@@ -1,0 +1,44 @@
+{
+  "id": "little-seed",
+  "title": { "ar": "الْبِذْرَةُ الصَّغِيرَةُ", "en": "The Little Seed" },
+  "theme": "patience-nature",
+  "level": 2,
+  "cover": { "kind": "lex", "id": "seedling" },
+  "pages": [
+    {
+      "scene": { "bg": "garden", "actors": [ { "lex": "girl", "x": 30, "y": 60, "size": "lg" }, { "lex": "seed", "x": 62, "y": 74, "size": "sm", "motion": "bounce" } ] },
+      "text": { "ar": "زَرَعَتْ سَلْمَى {بِذْرَةً} صَغِيرَةً فِي الْحَدِيقَةِ.", "en": "Salma planted a little {seed} in the garden." },
+      "vocab": ["seed", "girl"]
+    },
+    {
+      "scene": { "bg": "garden", "actors": [ { "lex": "girl", "x": 30, "y": 60, "size": "lg" }, { "lex": "water", "x": 58, "y": 48, "size": "sm", "motion": "bounce" }, { "lex": "seed", "x": 62, "y": 74, "size": "sm" } ] },
+      "text": { "ar": "سَقَتْ سَلْمَى الْبِذْرَةَ {بِالْمَاءِ}.", "en": "Salma gave the seed some {water}." },
+      "vocab": ["water"]
+    },
+    {
+      "scene": { "bg": "meadow", "actors": [ { "lex": "sun", "x": 80, "y": 18, "size": "md", "motion": "sway" }, { "lex": "seed", "x": 50, "y": 72, "size": "sm" } ] },
+      "text": { "ar": "أَعْطَتِ {الشَّمْسُ} الْبِذْرَةَ دِفْئًا وَنُورًا.", "en": "The {sun} gave the seed warmth and light." },
+      "vocab": ["sun"]
+    },
+    {
+      "scene": { "bg": "garden", "actors": [ { "lex": "girl", "x": 28, "y": 60, "size": "lg" }, { "lex": "seedling", "x": 62, "y": 70, "size": "md", "motion": "bounce" } ] },
+      "text": { "ar": "انْتَظَرَتْ سَلْمَى بِصَبْرٍ، فَخَرَجَتْ {نَبْتَةٌ} خَضْرَاءُ صَغِيرَةٌ!", "en": "Salma waited patiently, and a little green {sprout} came up!" },
+      "vocab": ["seedling"]
+    },
+    {
+      "scene": { "bg": "garden", "actors": [ { "lex": "sunflower", "x": 50, "y": 56, "size": "lg", "motion": "sway" }, { "lex": "bee", "x": 74, "y": 30, "size": "sm", "motion": "bounce" }, { "lex": "butterfly", "x": 26, "y": 34, "size": "sm", "motion": "bounce" } ] },
+      "text": { "ar": "كَبِرَتِ النَّبْتَةُ وَصَارَتْ {زَهْرَةً} كَبِيرَةً جَمِيلَةً.", "en": "The sprout grew into a big, beautiful {flower}." },
+      "vocab": ["sunflower", "bee", "butterfly"]
+    },
+    {
+      "scene": { "bg": "sky", "actors": [ { "lex": "girl", "x": 32, "y": 60, "size": "lg", "motion": "bounce" }, { "lex": "sunflower", "x": 66, "y": 58, "size": "lg" }, { "lex": "sun", "x": 86, "y": 16, "size": "md" } ] },
+      "text": { "ar": "فَرِحَتْ سَلْمَى كَثِيرًا. الصَّبْرُ يَأْتِي بِأَشْيَاءَ جَمِيلَةٍ.", "en": "Salma was so happy. Waiting patiently brings beautiful things." },
+      "vocab": ["happy"]
+    }
+  ],
+  "questions": [
+    { "id": "planted", "skill": "story.seed.what", "difficulty": 1, "say": { "ar": "مَاذَا زَرَعَتْ سَلْمَى؟", "en": "What did Salma plant?" }, "answer": { "kind": "lex", "id": "seed" }, "choices": [ { "kind": "lex", "id": "ball" }, { "kind": "lex", "id": "seed" }, { "kind": "lex", "id": "apple" } ] },
+    { "id": "needs", "skill": "story.seed.needs", "difficulty": 1, "say": { "ar": "مَاذَا تَحْتَاجُ النَّبْتَةُ لِتَكْبَرَ؟", "en": "What does a plant need to grow?" }, "answer": { "kind": "lex", "id": "water" }, "choices": [ { "kind": "lex", "id": "water" }, { "kind": "lex", "id": "car" }, { "kind": "lex", "id": "teddy" } ] },
+    { "id": "became", "skill": "story.seed.end", "difficulty": 1, "say": { "ar": "مَاذَا صَارَتِ النَّبْتَةُ فِي النِّهَايَةِ؟", "en": "What did the sprout become in the end?" }, "answer": { "kind": "lex", "id": "sunflower" }, "choices": [ { "kind": "lex", "id": "rock" }, { "kind": "lex", "id": "sunflower" }, { "kind": "lex", "id": "fish" } ] }
+  ]
+}

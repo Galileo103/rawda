@@ -1,0 +1,252 @@
+import manifest from '../../content/generated/audio-manifest.json'
+import { assetUrl } from '../../content/assets'
+import type { Lang } from '../../domain/types'
+import { clipKey, normalizeSpeech } from './clipKey'
+
+export type SpeakResult = 'file' | 'tts' | 'none' | 'muted' | 'stopped'
+export type SfxName = 'tap' | 'correct' | 'try' | 'complete' | 'pop' | 'flip' | 'sparkle'
+
+export interface AudioConfig {
+  narration: boolean
+  narrationVolume: number
+  sfxVolume: number
+  speechRate: number
+}
+
+const clips: Record<string, string> = (manifest as { clips: Record<string, string> }).clips
+
+/**
+ * Narration + sound effects.
+ * 1. Pre-rendered clip (bundled, offline) when one exists for the exact text.
+ * 2. Device speech synthesis, only if a voice for the language is installed.
+ * 3. Otherwise 'none' — the UI always shows the text (and the mascot) as a visual alternative.
+ * Nothing here throws: missing or broken audio never interrupts the child.
+ */
+export class AudioService {
+  private config: AudioConfig = { narration: true, narrationVolume: 0.9, sfxVolume: 0.5, speechRate: 1 }
+  private token = 0
+  private current: HTMLAudioElement | undefined
+  private ctx: AudioContext | undefined
+  private listeners = new Set<(speaking: boolean) => void>()
+
+  configure(c: Partial<AudioConfig>): void {
+    this.config = { ...this.config, ...c }
+    if (!this.config.narration) this.stop()
+  }
+
+  hasClip(lang: Lang, text: string): boolean {
+    return clipKey(lang, text) in clips
+  }
+
+  onSpeakingChange(fn: (speaking: boolean) => void): () => void {
+    this.listeners.add(fn)
+    return () => this.listeners.delete(fn)
+  }
+
+  /** Speak one line. Resolves when finished (or interrupted). */
+  async speak(text: string, lang: Lang): Promise<SpeakResult> {
+    this.stop()
+    const token = ++this.token
+    const clean = normalizeSpeech(text)
+    if (!clean) return 'none'
+    if (!this.config.narration || this.config.narrationVolume <= 0) return 'muted'
+    this.emit(true)
+    try {
+      const file = clips[clipKey(lang, clean)]
+      if (file) {
+        const ok = await this.playFile(assetUrl(`audio/${file}`), token)
+        if (token !== this.token) return 'stopped'
+        if (ok) return 'file'
+      }
+      if (await this.speakTts(clean, lang, token)) return token === this.token ? 'tts' : 'stopped'
+      return 'none'
+    } finally {
+      if (token === this.token) this.emit(false)
+    }
+  }
+
+  /** Speak several lines in order; stops early if anything else starts speaking. */
+  async speakAll(parts: { text: string; lang: Lang }[]): Promise<void> {
+    for (const p of parts) {
+      const before = this.token
+      const r = await this.speak(p.text, p.lang)
+      if (r === 'stopped' || this.token !== before + 1) return
+    }
+  }
+
+  stop(): void {
+    this.token++
+    if (this.current) {
+      try {
+        this.current.pause()
+      } catch {
+        /* ignore */
+      }
+      this.current = undefined
+    }
+    try {
+      globalThis.speechSynthesis?.cancel()
+    } catch {
+      /* ignore */
+    }
+    this.emit(false)
+  }
+
+  private emit(speaking: boolean) {
+    for (const l of this.listeners) l(speaking)
+  }
+
+  private playFile(url: string, token: number): Promise<boolean> {
+    return new Promise((resolve) => {
+      let el: HTMLAudioElement
+      try {
+        el = new Audio(url)
+      } catch {
+        resolve(false)
+        return
+      }
+      this.current = el
+      el.volume = clamp(this.config.narrationVolume)
+      el.playbackRate = this.config.speechRate
+      let started = false
+      const done = (ok: boolean) => {
+        el.onended = el.onerror = null
+        resolve(ok)
+      }
+      el.onplaying = () => {
+        started = true
+      }
+      el.onended = () => done(true)
+      el.onerror = () => done(started)
+      const watchdog = setInterval(() => {
+        if (token !== this.token) {
+          clearInterval(watchdog)
+          done(true)
+        }
+      }, 150)
+      el.addEventListener('ended', () => clearInterval(watchdog))
+      el.addEventListener('error', () => clearInterval(watchdog))
+      const p = el.play()
+      if (p && typeof p.catch === 'function') {
+        p.catch(() => {
+          clearInterval(watchdog)
+          done(false)
+        })
+      }
+    })
+  }
+
+  private async speakTts(text: string, lang: Lang, token: number): Promise<boolean> {
+    const synth = globalThis.speechSynthesis
+    if (!synth || typeof SpeechSynthesisUtterance === 'undefined') return false
+    const voice = await findVoice(lang)
+    if (!voice || token !== this.token) return false
+    return new Promise((resolve) => {
+      try {
+        const u = new SpeechSynthesisUtterance(text)
+        u.voice = voice
+        u.lang = voice.lang
+        u.rate = 0.9 * this.config.speechRate
+        u.volume = clamp(this.config.narrationVolume)
+        u.onend = () => resolve(true)
+        u.onerror = () => resolve(false)
+        synth.speak(u)
+      } catch {
+        resolve(false)
+      }
+    })
+  }
+
+  /** Short synthesized effects (no audio files needed, no licensing). */
+  sfx(name: SfxName): void {
+    if (this.config.sfxVolume <= 0) return
+    try {
+      const Ctx = globalThis.AudioContext ?? (globalThis as unknown as { webkitAudioContext?: typeof AudioContext }).webkitAudioContext
+      if (!Ctx) return
+      this.ctx ??= new Ctx()
+      const ctx = this.ctx
+      if (ctx.state === 'suspended') void ctx.resume()
+      const notes = SFX[name]
+      const t0 = ctx.currentTime + 0.01
+      for (const [freq, start, dur, type] of notes) {
+        const osc = ctx.createOscillator()
+        const gain = ctx.createGain()
+        osc.type = type ?? 'sine'
+        osc.frequency.value = freq
+        const peak = 0.18 * this.config.sfxVolume
+        gain.gain.setValueAtTime(0.0001, t0 + start)
+        gain.gain.exponentialRampToValueAtTime(peak, t0 + start + 0.02)
+        gain.gain.exponentialRampToValueAtTime(0.0001, t0 + start + dur)
+        osc.connect(gain).connect(ctx.destination)
+        osc.start(t0 + start)
+        osc.stop(t0 + start + dur + 0.05)
+      }
+    } catch {
+      /* audio unavailable: silently skip */
+    }
+  }
+}
+
+type Note = [freq: number, start: number, dur: number, type?: OscillatorType]
+// Soft, friendly tones only — the "try again" sound is gentle, never a buzzer.
+const SFX: Record<SfxName, Note[]> = {
+  tap: [[660, 0, 0.08]],
+  pop: [[880, 0, 0.07], [1175, 0.05, 0.08]],
+  flip: [[520, 0, 0.06, 'triangle']],
+  correct: [[523, 0, 0.12], [659, 0.1, 0.12], [784, 0.2, 0.22]],
+  try: [[440, 0, 0.14, 'triangle'], [392, 0.12, 0.18, 'triangle']],
+  complete: [[523, 0, 0.12], [659, 0.12, 0.12], [784, 0.24, 0.12], [1047, 0.36, 0.35]],
+  // Streak of correct answers: a quick rising twinkle.
+  sparkle: [[784, 0, 0.08, 'triangle'], [988, 0.06, 0.08, 'triangle'], [1175, 0.12, 0.08, 'triangle'], [1568, 0.18, 0.25, 'triangle'], [2093, 0.28, 0.3]],
+}
+
+function clamp(v: number): number {
+  return Math.max(0, Math.min(1, v))
+}
+
+let voicesCache: SpeechSynthesisVoice[] | undefined
+async function findVoice(lang: Lang): Promise<SpeechSynthesisVoice | undefined> {
+  const synth = globalThis.speechSynthesis
+  if (!synth) return undefined
+  if (!voicesCache || voicesCache.length === 0) {
+    voicesCache = synth.getVoices()
+    if (voicesCache.length === 0) {
+      await new Promise<void>((r) => {
+        const t = setTimeout(r, 600)
+        synth.addEventListener?.('voiceschanged', () => {
+          clearTimeout(t)
+          r()
+        }, { once: true })
+      })
+      voicesCache = synth.getVoices()
+    }
+  }
+  // Hala is a woman: a voice known to be male is never used (the text and Hala stay on screen instead).
+  const candidates = voicesCache.filter((v) => v.lang.toLowerCase().startsWith(lang) && !(MALE.test(v.name) && !FEMALE.test(v.name)))
+  return candidates.sort((a, b) => voiceScore(b, lang) - voiceScore(a, lang))[0]
+}
+
+/**
+ * Device-voice fallback preference: modern neural voices ("Natural"/"Online" on Windows
+ * and Edge) read Arabic tashkeel correctly; legacy voices often don't. Among regions,
+ * prefer ones whose voices read Modern Standard Arabic the way it is taught.
+ */
+const PREFERRED_REGIONS: Record<Lang, string[]> = {
+  ar: ['ar-sa', 'ar-ae', 'ar-qa', 'ar-eg'],
+  en: ['en-us', 'en-gb'],
+}
+/**
+ * Hala is a woman, so the fallback prefers female device voices (the browser API has no
+ * gender field, so this goes by well-known voice names). A male voice is used only if the
+ * device has nothing else for the language.
+ */
+const FEMALE = /female|hoda|salma|zariyah|amany|fatima|mariam|laila|layla|sana|amal|noura|rana|zira|aria|jenny|michelle|ana\b|libby|sonia|hazel|susan|samantha|karen|moira|tessa|victoria|ava|allison|emma|heera|catherine|natasha|clara/i
+const MALE = /\bmale|naayf|hamed|shakir|bassel|taim|hamdan|omar|moaz|david|mark|guy|ryan|christopher|eric|roger|steffan|daniel|fred|george|james|william|alex\b|thomas/i
+export function voiceScore(v: Pick<SpeechSynthesisVoice, 'name' | 'lang'>, lang: Lang): number {
+  const region = v.lang.toLowerCase().replace('_', '-')
+  const idx = PREFERRED_REGIONS[lang].indexOf(region)
+  const gender = FEMALE.test(v.name) ? 40 : MALE.test(v.name) ? -40 : 0
+  return gender + (/natural|online|neural/i.test(v.name) ? 10 : 0) + (idx >= 0 ? PREFERRED_REGIONS[lang].length - idx : 0)
+}
+
+export const audio = new AudioService()

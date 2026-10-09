@@ -1,0 +1,22 @@
+{
+  "id": "more-fewer",
+  "areaId": "numbers",
+  "template": "choice",
+  "langs": "any",
+  "level": 2,
+  "order": 2,
+  "sessionLength": 5,
+  "icon": { "kind": "group", "id": "balloon", "count": 4 },
+  "title": { "ar": "أَكْثَرُ أَمْ أَقَلُّ؟", "en": "More or fewer?" },
+  "intro": { "ar": "هَيَّا نَنْظُرُ: أَيُّ مَجْمُوعَةٍ فِيهَا أَكْثَرُ، وَأَيُّهَا فِيهَا أَقَلُّ؟", "en": "Let's look: which group has more, and which has fewer?" },
+  "items": [
+    { "id": "more-apple-1-3", "skill": "num.compare.more", "difficulty": 1, "say": { "ar": "أَيُّ مَجْمُوعَةٍ فِيهَا أَكْثَرُ؟", "en": "Which group has more?" }, "answer": { "kind": "group", "id": "apple", "count": 3 }, "choices": [ { "kind": "group", "id": "apple", "count": 1 }, { "kind": "group", "id": "apple", "count": 3 } ] },
+    { "id": "more-star-2-4", "skill": "num.compare.more", "difficulty": 1, "say": { "ar": "أَيُّ مَجْمُوعَةٍ فِيهَا أَكْثَرُ؟", "en": "Which group has more?" }, "answer": { "kind": "group", "id": "star", "count": 4 }, "choices": [ { "kind": "group", "id": "star", "count": 4 }, { "kind": "group", "id": "star", "count": 2 } ] },
+    { "id": "fewer-carrot-1-4", "skill": "num.compare.fewer", "difficulty": 2, "say": { "ar": "أَيُّ مَجْمُوعَةٍ فِيهَا أَقَلُّ؟", "en": "Which group has fewer?" }, "answer": { "kind": "group", "id": "carrot", "count": 1 }, "choices": [ { "kind": "group", "id": "carrot", "count": 4 }, { "kind": "group", "id": "carrot", "count": 1 } ] },
+    { "id": "more-balloon-3-5", "skill": "num.compare.more", "difficulty": 2, "say": { "ar": "أَيُّ مَجْمُوعَةٍ فِيهَا أَكْثَرُ؟", "en": "Which group has more?" }, "answer": { "kind": "group", "id": "balloon", "count": 5 }, "choices": [ { "kind": "group", "id": "balloon", "count": 3 }, { "kind": "group", "id": "balloon", "count": 5 } ] },
+    { "id": "fewer-flower-3-5", "skill": "num.compare.fewer", "difficulty": 3, "say": { "ar": "أَيُّ مَجْمُوعَةٍ فِيهَا أَقَلُّ؟", "en": "Which group has fewer?" }, "answer": { "kind": "group", "id": "flower", "count": 3 }, "choices": [ { "kind": "group", "id": "flower", "count": 5 }, { "kind": "group", "id": "flower", "count": 3 } ] },
+    { "id": "more-fish-2-6", "skill": "num.compare.more", "difficulty": 3, "say": { "ar": "أَيُّ مَجْمُوعَةٍ فِيهَا أَكْثَرُ؟", "en": "Which group has more?" }, "answer": { "kind": "group", "id": "fish", "count": 6 }, "choices": [ { "kind": "group", "id": "fish", "count": 2 }, { "kind": "group", "id": "fish", "count": 6 } ] },
+    { "id": "more-duck-4-5", "skill": "num.compare.more", "difficulty": 4, "say": { "ar": "أَيُّ مَجْمُوعَةٍ فِيهَا أَكْثَرُ؟", "en": "Which group has more?" }, "answer": { "kind": "group", "id": "duck", "count": 5 }, "choices": [ { "kind": "group", "id": "duck", "count": 4 }, { "kind": "group", "id": "duck", "count": 5 } ] },
+    { "id": "fewer-bee-6-7", "skill": "num.compare.fewer", "difficulty": 5, "say": { "ar": "أَيُّ مَجْمُوعَةٍ فِيهَا أَقَلُّ؟", "en": "Which group has fewer?" }, "answer": { "kind": "group", "id": "bee", "count": 6 }, "choices": [ { "kind": "group", "id": "bee", "count": 7 }, { "kind": "group", "id": "bee", "count": 6 } ] }
+  ]
+}

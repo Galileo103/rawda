@@ -1,0 +1,20 @@
+{
+  "id": "patterns",
+  "areaId": "logic",
+  "template": "choice",
+  "langs": "any",
+  "level": 4,
+  "order": 3,
+  "sessionLength": 5,
+  "icon": { "kind": "row", "question": true, "items": [ { "kind": "color", "color": "red" }, { "kind": "color", "color": "blue" } ] },
+  "title": { "ar": "مَا الَّذِي يَأْتِي بَعْدَ ذَلِكَ؟", "en": "What comes next?" },
+  "intro": { "ar": "بَعْضُ الْأَشْيَاءِ تَتَكَرَّرُ بِتَرْتِيبٍ جَمِيلٍ. هَيَّا نَكْتَشِفُ مَا يَأْتِي بَعْدَهَا!", "en": "Some things repeat in a pattern. Let's find out what comes next!" },
+  "items": [
+    { "id": "red-blue", "skill": "logic.pattern.ab", "difficulty": 1, "say": { "ar": "مَا الَّذِي يَأْتِي بَعْدَ ذَلِكَ؟", "en": "What comes next?" }, "show": { "kind": "row", "items": [ { "kind": "color", "color": "red" }, { "kind": "color", "color": "blue" }, { "kind": "color", "color": "red" }, { "kind": "color", "color": "blue" } ] }, "answer": { "kind": "color", "color": "red" }, "choices": [ { "kind": "color", "color": "blue" }, { "kind": "color", "color": "red" } ] },
+    { "id": "cat-dog", "skill": "logic.pattern.ab", "difficulty": 2, "say": { "ar": "مَا الَّذِي يَأْتِي بَعْدَ ذَلِكَ؟", "en": "What comes next?" }, "show": { "kind": "row", "items": [ { "kind": "lex", "id": "cat" }, { "kind": "lex", "id": "dog" }, { "kind": "lex", "id": "cat" }, { "kind": "lex", "id": "dog" } ] }, "answer": { "kind": "lex", "id": "cat" }, "choices": [ { "kind": "lex", "id": "cat" }, { "kind": "lex", "id": "dog" }, { "kind": "lex", "id": "fish" } ] },
+    { "id": "circle-square", "skill": "logic.pattern.ab", "difficulty": 2, "say": { "ar": "مَا الَّذِي يَأْتِي بَعْدَ ذَلِكَ؟", "en": "What comes next?" }, "show": { "kind": "row", "items": [ { "kind": "shape", "shape": "circle" }, { "kind": "shape", "shape": "square" }, { "kind": "shape", "shape": "circle" }, { "kind": "shape", "shape": "square" } ] }, "answer": { "kind": "shape", "shape": "circle" }, "choices": [ { "kind": "shape", "shape": "square" }, { "kind": "shape", "shape": "circle" }, { "kind": "shape", "shape": "triangle" } ] },
+    { "id": "apple-banana", "skill": "logic.pattern.ab", "difficulty": 3, "say": { "ar": "مَا الَّذِي يَأْتِي بَعْدَ ذَلِكَ؟", "en": "What comes next?" }, "show": { "kind": "row", "items": [ { "kind": "lex", "id": "apple" }, { "kind": "lex", "id": "banana" }, { "kind": "lex", "id": "apple" }, { "kind": "lex", "id": "banana" }, { "kind": "lex", "id": "apple" } ] }, "answer": { "kind": "lex", "id": "banana" }, "choices": [ { "kind": "lex", "id": "apple" }, { "kind": "lex", "id": "grapes" }, { "kind": "lex", "id": "banana" } ] },
+    { "id": "star-heart-heart", "skill": "logic.pattern.abb", "difficulty": 4, "say": { "ar": "مَا الَّذِي يَأْتِي بَعْدَ ذَلِكَ؟", "en": "What comes next?" }, "show": { "kind": "row", "items": [ { "kind": "shape", "shape": "star" }, { "kind": "shape", "shape": "heart" }, { "kind": "shape", "shape": "heart" }, { "kind": "shape", "shape": "star" }, { "kind": "shape", "shape": "heart" }, { "kind": "shape", "shape": "heart" } ] }, "answer": { "kind": "shape", "shape": "star" }, "choices": [ { "kind": "shape", "shape": "heart" }, { "kind": "shape", "shape": "star" }, { "kind": "shape", "shape": "circle" } ] },
+    { "id": "yellow-green-green", "skill": "logic.pattern.abb", "difficulty": 5, "say": { "ar": "مَا الَّذِي يَأْتِي بَعْدَ ذَلِكَ؟", "en": "What comes next?" }, "show": { "kind": "row", "items": [ { "kind": "color", "color": "yellow" }, { "kind": "color", "color": "green" }, { "kind": "color", "color": "green" }, { "kind": "color", "color": "yellow" }, { "kind": "color", "color": "green" } ] }, "answer": { "kind": "color", "color": "green" }, "choices": [ { "kind": "color", "color": "yellow" }, { "kind": "color", "color": "green" }, { "kind": "color", "color": "blue" } ] }
+  ]
+}

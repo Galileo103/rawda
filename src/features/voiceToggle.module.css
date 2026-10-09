@@ -1,0 +1,41 @@
+.btn {
+  position: relative;
+  display: inline-grid;
+  place-items: center;
+  min-width: var(--touch);
+  min-height: var(--touch);
+  padding: 8px;
+  border-radius: 22px;
+  border: 3px solid var(--line);
+  background: var(--surface);
+  color: var(--ink);
+  cursor: pointer;
+  box-shadow: var(--shadow);
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
+  overflow: hidden;
+}
+.btn > svg {
+  position: relative;
+}
+
+/* Voice off: calm "grown-up reads" look. */
+.off {
+  border-color: var(--sun);
+  background: var(--sun-soft);
+}
+
+/* Fills from the bottom while held, so the grown-up sees it working. */
+.ring {
+  position: absolute;
+  inset: 0;
+  background: var(--leaf-soft);
+  transform: scaleY(0);
+  transform-origin: bottom;
+}
+.holding .ring {
+  transform: scaleY(1);
+  transition: transform var(--hold) linear;
+}

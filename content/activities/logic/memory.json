@@ -1,0 +1,19 @@
+{
+  "id": "memory",
+  "areaId": "logic",
+  "template": "memory",
+  "langs": "any",
+  "level": 1,
+  "order": 1,
+  "sessionLength": 2,
+  "icon": { "kind": "img", "hex": "1F0CF" },
+  "title": { "ar": "لُعْبَةُ الذَّاكِرَةِ", "en": "Memory game" },
+  "intro": { "ar": "نَقْلِبُ بِطَاقَتَيْنِ وَنَبْحَثُ عَنِ الصُّوَرِ الْمُتَشَابِهَةِ!", "en": "Turn over two cards and look for pictures that match!" },
+  "items": [
+    { "id": "pets", "skill": "logic.memory.2", "difficulty": 1, "say": { "ar": "هَيَّا نَجِدُ الصُّوَرَ الْمُتَشَابِهَةَ!", "en": "Let's find the matching pictures!" }, "cards": ["cat", "dog"] },
+    { "id": "fruit", "skill": "logic.memory.3", "difficulty": 2, "say": { "ar": "هَيَّا نَجِدُ الصُّوَرَ الْمُتَشَابِهَةَ!", "en": "Let's find the matching pictures!" }, "cards": ["apple", "banana", "grapes"] },
+    { "id": "water", "skill": "logic.memory.4", "difficulty": 3, "say": { "ar": "هَيَّا نَجِدُ الصُّوَرَ الْمُتَشَابِهَةَ!", "en": "Let's find the matching pictures!" }, "cards": ["fish", "whale", "frog", "duck"] },
+    { "id": "sky", "skill": "logic.memory.5", "difficulty": 4, "say": { "ar": "هَيَّا نَجِدُ الصُّوَرَ الْمُتَشَابِهَةَ!", "en": "Let's find the matching pictures!" }, "cards": ["sun", "crescent", "star", "cloud", "rainbow"] },
+    { "id": "farm", "skill": "logic.memory.6", "difficulty": 5, "say": { "ar": "هَيَّا نَجِدُ الصُّوَرَ الْمُتَشَابِهَةَ!", "en": "Let's find the matching pictures!" }, "cards": ["lion", "cow", "chicken", "turtle", "bee", "butterfly"] }
+  ]
+}

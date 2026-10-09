@@ -1,0 +1,10 @@
+[
+  { "id": "letters", "order": 1, "route": "map", "color": "#E8613A", "icon": { "kind": "glyph", "text": "أ ب ت" }, "iconByLang": { "ar": { "kind": "glyph", "text": "أ ب ت" }, "en": { "kind": "glyph", "text": "a b c" } }, "title": { "ar": "الحروف والأصوات", "en": "Letters & sounds" } },
+  { "id": "numbers", "order": 2, "route": "map", "color": "#2F8FDB", "icon": { "kind": "img", "hex": "1F522" }, "iconByLang": { "ar": { "kind": "glyph", "text": "١ ٢ ٣" }, "en": { "kind": "glyph", "text": "1 2 3" } }, "title": { "ar": "الأرقام والعدّ", "en": "Numbers & counting" } },
+  { "id": "colors-shapes", "order": 3, "route": "map", "color": "#D94A86", "icon": { "kind": "img", "hex": "1F3A8" }, "title": { "ar": "الألوان والأشكال", "en": "Colors & shapes" } },
+  { "id": "stories", "order": 4, "route": "stories", "color": "#7A5CD6", "icon": { "kind": "img", "hex": "1F4D6" }, "title": { "ar": "القصص والكلمات", "en": "Stories & words" } },
+  { "id": "islamic", "order": 5, "route": "map", "color": "#13897F", "icon": { "kind": "img", "hex": "1F54C" }, "title": { "ar": "القرآن والتربية الإسلامية", "en": "Quran & Islamic learning" } },
+  { "id": "science", "order": 6, "route": "map", "color": "#3F9D33", "icon": { "kind": "img", "hex": "1F331" }, "title": { "ar": "العلوم والطبيعة", "en": "Science & nature" } },
+  { "id": "logic", "order": 7, "route": "map", "color": "#F5A300", "icon": { "kind": "img", "hex": "1F9E9" }, "title": { "ar": "التفكير والألغاز", "en": "Thinking & puzzles" } },
+  { "id": "creativity", "order": 8, "route": "studio", "color": "#FF8A5B", "icon": { "kind": "img", "hex": "1F58D" }, "title": { "ar": "الرسم والإبداع", "en": "Drawing & creativity" } }
+]

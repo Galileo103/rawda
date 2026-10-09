@@ -1,0 +1,23 @@
+{
+  "id": "allah-creation",
+  "areaId": "islamic",
+  "template": "choice",
+  "langs": "any",
+  "level": 1,
+  "order": 2,
+  "sessionLength": 5,
+  "icon": { "kind": "lex", "id": "universe" },
+  "title": { "ar": "خَلْقُ اللهِ الْجَمِيلُ", "en": "Allah's beautiful creation" },
+  "intro": { "ar": "خَلَقَ اللهُ أَشْيَاءَ جَمِيلَةً كَثِيرَةً: الشَّمْسَ وَالْقَمَرَ وَالْأَشْجَارَ وَالْحَيَوَانَاتِ. هَيَّا نَجِدُهَا!", "en": "Allah created so many beautiful things: the sun, the moon, the trees and the animals. Let's find them!" },
+  "items": [
+    { "id": "sun", "skill": "islam.creation.sun", "difficulty": 1, "say": { "ar": "أَيْنَ الشَّمْسُ؟", "en": "Where is the sun?" }, "answer": { "kind": "lex", "id": "sun" } },
+    { "id": "moon", "skill": "islam.creation.moon", "difficulty": 1, "say": { "ar": "أَيْنَ الْهِلَالُ؟", "en": "Where is the moon?" }, "answer": { "kind": "lex", "id": "crescent" } },
+    { "id": "tree", "skill": "islam.creation.tree", "difficulty": 1, "say": { "ar": "أَيْنَ الشَّجَرَةُ؟", "en": "Where is the tree?" }, "answer": { "kind": "lex", "id": "tree" } },
+    { "id": "star", "skill": "islam.creation.star", "difficulty": 2, "say": { "ar": "أَيْنَ النَّجْمَةُ؟", "en": "Where is the star?" }, "answer": { "kind": "lex", "id": "star" } },
+    { "id": "fish", "skill": "islam.creation.fish", "difficulty": 2, "say": { "ar": "أَيْنَ السَّمَكَةُ؟", "en": "Where is the fish?" }, "answer": { "kind": "lex", "id": "fish" } },
+    { "id": "flower", "skill": "islam.creation.flower", "difficulty": 2, "say": { "ar": "أَيْنَ الزَّهْرَةُ؟", "en": "Where is the flower?" }, "answer": { "kind": "lex", "id": "flower" } },
+    { "id": "rainbow", "skill": "islam.creation.rainbow", "difficulty": 3, "say": { "ar": "أَيْنَ قَوْسُ قُزَحٍ؟", "en": "Where is the rainbow?" }, "answer": { "kind": "lex", "id": "rainbow" } },
+    { "id": "sea", "skill": "islam.creation.sea", "difficulty": 3, "say": { "ar": "أَيْنَ الْبَحْرُ؟", "en": "Where is the sea?" }, "answer": { "kind": "lex", "id": "sea" } },
+    { "id": "butterfly", "skill": "islam.creation.butterfly", "difficulty": 3, "say": { "ar": "أَيْنَ الْفَرَاشَةُ؟", "en": "Where is the butterfly?" }, "answer": { "kind": "lex", "id": "butterfly" } }
+  ]
+}

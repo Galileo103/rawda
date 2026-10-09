@@ -1,0 +1,19 @@
+{
+  "id": "num-discover",
+  "areaId": "numbers",
+  "template": "lesson",
+  "langs": "any",
+  "level": 1,
+  "order": 0,
+  "sessionLength": 1,
+  "icon": { "kind": "img", "hex": "1F52D" },
+  "title": { "ar": "نَكْتَشِفُ رَقْمًا جَدِيدًا", "en": "Discover a new number" },
+  "intro": { "ar": "هَيَّا نَتَعَرَّفُ عَلَى رَقْمٍ جَدِيدٍ وَنَعُدُّ مَعًا!", "en": "Let's meet a new number and count together!" },
+  "items": [
+    { "id": "one", "skill": "num.count.1", "difficulty": 1, "teaches": ["num.count.1"], "say": { "ar": "هَيَّا نَتَعَرَّفُ عَلَى رَقْمٍ جَدِيدٍ!", "en": "Let's meet a new number!" }, "focus": { "kind": "numeral", "value": 1 }, "meet": { "ar": "هَذَا الرَّقْمُ وَاحِد.", "en": "This is the number one." }, "count": { "object": "apple", "n": 1 }, "check": { "say": { "ar": "أَيْنَ الرَّقْمُ وَاحِد؟", "en": "Where is the number one?" }, "answer": { "kind": "numeral", "value": 1 }, "choices": [ { "kind": "numeral", "value": 1 }, { "kind": "numeral", "value": 4 } ] } },
+    { "id": "two", "skill": "num.count.2", "difficulty": 1, "teaches": ["num.count.2"], "say": { "ar": "هَيَّا نَتَعَرَّفُ عَلَى رَقْمٍ جَدِيدٍ!", "en": "Let's meet a new number!" }, "focus": { "kind": "numeral", "value": 2 }, "meet": { "ar": "هَذَا الرَّقْمُ اثْنَان.", "en": "This is the number two." }, "count": { "object": "star", "n": 2 }, "check": { "say": { "ar": "أَيْنَ الرَّقْمُ اثْنَان؟", "en": "Where is the number two?" }, "answer": { "kind": "numeral", "value": 2 }, "choices": [ { "kind": "numeral", "value": 5 }, { "kind": "numeral", "value": 2 } ] } },
+    { "id": "three", "skill": "num.count.3", "difficulty": 1, "teaches": ["num.count.3"], "say": { "ar": "هَيَّا نَتَعَرَّفُ عَلَى رَقْمٍ جَدِيدٍ!", "en": "Let's meet a new number!" }, "focus": { "kind": "numeral", "value": 3 }, "meet": { "ar": "هَذَا الرَّقْمُ ثَلَاثَة.", "en": "This is the number three." }, "count": { "object": "balloon", "n": 3 }, "check": { "say": { "ar": "أَيْنَ الرَّقْمُ ثَلَاثَة؟", "en": "Where is the number three?" }, "answer": { "kind": "numeral", "value": 3 }, "choices": [ { "kind": "numeral", "value": 3 }, { "kind": "numeral", "value": 1 } ] } },
+    { "id": "four", "skill": "num.count.4", "difficulty": 1, "teaches": ["num.count.4"], "say": { "ar": "هَيَّا نَتَعَرَّفُ عَلَى رَقْمٍ جَدِيدٍ!", "en": "Let's meet a new number!" }, "focus": { "kind": "numeral", "value": 4 }, "meet": { "ar": "هَذَا الرَّقْمُ أَرْبَعَة.", "en": "This is the number four." }, "count": { "object": "fish", "n": 4 }, "check": { "say": { "ar": "أَيْنَ الرَّقْمُ أَرْبَعَة؟", "en": "Where is the number four?" }, "answer": { "kind": "numeral", "value": 4 }, "choices": [ { "kind": "numeral", "value": 2 }, { "kind": "numeral", "value": 4 } ] } },
+    { "id": "five", "skill": "num.count.5", "difficulty": 1, "teaches": ["num.count.5"], "say": { "ar": "هَيَّا نَتَعَرَّفُ عَلَى رَقْمٍ جَدِيدٍ!", "en": "Let's meet a new number!" }, "focus": { "kind": "numeral", "value": 5 }, "meet": { "ar": "هَذَا الرَّقْمُ خَمْسَة.", "en": "This is the number five." }, "count": { "object": "flower", "n": 5 }, "check": { "say": { "ar": "أَيْنَ الرَّقْمُ خَمْسَة؟", "en": "Where is the number five?" }, "answer": { "kind": "numeral", "value": 5 }, "choices": [ { "kind": "numeral", "value": 5 }, { "kind": "numeral", "value": 3 } ] } }
+  ]
+}

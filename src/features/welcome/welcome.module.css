@@ -1,0 +1,93 @@
+.welcome {
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 18px;
+  position: relative;
+}
+
+.logo {
+  margin: 0;
+  font-size: clamp(3rem, 11vw, 5.5rem);
+  font-weight: 800;
+  line-height: 1;
+  color: var(--coral);
+  text-shadow: 0 5px 0 var(--sun);
+}
+
+.logoSub {
+  display: block;
+  font-size: 0.45em;
+  color: var(--grape);
+  text-shadow: none;
+  letter-spacing: 0.04em;
+}
+
+.tagline {
+  margin: 0;
+  font-size: clamp(1.1rem, 3vw, 1.5rem);
+  font-weight: 700;
+  color: var(--ink-soft);
+}
+
+.mascotBtn {
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  border-radius: 50%;
+  padding: 0;
+}
+
+.grownups {
+  position: absolute;
+  inset-block-end: max(var(--gutter), env(safe-area-inset-bottom));
+  inset-inline-end: var(--gutter);
+}
+
+.wizard {
+  max-width: 720px;
+  width: 100%;
+  margin-inline: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.wizard h1 {
+  margin: 0;
+  font-size: 2rem;
+}
+
+.step {
+  color: var(--ink-soft);
+  font-weight: 700;
+}
+
+.privacy {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  background: var(--teal-soft);
+  border-radius: var(--radius-s);
+  padding: 10px 14px;
+  font-weight: 600;
+}
+
+.actions {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.error {
+  color: #b42318;
+  font-weight: 700;
+  margin: 0;
+}
+
+.pinInput {
+  font-size: 2rem !important;
+  letter-spacing: 0.6em;
+  text-align: center;
+  max-width: 240px;
+}

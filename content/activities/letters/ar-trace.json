@@ -1,0 +1,24 @@
+{
+  "id": "ar-trace",
+  "areaId": "letters",
+  "template": "trace",
+  "langs": "ar",
+  "level": 2,
+  "order": 6,
+  "sessionLength": 4,
+  "icon": { "kind": "img", "hex": "270F" },
+  "title": { "ar": "نَكْتُبُ بِإِصْبَعِنَا" },
+  "intro": { "ar": "هَيَّا نَرْسُمُ الْحُرُوفَ بِإِصْبَعِنَا عَلَى الْخَطِّ!" },
+  "items": [
+    { "id": "alif", "skill": "ar.write.alif", "difficulty": 1, "glyph": "ا", "say": { "ar": "هَيَّا نَرْسُمُ حَرْفَ الْأَلِفِ!" } },
+    { "id": "ba", "skill": "ar.write.ba", "difficulty": 1, "glyph": "ب", "say": { "ar": "هَيَّا نَرْسُمُ حَرْفَ الْبَاءِ!" } },
+    { "id": "dal", "skill": "ar.write.dal", "difficulty": 1, "glyph": "د", "say": { "ar": "هَيَّا نَرْسُمُ حَرْفَ الدَّالِ!" } },
+    { "id": "ra", "skill": "ar.write.ra", "difficulty": 1, "glyph": "ر", "say": { "ar": "هَيَّا نَرْسُمُ حَرْفَ الرَّاءِ!" } },
+    { "id": "ta", "skill": "ar.write.ta", "difficulty": 2, "glyph": "ت", "say": { "ar": "هَيَّا نَرْسُمُ حَرْفَ التَّاءِ!" } },
+    { "id": "sin", "skill": "ar.write.sin", "difficulty": 2, "glyph": "س", "say": { "ar": "هَيَّا نَرْسُمُ حَرْفَ السِّينِ!" } },
+    { "id": "mim", "skill": "ar.write.mim", "difficulty": 2, "glyph": "م", "say": { "ar": "هَيَّا نَرْسُمُ حَرْفَ الْمِيمِ!" } },
+    { "id": "nun", "skill": "ar.write.nun", "difficulty": 3, "glyph": "ن", "say": { "ar": "هَيَّا نَرْسُمُ حَرْفَ النُّونِ!" } },
+    { "id": "waw", "skill": "ar.write.waw", "difficulty": 3, "glyph": "و", "say": { "ar": "هَيَّا نَرْسُمُ حَرْفَ الْوَاوِ!" } },
+    { "id": "ha", "skill": "ar.write.ha", "difficulty": 3, "glyph": "ه", "say": { "ar": "هَيَّا نَرْسُمُ حَرْفَ الْهَاءِ!" } }
+  ]
+}

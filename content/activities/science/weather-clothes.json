@@ -1,0 +1,19 @@
+{
+  "id": "weather-clothes",
+  "areaId": "science",
+  "template": "choice",
+  "langs": "any",
+  "level": 2,
+  "order": 4,
+  "sessionLength": 5,
+  "icon": { "kind": "lex", "id": "umbrella" },
+  "title": { "ar": "الطَّقْسُ وَالْمَلَابِسُ", "en": "Weather and clothes" },
+  "intro": { "ar": "أَحْيَانًا يَكُونُ الْجَوُّ حَارًّا، وَأَحْيَانًا بَارِدًا أَوْ مُمْطِرًا. مَاذَا نَلْبَسُ؟", "en": "Sometimes it's hot, sometimes it's cold or rainy. What do we wear?" },
+  "items": [
+    { "id": "rain", "skill": "sci.weather.rain", "difficulty": 1, "say": { "ar": "إِنَّهَا تُمْطِرُ! مَاذَا نَحْتَاجُ؟", "en": "It's raining! What do we need?" }, "show": { "kind": "lex", "id": "rain" }, "answer": { "kind": "lex", "id": "umbrella" }, "choices": [ { "kind": "lex", "id": "umbrella" }, { "kind": "lex", "id": "sunglasses" } ] },
+    { "id": "hot", "skill": "sci.weather.hot", "difficulty": 1, "say": { "ar": "الْجَوُّ حَارٌّ! مَاذَا نَلْبَسُ؟", "en": "It's hot! What do we wear?" }, "show": { "kind": "lex", "id": "sun" }, "answer": { "kind": "lex", "id": "tshirt" }, "choices": [ { "kind": "lex", "id": "coat" }, { "kind": "lex", "id": "tshirt" } ] },
+    { "id": "cold", "skill": "sci.weather.cold", "difficulty": 2, "say": { "ar": "الْجَوُّ بَارِدٌ جِدًّا! مَاذَا نَلْبَسُ؟", "en": "It's very cold! What do we wear?" }, "show": { "kind": "lex", "id": "snow" }, "answer": { "kind": "lex", "id": "coat" }, "choices": [ { "kind": "lex", "id": "coat" }, { "kind": "lex", "id": "tshirt" }, { "kind": "lex", "id": "sunglasses" } ] },
+    { "id": "sunny", "skill": "sci.weather.sunny", "difficulty": 3, "say": { "ar": "الشَّمْسُ قَوِيَّةٌ! مَاذَا نَلْبَسُ عَلَى رُؤُوسِنَا؟", "en": "The sun is strong! What do we wear on our heads?" }, "show": { "kind": "lex", "id": "sun" }, "answer": { "kind": "lex", "id": "hat" }, "choices": [ { "kind": "lex", "id": "scarf" }, { "kind": "lex", "id": "hat" }, { "kind": "lex", "id": "umbrella" } ] },
+    { "id": "neck", "skill": "sci.weather.cold", "difficulty": 3, "say": { "ar": "الْجَوُّ بَارِدٌ! مَاذَا نَلُفُّ حَوْلَ رَقَبَتِنَا؟", "en": "It's cold! What do we wrap around our neck?" }, "show": { "kind": "lex", "id": "snow" }, "answer": { "kind": "lex", "id": "scarf" }, "choices": [ { "kind": "lex", "id": "sunglasses" }, { "kind": "lex", "id": "tshirt" }, { "kind": "lex", "id": "scarf" } ] }
+  ]
+}

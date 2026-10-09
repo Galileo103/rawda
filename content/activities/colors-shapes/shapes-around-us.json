@@ -1,0 +1,20 @@
+{
+  "id": "shapes-around-us",
+  "areaId": "colors-shapes",
+  "template": "choice",
+  "langs": "any",
+  "level": 3,
+  "order": 3,
+  "sessionLength": 5,
+  "icon": { "kind": "lex", "id": "pizza" },
+  "title": { "ar": "أَشْكَالٌ حَوْلَنَا", "en": "Shapes around us" },
+  "intro": { "ar": "الْأَشْكَالُ فِي كُلِّ مَكَانٍ: الْكُرَةُ دَائِرَةٌ، وَالْبَابُ مُسْتَطِيلٌ. هَيَّا نَبْحَثُ!", "en": "Shapes are everywhere: a ball is a circle, a door is a rectangle. Let's look!" },
+  "items": [
+    { "id": "circle-ball", "skill": "shape.real.circle", "difficulty": 1, "say": { "ar": "أَيُّهُمَا يُشْبِهُ الدَّائِرَةَ؟", "en": "Which one looks like a circle?" }, "show": { "kind": "shape", "shape": "circle" }, "answer": { "kind": "lex", "id": "ball" }, "choices": [ { "kind": "lex", "id": "ball" }, { "kind": "lex", "id": "door" } ] },
+    { "id": "heart", "skill": "shape.real.heart", "difficulty": 1, "say": { "ar": "أَيُّهُمَا يُشْبِهُ الْقَلْبَ؟", "en": "Which one looks like a heart?" }, "show": { "kind": "shape", "shape": "heart" }, "answer": { "kind": "lex", "id": "heart" }, "choices": [ { "kind": "lex", "id": "pizza" }, { "kind": "lex", "id": "heart" } ] },
+    { "id": "rectangle-door", "skill": "shape.real.rectangle", "difficulty": 2, "say": { "ar": "أَيُّهُمَا يُشْبِهُ الْمُسْتَطِيلَ؟", "en": "Which one looks like a rectangle?" }, "show": { "kind": "shape", "shape": "rectangle" }, "answer": { "kind": "lex", "id": "door" }, "choices": [ { "kind": "lex", "id": "ball" }, { "kind": "lex", "id": "door" }, { "kind": "lex", "id": "pizza" } ] },
+    { "id": "triangle-pizza", "skill": "shape.real.triangle", "difficulty": 2, "say": { "ar": "أَيُّهُمَا يُشْبِهُ الْمُثَلَّثَ؟", "en": "Which one looks like a triangle?" }, "show": { "kind": "shape", "shape": "triangle" }, "answer": { "kind": "lex", "id": "pizza" }, "choices": [ { "kind": "lex", "id": "pizza" }, { "kind": "lex", "id": "ball" }, { "kind": "lex", "id": "door" } ] },
+    { "id": "square-gift", "skill": "shape.real.square", "difficulty": 3, "say": { "ar": "أَيُّهَا يُشْبِهُ الْمُرَبَّعَ؟", "en": "Which one looks like a square?" }, "show": { "kind": "shape", "shape": "square" }, "answer": { "kind": "lex", "id": "gift" }, "choices": [ { "kind": "lex", "id": "ball" }, { "kind": "lex", "id": "pizza" }, { "kind": "lex", "id": "gift" } ] },
+    { "id": "star", "skill": "shape.real.star", "difficulty": 3, "say": { "ar": "أَيُّهَا يُشْبِهُ النَّجْمَةَ؟", "en": "Which one looks like a star?" }, "show": { "kind": "shape", "shape": "star" }, "answer": { "kind": "lex", "id": "star" }, "choices": [ { "kind": "lex", "id": "door" }, { "kind": "lex", "id": "star" }, { "kind": "lex", "id": "ball" } ] }
+  ]
+}

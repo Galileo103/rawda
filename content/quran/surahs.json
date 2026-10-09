@@ -1,0 +1,263 @@
+{
+  "source": {
+    "text": "Tanzil Quran Text (Uthmani, Version 1.1) — Hafs",
+    "textUrl": "https://tanzil.net",
+    "textLicense": "Creative Commons Attribution 3.0 — verbatim copies only; changing the text is not allowed",
+    "textNotice": "# PLEASE DO NOT REMOVE OR CHANGE THIS COPYRIGHT BLOCK\n#====================================================================\n#\n#  Tanzil Quran Text (Uthmani, Version 1.1)\n#  Copyright (C) 2007-2026 Tanzil Project\n#  License: Creative Commons Attribution 3.0\n#\n#  This copy of the Quran text is carefully produced, highly \n#  verified and continuously monitored by a group of specialists \n#  at Tanzil Project.\n#\n#  TERMS OF USE:\n#\n#  - Permission is granted to copy and distribute verbatim copies \n#    of this text, but CHANGING IT IS NOT ALLOWED.\n#\n#  - This Quran text can be used in any website or application, \n#    provided that its source (Tanzil Project) is clearly indicated, \n#    and a link is made to tanzil.net to enable users to keep\n#    track of changes.\n#\n#  - This copyright notice shall be included in all verbatim copies \n#    of the text, and shall be reproduced appropriately in all files \n#    derived from or containing substantial portion of this text.\n#\n#  Please check updates at: http://tanzil.net/updates/\n#\n#====================================================================",
+    "textSha256": "bf4f57b968d03f4131c070b1e285da9be0e0a108a21c910e872801ca273312c8",
+    "reciter": {
+      "ar": "محمود خليل الحصري (المصحف المعلّم)",
+      "en": "Mahmoud Khalil Al-Husary (Mu'allim)"
+    },
+    "audioUrl": "https://everyayah.com/data/Husary_Muallim_128kbps/",
+    "crossCheck": "Ayah counts checked against Tanzil metadata and quran.com; per-ayah word counts checked against quran.com word-by-word data.",
+    "fetchedAt": "2026-10-09T18:11:17.947Z"
+  },
+  "basmala": {
+    "text": "بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ",
+    "audio": "quran/husary-muallim/001001.mp3",
+    "sha256": "f4dff7d7b3624f4ad760f147425d6b63381d12852e258717641f9b605944dcb6"
+  },
+  "surahs": [
+    {
+      "number": 1,
+      "nameAr": "الفاتحة",
+      "nameTranslit": "Al-Faatiha",
+      "nameEn": "The Opening",
+      "ayahCount": 7,
+      "basmalaHeading": false,
+      "ayahs": [
+        {
+          "n": 1,
+          "text": "بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ",
+          "audio": "quran/husary-muallim/001001.mp3",
+          "sha256": "f4dff7d7b3624f4ad760f147425d6b63381d12852e258717641f9b605944dcb6"
+        },
+        {
+          "n": 2,
+          "text": "ٱلْحَمْدُ لِلَّهِ رَبِّ ٱلْعَٰلَمِينَ",
+          "audio": "quran/husary-muallim/001002.mp3",
+          "sha256": "9717bbf9cf97e0ab38c59890e4e56a5533078073d7bcf34a9a51b7b4f89ef863"
+        },
+        {
+          "n": 3,
+          "text": "ٱلرَّحْمَٰنِ ٱلرَّحِيمِ",
+          "audio": "quran/husary-muallim/001003.mp3",
+          "sha256": "f58ae5ff1f7b056d22d29d17161d84e1e6ec3232d35099e2ec92ded07d49e56b"
+        },
+        {
+          "n": 4,
+          "text": "مَٰلِكِ يَوْمِ ٱلدِّينِ",
+          "audio": "quran/husary-muallim/001004.mp3",
+          "sha256": "4c0c5741098f0599a3133492e6dd8a2cdf3c716ff732a78064c4a3749284cccd"
+        },
+        {
+          "n": 5,
+          "text": "إِيَّاكَ نَعْبُدُ وَإِيَّاكَ نَسْتَعِينُ",
+          "audio": "quran/husary-muallim/001005.mp3",
+          "sha256": "26ce1573bf520355a77b7cf674b162cb98769558436f87dfb4abeddd11d3db68"
+        },
+        {
+          "n": 6,
+          "text": "ٱهْدِنَا ٱلصِّرَٰطَ ٱلْمُسْتَقِيمَ",
+          "audio": "quran/husary-muallim/001006.mp3",
+          "sha256": "e13a1b33937d53fa3236d00b054ed0ddf8f5ff49b21ecebc2f98dc4f294af839"
+        },
+        {
+          "n": 7,
+          "text": "صِرَٰطَ ٱلَّذِينَ أَنْعَمْتَ عَلَيْهِمْ غَيْرِ ٱلْمَغْضُوبِ عَلَيْهِمْ وَلَا ٱلضَّآلِّينَ",
+          "audio": "quran/husary-muallim/001007.mp3",
+          "sha256": "b9dd9a11289b55bbdd6c0e8d739a6340c22093fa7366c971710194a55206b77e"
+        }
+      ]
+    },
+    {
+      "number": 114,
+      "nameAr": "الناس",
+      "nameTranslit": "An-Naas",
+      "nameEn": "Mankind",
+      "ayahCount": 6,
+      "basmalaHeading": true,
+      "ayahs": [
+        {
+          "n": 1,
+          "text": "قُلْ أَعُوذُ بِرَبِّ ٱلنَّاسِ",
+          "audio": "quran/husary-muallim/114001.mp3",
+          "sha256": "9dd08d9b862257f7a41b516a9208e34e3456b9e90ca142127555c2dd9620969b"
+        },
+        {
+          "n": 2,
+          "text": "مَلِكِ ٱلنَّاسِ",
+          "audio": "quran/husary-muallim/114002.mp3",
+          "sha256": "05c66f80d669635393847b7eebbd1c5263d33dc90d59fe05269c5ddc2c3741ba"
+        },
+        {
+          "n": 3,
+          "text": "إِلَٰهِ ٱلنَّاسِ",
+          "audio": "quran/husary-muallim/114003.mp3",
+          "sha256": "d9bb596223119389fb7fa33d46c75c6f2c309b109ead9fecd48a25aede0b1233"
+        },
+        {
+          "n": 4,
+          "text": "مِن شَرِّ ٱلْوَسْوَاسِ ٱلْخَنَّاسِ",
+          "audio": "quran/husary-muallim/114004.mp3",
+          "sha256": "912105b3dac55d6922ec48a3ad45fe9a12c58759506f0faa4078085f076f1393"
+        },
+        {
+          "n": 5,
+          "text": "ٱلَّذِى يُوَسْوِسُ فِى صُدُورِ ٱلنَّاسِ",
+          "audio": "quran/husary-muallim/114005.mp3",
+          "sha256": "6e1249cc5e48e9c8376b961380e0593875d2b7cf6200b24f5b9709321a0fe2e4"
+        },
+        {
+          "n": 6,
+          "text": "مِنَ ٱلْجِنَّةِ وَٱلنَّاسِ",
+          "audio": "quran/husary-muallim/114006.mp3",
+          "sha256": "010db0dcd7fda9f2339e8ae46c361b3d9c0c0cb39e87891f9896cb3cde5c7b54"
+        }
+      ]
+    },
+    {
+      "number": 113,
+      "nameAr": "الفلق",
+      "nameTranslit": "Al-Falaq",
+      "nameEn": "The Dawn",
+      "ayahCount": 5,
+      "basmalaHeading": true,
+      "ayahs": [
+        {
+          "n": 1,
+          "text": "قُلْ أَعُوذُ بِرَبِّ ٱلْفَلَقِ",
+          "audio": "quran/husary-muallim/113001.mp3",
+          "sha256": "b4b381cd16a87dda3f45f923e6388e6e44787a10bfc6992c19389be147991d81"
+        },
+        {
+          "n": 2,
+          "text": "مِن شَرِّ مَا خَلَقَ",
+          "audio": "quran/husary-muallim/113002.mp3",
+          "sha256": "1a82d339ba76d91b12ffd582d5586878d451f4c08eb6c899c045ffdb68b70b81"
+        },
+        {
+          "n": 3,
+          "text": "وَمِن شَرِّ غَاسِقٍ إِذَا وَقَبَ",
+          "audio": "quran/husary-muallim/113003.mp3",
+          "sha256": "194d28136f236c5800f4709d78e0bfd145b4ebb7728d54cf78812ce3ff9f3575"
+        },
+        {
+          "n": 4,
+          "text": "وَمِن شَرِّ ٱلنَّفَّٰثَٰتِ فِى ٱلْعُقَدِ",
+          "audio": "quran/husary-muallim/113004.mp3",
+          "sha256": "4e570d4c4fed9cf890eb47f090ff083c30d3d987a47b94941b0c5d3a6360205d"
+        },
+        {
+          "n": 5,
+          "text": "وَمِن شَرِّ حَاسِدٍ إِذَا حَسَدَ",
+          "audio": "quran/husary-muallim/113005.mp3",
+          "sha256": "98f6b4afb7e69a3c2051cbbda0e7167a5ab8c4435889dd9fcb7a8d6a880f7b1b"
+        }
+      ]
+    },
+    {
+      "number": 112,
+      "nameAr": "الإخلاص",
+      "nameTranslit": "Al-Ikhlaas",
+      "nameEn": "Sincerity",
+      "ayahCount": 4,
+      "basmalaHeading": true,
+      "ayahs": [
+        {
+          "n": 1,
+          "text": "قُلْ هُوَ ٱللَّهُ أَحَدٌ",
+          "audio": "quran/husary-muallim/112001.mp3",
+          "sha256": "0b16ecd06a0fc6542000fa22943cf71d248ad085606abdae93ff30ae9b887a93"
+        },
+        {
+          "n": 2,
+          "text": "ٱللَّهُ ٱلصَّمَدُ",
+          "audio": "quran/husary-muallim/112002.mp3",
+          "sha256": "14e9cfdd371e7aae4f6e259e28a7e66244445fd0552badaaa2ffe9219be746b2"
+        },
+        {
+          "n": 3,
+          "text": "لَمْ يَلِدْ وَلَمْ يُولَدْ",
+          "audio": "quran/husary-muallim/112003.mp3",
+          "sha256": "a6d10a34e788750ab2ca578d0e05b0d4e70c1985fdd45ae8f704dc917fbd7eca"
+        },
+        {
+          "n": 4,
+          "text": "وَلَمْ يَكُن لَّهُۥ كُفُوًا أَحَدٌۢ",
+          "audio": "quran/husary-muallim/112004.mp3",
+          "sha256": "47f4d7a3e1999ca99588caccd271e788dc5eacd2a311dedc312f33c12ea1941e"
+        }
+      ]
+    },
+    {
+      "number": 111,
+      "nameAr": "المسد",
+      "nameTranslit": "Al-Masad",
+      "nameEn": "The Palm Fibre",
+      "ayahCount": 5,
+      "basmalaHeading": true,
+      "ayahs": [
+        {
+          "n": 1,
+          "text": "تَبَّتْ يَدَآ أَبِى لَهَبٍ وَتَبَّ",
+          "audio": "quran/husary-muallim/111001.mp3",
+          "sha256": "ac8ecd4d039a0b9336717433f2daf2ccca5fd255ff21a0dd9a8af6cc0e66d5d9"
+        },
+        {
+          "n": 2,
+          "text": "مَآ أَغْنَىٰ عَنْهُ مَالُهُۥ وَمَا كَسَبَ",
+          "audio": "quran/husary-muallim/111002.mp3",
+          "sha256": "bccc4c562ba54ba8b463df184013a567a430b81a7f7104856f35030dda5575e5"
+        },
+        {
+          "n": 3,
+          "text": "سَيَصْلَىٰ نَارًا ذَاتَ لَهَبٍ",
+          "audio": "quran/husary-muallim/111003.mp3",
+          "sha256": "4922b99a456aa269f1324bad7c3d222c3551da155771550f57c90653fed61b1c"
+        },
+        {
+          "n": 4,
+          "text": "وَٱمْرَأَتُهُۥ حَمَّالَةَ ٱلْحَطَبِ",
+          "audio": "quran/husary-muallim/111004.mp3",
+          "sha256": "03a68b240bedf6c74783f25f254ba63db95c7dc6fd9b9614996c0f9f643f621d"
+        },
+        {
+          "n": 5,
+          "text": "فِى جِيدِهَا حَبْلٌ مِّن مَّسَدٍۭ",
+          "audio": "quran/husary-muallim/111005.mp3",
+          "sha256": "a484f1311517d5655e07945b7b0e77df3439cea6858568be09c00c7b380005b3"
+        }
+      ]
+    },
+    {
+      "number": 110,
+      "nameAr": "النصر",
+      "nameTranslit": "An-Nasr",
+      "nameEn": "Divine Support",
+      "ayahCount": 3,
+      "basmalaHeading": true,
+      "ayahs": [
+        {
+          "n": 1,
+          "text": "إِذَا جَآءَ نَصْرُ ٱللَّهِ وَٱلْفَتْحُ",
+          "audio": "quran/husary-muallim/110001.mp3",
+          "sha256": "a292eab2b1e88c4cdcaaa12e5b0864b7285abf5f1ed07684ce1a27acc83b9045"
+        },
+        {
+          "n": 2,
+          "text": "وَرَأَيْتَ ٱلنَّاسَ يَدْخُلُونَ فِى دِينِ ٱللَّهِ أَفْوَاجًا",
+          "audio": "quran/husary-muallim/110002.mp3",
+          "sha256": "8f14276d2400136a7994a6f0e6cef167a1e8be040681a767b53e25c82618d6d2"
+        },
+        {
+          "n": 3,
+          "text": "فَسَبِّحْ بِحَمْدِ رَبِّكَ وَٱسْتَغْفِرْهُ إِنَّهُۥ كَانَ تَوَّابًۢا",
+          "audio": "quran/husary-muallim/110003.mp3",
+          "sha256": "28ced3c776d406ceb45b8e25839441078d4e4f1de4c726450ed61774bb4a8828"
+        }
+      ]
+    }
+  ]
+}

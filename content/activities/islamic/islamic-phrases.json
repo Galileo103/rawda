@@ -1,0 +1,18 @@
+{
+  "id": "islamic-phrases",
+  "areaId": "islamic",
+  "template": "choice",
+  "langs": "any",
+  "level": 1,
+  "order": 1,
+  "sessionLength": 4,
+  "icon": { "kind": "lex", "id": "meal" },
+  "title": { "ar": "كَلِمَاتٌ طَيِّبَةٌ", "en": "Kind words" },
+  "intro": { "ar": "هَيَّا نَتَعَلَّمُ كَلِمَاتٍ طَيِّبَةً نَقُولُهَا كُلَّ يَوْمٍ.", "en": "Let's learn kind words we say every day." },
+  "items": [
+    { "id": "before-eating", "skill": "islam.phrase.bismillah", "difficulty": 1, "say": { "ar": "مَاذَا نَقُولُ قَبْلَ أَنْ نَأْكُلَ؟", "en": "What do we say before we eat?" }, "show": { "kind": "lex", "id": "meal" }, "answer": { "kind": "phrase", "text": { "ar": "بِسْمِ اللهِ", "en": "Bismillah" } }, "choices": [ { "kind": "phrase", "text": { "ar": "بِسْمِ اللهِ", "en": "Bismillah" } }, { "kind": "phrase", "text": { "ar": "السَّلَامُ عَلَيْكُمْ", "en": "Assalamu alaykum" } } ], "sayAfter": { "ar": "بِسْمِ اللهِ", "en": "Bismillah: in the name of Allah." } },
+    { "id": "after-eating", "skill": "islam.phrase.alhamdulillah", "difficulty": 1, "say": { "ar": "مَاذَا نَقُولُ بَعْدَ أَنْ نَأْكُلَ؟", "en": "What do we say after we eat?" }, "show": { "kind": "lex", "id": "meal" }, "answer": { "kind": "phrase", "text": { "ar": "الْحَمْدُ لِلَّهِ", "en": "Alhamdulillah" } }, "choices": [ { "kind": "phrase", "text": { "ar": "السَّلَامُ عَلَيْكُمْ", "en": "Assalamu alaykum" } }, { "kind": "phrase", "text": { "ar": "الْحَمْدُ لِلَّهِ", "en": "Alhamdulillah" } } ], "sayAfter": { "ar": "الْحَمْدُ لِلَّهِ", "en": "Alhamdulillah: all praise is for Allah." } },
+    { "id": "greeting", "skill": "islam.phrase.salam", "difficulty": 2, "say": { "ar": "مَاذَا نَقُولُ عِنْدَمَا نُقَابِلُ أَصْدِقَاءَنَا؟", "en": "What do we say when we meet our friends?" }, "show": { "kind": "lex", "id": "wave" }, "answer": { "kind": "phrase", "text": { "ar": "السَّلَامُ عَلَيْكُمْ", "en": "Assalamu alaykum" } }, "choices": [ { "kind": "phrase", "text": { "ar": "بِسْمِ اللهِ", "en": "Bismillah" } }, { "kind": "phrase", "text": { "ar": "السَّلَامُ عَلَيْكُمْ", "en": "Assalamu alaykum" } }, { "kind": "phrase", "text": { "ar": "الْحَمْدُ لِلَّهِ", "en": "Alhamdulillah" } } ], "sayAfter": { "ar": "السَّلَامُ عَلَيْكُمْ", "en": "Assalamu alaykum: peace be upon you." } },
+    { "id": "sneeze", "skill": "islam.phrase.sneeze", "difficulty": 3, "say": { "ar": "مَاذَا نَقُولُ عِنْدَمَا نَعْطِسُ؟", "en": "What do we say when we sneeze?" }, "show": { "kind": "lex", "id": "sneeze" }, "answer": { "kind": "phrase", "text": { "ar": "الْحَمْدُ لِلَّهِ", "en": "Alhamdulillah" } }, "choices": [ { "kind": "phrase", "text": { "ar": "الْحَمْدُ لِلَّهِ", "en": "Alhamdulillah" } }, { "kind": "phrase", "text": { "ar": "السَّلَامُ عَلَيْكُمْ", "en": "Assalamu alaykum" } }, { "kind": "phrase", "text": { "ar": "بِسْمِ اللهِ", "en": "Bismillah" } } ], "sayAfter": { "ar": "الْحَمْدُ لِلَّهِ", "en": "Alhamdulillah." } }
+  ]
+}

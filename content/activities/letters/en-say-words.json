@@ -1,0 +1,156 @@
+{
+  "id": "en-say-words",
+  "areaId": "letters",
+  "template": "speak",
+  "langs": "en",
+  "level": 2,
+  "order": 8,
+  "sessionLength": 4,
+  "icon": {
+    "kind": "lex",
+    "id": "wave"
+  },
+  "title": {
+    "en": "Say it!"
+  },
+  "intro": {
+    "en": "Listen to the word, then say it out loud!"
+  },
+  "items": [
+    {
+      "id": "cat",
+      "skill": "speak.cat",
+      "difficulty": 1,
+      "say": {
+        "en": "Let's say: cat!"
+      },
+      "word": "cat"
+    },
+    {
+      "id": "dog",
+      "skill": "speak.dog",
+      "difficulty": 1,
+      "say": {
+        "en": "Let's say: dog!"
+      },
+      "word": "dog"
+    },
+    {
+      "id": "sun",
+      "skill": "speak.sun",
+      "difficulty": 1,
+      "say": {
+        "en": "Let's say: sun!"
+      },
+      "word": "sun"
+    },
+    {
+      "id": "ball",
+      "skill": "speak.ball",
+      "difficulty": 1,
+      "say": {
+        "en": "Let's say: ball!"
+      },
+      "word": "ball"
+    },
+    {
+      "id": "egg",
+      "skill": "speak.egg",
+      "difficulty": 1,
+      "say": {
+        "en": "Let's say: egg!"
+      },
+      "word": "egg"
+    },
+    {
+      "id": "fish",
+      "skill": "speak.fish",
+      "difficulty": 2,
+      "say": {
+        "en": "Let's say: fish!"
+      },
+      "word": "fish"
+    },
+    {
+      "id": "duck",
+      "skill": "speak.duck",
+      "difficulty": 2,
+      "say": {
+        "en": "Let's say: duck!"
+      },
+      "word": "duck"
+    },
+    {
+      "id": "hat",
+      "skill": "speak.hat",
+      "difficulty": 2,
+      "say": {
+        "en": "Let's say: hat!"
+      },
+      "word": "hat"
+    },
+    {
+      "id": "book",
+      "skill": "speak.book",
+      "difficulty": 2,
+      "say": {
+        "en": "Let's say: book!"
+      },
+      "word": "book"
+    },
+    {
+      "id": "star",
+      "skill": "speak.star",
+      "difficulty": 2,
+      "say": {
+        "en": "Let's say: star!"
+      },
+      "word": "star"
+    },
+    {
+      "id": "apple",
+      "skill": "speak.apple",
+      "difficulty": 3,
+      "say": {
+        "en": "Let's say: apple!"
+      },
+      "word": "apple"
+    },
+    {
+      "id": "tree",
+      "skill": "speak.tree",
+      "difficulty": 3,
+      "say": {
+        "en": "Let's say: tree!"
+      },
+      "word": "tree"
+    },
+    {
+      "id": "rabbit",
+      "skill": "speak.rabbit",
+      "difficulty": 4,
+      "say": {
+        "en": "Let's say: rabbit!"
+      },
+      "word": "rabbit"
+    },
+    {
+      "id": "butterfly",
+      "skill": "speak.butterfly",
+      "difficulty": 4,
+      "say": {
+        "en": "Let's say: butterfly!"
+      },
+      "word": "butterfly"
+    },
+    {
+      "id": "elephant",
+      "skill": "speak.elephant",
+      "difficulty": 5,
+      "say": {
+        "en": "Let's say: elephant!"
+      },
+      "word": "elephant"
+    }
+  ]
+}

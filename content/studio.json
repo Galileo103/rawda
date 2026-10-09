@@ -1,0 +1,9 @@
+{
+  "stamps": ["2B50", "2764", "1F338", "1F98B", "1F308", "1F431", "1F420", "1F333", "1F697", "1F388", "1F319", "2600", "1F680", "1F3E0"],
+  "pages": [
+    { "id": "fish", "file": "fish.svg", "title": { "ar": "سمكة", "en": "Fish" } },
+    { "id": "house", "file": "house.svg", "title": { "ar": "بيت", "en": "House" } },
+    { "id": "flower", "file": "flower.svg", "title": { "ar": "زهرة", "en": "Flower" } },
+    { "id": "butterfly", "file": "butterfly.svg", "title": { "ar": "فراشة", "en": "Butterfly" } }
+  ]
+}

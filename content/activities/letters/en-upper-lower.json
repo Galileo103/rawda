@@ -1,0 +1,21 @@
+{
+  "id": "en-upper-lower",
+  "areaId": "letters",
+  "template": "match",
+  "langs": "en",
+  "level": 2,
+  "order": 5,
+  "sessionLength": 3,
+  "icon": { "kind": "glyph", "text": "Bb" },
+  "title": { "en": "Big and small letters" },
+  "intro": { "en": "Every big letter has a small letter friend. Let's match them!" },
+  "items": [
+    { "id": "abc", "skill": "en.case.a-c", "difficulty": 1, "say": { "en": "Match each big letter with its small letter." }, "pairs": [ { "a": { "kind": "glyph", "text": "A" }, "b": { "kind": "glyph", "text": "a" } }, { "a": { "kind": "glyph", "text": "B" }, "b": { "kind": "glyph", "text": "b" } }, { "a": { "kind": "glyph", "text": "C" }, "b": { "kind": "glyph", "text": "c" } } ] },
+    { "id": "defg", "skill": "en.case.d-g", "difficulty": 2, "say": { "en": "Match each big letter with its small letter." }, "pairs": [ { "a": { "kind": "glyph", "text": "D" }, "b": { "kind": "glyph", "text": "d" } }, { "a": { "kind": "glyph", "text": "E" }, "b": { "kind": "glyph", "text": "e" } }, { "a": { "kind": "glyph", "text": "F" }, "b": { "kind": "glyph", "text": "f" } }, { "a": { "kind": "glyph", "text": "G" }, "b": { "kind": "glyph", "text": "g" } } ] },
+    { "id": "hijk", "skill": "en.case.h-k", "difficulty": 2, "say": { "en": "Match each big letter with its small letter." }, "pairs": [ { "a": { "kind": "glyph", "text": "H" }, "b": { "kind": "glyph", "text": "h" } }, { "a": { "kind": "glyph", "text": "I" }, "b": { "kind": "glyph", "text": "i" } }, { "a": { "kind": "glyph", "text": "J" }, "b": { "kind": "glyph", "text": "j" } }, { "a": { "kind": "glyph", "text": "K" }, "b": { "kind": "glyph", "text": "k" } } ] },
+    { "id": "lmno", "skill": "en.case.l-o", "difficulty": 3, "say": { "en": "Match each big letter with its small letter." }, "pairs": [ { "a": { "kind": "glyph", "text": "L" }, "b": { "kind": "glyph", "text": "l" } }, { "a": { "kind": "glyph", "text": "M" }, "b": { "kind": "glyph", "text": "m" } }, { "a": { "kind": "glyph", "text": "N" }, "b": { "kind": "glyph", "text": "n" } }, { "a": { "kind": "glyph", "text": "O" }, "b": { "kind": "glyph", "text": "o" } } ] },
+    { "id": "rstu", "skill": "en.case.r-u", "difficulty": 3, "say": { "en": "Match each big letter with its small letter." }, "pairs": [ { "a": { "kind": "glyph", "text": "R" }, "b": { "kind": "glyph", "text": "r" } }, { "a": { "kind": "glyph", "text": "S" }, "b": { "kind": "glyph", "text": "s" } }, { "a": { "kind": "glyph", "text": "T" }, "b": { "kind": "glyph", "text": "t" } }, { "a": { "kind": "glyph", "text": "U" }, "b": { "kind": "glyph", "text": "u" } } ] },
+    { "id": "vwxyz", "skill": "en.case.v-z", "difficulty": 4, "say": { "en": "Match each big letter with its small letter." }, "pairs": [ { "a": { "kind": "glyph", "text": "V" }, "b": { "kind": "glyph", "text": "v" } }, { "a": { "kind": "glyph", "text": "W" }, "b": { "kind": "glyph", "text": "w" } }, { "a": { "kind": "glyph", "text": "X" }, "b": { "kind": "glyph", "text": "x" } }, { "a": { "kind": "glyph", "text": "Y" }, "b": { "kind": "glyph", "text": "y" } }, { "a": { "kind": "glyph", "text": "Z" }, "b": { "kind": "glyph", "text": "z" } } ] },
+    { "id": "bdpq", "skill": "en.case.bdpq", "difficulty": 5, "say": { "en": "These look alike! Match each big letter with its small letter." }, "pairs": [ { "a": { "kind": "glyph", "text": "B" }, "b": { "kind": "glyph", "text": "b" } }, { "a": { "kind": "glyph", "text": "D" }, "b": { "kind": "glyph", "text": "d" } }, { "a": { "kind": "glyph", "text": "P" }, "b": { "kind": "glyph", "text": "p" } }, { "a": { "kind": "glyph", "text": "Q" }, "b": { "kind": "glyph", "text": "q" } } ] }
+  ]
+}

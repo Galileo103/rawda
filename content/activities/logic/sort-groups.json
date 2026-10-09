@@ -1,0 +1,101 @@
+{
+  "id": "sort-groups",
+  "areaId": "logic",
+  "template": "sort",
+  "langs": "any",
+  "level": 2,
+  "order": 4,
+  "sessionLength": 3,
+  "icon": { "kind": "lex", "id": "apple" },
+  "title": { "ar": "كُلُّ شَيْءٍ فِي سَلَّتِهِ", "en": "Into the right basket" },
+  "intro": { "ar": "هَيَّا نَضَعُ كُلَّ صُورَةٍ فِي السَّلَّةِ الْمُنَاسِبَةِ!", "en": "Let's put each picture in the right basket!" },
+  "items": [
+    {
+      "id": "red-yellow",
+      "skill": "logic.sort.color",
+      "difficulty": 1,
+      "say": { "ar": "الْأَشْيَاءُ الْحَمْرَاءُ هُنَا، وَالصَّفْرَاءُ هُنَاكَ!", "en": "Red things here, yellow things there!" },
+      "bins": [
+        { "id": "red", "label": { "kind": "color", "color": "red" } },
+        { "id": "yellow", "label": { "kind": "color", "color": "yellow" } }
+      ],
+      "things": [
+        { "v": { "kind": "lex", "id": "apple" }, "bin": "red" },
+        { "v": { "kind": "lex", "id": "strawberry" }, "bin": "red" },
+        { "v": { "kind": "lex", "id": "ladybug" }, "bin": "red" },
+        { "v": { "kind": "lex", "id": "banana" }, "bin": "yellow" },
+        { "v": { "kind": "lex", "id": "lemon" }, "bin": "yellow" },
+        { "v": { "kind": "lex", "id": "chick" }, "bin": "yellow" }
+      ]
+    },
+    {
+      "id": "circle-triangle",
+      "skill": "logic.sort.shape",
+      "difficulty": 2,
+      "say": { "ar": "الدَّوَائِرُ مَعًا، وَالْمُثَلَّثَاتُ مَعًا!", "en": "Circles together, triangles together!" },
+      "bins": [
+        { "id": "circle", "label": { "kind": "shape", "shape": "circle" } },
+        { "id": "triangle", "label": { "kind": "shape", "shape": "triangle" } }
+      ],
+      "things": [
+        { "v": { "kind": "lex", "id": "ball" }, "bin": "circle" },
+        { "v": { "kind": "lex", "id": "orange" }, "bin": "circle" },
+        { "v": { "kind": "lex", "id": "sun" }, "bin": "circle" },
+        { "v": { "kind": "lex", "id": "pizza" }, "bin": "triangle" },
+        { "v": { "kind": "shape", "shape": "triangle" }, "bin": "triangle" }
+      ]
+    },
+    {
+      "id": "sky-sea",
+      "skill": "logic.sort.place",
+      "difficulty": 3,
+      "say": { "ar": "مَا يَطِيرُ فِي السَّمَاءِ، وَمَا يَسْبَحُ فِي الْبَحْرِ؟", "en": "What flies in the sky, and what swims in the sea?" },
+      "bins": [
+        { "id": "sky", "label": { "kind": "lex", "id": "cloud" } },
+        { "id": "sea", "label": { "kind": "lex", "id": "sea" } }
+      ],
+      "things": [
+        { "v": { "kind": "lex", "id": "airplane" }, "bin": "sky" },
+        { "v": { "kind": "lex", "id": "bird" }, "bin": "sky" },
+        { "v": { "kind": "lex", "id": "kite" }, "bin": "sky" },
+        { "v": { "kind": "lex", "id": "fish" }, "bin": "sea" },
+        { "v": { "kind": "lex", "id": "whale" }, "bin": "sea" },
+        { "v": { "kind": "lex", "id": "jellyfish" }, "bin": "sea" }
+      ]
+    },
+    {
+      "id": "hot-cold",
+      "skill": "logic.sort.weather",
+      "difficulty": 4,
+      "say": { "ar": "مَاذَا نَلْبَسُ فِي الشَّمْسِ، وَمَاذَا نَلْبَسُ فِي الثَّلْجِ؟", "en": "What do we wear in the sun, and what do we wear in the snow?" },
+      "bins": [
+        { "id": "sunny", "label": { "kind": "lex", "id": "sun" } },
+        { "id": "snowy", "label": { "kind": "lex", "id": "snow" } }
+      ],
+      "things": [
+        { "v": { "kind": "lex", "id": "sunglasses" }, "bin": "sunny" },
+        { "v": { "kind": "lex", "id": "tshirt" }, "bin": "sunny" },
+        { "v": { "kind": "lex", "id": "coat" }, "bin": "snowy" },
+        { "v": { "kind": "lex", "id": "scarf" }, "bin": "snowy" }
+      ]
+    },
+    {
+      "id": "land-sea-animals",
+      "skill": "logic.sort.habitat",
+      "difficulty": 5,
+      "say": { "ar": "مَنْ يَعِيشُ عَلَى الْأَرْضِ، وَمَنْ يَعِيشُ فِي الْبَحْرِ؟", "en": "Who lives on land, and who lives in the sea?" },
+      "bins": [
+        { "id": "land", "label": { "kind": "lex", "id": "tree" } },
+        { "id": "water", "label": { "kind": "lex", "id": "sea" } }
+      ],
+      "things": [
+        { "v": { "kind": "lex", "id": "camel" }, "bin": "land" },
+        { "v": { "kind": "lex", "id": "lion" }, "bin": "land" },
+        { "v": { "kind": "lex", "id": "horse" }, "bin": "land" },
+        { "v": { "kind": "lex", "id": "fish" }, "bin": "water" },
+        { "v": { "kind": "lex", "id": "whale" }, "bin": "water" },
+        { "v": { "kind": "lex", "id": "jellyfish" }, "bin": "water" }
+      ]
+    }
+  ]
+}

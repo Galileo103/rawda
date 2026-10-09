@@ -1,0 +1,18 @@
+{
+  "id": "ar-letter-forms",
+  "areaId": "letters",
+  "template": "match",
+  "langs": "ar",
+  "level": 4,
+  "order": 8,
+  "sessionLength": 3,
+  "icon": { "kind": "glyph", "text": "بـ" },
+  "title": { "ar": "أَشْكَالُ الْحُرُوفِ" },
+  "intro": { "ar": "الْحَرْفُ يَتَغَيَّرُ شَكْلُهُ قَلِيلًا فِي أَوَّلِ الْكَلِمَةِ وَوَسَطِهَا وَآخِرِهَا. هَيَّا نُطَابِقُ!" },
+  "items": [
+    { "id": "start-1", "skill": "ar.form.start", "difficulty": 3, "say": { "ar": "نُطَابِقُ كُلَّ حَرْفٍ مَعَ شَكْلِهِ فِي أَوَّلِ الْكَلِمَةِ." }, "pairs": [ { "a": { "kind": "glyph", "text": "ب" }, "b": { "kind": "glyph", "text": "بـ" } }, { "a": { "kind": "glyph", "text": "ج" }, "b": { "kind": "glyph", "text": "جـ" } }, { "a": { "kind": "glyph", "text": "س" }, "b": { "kind": "glyph", "text": "سـ" } }, { "a": { "kind": "glyph", "text": "م" }, "b": { "kind": "glyph", "text": "مـ" } } ] },
+    { "id": "start-2", "skill": "ar.form.start", "difficulty": 3, "say": { "ar": "نُطَابِقُ كُلَّ حَرْفٍ مَعَ شَكْلِهِ فِي أَوَّلِ الْكَلِمَةِ." }, "pairs": [ { "a": { "kind": "glyph", "text": "ع" }, "b": { "kind": "glyph", "text": "عـ" } }, { "a": { "kind": "glyph", "text": "ه" }, "b": { "kind": "glyph", "text": "هـ" } }, { "a": { "kind": "glyph", "text": "ك" }, "b": { "kind": "glyph", "text": "كـ" } }, { "a": { "kind": "glyph", "text": "ي" }, "b": { "kind": "glyph", "text": "يـ" } } ] },
+    { "id": "middle", "skill": "ar.form.middle", "difficulty": 4, "say": { "ar": "نُطَابِقُ كُلَّ حَرْفٍ مَعَ شَكْلِهِ فِي وَسَطِ الْكَلِمَةِ." }, "pairs": [ { "a": { "kind": "glyph", "text": "ب" }, "b": { "kind": "glyph", "text": "ـبـ" } }, { "a": { "kind": "glyph", "text": "ع" }, "b": { "kind": "glyph", "text": "ـعـ" } }, { "a": { "kind": "glyph", "text": "ه" }, "b": { "kind": "glyph", "text": "ـهـ" } }, { "a": { "kind": "glyph", "text": "ج" }, "b": { "kind": "glyph", "text": "ـجـ" } } ] },
+    { "id": "end", "skill": "ar.form.end", "difficulty": 5, "say": { "ar": "نُطَابِقُ كُلَّ حَرْفٍ مَعَ شَكْلِهِ فِي آخِرِ الْكَلِمَةِ." }, "pairs": [ { "a": { "kind": "glyph", "text": "ب" }, "b": { "kind": "glyph", "text": "ـب" } }, { "a": { "kind": "glyph", "text": "ع" }, "b": { "kind": "glyph", "text": "ـع" } }, { "a": { "kind": "glyph", "text": "ه" }, "b": { "kind": "glyph", "text": "ـه" } }, { "a": { "kind": "glyph", "text": "ي" }, "b": { "kind": "glyph", "text": "ـي" } } ] }
+  ]
+}

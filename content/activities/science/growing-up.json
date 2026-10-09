@@ -1,0 +1,17 @@
+{
+  "id": "growing-up",
+  "areaId": "science",
+  "template": "sequence",
+  "langs": "any",
+  "level": 3,
+  "order": 6,
+  "sessionLength": 3,
+  "icon": { "kind": "lex", "id": "seedling" },
+  "title": { "ar": "كَيْفَ نَكْبَرُ؟", "en": "How things grow" },
+  "intro": { "ar": "النَّبَاتَاتُ وَالْحَيَوَانَاتُ تَكْبَرُ خُطْوَةً بَعْدَ خُطْوَةٍ. هَيَّا نُرَتِّبُ!", "en": "Plants and animals grow step by step. Let's put the steps in order!" },
+  "items": [
+    { "id": "plant-3", "skill": "sci.growth.plant", "difficulty": 1, "say": { "ar": "هَيَّا نُرَتِّبُ: مَاذَا يَأْتِي أَوَّلًا، ثُمَّ بَعْدَهُ؟", "en": "Let's put them in order: what comes first, and then next?" }, "steps": [ { "kind": "lex", "id": "seed" }, { "kind": "lex", "id": "seedling" }, { "kind": "lex", "id": "sunflower" } ] },
+    { "id": "chicken-3", "skill": "sci.growth.chicken", "difficulty": 2, "say": { "ar": "هَيَّا نُرَتِّبُ: مَاذَا يَأْتِي أَوَّلًا، ثُمَّ بَعْدَهُ؟", "en": "Let's put them in order: what comes first, and then next?" }, "steps": [ { "kind": "lex", "id": "egg" }, { "kind": "lex", "id": "chick" }, { "kind": "lex", "id": "chicken" } ] },
+    { "id": "plant-4", "skill": "sci.growth.plant", "difficulty": 3, "say": { "ar": "هَيَّا نُرَتِّبُ: مَاذَا يَأْتِي أَوَّلًا، ثُمَّ بَعْدَهُ؟", "en": "Let's put them in order: what comes first, and then next?" }, "steps": [ { "kind": "lex", "id": "seed" }, { "kind": "lex", "id": "seedling" }, { "kind": "lex", "id": "plant" }, { "kind": "lex", "id": "sunflower" } ] }
+  ]
+}

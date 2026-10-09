@@ -1,0 +1,8 @@
+[
+  { "id": "frog", "lex": "frog", "say": { "ar": "وَقْتُ الْحَرَكَةِ! هَيَّا نَقْفِزُ مِثْلَ الضِّفْدَعِ ثَلَاثَ مَرَّاتٍ!", "en": "Movement time! Let's jump like a frog three times!" } },
+  { "id": "giraffe", "lex": "giraffe", "say": { "ar": "وَقْتُ الْحَرَكَةِ! هَيَّا نَتَمَدَّدُ وَنَصِيرُ طِوَالًا مِثْلَ الزَّرَافَةِ!", "en": "Movement time! Let's stretch up tall like a giraffe!" } },
+  { "id": "butterfly", "lex": "butterfly", "say": { "ar": "وَقْتُ الْحَرَكَةِ! هَيَّا نُرَفْرِفُ بِأَيْدِينَا مِثْلَ الْفَرَاشَةِ!", "en": "Movement time! Let's flap our arms like a butterfly!" } },
+  { "id": "rabbit", "lex": "rabbit", "say": { "ar": "وَقْتُ الْحَرَكَةِ! هَيَّا نَقْفِزُ قَفَزَاتٍ صَغِيرَةً مِثْلَ الْأَرْنَبِ!", "en": "Movement time! Let's do little hops like a rabbit!" } },
+  { "id": "elephant", "lex": "elephant", "say": { "ar": "وَقْتُ الْحَرَكَةِ! هَيَّا نَمْشِي بِبُطْءٍ وَقُوَّةٍ مِثْلَ الْفِيلِ!", "en": "Movement time! Let's stomp slowly like an elephant!" } },
+  { "id": "turtle", "lex": "turtle", "say": { "ar": "وَقْتُ الرَّاحَةِ! هَيَّا نَتَنَفَّسُ بِهُدُوءٍ وَبِبُطْءٍ مِثْلَ السُّلَحْفَاةِ.", "en": "Calm time! Let's breathe in and out slowly, like a turtle." } }
+]

@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <!-- Rawda app icon: Hala the owl (original artwork). -->
+  <rect width="512" height="512" rx="112" fill="#FF8A5B"/>
+  <circle cx="256" cy="276" r="190" fill="#FFC83D" opacity=".35"/>
+  <path d="M138 150 120 72l76 48zM374 150l18-78-76 48z" fill="#8a6de0"/>
+  <path d="M256 92c-98 0-158 72-158 180 0 118 68 186 158 186s158-68 158-186c0-108-60-180-158-180z" fill="#8a6de0"/>
+  <path d="M256 280c-62 0-96 50-96 108 0 52 42 70 96 70s96-18 96-70c0-58-34-108-96-108z" fill="#ffe7c2"/>
+  <circle cx="192" cy="214" r="70" fill="#fff8ec"/>
+  <circle cx="320" cy="214" r="70" fill="#fff8ec"/>
+  <circle cx="192" cy="214" r="34" fill="#33264a"/>
+  <circle cx="320" cy="214" r="34" fill="#33264a"/>
+  <circle cx="204" cy="200" r="12" fill="#fff"/>
+  <circle cx="332" cy="200" r="12" fill="#fff"/>
+  <path d="M230 258h52l-26 38z" fill="#ffb02e"/>
+</svg>

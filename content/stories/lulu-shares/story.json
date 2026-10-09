@@ -1,0 +1,44 @@
+{
+  "id": "lulu-shares",
+  "title": { "ar": "لُولُو تُشَارِكُ", "en": "Lulu Shares" },
+  "theme": "sharing",
+  "level": 1,
+  "cover": { "kind": "lex", "id": "cat" },
+  "pages": [
+    {
+      "scene": { "bg": "meadow", "actors": [ { "lex": "cat", "x": 32, "y": 64, "size": "lg", "motion": "bounce" }, { "lex": "tree", "x": 76, "y": 52, "size": "lg" }, { "lex": "sun", "x": 88, "y": 16, "size": "md", "motion": "sway" } ] },
+      "text": { "ar": "هَذِهِ {قِطَّةٌ} صَغِيرَةٌ، اسْمُهَا لُولُو.", "en": "This is a little {cat}. Her name is Lulu." },
+      "vocab": ["cat"]
+    },
+    {
+      "scene": { "bg": "garden", "actors": [ { "lex": "cat", "x": 26, "y": 62, "size": "lg" }, { "lex": "apple", "x": 58, "y": 70, "size": "sm", "motion": "bounce" }, { "lex": "apple", "x": 70, "y": 72, "size": "sm", "motion": "bounce" }, { "lex": "apple", "x": 82, "y": 70, "size": "sm", "motion": "bounce" } ] },
+      "text": { "ar": "عِنْدَ لُولُو ثَلَاثُ {تُفَّاحَاتٍ} حَمْرَاءَ.", "en": "Lulu has three red {apples}." },
+      "vocab": ["apple"]
+    },
+    {
+      "scene": { "bg": "meadow", "actors": [ { "lex": "cat", "x": 24, "y": 64, "size": "md" }, { "lex": "rabbit", "x": 70, "y": 62, "size": "lg", "motion": "sway", "flip": true }, { "lex": "sad", "x": 70, "y": 24, "size": "sm" } ] },
+      "text": { "ar": "جَاءَ {الْأَرْنَبُ}. الْأَرْنَبُ جَائِعٌ.", "en": "Here comes {Rabbit}. Rabbit is hungry." },
+      "vocab": ["rabbit", "sad"]
+    },
+    {
+      "scene": { "bg": "meadow", "actors": [ { "lex": "cat", "x": 32, "y": 62, "size": "lg" }, { "lex": "apple", "x": 51, "y": 56, "size": "sm", "motion": "bounce" }, { "lex": "rabbit", "x": 70, "y": 62, "size": "lg", "flip": true } ] },
+      "text": { "ar": "أَعْطَتْ لُولُو الْأَرْنَبَ {تُفَّاحَةً}.", "en": "Lulu gives Rabbit an {apple}." },
+      "vocab": ["apple"]
+    },
+    {
+      "scene": { "bg": "garden", "actors": [ { "lex": "cat", "x": 33, "y": 62, "size": "lg", "motion": "bounce" }, { "lex": "rabbit", "x": 67, "y": 62, "size": "lg", "motion": "bounce", "flip": true }, { "lex": "heart", "x": 50, "y": 26, "size": "md", "motion": "bounce" } ] },
+      "text": { "ar": "فَرِحَ الْأَرْنَبُ وَقَالَ: شُكْرًا يَا لُولُو!", "en": "Rabbit is happy. “Thank you, Lulu!”" },
+      "vocab": ["happy", "heart"]
+    },
+    {
+      "scene": { "bg": "sky", "actors": [ { "lex": "cat", "x": 34, "y": 62, "size": "lg" }, { "lex": "rabbit", "x": 64, "y": 62, "size": "lg", "flip": true }, { "lex": "rainbow", "x": 50, "y": 22, "size": "lg" } ] },
+      "text": { "ar": "الْمُشَارَكَةُ تَجْعَلُنَا {سُعَدَاءَ}.", "en": "Sharing makes us {happy}." },
+      "vocab": ["happy"]
+    }
+  ],
+  "questions": [
+    { "id": "hungry", "skill": "story.lulu.who", "difficulty": 1, "say": { "ar": "مَنْ كَانَ جَائِعًا؟", "en": "Who was hungry?" }, "answer": { "kind": "lex", "id": "rabbit" }, "choices": [ { "kind": "lex", "id": "cat" }, { "kind": "lex", "id": "rabbit" }, { "kind": "lex", "id": "duck" } ] },
+    { "id": "apples", "skill": "story.lulu.count", "difficulty": 1, "say": { "ar": "كَمْ تُفَّاحَةً كَانَتْ عِنْدَ لُولُو؟", "en": "How many apples did Lulu have?" }, "answer": { "kind": "numeral", "value": 3 }, "choices": [ { "kind": "numeral", "value": 2 }, { "kind": "numeral", "value": 3 }, { "kind": "numeral", "value": 5 } ] },
+    { "id": "feeling", "skill": "story.lulu.feeling", "difficulty": 1, "say": { "ar": "كَيْفَ شَعَرَ الْأَرْنَبُ فِي النِّهَايَةِ؟", "en": "How did Rabbit feel at the end?" }, "answer": { "kind": "lex", "id": "happy" }, "choices": [ { "kind": "lex", "id": "happy" }, { "kind": "lex", "id": "sad" } ] }
+  ]
+}

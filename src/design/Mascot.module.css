@@ -1,0 +1,96 @@
+.wrap {
+  display: inline-block;
+  line-height: 0;
+  flex: none;
+}
+
+.idle .body {
+  animation: float 3.2s ease-in-out infinite;
+}
+
+.happy .body,
+.cheer .body {
+  animation: hop 0.6s ease-in-out 2;
+}
+
+.cheer .wingL {
+  transform-origin: 70px 120px;
+  animation: flapL 0.35s ease-in-out 4 alternate;
+}
+.cheer .wingR {
+  transform-origin: 170px 120px;
+  animation: flapR 0.35s ease-in-out 4 alternate;
+}
+
+.eyes {
+  transform-origin: 120px 95px;
+  animation: blink 4.5s infinite;
+}
+
+.talk .beak {
+  transform-origin: 120px 118px;
+  animation: talk 0.28s ease-in-out infinite alternate;
+}
+
+.think .body {
+  animation: tilt 2.4s ease-in-out infinite;
+  transform-origin: 120px 200px;
+}
+
+.sleep .body {
+  animation: breathe 3s ease-in-out infinite;
+  transform-origin: 120px 220px;
+}
+
+@keyframes hop {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-14px);
+  }
+}
+@keyframes flapL {
+  to {
+    transform: rotate(-28deg);
+  }
+}
+@keyframes flapR {
+  to {
+    transform: rotate(28deg);
+  }
+}
+@keyframes blink {
+  0%,
+  92%,
+  100% {
+    transform: scaleY(1);
+  }
+  95% {
+    transform: scaleY(0.1);
+  }
+}
+@keyframes talk {
+  to {
+    transform: scaleY(1.35);
+  }
+}
+@keyframes tilt {
+  0%,
+  100% {
+    transform: rotate(0);
+  }
+  50% {
+    transform: rotate(-5deg);
+  }
+}
+@keyframes breathe {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.03);
+  }
+}

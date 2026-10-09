@@ -1,0 +1,20 @@
+{
+  "id": "number-order",
+  "areaId": "numbers",
+  "template": "sequence",
+  "langs": "any",
+  "level": 3,
+  "order": 3,
+  "sessionLength": 3,
+  "icon": { "kind": "img", "hex": "1F522" },
+  "iconByLang": { "ar": { "kind": "glyph", "text": "١ ٢ ٣" }, "en": { "kind": "glyph", "text": "1 2 3" } },
+  "title": { "ar": "نُرَتِّبُ الْأَرْقَامَ", "en": "Numbers in order" },
+  "intro": { "ar": "الْأَرْقَامُ تَمْشِي بِالدَّوْرِ: وَاحِد، اثْنَان، ثَلَاثَة. هَيَّا نُرَتِّبُهَا!", "en": "Numbers take turns: one, two, three. Let's put them in order!" },
+  "items": [
+    { "id": "1-3", "skill": "num.order.1-3", "difficulty": 1, "say": { "ar": "هَيَّا نُرَتِّبُ الْأَرْقَامَ مِنَ الصَّغِيرِ إِلَى الْكَبِيرِ!", "en": "Let's put the numbers in order, from small to big!" }, "steps": [ { "kind": "numeral", "value": 1 }, { "kind": "numeral", "value": 2 }, { "kind": "numeral", "value": 3 } ] },
+    { "id": "1-4", "skill": "num.order.1-4", "difficulty": 2, "say": { "ar": "هَيَّا نُرَتِّبُ الْأَرْقَامَ مِنَ الصَّغِيرِ إِلَى الْكَبِيرِ!", "en": "Let's put the numbers in order, from small to big!" }, "steps": [ { "kind": "numeral", "value": 1 }, { "kind": "numeral", "value": 2 }, { "kind": "numeral", "value": 3 }, { "kind": "numeral", "value": 4 } ] },
+    { "id": "1-5", "skill": "num.order.1-5", "difficulty": 3, "say": { "ar": "هَيَّا نُرَتِّبُ الْأَرْقَامَ مِنَ الصَّغِيرِ إِلَى الْكَبِيرِ!", "en": "Let's put the numbers in order, from small to big!" }, "steps": [ { "kind": "numeral", "value": 1 }, { "kind": "numeral", "value": 2 }, { "kind": "numeral", "value": 3 }, { "kind": "numeral", "value": 4 }, { "kind": "numeral", "value": 5 } ] },
+    { "id": "3-7", "skill": "num.order.3-7", "difficulty": 4, "say": { "ar": "هَيَّا نُرَتِّبُ الْأَرْقَامَ مِنَ الصَّغِيرِ إِلَى الْكَبِيرِ!", "en": "Let's put the numbers in order, from small to big!" }, "steps": [ { "kind": "numeral", "value": 3 }, { "kind": "numeral", "value": 4 }, { "kind": "numeral", "value": 5 }, { "kind": "numeral", "value": 6 }, { "kind": "numeral", "value": 7 } ] },
+    { "id": "6-10", "skill": "num.order.6-10", "difficulty": 5, "say": { "ar": "هَيَّا نُرَتِّبُ الْأَرْقَامَ مِنَ الصَّغِيرِ إِلَى الْكَبِيرِ!", "en": "Let's put the numbers in order, from small to big!" }, "steps": [ { "kind": "numeral", "value": 6 }, { "kind": "numeral", "value": 7 }, { "kind": "numeral", "value": 8 }, { "kind": "numeral", "value": 9 }, { "kind": "numeral", "value": 10 } ] }
+  ]
+}

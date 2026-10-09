@@ -1,0 +1,25 @@
+{
+  "id": "count-objects",
+  "areaId": "numbers",
+  "template": "count",
+  "langs": "any",
+  "level": 1,
+  "order": 1,
+  "sessionLength": 5,
+  "icon": { "kind": "group", "id": "apple", "count": 3 },
+  "title": { "ar": "نَعُدُّ مَعًا", "en": "Let's count" },
+  "intro": { "ar": "هَيَّا نَعُدُّ الْأَشْيَاءَ! نَلْمِسُ كُلَّ وَاحِدَةٍ وَنَعُدُّ.", "en": "Let's count things! Touch each one as we count." },
+  "items": [
+    { "id": "apple-1", "skill": "num.count.1", "difficulty": 1, "object": "apple", "count": 1, "say": { "ar": "كَمْ تُفَّاحَةً هُنَا؟", "en": "How many apples are there?" } },
+    { "id": "star-2", "skill": "num.count.2", "difficulty": 1, "object": "star", "count": 2, "say": { "ar": "كَمْ نَجْمَةً هُنَا؟", "en": "How many stars are there?" } },
+    { "id": "balloon-3", "skill": "num.count.3", "difficulty": 1, "object": "balloon", "count": 3, "say": { "ar": "كَمْ بَالُونًا هُنَا؟", "en": "How many balloons are there?" } },
+    { "id": "carrot-3", "skill": "num.count.3", "difficulty": 2, "object": "carrot", "count": 3, "say": { "ar": "كَمْ جَزَرَةً هُنَا؟", "en": "How many carrots are there?" } },
+    { "id": "fish-4", "skill": "num.count.4", "difficulty": 2, "object": "fish", "count": 4, "say": { "ar": "كَمْ سَمَكَةً هُنَا؟", "en": "How many fish are there?" } },
+    { "id": "flower-5", "skill": "num.count.5", "difficulty": 2, "object": "flower", "count": 5, "say": { "ar": "كَمْ زَهْرَةً هُنَا؟", "en": "How many flowers are there?" } },
+    { "id": "strawberry-6", "skill": "num.count.6", "difficulty": 3, "object": "strawberry", "count": 6, "say": { "ar": "كَمْ حَبَّةَ فَرَاوْلَةٍ هُنَا؟", "en": "How many strawberries are there?" } },
+    { "id": "duck-7", "skill": "num.count.7", "difficulty": 3, "object": "duck", "count": 7, "say": { "ar": "كَمْ بَطَّةً هُنَا؟", "en": "How many ducks are there?" } },
+    { "id": "car-8", "skill": "num.count.8", "difficulty": 4, "object": "car", "count": 8, "say": { "ar": "كَمْ سَيَّارَةً هُنَا؟", "en": "How many cars are there?" } },
+    { "id": "bee-9", "skill": "num.count.9", "difficulty": 4, "object": "bee", "count": 9, "say": { "ar": "كَمْ نَحْلَةً هُنَا؟", "en": "How many bees are there?" } },
+    { "id": "star-10", "skill": "num.count.10", "difficulty": 5, "object": "star", "count": 10, "say": { "ar": "كَمْ نَجْمَةً هُنَا؟", "en": "How many stars are there?" } }
+  ]
+}

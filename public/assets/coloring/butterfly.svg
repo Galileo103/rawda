@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" width="1200" height="900">
+  <!-- Rawda original coloring page: butterfly. -->
+  <g fill="none" stroke="#222" stroke-width="10" stroke-linejoin="round" stroke-linecap="round">
+    <path d="M572 430 C380 140 150 200 210 420 C250 540 450 520 572 450 Z"/>
+    <path d="M628 430 C820 140 1050 200 990 420 C950 540 750 520 628 450 Z"/>
+    <path d="M572 470 C430 520 280 600 340 720 C400 800 530 700 576 540 Z"/>
+    <path d="M628 470 C770 520 920 600 860 720 C800 800 670 700 624 540 Z"/>
+    <ellipse cx="600" cy="480" rx="32" ry="200" fill="#fff"/>
+    <circle cx="600" cy="262" r="44" fill="#fff"/>
+    <path d="M585 222 C560 150 520 110 480 100"/>
+    <path d="M615 222 C640 150 680 110 720 100"/>
+    <circle cx="474" cy="98" r="16"/>
+    <circle cx="726" cy="98" r="16"/>
+    <circle cx="350" cy="330" r="48"/>
+    <circle cx="850" cy="330" r="48"/>
+    <circle cx="420" cy="640" r="34"/>
+    <circle cx="780" cy="640" r="34"/>
+  </g>
+</svg>

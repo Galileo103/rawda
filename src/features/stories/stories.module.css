@@ -1,0 +1,177 @@
+.langs {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 280px), 340px));
+  justify-content: center;
+  gap: 22px;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 12px 18px;
+  border-radius: var(--radius-l);
+  background: var(--surface);
+  border: 4px solid var(--line);
+  box-shadow: var(--shadow);
+  animation: pop-in 0.4s ease backwards;
+}
+/* Picture-book cover with the story's own scenery. */
+.cover {
+  display: grid;
+  place-items: center;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  border: 0;
+  border-radius: calc(var(--radius-l) - 10px);
+  cursor: pointer;
+  box-shadow: inset 0 -6px 0 rgba(0, 0, 0, 0.08);
+}
+.cover > * {
+  filter: drop-shadow(0 6px 4px rgba(0, 0, 0, 0.18));
+  animation: float 3s ease-in-out infinite;
+}
+
+.cardTitle {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 800;
+  text-align: center;
+}
+
+.cardActions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.finished {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  color: var(--leaf);
+  font-weight: 800;
+}
+
+.scene {
+  position: relative;
+  /* Keep text and the Next button on screen on short tablets/phones. */
+  width: min(100%, 900px, calc(48dvh * 16 / 9));
+  aspect-ratio: 16 / 9;
+  flex: none;
+  margin-inline: auto;
+  border-radius: var(--radius-l);
+  overflow: hidden;
+  border: 5px solid #fff;
+  box-shadow: var(--shadow-soft);
+}
+
+.meadow {
+  background: linear-gradient(180deg, #bfe6ff 0%, #e9f7ff 55%, #8fd16a 55%, #6dbb4a 100%);
+}
+.sky {
+  background: linear-gradient(180deg, #7cc4f5 0%, #c9ecff 100%);
+}
+.night {
+  background: linear-gradient(180deg, #1c1846 0%, #3b3480 100%);
+}
+.home {
+  background: linear-gradient(180deg, #ffe9cf 0%, #ffe9cf 70%, #d9a873 70%, #c48f5a 100%);
+}
+.sea {
+  background: linear-gradient(180deg, #bfe6ff 0%, #bfe6ff 45%, #3aa6dd 45%, #1f74b5 100%);
+}
+.garden {
+  background: linear-gradient(180deg, #fff3c9 0%, #fff8e0 50%, #9bd77d 50%, #74c057 100%);
+}
+
+.actor {
+  position: absolute;
+  line-height: 0;
+}
+
+.actor img {
+  width: 100% !important;
+  height: auto !important;
+}
+
+.bounce {
+  animation: float 1.6s ease-in-out infinite;
+}
+
+.sway {
+  animation: tilt 2.6s ease-in-out infinite;
+}
+
+@keyframes tilt {
+  0%,
+  100% {
+    rotate: -4deg;
+  }
+  50% {
+    rotate: 4deg;
+  }
+}
+
+.text {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 16px 22px;
+  border-radius: var(--radius);
+  background: var(--surface);
+  font-size: clamp(1.4rem, 3.6vw, 2.1rem);
+  font-weight: 700;
+  line-height: 1.7;
+  text-align: center;
+}
+
+.word {
+  padding: 0 6px;
+  border-radius: 10px;
+  background: var(--sun-soft);
+  box-shadow: inset 0 -4px 0 var(--sun);
+}
+
+.vocab {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.vocabBtn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 72px;
+  padding: 6px 16px 6px 8px;
+  padding-inline: 8px 16px;
+  border-radius: 999px;
+  border: 3px solid var(--line);
+  background: var(--surface);
+  cursor: pointer;
+  font-weight: 800;
+  font-size: 1.1rem;
+}
+
+.controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 18px;
+}
+
+.pageNum {
+  font-weight: 800;
+  color: var(--ink-soft);
+  min-width: 70px;
+  text-align: center;
+}

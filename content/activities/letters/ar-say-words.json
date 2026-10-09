@@ -1,0 +1,156 @@
+{
+  "id": "ar-say-words",
+  "areaId": "letters",
+  "template": "speak",
+  "langs": "ar",
+  "level": 2,
+  "order": 8,
+  "sessionLength": 4,
+  "icon": {
+    "kind": "lex",
+    "id": "wave"
+  },
+  "title": {
+    "ar": "هَيَّا نَنْطِقُ!"
+  },
+  "intro": {
+    "ar": "نَسْمَعُ الْكَلِمَةَ، ثُمَّ نَقُولُهَا بِصَوْتٍ عَالٍ!"
+  },
+  "items": [
+    {
+      "id": "apple",
+      "skill": "speak.apple",
+      "difficulty": 1,
+      "say": {
+        "ar": "هَيَّا نَقُولُ: تُفَّاحَة"
+      },
+      "word": "apple"
+    },
+    {
+      "id": "duck",
+      "skill": "speak.duck",
+      "difficulty": 1,
+      "say": {
+        "ar": "هَيَّا نَقُولُ: بَطَّة"
+      },
+      "word": "duck"
+    },
+    {
+      "id": "cat",
+      "skill": "speak.cat",
+      "difficulty": 1,
+      "say": {
+        "ar": "هَيَّا نَقُولُ: قِطَّة"
+      },
+      "word": "cat"
+    },
+    {
+      "id": "sun",
+      "skill": "speak.sun",
+      "difficulty": 1,
+      "say": {
+        "ar": "هَيَّا نَقُولُ: شَمْس"
+      },
+      "word": "sun"
+    },
+    {
+      "id": "banana",
+      "skill": "speak.banana",
+      "difficulty": 1,
+      "say": {
+        "ar": "هَيَّا نَقُولُ: مَوْز"
+      },
+      "word": "banana"
+    },
+    {
+      "id": "fish",
+      "skill": "speak.fish",
+      "difficulty": 2,
+      "say": {
+        "ar": "هَيَّا نَقُولُ: سَمَكَة"
+      },
+      "word": "fish"
+    },
+    {
+      "id": "camel",
+      "skill": "speak.camel",
+      "difficulty": 2,
+      "say": {
+        "ar": "هَيَّا نَقُولُ: جَمَل"
+      },
+      "word": "camel"
+    },
+    {
+      "id": "ball",
+      "skill": "speak.ball",
+      "difficulty": 2,
+      "say": {
+        "ar": "هَيَّا نَقُولُ: كُرَة"
+      },
+      "word": "ball"
+    },
+    {
+      "id": "tree",
+      "skill": "speak.tree",
+      "difficulty": 2,
+      "say": {
+        "ar": "هَيَّا نَقُولُ: شَجَرَة"
+      },
+      "word": "tree"
+    },
+    {
+      "id": "star",
+      "skill": "speak.star",
+      "difficulty": 2,
+      "say": {
+        "ar": "هَيَّا نَقُولُ: نَجْمَة"
+      },
+      "word": "star"
+    },
+    {
+      "id": "rabbit",
+      "skill": "speak.rabbit",
+      "difficulty": 3,
+      "say": {
+        "ar": "هَيَّا نَقُولُ: أَرْنَب"
+      },
+      "word": "rabbit"
+    },
+    {
+      "id": "elephant",
+      "skill": "speak.elephant",
+      "difficulty": 3,
+      "say": {
+        "ar": "هَيَّا نَقُولُ: فِيل"
+      },
+      "word": "elephant"
+    },
+    {
+      "id": "butterfly",
+      "skill": "speak.butterfly",
+      "difficulty": 4,
+      "say": {
+        "ar": "هَيَّا نَقُولُ: فَرَاشَة"
+      },
+      "word": "butterfly"
+    },
+    {
+      "id": "giraffe",
+      "skill": "speak.giraffe",
+      "difficulty": 4,
+      "say": {
+        "ar": "هَيَّا نَقُولُ: زَرَافَة"
+      },
+      "word": "giraffe"
+    },
+    {
+      "id": "airplane",
+      "skill": "speak.airplane",
+      "difficulty": 5,
+      "say": {
+        "ar": "هَيَّا نَقُولُ: طَائِرَة"
+      },
+      "word": "airplane"
+    }
+  ]
+}

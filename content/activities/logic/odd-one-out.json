@@ -1,0 +1,22 @@
+{
+  "id": "odd-one-out",
+  "areaId": "logic",
+  "template": "choice",
+  "langs": "any",
+  "level": 2,
+  "order": 2,
+  "sessionLength": 5,
+  "icon": { "kind": "img", "hex": "1F50D" },
+  "title": { "ar": "مَنِ الْمُخْتَلِفُ؟", "en": "Which one is different?" },
+  "intro": { "ar": "صُوَرٌ تَتَشَابَهُ، وَوَاحِدَةٌ مُخْتَلِفَةٌ. هَيَّا نَجِدُهَا!", "en": "Some pictures belong together, and one is different. Let's find it!" },
+  "items": [
+    { "id": "animals-apple", "skill": "logic.odd", "difficulty": 1, "say": { "ar": "أَيُّ صُورَةٍ لَا تُشْبِهُ الْبَاقِيَ؟", "en": "Which picture doesn't belong?" }, "answer": { "kind": "lex", "id": "apple" }, "choices": [ { "kind": "lex", "id": "cat" }, { "kind": "lex", "id": "dog" }, { "kind": "lex", "id": "apple" } ] },
+    { "id": "fruit-car", "skill": "logic.odd", "difficulty": 2, "say": { "ar": "أَيُّ صُورَةٍ لَا تُشْبِهُ الْبَاقِيَ؟", "en": "Which picture doesn't belong?" }, "answer": { "kind": "lex", "id": "car" }, "choices": [ { "kind": "lex", "id": "apple" }, { "kind": "lex", "id": "banana" }, { "kind": "lex", "id": "grapes" }, { "kind": "lex", "id": "car" } ] },
+    { "id": "vehicles-banana", "skill": "logic.odd", "difficulty": 2, "say": { "ar": "أَيُّ صُورَةٍ لَا تُشْبِهُ الْبَاقِيَ؟", "en": "Which picture doesn't belong?" }, "answer": { "kind": "lex", "id": "banana" }, "choices": [ { "kind": "lex", "id": "car" }, { "kind": "lex", "id": "bus" }, { "kind": "lex", "id": "bicycle" }, { "kind": "lex", "id": "banana" } ] },
+    { "id": "sea-lion", "skill": "logic.odd", "difficulty": 3, "say": { "ar": "أَيُّ صُورَةٍ لَا تُشْبِهُ الْبَاقِيَ؟", "en": "Which picture doesn't belong?" }, "answer": { "kind": "lex", "id": "lion" }, "choices": [ { "kind": "lex", "id": "fish" }, { "kind": "lex", "id": "whale" }, { "kind": "lex", "id": "jellyfish" }, { "kind": "lex", "id": "lion" } ] },
+    { "id": "sky-ball", "skill": "logic.odd", "difficulty": 3, "say": { "ar": "أَيُّ صُورَةٍ لَا تُشْبِهُ الْبَاقِيَ؟", "en": "Which picture doesn't belong?" }, "answer": { "kind": "lex", "id": "ball" }, "choices": [ { "kind": "lex", "id": "sun" }, { "kind": "lex", "id": "cloud" }, { "kind": "lex", "id": "star" }, { "kind": "lex", "id": "ball" } ] },
+    { "id": "plants-dog", "skill": "logic.odd", "difficulty": 4, "say": { "ar": "أَيُّ صُورَةٍ لَا تُشْبِهُ الْبَاقِيَ؟", "en": "Which picture doesn't belong?" }, "answer": { "kind": "lex", "id": "dog" }, "choices": [ { "kind": "lex", "id": "rose" }, { "kind": "lex", "id": "tree" }, { "kind": "lex", "id": "flower" }, { "kind": "lex", "id": "dog" } ] },
+    { "id": "insects-cat", "skill": "logic.odd", "difficulty": 4, "say": { "ar": "أَيُّ صُورَةٍ لَا تُشْبِهُ الْبَاقِيَ؟", "en": "Which picture doesn't belong?" }, "answer": { "kind": "lex", "id": "cat" }, "choices": [ { "kind": "lex", "id": "bee" }, { "kind": "lex", "id": "butterfly" }, { "kind": "lex", "id": "ladybug" }, { "kind": "lex", "id": "cat" } ] },
+    { "id": "toys-carrot", "skill": "logic.odd", "difficulty": 5, "say": { "ar": "أَيُّ صُورَةٍ لَا تُشْبِهُ الْبَاقِيَ؟", "en": "Which picture doesn't belong?" }, "answer": { "kind": "lex", "id": "carrot" }, "choices": [ { "kind": "lex", "id": "ball" }, { "kind": "lex", "id": "kite" }, { "kind": "lex", "id": "yoyo" }, { "kind": "lex", "id": "carrot" } ] }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "id": "finger-paths",
+  "areaId": "colors-shapes",
+  "template": "trace",
+  "langs": "any",
+  "level": 1,
+  "order": 0,
+  "sessionLength": 4,
+  "icon": { "kind": "shape", "shape": "circle" },
+  "title": { "ar": "طُرُقُ الْإِصْبَعِ", "en": "Finger paths" },
+  "intro": { "ar": "نَبْدَأُ مِنَ النُّقْطَةِ الْخَضْرَاءِ وَنَمْشِي بِإِصْبَعِنَا عَلَى الطَّرِيقِ!", "en": "Start at the green dot and walk your finger along the path!" },
+  "items": [
+    { "id": "vline", "skill": "motor.stroke.vline", "difficulty": 1, "say": { "ar": "خَطٌّ مِنْ فَوْقُ إِلَى تَحْتُ!", "en": "A line from top to bottom!" }, "stroke": "vline" },
+    { "id": "hline", "skill": "motor.stroke.hline", "difficulty": 1, "say": { "ar": "خَطٌّ مِنْ جَانِبٍ إِلَى جَانِبٍ!", "en": "A line from side to side!" }, "stroke": "hline" },
+    { "id": "circle", "skill": "motor.stroke.circle", "difficulty": 2, "say": { "ar": "نَرْسُمُ دَائِرَةً كَبِيرَةً!", "en": "Let's draw a big circle!" }, "stroke": "circle" },
+    { "id": "cross", "skill": "motor.stroke.cross", "difficulty": 2, "say": { "ar": "خَطَّانِ يَتَقَاطَعَانِ!", "en": "Two lines that cross!" }, "stroke": "cross" },
+    { "id": "wave", "skill": "motor.stroke.wave", "difficulty": 3, "say": { "ar": "مَوْجُ الْبَحْرِ يَمْشِي هَكَذَا!", "en": "Sea waves go like this!" }, "stroke": "wave" },
+    { "id": "zigzag", "skill": "motor.stroke.zigzag", "difficulty": 3, "say": { "ar": "نَصْعَدُ وَنَنْزِلُ مِثْلَ الْجَبَلِ!", "en": "Up and down like mountains!" }, "stroke": "zigzag" },
+    { "id": "square", "skill": "motor.stroke.square", "difficulty": 4, "say": { "ar": "نَرْسُمُ مُرَبَّعًا!", "en": "Let's draw a square!" }, "stroke": "square" },
+    { "id": "triangle", "skill": "motor.stroke.triangle", "difficulty": 5, "say": { "ar": "نَرْسُمُ مُثَلَّثًا!", "en": "Let's draw a triangle!" }, "stroke": "triangle" }
+  ]
+}

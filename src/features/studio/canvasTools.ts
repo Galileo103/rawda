@@ -1,0 +1,167 @@
+/** Fixed logical canvas size: drawings look the same on every device; CSS scales it to fit. */
+export const CANVAS_W = 1200
+export const CANVAS_H = 900
+
+export type RGBA = [number, number, number, number]
+
+export function hexToRgba(hex: string): RGBA {
+  const h = hex.replace('#', '')
+  return [parseInt(h.slice(0, 2), 16), parseInt(h.slice(2, 4), 16), parseInt(h.slice(4, 6), 16), 255]
+}
+
+/** Minimal image buffer (ImageData-compatible) so the algorithm is testable without a browser. */
+export interface PixelBuffer {
+  width: number
+  height: number
+  data: Uint8ClampedArray
+}
+
+/** A coloring-page line pixel acts as a wall for the paint bucket. */
+export function isWall(boundary: PixelBuffer | null, i: number): boolean {
+  if (!boundary) return false
+  const d = boundary.data
+  const a = d[i + 3] ?? 0
+  if (a < 100) return false
+  const lum = 0.299 * (d[i] ?? 0) + 0.587 * (d[i + 1] ?? 0) + 0.114 * (d[i + 2] ?? 0)
+  return lum < 140
+}
+
+/** Transparent pixels count as white paper. */
+function colorAt(layer: PixelBuffer, i: number): RGBA {
+  const d = layer.data
+  if ((d[i + 3] ?? 0) < 20) return [255, 255, 255, 255]
+  return [d[i] ?? 0, d[i + 1] ?? 0, d[i + 2] ?? 0, d[i + 3] ?? 0]
+}
+
+function close(a: RGBA, b: RGBA, tol: number): boolean {
+  return Math.abs(a[0] - b[0]) <= tol && Math.abs(a[1] - b[1]) <= tol && Math.abs(a[2] - b[2]) <= tol
+}
+
+/**
+ * Scanline flood fill on the drawing layer, bounded by coloring-page lines.
+ * Returns false when nothing changed (tapped a line, or same colour).
+ */
+export function floodFill(layer: PixelBuffer, boundary: PixelBuffer | null, x: number, y: number, color: RGBA, tolerance = 48): boolean {
+  const { width: w, height: h } = layer
+  x = Math.floor(x)
+  y = Math.floor(y)
+  if (x < 0 || y < 0 || x >= w || y >= h) return false
+  const start = (y * w + x) * 4
+  if (isWall(boundary, start)) return false
+  const target = colorAt(layer, start)
+  if (close(target, color, 4)) return false
+
+  const visited = new Uint8Array(w * h)
+  const stack: number[] = [x, y]
+  const d = layer.data
+  const matches = (px: number, py: number) => {
+    const p = py * w + px
+    if (visited[p]) return false
+    const i = p * 4
+    return !isWall(boundary, i) && close(colorAt(layer, i), target, tolerance)
+  }
+  while (stack.length) {
+    const sy = stack.pop() as number
+    let sx = stack.pop() as number
+    while (sx > 0 && matches(sx - 1, sy)) sx--
+    let spanUp = false
+    let spanDown = false
+    for (let cx = sx; cx < w && matches(cx, sy); cx++) {
+      const p = sy * w + cx
+      visited[p] = 1
+      const i = p * 4
+      d[i] = color[0]
+      d[i + 1] = color[1]
+      d[i + 2] = color[2]
+      d[i + 3] = color[3]
+      if (sy > 0) {
+        const up = matches(cx, sy - 1)
+        if (up && !spanUp) stack.push(cx, sy - 1)
+        spanUp = up
+      }
+      if (sy < h - 1) {
+        const down = matches(cx, sy + 1)
+        if (down && !spanDown) stack.push(cx, sy + 1)
+        spanDown = down
+      }
+    }
+  }
+  return true
+}
+
+/** Path for a filled shape stamp centred at (cx, cy). */
+export function shapePath(ctx: CanvasRenderingContext2D, shape: 'circle' | 'square' | 'triangle' | 'star' | 'heart', cx: number, cy: number, r: number): void {
+  ctx.beginPath()
+  switch (shape) {
+    case 'circle':
+      ctx.arc(cx, cy, r, 0, Math.PI * 2)
+      break
+    case 'square':
+      ctx.rect(cx - r, cy - r, r * 2, r * 2)
+      break
+    case 'triangle':
+      ctx.moveTo(cx, cy - r)
+      ctx.lineTo(cx + r, cy + r * 0.85)
+      ctx.lineTo(cx - r, cy + r * 0.85)
+      ctx.closePath()
+      break
+    case 'star':
+      for (let i = 0; i < 10; i++) {
+        const rad = i % 2 === 0 ? r : r * 0.45
+        const ang = -Math.PI / 2 + (i * Math.PI) / 5
+        const px = cx + rad * Math.cos(ang)
+        const py = cy + rad * Math.sin(ang)
+        if (i === 0) ctx.moveTo(px, py)
+        else ctx.lineTo(px, py)
+      }
+      ctx.closePath()
+      break
+    case 'heart':
+      ctx.moveTo(cx, cy + r * 0.9)
+      ctx.bezierCurveTo(cx - r * 1.4, cy, cx - r * 0.8, cy - r * 1.2, cx, cy - r * 0.45)
+      ctx.bezierCurveTo(cx + r * 0.8, cy - r * 1.2, cx + r * 1.4, cy, cx, cy + r * 0.9)
+      ctx.closePath()
+      break
+  }
+}
+
+/** Sample points (x0,y0,x1,y1,…) on a grid where the buffer is painted — the shape to trace. */
+export function maskPoints(buf: PixelBuffer, step = 12): Float32Array {
+  const pts: number[] = []
+  for (let y = step / 2; y < buf.height; y += step) {
+    for (let x = step / 2; x < buf.width; x += step) {
+      if ((buf.data[(Math.floor(y) * buf.width + Math.floor(x)) * 4 + 3] ?? 0) > 100) pts.push(x, y)
+    }
+  }
+  return Float32Array.from(pts)
+}
+
+/** Mark mask points within `r` of (x, y) as covered. Returns how many were newly covered. */
+export function coverPoints(points: Float32Array, covered: Uint8Array, x: number, y: number, r: number): number {
+  let added = 0
+  const r2 = r * r
+  for (let i = 0; i < covered.length; i++) {
+    if (covered[i]) continue
+    const dx = (points[i * 2] ?? 0) - x
+    const dy = (points[i * 2 + 1] ?? 0) - y
+    if (dx * dx + dy * dy <= r2) {
+      covered[i] = 1
+      added++
+    }
+  }
+  return added
+}
+
+/** Coverage needed to finish a trace: generous, and easier with each hint. */
+export function traceThreshold(hintLevel: number): number {
+  return Math.max(0.4, 0.7 - 0.12 * hintLevel)
+}
+
+export function loadImage(src: string): Promise<HTMLImageElement> {
+  return new Promise((resolve, reject) => {
+    const img = new Image()
+    img.onload = () => resolve(img)
+    img.onerror = () => reject(new Error(`image failed: ${src}`))
+    img.src = src
+  })
+}

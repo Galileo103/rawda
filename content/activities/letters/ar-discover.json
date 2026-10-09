@@ -1,0 +1,1281 @@
+{
+  "id": "ar-discover",
+  "areaId": "letters",
+  "template": "lesson",
+  "langs": "ar",
+  "level": 1,
+  "order": 0,
+  "sessionLength": 1,
+  "icon": {
+    "kind": "img",
+    "hex": "1F9ED"
+  },
+  "title": {
+    "ar": "نَكْتَشِفُ حَرْفًا جَدِيدًا"
+  },
+  "intro": {
+    "ar": "هَيَّا نَذْهَبُ فِي رِحْلَةٍ وَنَتَعَرَّفُ عَلَى حَرْفٍ جَدِيدٍ!"
+  },
+  "items": [
+    {
+      "id": "alif",
+      "skill": "ar.letter.alif",
+      "difficulty": 1,
+      "teaches": [
+        "ar.letter.alif",
+        "ar.sound.alif",
+        "ar.write.alif"
+      ],
+      "say": {
+        "ar": "هَيَّا نَتَعَرَّفُ عَلَى حَرْفٍ جَدِيدٍ!"
+      },
+      "focus": {
+        "kind": "glyph",
+        "text": "أ"
+      },
+      "meet": {
+        "ar": "هَذَا حَرْفُ الْأَلِفِ. حَرْفُ الْأَلِفِ يَقُولُ: أَ، أُ، إِ."
+      },
+      "highlight": "أ",
+      "examples": [
+        "rabbit",
+        "lion"
+      ],
+      "trace": "ا",
+      "check": {
+        "say": {
+          "ar": "أَيْنَ حَرْفُ الْأَلِفِ؟"
+        },
+        "answer": {
+          "kind": "glyph",
+          "text": "أ"
+        },
+        "choices": [
+          {
+            "kind": "glyph",
+            "text": "أ"
+          },
+          {
+            "kind": "glyph",
+            "text": "م"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ba",
+      "skill": "ar.letter.ba",
+      "difficulty": 1,
+      "teaches": [
+        "ar.letter.ba",
+        "ar.sound.ba",
+        "ar.write.ba"
+      ],
+      "say": {
+        "ar": "هَيَّا نَتَعَرَّفُ عَلَى حَرْفٍ جَدِيدٍ!"
+      },
+      "focus": {
+        "kind": "glyph",
+        "text": "ب"
+      },
+      "meet": {
+        "ar": "هَذَا حَرْفُ الْبَاءِ. حَرْفُ الْبَاءِ يَقُولُ: بَ، بُ، بِ."
+      },
+      "highlight": "ب",
+      "examples": [
+        "duck",
+        "cow",
+        "egg"
+      ],
+      "trace": "ب",
+      "check": {
+        "say": {
+          "ar": "أَيْنَ حَرْفُ الْبَاءِ؟"
+        },
+        "answer": {
+          "kind": "glyph",
+          "text": "ب"
+        },
+        "choices": [
+          {
+            "kind": "glyph",
+            "text": "س"
+          },
+          {
+            "kind": "glyph",
+            "text": "ب"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ta",
+      "skill": "ar.letter.ta",
+      "difficulty": 1,
+      "teaches": [
+        "ar.letter.ta",
+        "ar.sound.ta",
+        "ar.write.ta"
+      ],
+      "say": {
+        "ar": "هَيَّا نَتَعَرَّفُ عَلَى حَرْفٍ جَدِيدٍ!"
+      },
+      "focus": {
+        "kind": "glyph",
+        "text": "ت"
+      },
+      "meet": {
+        "ar": "هَذَا حَرْفُ التَّاءِ. حَرْفُ التَّاءِ يَقُولُ: تَ، تُ، تِ."
+      },
+      "highlight": "ت",
+      "examples": [
+        "apple"
+      ],
+      "trace": "ت",
+      "check": {
+        "say": {
+          "ar": "أَيْنَ حَرْفُ التَّاءِ؟"
+        },
+        "answer": {
+          "kind": "glyph",
+          "text": "ت"
+        },
+        "choices": [
+          {
+            "kind": "glyph",
+            "text": "ت"
+          },
+          {
+            "kind": "glyph",
+            "text": "م"
+          }
+        ]
+      }
+    },
+    {
+      "id": "tha",
+      "skill": "ar.letter.tha",
+      "difficulty": 1,
+      "teaches": [
+        "ar.letter.tha",
+        "ar.sound.tha"
+      ],
+      "say": {
+        "ar": "هَيَّا نَتَعَرَّفُ عَلَى حَرْفٍ جَدِيدٍ!"
+      },
+      "focus": {
+        "kind": "glyph",
+        "text": "ث"
+      },
+      "meet": {
+        "ar": "هَذَا حَرْفُ الثَّاءِ. حَرْفُ الثَّاءِ يَقُولُ: ثَ، ثُ، ثِ."
+      },
+      "highlight": "ث",
+      "examples": [
+        "fox",
+        "snow"
+      ],
+      "check": {
+        "say": {
+          "ar": "أَيْنَ حَرْفُ الثَّاءِ؟"
+        },
+        "answer": {
+          "kind": "glyph",
+          "text": "ث"
+        },
+        "choices": [
+          {
+            "kind": "glyph",
+            "text": "و"
+          },
+          {
+            "kind": "glyph",
+            "text": "ث"
+          }
+        ]
+      },
+      "trace": "ث"
+    },
+    {
+      "id": "jim",
+      "skill": "ar.letter.jim",
+      "difficulty": 1,
+      "teaches": [
+        "ar.letter.jim",
+        "ar.sound.jim"
+      ],
+      "say": {
+        "ar": "هَيَّا نَتَعَرَّفُ عَلَى حَرْفٍ جَدِيدٍ!"
+      },
+      "focus": {
+        "kind": "glyph",
+        "text": "ج"
+      },
+      "meet": {
+        "ar": "هَذَا حَرْفُ الْجِيمِ. حَرْفُ الْجِيمِ يَقُولُ: جَ، جُ، جِ."
+      },
+      "highlight": "ج",
+      "examples": [
+        "camel",
+        "carrot"
+      ],
+      "check": {
+        "say": {
+          "ar": "أَيْنَ حَرْفُ الْجِيمِ؟"
+        },
+        "answer": {
+          "kind": "glyph",
+          "text": "ج"
+        },
+        "choices": [
+          {
+            "kind": "glyph",
+            "text": "ج"
+          },
+          {
+            "kind": "glyph",
+            "text": "ل"
+          }
+        ]
+      },
+      "trace": "ج"
+    },
+    {
+      "id": "hha",
+      "skill": "ar.letter.hha",
+      "difficulty": 1,
+      "teaches": [
+        "ar.letter.hha",
+        "ar.sound.hha"
+      ],
+      "say": {
+        "ar": "هَيَّا نَتَعَرَّفُ عَلَى حَرْفٍ جَدِيدٍ!"
+      },
+      "focus": {
+        "kind": "glyph",
+        "text": "ح"
+      },
+      "meet": {
+        "ar": "هَذَا حَرْفُ الْحَاءِ. حَرْفُ الْحَاءِ يَقُولُ: حَ، حُ، حِ."
+      },
+      "highlight": "ح",
+      "examples": [
+        "horse",
+        "whale",
+        "bus"
+      ],
+      "check": {
+        "say": {
+          "ar": "أَيْنَ حَرْفُ الْحَاءِ؟"
+        },
+        "answer": {
+          "kind": "glyph",
+          "text": "ح"
+        },
+        "choices": [
+          {
+            "kind": "glyph",
+            "text": "م"
+          },
+          {
+            "kind": "glyph",
+            "text": "ح"
+          }
+        ]
+      },
+      "trace": "ح"
+    },
+    {
+      "id": "kha",
+      "skill": "ar.letter.kha",
+      "difficulty": 1,
+      "teaches": [
+        "ar.letter.kha",
+        "ar.sound.kha"
+      ],
+      "say": {
+        "ar": "هَيَّا نَتَعَرَّفُ عَلَى حَرْفٍ جَدِيدٍ!"
+      },
+      "focus": {
+        "kind": "glyph",
+        "text": "خ"
+      },
+      "meet": {
+        "ar": "هَذَا حَرْفُ الْخَاءِ. حَرْفُ الْخَاءِ يَقُولُ: خَ، خُ، خِ."
+      },
+      "highlight": "خ",
+      "examples": [
+        "sheep"
+      ],
+      "check": {
+        "say": {
+          "ar": "أَيْنَ حَرْفُ الْخَاءِ؟"
+        },
+        "answer": {
+          "kind": "glyph",
+          "text": "خ"
+        },
+        "choices": [
+          {
+            "kind": "glyph",
+            "text": "خ"
+          },
+          {
+            "kind": "glyph",
+            "text": "د"
+          }
+        ]
+      },
+      "trace": "خ"
+    },
+    {
+      "id": "dal",
+      "skill": "ar.letter.dal",
+      "difficulty": 2,
+      "teaches": [
+        "ar.letter.dal",
+        "ar.sound.dal",
+        "ar.write.dal"
+      ],
+      "say": {
+        "ar": "هَيَّا نَتَعَرَّفُ عَلَى حَرْفٍ جَدِيدٍ!"
+      },
+      "focus": {
+        "kind": "glyph",
+        "text": "د"
+      },
+      "meet": {
+        "ar": "هَذَا حَرْفُ الدَّالِ. حَرْفُ الدَّالِ يَقُولُ: دَ، دُ، دِ."
+      },
+      "highlight": "د",
+      "examples": [
+        "bear",
+        "chicken",
+        "bicycle"
+      ],
+      "trace": "د",
+      "check": {
+        "say": {
+          "ar": "أَيْنَ حَرْفُ الدَّالِ؟"
+        },
+        "answer": {
+          "kind": "glyph",
+          "text": "د"
+        },
+        "choices": [
+          {
+            "kind": "glyph",
+            "text": "س"
+          },
+          {
+            "kind": "glyph",
+            "text": "د"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dhal",
+      "skill": "ar.letter.dhal",
+      "difficulty": 2,
+      "teaches": [
+        "ar.letter.dhal",
+        "ar.sound.dhal",
+        "ar.write.dhal"
+      ],
+      "say": {
+        "ar": "هَيَّا نَتَعَرَّفُ عَلَى حَرْفٍ جَدِيدٍ!"
+      },
+      "focus": {
+        "kind": "glyph",
+        "text": "ذ"
+      },
+      "meet": {
+        "ar": "هَذَا حَرْفُ الذَّالِ. حَرْفُ الذَّالِ يَقُولُ: ذَ، ذُ، ذِ."
+      },
+      "highlight": "ذ",
+      "examples": [
+        "corn"
+      ],
+      "trace": "ذ",
+      "check": {
+        "say": {
+          "ar": "أَيْنَ حَرْفُ الذَّالِ؟"
+        },
+        "answer": {
+          "kind": "glyph",
+          "text": "ذ"
+        },
+        "choices": [
+          {
+            "kind": "glyph",
+            "text": "م"
+          },
+          {
+            "kind": "glyph",
+            "text": "ذ"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ra",
+      "skill": "ar.letter.ra",
+      "difficulty": 2,
+      "teaches": [
+        "ar.letter.ra",
+        "ar.sound.ra",
+        "ar.write.ra"
+      ],
+      "say": {
+        "ar": "هَيَّا نَتَعَرَّفُ عَلَى حَرْفٍ جَدِيدٍ!"
+      },
+      "focus": {
+        "kind": "glyph",
+        "text": "ر"
+      },
+      "meet": {
+        "ar": "هَذَا حَرْفُ الرَّاءِ. حَرْفُ الرَّاءِ يَقُولُ: رَ، رُ، رِ."
+      },
+      "highlight": "ر",
+      "examples": [
+        "feather"
+      ],
+      "trace": "ر",
+      "check": {
+        "say": {
+          "ar": "أَيْنَ حَرْفُ الرَّاءِ؟"
+        },
+        "answer": {
+          "kind": "glyph",
+          "text": "ر"
+        },
+        "choices": [
+          {
+            "kind": "glyph",
+            "text": "ر"
+          },
+          {
+            "kind": "glyph",
+            "text": "ك"
+          }
+        ]
+      }
+    },
+    {
+      "id": "zay",
+      "skill": "ar.letter.zay",
+      "difficulty": 2,
+      "teaches": [
+        "ar.letter.zay",
+        "ar.sound.zay",
+        "ar.write.zay"
+      ],
+      "say": {
+        "ar": "هَيَّا نَتَعَرَّفُ عَلَى حَرْفٍ جَدِيدٍ!"
+      },
+      "focus": {
+        "kind": "glyph",
+        "text": "ز"
+      },
+      "meet": {
+        "ar": "هَذَا حَرْفُ الزَّايِ. حَرْفُ الزَّايِ يَقُولُ: زَ، زُ، زِ."
+      },
+      "highlight": "ز",
+      "examples": [
+        "giraffe",
+        "flower"
+      ],
+      "trace": "ز",
+      "check": {
+        "say": {
+          "ar": "أَيْنَ حَرْفُ الزَّايِ؟"
+        },
+        "answer": {
+          "kind": "glyph",
+          "text": "ز"
+        },
+        "choices": [
+          {
+            "kind": "glyph",
+            "text": "ع"
+          },
+          {
+            "kind": "glyph",
+            "text": "ز"
+          }
+        ]
+      }
+    },
+    {
+      "id": "sin",
+      "skill": "ar.letter.sin",
+      "difficulty": 2,
+      "teaches": [
+        "ar.letter.sin",
+        "ar.sound.sin",
+        "ar.write.sin"
+      ],
+      "say": {
+        "ar": "هَيَّا نَتَعَرَّفُ عَلَى حَرْفٍ جَدِيدٍ!"
+      },
+      "focus": {
+        "kind": "glyph",
+        "text": "س"
+      },
+      "meet": {
+        "ar": "هَذَا حَرْفُ السِّينِ. حَرْفُ السِّينِ يَقُولُ: سَ، سُ، سِ."
+      },
+      "highlight": "س",
+      "examples": [
+        "fish",
+        "car",
+        "turtle"
+      ],
+      "trace": "س",
+      "check": {
+        "say": {
+          "ar": "أَيْنَ حَرْفُ السِّينِ؟"
+        },
+        "answer": {
+          "kind": "glyph",
+          "text": "س"
+        },
+        "choices": [
+          {
+            "kind": "glyph",
+            "text": "س"
+          },
+          {
+            "kind": "glyph",
+            "text": "د"
+          }
+        ]
+      }
+    },
+    {
+      "id": "shin",
+      "skill": "ar.letter.shin",
+      "difficulty": 2,
+      "teaches": [
+        "ar.letter.shin",
+        "ar.sound.shin",
+        "ar.write.shin"
+      ],
+      "say": {
+        "ar": "هَيَّا نَتَعَرَّفُ عَلَى حَرْفٍ جَدِيدٍ!"
+      },
+      "focus": {
+        "kind": "glyph",
+        "text": "ش"
+      },
+      "meet": {
+        "ar": "هَذَا حَرْفُ الشِّينِ. حَرْفُ الشِّينِ يَقُولُ: شَ، شُ، شِ."
+      },
+      "highlight": "ش",
+      "examples": [
+        "sun",
+        "tree"
+      ],
+      "trace": "ش",
+      "check": {
+        "say": {
+          "ar": "أَيْنَ حَرْفُ الشِّينِ؟"
+        },
+        "answer": {
+          "kind": "glyph",
+          "text": "ش"
+        },
+        "choices": [
+          {
+            "kind": "glyph",
+            "text": "ل"
+          },
+          {
+            "kind": "glyph",
+            "text": "ش"
+          }
+        ]
+      }
+    },
+    {
+      "id": "sad",
+      "skill": "ar.letter.sad",
+      "difficulty": 2,
+      "teaches": [
+        "ar.letter.sad",
+        "ar.sound.sad",
+        "ar.write.sad"
+      ],
+      "say": {
+        "ar": "هَيَّا نَتَعَرَّفُ عَلَى حَرْفٍ جَدِيدٍ!"
+      },
+      "focus": {
+        "kind": "glyph",
+        "text": "ص"
+      },
+      "meet": {
+        "ar": "هَذَا حَرْفُ الصَّادِ. حَرْفُ الصَّادِ يَقُولُ: صَ، صُ، صِ."
+      },
+      "highlight": "ص",
+      "examples": [
+        "rocket",
+        "desert",
+        "rock"
+      ],
+      "trace": "ص",
+      "check": {
+        "say": {
+          "ar": "أَيْنَ حَرْفُ الصَّادِ؟"
+        },
+        "answer": {
+          "kind": "glyph",
+          "text": "ص"
+        },
+        "choices": [
+          {
+            "kind": "glyph",
+            "text": "ص"
+          },
+          {
+            "kind": "glyph",
+            "text": "ي"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dad",
+      "skill": "ar.letter.dad",
+      "difficulty": 2,
+      "teaches": [
+        "ar.letter.dad",
+        "ar.sound.dad",
+        "ar.write.dad"
+      ],
+      "say": {
+        "ar": "هَيَّا نَتَعَرَّفُ عَلَى حَرْفٍ جَدِيدٍ!"
+      },
+      "focus": {
+        "kind": "glyph",
+        "text": "ض"
+      },
+      "meet": {
+        "ar": "هَذَا حَرْفُ الضَّادِ. حَرْفُ الضَّادِ يَقُولُ: ضَ، ضُ، ضِ."
+      },
+      "highlight": "ض",
+      "examples": [
+        "frog"
+      ],
+      "trace": "ض",
+      "check": {
+        "say": {
+          "ar": "أَيْنَ حَرْفُ الضَّادِ؟"
+        },
+        "answer": {
+          "kind": "glyph",
+          "text": "ض"
+        },
+        "choices": [
+          {
+            "kind": "glyph",
+            "text": "ه"
+          },
+          {
+            "kind": "glyph",
+            "text": "ض"
+          }
+        ]
+      }
+    },
+    {
+      "id": "tta",
+      "skill": "ar.letter.tta",
+      "difficulty": 2,
+      "teaches": [
+        "ar.letter.tta",
+        "ar.sound.tta",
+        "ar.write.tta"
+      ],
+      "say": {
+        "ar": "هَيَّا نَتَعَرَّفُ عَلَى حَرْفٍ جَدِيدٍ!"
+      },
+      "focus": {
+        "kind": "glyph",
+        "text": "ط"
+      },
+      "meet": {
+        "ar": "هَذَا حَرْفُ الطَّاءِ. حَرْفُ الطَّاءِ يَقُولُ: طَ، طُ، طِ."
+      },
+      "highlight": "ط",
+      "examples": [
+        "airplane",
+        "bird",
+        "meal"
+      ],
+      "trace": "ط",
+      "check": {
+        "say": {
+          "ar": "أَيْنَ حَرْفُ الطَّاءِ؟"
+        },
+        "answer": {
+          "kind": "glyph",
+          "text": "ط"
+        },
+        "choices": [
+          {
+            "kind": "glyph",
+            "text": "ط"
+          },
+          {
+            "kind": "glyph",
+            "text": "ن"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dha",
+      "skill": "ar.letter.dha",
+      "difficulty": 2,
+      "teaches": [
+        "ar.letter.dha",
+        "ar.sound.dha",
+        "ar.write.dha"
+      ],
+      "say": {
+        "ar": "هَيَّا نَتَعَرَّفُ عَلَى حَرْفٍ جَدِيدٍ!"
+      },
+      "focus": {
+        "kind": "glyph",
+        "text": "ظ"
+      },
+      "meet": {
+        "ar": "هَذَا حَرْفُ الظَّاءِ. حَرْفُ الظَّاءِ يَقُولُ: ظَ، ظُ، ظِ."
+      },
+      "highlight": "ظ",
+      "examples": [
+        "envelope"
+      ],
+      "trace": "ظ",
+      "check": {
+        "say": {
+          "ar": "أَيْنَ حَرْفُ الظَّاءِ؟"
+        },
+        "answer": {
+          "kind": "glyph",
+          "text": "ظ"
+        },
+        "choices": [
+          {
+            "kind": "glyph",
+            "text": "و"
+          },
+          {
+            "kind": "glyph",
+            "text": "ظ"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ayn",
+      "skill": "ar.letter.ayn",
+      "difficulty": 2,
+      "teaches": [
+        "ar.letter.ayn",
+        "ar.sound.ayn",
+        "ar.write.ayn"
+      ],
+      "say": {
+        "ar": "هَيَّا نَتَعَرَّفُ عَلَى حَرْفٍ جَدِيدٍ!"
+      },
+      "focus": {
+        "kind": "glyph",
+        "text": "ع"
+      },
+      "meet": {
+        "ar": "هَذَا حَرْفُ الْعَيْنِ. حَرْفُ الْعَيْنِ يَقُولُ: عَ، عُ، عِ."
+      },
+      "highlight": "ع",
+      "examples": [
+        "grapes",
+        "nest",
+        "grass"
+      ],
+      "trace": "ع",
+      "check": {
+        "say": {
+          "ar": "أَيْنَ حَرْفُ الْعَيْنِ؟"
+        },
+        "answer": {
+          "kind": "glyph",
+          "text": "ع"
+        },
+        "choices": [
+          {
+            "kind": "glyph",
+            "text": "ع"
+          },
+          {
+            "kind": "glyph",
+            "text": "ب"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ghayn",
+      "skill": "ar.letter.ghayn",
+      "difficulty": 2,
+      "teaches": [
+        "ar.letter.ghayn",
+        "ar.sound.ghayn",
+        "ar.write.ghayn"
+      ],
+      "say": {
+        "ar": "هَيَّا نَتَعَرَّفُ عَلَى حَرْفٍ جَدِيدٍ!"
+      },
+      "focus": {
+        "kind": "glyph",
+        "text": "غ"
+      },
+      "meet": {
+        "ar": "هَذَا حَرْفُ الْغَيْنِ. حَرْفُ الْغَيْنِ يَقُولُ: غَ، غُ، غِ."
+      },
+      "highlight": "غ",
+      "examples": [
+        "cloud"
+      ],
+      "trace": "غ",
+      "check": {
+        "say": {
+          "ar": "أَيْنَ حَرْفُ الْغَيْنِ؟"
+        },
+        "answer": {
+          "kind": "glyph",
+          "text": "غ"
+        },
+        "choices": [
+          {
+            "kind": "glyph",
+            "text": "ر"
+          },
+          {
+            "kind": "glyph",
+            "text": "غ"
+          }
+        ]
+      }
+    },
+    {
+      "id": "fa",
+      "skill": "ar.letter.fa",
+      "difficulty": 2,
+      "teaches": [
+        "ar.letter.fa",
+        "ar.sound.fa",
+        "ar.write.fa"
+      ],
+      "say": {
+        "ar": "هَيَّا نَتَعَرَّفُ عَلَى حَرْفٍ جَدِيدٍ!"
+      },
+      "focus": {
+        "kind": "glyph",
+        "text": "ف"
+      },
+      "meet": {
+        "ar": "هَذَا حَرْفُ الْفَاءِ. حَرْفُ الْفَاءِ يَقُولُ: فَ، فُ، فِ."
+      },
+      "highlight": "ف",
+      "examples": [
+        "elephant",
+        "butterfly",
+        "strawberry"
+      ],
+      "trace": "ف",
+      "check": {
+        "say": {
+          "ar": "أَيْنَ حَرْفُ الْفَاءِ؟"
+        },
+        "answer": {
+          "kind": "glyph",
+          "text": "ف"
+        },
+        "choices": [
+          {
+            "kind": "glyph",
+            "text": "ف"
+          },
+          {
+            "kind": "glyph",
+            "text": "ل"
+          }
+        ]
+      }
+    },
+    {
+      "id": "qaf",
+      "skill": "ar.letter.qaf",
+      "difficulty": 2,
+      "teaches": [
+        "ar.letter.qaf",
+        "ar.sound.qaf",
+        "ar.write.qaf"
+      ],
+      "say": {
+        "ar": "هَيَّا نَتَعَرَّفُ عَلَى حَرْفٍ جَدِيدٍ!"
+      },
+      "focus": {
+        "kind": "glyph",
+        "text": "ق"
+      },
+      "meet": {
+        "ar": "هَذَا حَرْفُ الْقَافِ. حَرْفُ الْقَافِ يَقُولُ: قَ، قُ، قِ."
+      },
+      "highlight": "ق",
+      "examples": [
+        "cat",
+        "monkey",
+        "heart"
+      ],
+      "trace": "ق",
+      "check": {
+        "say": {
+          "ar": "أَيْنَ حَرْفُ الْقَافِ؟"
+        },
+        "answer": {
+          "kind": "glyph",
+          "text": "ق"
+        },
+        "choices": [
+          {
+            "kind": "glyph",
+            "text": "د"
+          },
+          {
+            "kind": "glyph",
+            "text": "ق"
+          }
+        ]
+      }
+    },
+    {
+      "id": "kaf",
+      "skill": "ar.letter.kaf",
+      "difficulty": 2,
+      "teaches": [
+        "ar.letter.kaf",
+        "ar.sound.kaf",
+        "ar.write.kaf"
+      ],
+      "say": {
+        "ar": "هَيَّا نَتَعَرَّفُ عَلَى حَرْفٍ جَدِيدٍ!"
+      },
+      "focus": {
+        "kind": "glyph",
+        "text": "ك"
+      },
+      "meet": {
+        "ar": "هَذَا حَرْفُ الْكَافِ. حَرْفُ الْكَافِ يَقُولُ: كَ، كُ، كِ."
+      },
+      "highlight": "ك",
+      "examples": [
+        "dog",
+        "ball",
+        "book"
+      ],
+      "trace": "ك",
+      "check": {
+        "say": {
+          "ar": "أَيْنَ حَرْفُ الْكَافِ؟"
+        },
+        "answer": {
+          "kind": "glyph",
+          "text": "ك"
+        },
+        "choices": [
+          {
+            "kind": "glyph",
+            "text": "ك"
+          },
+          {
+            "kind": "glyph",
+            "text": "س"
+          }
+        ]
+      }
+    },
+    {
+      "id": "lam",
+      "skill": "ar.letter.lam",
+      "difficulty": 2,
+      "teaches": [
+        "ar.letter.lam",
+        "ar.sound.lam",
+        "ar.write.lam"
+      ],
+      "say": {
+        "ar": "هَيَّا نَتَعَرَّفُ عَلَى حَرْفٍ جَدِيدٍ!"
+      },
+      "focus": {
+        "kind": "glyph",
+        "text": "ل"
+      },
+      "meet": {
+        "ar": "هَذَا حَرْفُ اللَّامِ. حَرْفُ اللَّامِ يَقُولُ: لَ، لُ، لِ."
+      },
+      "highlight": "ل",
+      "examples": [
+        "lemon"
+      ],
+      "trace": "ل",
+      "check": {
+        "say": {
+          "ar": "أَيْنَ حَرْفُ اللَّامِ؟"
+        },
+        "answer": {
+          "kind": "glyph",
+          "text": "ل"
+        },
+        "choices": [
+          {
+            "kind": "glyph",
+            "text": "ت"
+          },
+          {
+            "kind": "glyph",
+            "text": "ل"
+          }
+        ]
+      }
+    },
+    {
+      "id": "mim",
+      "skill": "ar.letter.mim",
+      "difficulty": 2,
+      "teaches": [
+        "ar.letter.mim",
+        "ar.sound.mim",
+        "ar.write.mim"
+      ],
+      "say": {
+        "ar": "هَيَّا نَتَعَرَّفُ عَلَى حَرْفٍ جَدِيدٍ!"
+      },
+      "focus": {
+        "kind": "glyph",
+        "text": "م"
+      },
+      "meet": {
+        "ar": "هَذَا حَرْفُ الْمِيمِ. حَرْفُ الْمِيمِ يَقُولُ: مَ، مُ، مِ."
+      },
+      "highlight": "م",
+      "examples": [
+        "banana",
+        "rain",
+        "umbrella"
+      ],
+      "trace": "م",
+      "check": {
+        "say": {
+          "ar": "أَيْنَ حَرْفُ الْمِيمِ؟"
+        },
+        "answer": {
+          "kind": "glyph",
+          "text": "م"
+        },
+        "choices": [
+          {
+            "kind": "glyph",
+            "text": "م"
+          },
+          {
+            "kind": "glyph",
+            "text": "ج"
+          }
+        ]
+      }
+    },
+    {
+      "id": "nun",
+      "skill": "ar.letter.nun",
+      "difficulty": 2,
+      "teaches": [
+        "ar.letter.nun",
+        "ar.sound.nun",
+        "ar.write.nun"
+      ],
+      "say": {
+        "ar": "هَيَّا نَتَعَرَّفُ عَلَى حَرْفٍ جَدِيدٍ!"
+      },
+      "focus": {
+        "kind": "glyph",
+        "text": "ن"
+      },
+      "meet": {
+        "ar": "هَذَا حَرْفُ النُّونِ. حَرْفُ النُّونِ يَقُولُ: نَ، نُ، نِ."
+      },
+      "highlight": "ن",
+      "examples": [
+        "bee",
+        "star",
+        "seedling"
+      ],
+      "trace": "ن",
+      "check": {
+        "say": {
+          "ar": "أَيْنَ حَرْفُ النُّونِ؟"
+        },
+        "answer": {
+          "kind": "glyph",
+          "text": "ن"
+        },
+        "choices": [
+          {
+            "kind": "glyph",
+            "text": "ص"
+          },
+          {
+            "kind": "glyph",
+            "text": "ن"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ha",
+      "skill": "ar.letter.ha",
+      "difficulty": 2,
+      "teaches": [
+        "ar.letter.ha",
+        "ar.sound.ha",
+        "ar.write.ha"
+      ],
+      "say": {
+        "ar": "هَيَّا نَتَعَرَّفُ عَلَى حَرْفٍ جَدِيدٍ!"
+      },
+      "focus": {
+        "kind": "glyph",
+        "text": "ه"
+      },
+      "meet": {
+        "ar": "هَذَا حَرْفُ الْهَاءِ. حَرْفُ الْهَاءِ يَقُولُ: هَ، هُ، هِ."
+      },
+      "highlight": "ه",
+      "examples": [
+        "crescent",
+        "gift"
+      ],
+      "trace": "ه",
+      "check": {
+        "say": {
+          "ar": "أَيْنَ حَرْفُ الْهَاءِ؟"
+        },
+        "answer": {
+          "kind": "glyph",
+          "text": "ه"
+        },
+        "choices": [
+          {
+            "kind": "glyph",
+            "text": "ه"
+          },
+          {
+            "kind": "glyph",
+            "text": "ب"
+          }
+        ]
+      }
+    },
+    {
+      "id": "waw",
+      "skill": "ar.letter.waw",
+      "difficulty": 2,
+      "teaches": [
+        "ar.letter.waw",
+        "ar.sound.waw",
+        "ar.write.waw"
+      ],
+      "say": {
+        "ar": "هَيَّا نَتَعَرَّفُ عَلَى حَرْفٍ جَدِيدٍ!"
+      },
+      "focus": {
+        "kind": "glyph",
+        "text": "و"
+      },
+      "meet": {
+        "ar": "هَذَا حَرْفُ الْوَاوِ. حَرْفُ الْوَاوِ يَقُولُ: وَ، وُ، وِ."
+      },
+      "highlight": "و",
+      "examples": [
+        "rose",
+        "scarf"
+      ],
+      "trace": "و",
+      "check": {
+        "say": {
+          "ar": "أَيْنَ حَرْفُ الْوَاوِ؟"
+        },
+        "answer": {
+          "kind": "glyph",
+          "text": "و"
+        },
+        "choices": [
+          {
+            "kind": "glyph",
+            "text": "ك"
+          },
+          {
+            "kind": "glyph",
+            "text": "و"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ya",
+      "skill": "ar.letter.ya",
+      "difficulty": 2,
+      "teaches": [
+        "ar.letter.ya",
+        "ar.sound.ya",
+        "ar.write.ya"
+      ],
+      "say": {
+        "ar": "هَيَّا نَتَعَرَّفُ عَلَى حَرْفٍ جَدِيدٍ!"
+      },
+      "focus": {
+        "kind": "glyph",
+        "text": "ي"
+      },
+      "meet": {
+        "ar": "هَذَا حَرْفُ الْيَاءِ. حَرْفُ الْيَاءِ يَقُولُ: يَ، يُ، يِ."
+      },
+      "highlight": "ي",
+      "examples": [
+        "hand",
+        "yoyo"
+      ],
+      "trace": "ي",
+      "check": {
+        "say": {
+          "ar": "أَيْنَ حَرْفُ الْيَاءِ؟"
+        },
+        "answer": {
+          "kind": "glyph",
+          "text": "ي"
+        },
+        "choices": [
+          {
+            "kind": "glyph",
+            "text": "ي"
+          },
+          {
+            "kind": "glyph",
+            "text": "ح"
+          }
+        ]
+      }
+    }
+  ]
+}

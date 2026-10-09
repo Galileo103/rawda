@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" width="1200" height="900">
+  <!-- Rawda original coloring page: house with sun. -->
+  <g fill="none" stroke="#222" stroke-width="10" stroke-linejoin="round" stroke-linecap="round">
+    <path d="M0 800 H1200"/>
+    <rect x="300" y="400" width="600" height="400"/>
+    <path d="M240 410 L600 130 L960 410 Z"/>
+    <rect x="520" y="590" width="160" height="210" rx="12"/>
+    <circle cx="655" cy="700" r="10" fill="#222"/>
+    <rect x="360" y="470" width="120" height="110"/>
+    <path d="M420 470 V580 M360 525 H480"/>
+    <rect x="720" y="470" width="120" height="110"/>
+    <path d="M780 470 V580 M720 525 H840"/>
+    <rect x="700" y="190" width="70" height="120"/>
+    <circle cx="1060" cy="140" r="70"/>
+    <path d="M1060 30 V50 M1060 230 V250 M950 140 H970 M1150 140 H1170 M982 62 L996 76 M1124 204 L1138 218 M982 218 L996 204 M1124 76 L1138 62"/>
+    <path d="M90 800 Q90 700 150 690 Q210 700 210 800"/>
+    <path d="M1000 800 Q1000 710 1050 700 Q1100 710 1100 800"/>
+  </g>
+</svg>

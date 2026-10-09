@@ -1,0 +1,21 @@
+{
+  "id": "animal-food",
+  "areaId": "science",
+  "template": "choice",
+  "langs": "any",
+  "level": 2,
+  "order": 1,
+  "sessionLength": 5,
+  "icon": { "kind": "lex", "id": "carrot" },
+  "title": { "ar": "طَعَامُ الْحَيَوَانَاتِ", "en": "Animal food" },
+  "intro": { "ar": "كُلُّ حَيَوَانٍ يَحْتَاجُ إِلَى طَعَامٍ لِيَكْبَرَ. هَيَّا نَعْرِفُ مَاذَا يَأْكُلُ!", "en": "Every animal needs food to grow. Let's find out what they eat!" },
+  "items": [
+    { "id": "rabbit", "skill": "sci.food.rabbit", "difficulty": 1, "say": { "ar": "مَاذَا يَأْكُلُ الْأَرْنَبُ؟", "en": "What does the rabbit eat?" }, "show": { "kind": "lex", "id": "rabbit" }, "answer": { "kind": "lex", "id": "carrot" }, "choices": [ { "kind": "lex", "id": "carrot" }, { "kind": "lex", "id": "fish" } ] },
+    { "id": "bee", "skill": "sci.food.bee", "difficulty": 1, "say": { "ar": "مِنْ أَيْنَ تَجْمَعُ النَّحْلَةُ غِذَاءَهَا؟", "en": "Where does the bee find its food?" }, "show": { "kind": "lex", "id": "bee" }, "answer": { "kind": "lex", "id": "flower" }, "choices": [ { "kind": "lex", "id": "flower" }, { "kind": "lex", "id": "egg" } ] },
+    { "id": "monkey", "skill": "sci.food.monkey", "difficulty": 2, "say": { "ar": "مَاذَا يَأْكُلُ الْقِرْدُ؟", "en": "What does the monkey eat?" }, "show": { "kind": "lex", "id": "monkey" }, "answer": { "kind": "lex", "id": "banana" }, "choices": [ { "kind": "lex", "id": "banana" }, { "kind": "lex", "id": "rock" }, { "kind": "lex", "id": "fish" } ] },
+    { "id": "penguin", "skill": "sci.food.penguin", "difficulty": 2, "say": { "ar": "مَاذَا يَأْكُلُ الْبِطْرِيقُ؟", "en": "What does the penguin eat?" }, "show": { "kind": "lex", "id": "penguin" }, "answer": { "kind": "lex", "id": "fish" }, "choices": [ { "kind": "lex", "id": "fish" }, { "kind": "lex", "id": "corn" }, { "kind": "lex", "id": "grass" } ] },
+    { "id": "cow", "skill": "sci.food.cow", "difficulty": 3, "say": { "ar": "مَاذَا تَأْكُلُ الْبَقَرَةُ؟", "en": "What does the cow eat?" }, "show": { "kind": "lex", "id": "cow" }, "answer": { "kind": "lex", "id": "grass" }, "choices": [ { "kind": "lex", "id": "grass" }, { "kind": "lex", "id": "fish" }, { "kind": "lex", "id": "icecream" } ] },
+    { "id": "chicken", "skill": "sci.food.chicken", "difficulty": 3, "say": { "ar": "مَاذَا تَأْكُلُ الدَّجَاجَةُ؟", "en": "What does the chicken eat?" }, "show": { "kind": "lex", "id": "chicken" }, "answer": { "kind": "lex", "id": "corn" }, "choices": [ { "kind": "lex", "id": "corn" }, { "kind": "lex", "id": "rock" }, { "kind": "lex", "id": "lemon" } ] },
+    { "id": "giraffe", "skill": "sci.food.giraffe", "difficulty": 4, "say": { "ar": "مَاذَا تَأْكُلُ الزَّرَافَةُ؟", "en": "What does the giraffe eat?" }, "show": { "kind": "lex", "id": "giraffe" }, "answer": { "kind": "lex", "id": "leaves" }, "choices": [ { "kind": "lex", "id": "leaves" }, { "kind": "lex", "id": "fish" }, { "kind": "lex", "id": "egg" }, { "kind": "lex", "id": "icecream" } ] }
+  ]
+}

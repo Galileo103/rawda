@@ -1,0 +1,21 @@
+{
+  "id": "add-together",
+  "areaId": "numbers",
+  "template": "choice",
+  "langs": "any",
+  "level": 5,
+  "order": 4,
+  "sessionLength": 5,
+  "icon": { "kind": "glyph", "text": "+" },
+  "title": { "ar": "نَجْمَعُ مَعًا", "en": "Putting together" },
+  "intro": { "ar": "عِنْدَمَا نَضَعُ مَجْمُوعَتَيْنِ مَعًا، يَصِيرُ الْعَدَدُ أَكْبَرَ. هَيَّا نَعُدُّ!", "en": "When we put two groups together, we get more. Let's count!" },
+  "items": [
+    { "id": "sum-1-1", "skill": "num.add.2", "difficulty": 1, "say": { "ar": "كَمْ تُفَّاحَةً مَعًا؟", "en": "How many apples altogether?" }, "show": { "kind": "row", "question": false, "items": [ { "kind": "group", "id": "apple", "count": 1 }, { "kind": "glyph", "text": "+" }, { "kind": "group", "id": "apple", "count": 1 } ] }, "answer": { "kind": "numeral", "value": 2 } },
+    { "id": "sum-2-1", "skill": "num.add.3", "difficulty": 1, "say": { "ar": "كَمْ نَجْمَةً مَعًا؟", "en": "How many stars altogether?" }, "show": { "kind": "row", "question": false, "items": [ { "kind": "group", "id": "star", "count": 2 }, { "kind": "glyph", "text": "+" }, { "kind": "group", "id": "star", "count": 1 } ] }, "answer": { "kind": "numeral", "value": 3 } },
+    { "id": "sum-1-2", "skill": "num.add.3", "difficulty": 2, "say": { "ar": "كَمْ بَالُونًا مَعًا؟", "en": "How many balloons altogether?" }, "show": { "kind": "row", "question": false, "items": [ { "kind": "group", "id": "balloon", "count": 1 }, { "kind": "glyph", "text": "+" }, { "kind": "group", "id": "balloon", "count": 2 } ] }, "answer": { "kind": "numeral", "value": 3 } },
+    { "id": "sum-2-2", "skill": "num.add.4", "difficulty": 2, "say": { "ar": "كَمْ سَمَكَةً مَعًا؟", "en": "How many fish altogether?" }, "show": { "kind": "row", "question": false, "items": [ { "kind": "group", "id": "fish", "count": 2 }, { "kind": "glyph", "text": "+" }, { "kind": "group", "id": "fish", "count": 2 } ] }, "answer": { "kind": "numeral", "value": 4 } },
+    { "id": "sum-3-1", "skill": "num.add.4", "difficulty": 3, "say": { "ar": "كَمْ بَطَّةً مَعًا؟", "en": "How many ducks altogether?" }, "show": { "kind": "row", "question": false, "items": [ { "kind": "group", "id": "duck", "count": 3 }, { "kind": "glyph", "text": "+" }, { "kind": "group", "id": "duck", "count": 1 } ] }, "answer": { "kind": "numeral", "value": 4 } },
+    { "id": "sum-3-2", "skill": "num.add.5", "difficulty": 3, "say": { "ar": "كَمْ زَهْرَةً مَعًا؟", "en": "How many flowers altogether?" }, "show": { "kind": "row", "question": false, "items": [ { "kind": "group", "id": "flower", "count": 3 }, { "kind": "glyph", "text": "+" }, { "kind": "group", "id": "flower", "count": 2 } ] }, "answer": { "kind": "numeral", "value": 5 } },
+    { "id": "sum-4-1", "skill": "num.add.5", "difficulty": 4, "say": { "ar": "كَمْ جَزَرَةً مَعًا؟", "en": "How many carrots altogether?" }, "show": { "kind": "row", "question": false, "items": [ { "kind": "group", "id": "carrot", "count": 4 }, { "kind": "glyph", "text": "+" }, { "kind": "group", "id": "carrot", "count": 1 } ] }, "answer": { "kind": "numeral", "value": 5 } }
+  ]
+}

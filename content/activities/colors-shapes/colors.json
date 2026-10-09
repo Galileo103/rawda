@@ -1,0 +1,24 @@
+{
+  "id": "colors",
+  "areaId": "colors-shapes",
+  "template": "choice",
+  "langs": "any",
+  "level": 1,
+  "order": 1,
+  "sessionLength": 6,
+  "icon": { "kind": "color", "color": "red" },
+  "title": { "ar": "الْأَلْوَانُ", "en": "Colors" },
+  "intro": { "ar": "الْعَالَمُ مَلِيءٌ بِالْأَلْوَانِ! هَيَّا نَتَعَرَّفُ عَلَيْهَا.", "en": "The world is full of colors! Let's get to know them." },
+  "items": [
+    { "id": "red", "skill": "color.red", "difficulty": 1, "say": { "ar": "أَيْنَ اللَّوْنُ الْأَحْمَرُ؟", "en": "Where is red?" }, "answer": { "kind": "color", "color": "red" } },
+    { "id": "blue", "skill": "color.blue", "difficulty": 1, "say": { "ar": "أَيْنَ اللَّوْنُ الْأَزْرَقُ؟", "en": "Where is blue?" }, "answer": { "kind": "color", "color": "blue" } },
+    { "id": "yellow", "skill": "color.yellow", "difficulty": 1, "say": { "ar": "أَيْنَ اللَّوْنُ الْأَصْفَرُ؟", "en": "Where is yellow?" }, "answer": { "kind": "color", "color": "yellow" } },
+    { "id": "green", "skill": "color.green", "difficulty": 1, "say": { "ar": "أَيْنَ اللَّوْنُ الْأَخْضَرُ؟", "en": "Where is green?" }, "answer": { "kind": "color", "color": "green" } },
+    { "id": "orange", "skill": "color.orange", "difficulty": 2, "say": { "ar": "أَيْنَ اللَّوْنُ الْبُرْتُقَالِيُّ؟", "en": "Where is orange?" }, "answer": { "kind": "color", "color": "orange" } },
+    { "id": "purple", "skill": "color.purple", "difficulty": 2, "say": { "ar": "أَيْنَ اللَّوْنُ الْبَنَفْسَجِيُّ؟", "en": "Where is purple?" }, "answer": { "kind": "color", "color": "purple" } },
+    { "id": "pink", "skill": "color.pink", "difficulty": 3, "say": { "ar": "أَيْنَ اللَّوْنُ الْوَرْدِيُّ؟", "en": "Where is pink?" }, "answer": { "kind": "color", "color": "pink" } },
+    { "id": "brown", "skill": "color.brown", "difficulty": 3, "say": { "ar": "أَيْنَ اللَّوْنُ الْبُنِّيُّ؟", "en": "Where is brown?" }, "answer": { "kind": "color", "color": "brown" } },
+    { "id": "black", "skill": "color.black", "difficulty": 4, "say": { "ar": "أَيْنَ اللَّوْنُ الْأَسْوَدُ؟", "en": "Where is black?" }, "answer": { "kind": "color", "color": "black" } },
+    { "id": "white", "skill": "color.white", "difficulty": 4, "say": { "ar": "أَيْنَ اللَّوْنُ الْأَبْيَضُ؟", "en": "Where is white?" }, "answer": { "kind": "color", "color": "white" } }
+  ]
+}

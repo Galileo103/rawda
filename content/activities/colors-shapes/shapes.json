@@ -1,0 +1,21 @@
+{
+  "id": "shapes",
+  "areaId": "colors-shapes",
+  "template": "choice",
+  "langs": "any",
+  "level": 2,
+  "order": 2,
+  "sessionLength": 5,
+  "icon": { "kind": "shape", "shape": "triangle" },
+  "title": { "ar": "الْأَشْكَالُ", "en": "Shapes" },
+  "intro": { "ar": "حَوْلَنَا أَشْكَالٌ كَثِيرَةٌ: دَائِرَةٌ، وَمُرَبَّعٌ، وَمُثَلَّثٌ. هَيَّا نَجِدُهَا!", "en": "There are shapes all around us: circles, squares and triangles. Let's find them!" },
+  "items": [
+    { "id": "circle", "skill": "shape.circle", "difficulty": 1, "say": { "ar": "أَيْنَ الدَّائِرَةُ؟", "en": "Where is the circle?" }, "answer": { "kind": "shape", "shape": "circle" } },
+    { "id": "square", "skill": "shape.square", "difficulty": 1, "say": { "ar": "أَيْنَ الْمُرَبَّعُ؟", "en": "Where is the square?" }, "answer": { "kind": "shape", "shape": "square" } },
+    { "id": "triangle", "skill": "shape.triangle", "difficulty": 1, "say": { "ar": "أَيْنَ الْمُثَلَّثُ؟", "en": "Where is the triangle?" }, "answer": { "kind": "shape", "shape": "triangle" } },
+    { "id": "rectangle", "skill": "shape.rectangle", "difficulty": 2, "say": { "ar": "أَيْنَ الْمُسْتَطِيلُ؟", "en": "Where is the rectangle?" }, "answer": { "kind": "shape", "shape": "rectangle" } },
+    { "id": "star", "skill": "shape.star", "difficulty": 2, "say": { "ar": "أَيْنَ النَّجْمَةُ؟", "en": "Where is the star?" }, "answer": { "kind": "shape", "shape": "star" } },
+    { "id": "heart", "skill": "shape.heart", "difficulty": 3, "say": { "ar": "أَيْنَ الْقَلْبُ؟", "en": "Where is the heart?" }, "answer": { "kind": "shape", "shape": "heart" } },
+    { "id": "oval", "skill": "shape.oval", "difficulty": 4, "say": { "ar": "أَيْنَ الشَّكْلُ الْبَيْضَاوِيُّ؟", "en": "Where is the oval?" }, "answer": { "kind": "shape", "shape": "oval" } }
+  ]
+}

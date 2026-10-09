@@ -1,0 +1,18 @@
+{
+  "id": "day-night",
+  "areaId": "science",
+  "template": "choice",
+  "langs": "any",
+  "level": 1,
+  "order": 5,
+  "sessionLength": 4,
+  "icon": { "kind": "lex", "id": "crescent" },
+  "title": { "ar": "النَّهَارُ وَاللَّيْلُ", "en": "Day and night" },
+  "intro": { "ar": "فِي النَّهَارِ تُضِيءُ الشَّمْسُ، وَفِي اللَّيْلِ نَرَى الْقَمَرَ وَالنُّجُومَ.", "en": "In the day the sun shines. At night we see the moon and the stars." },
+  "items": [
+    { "id": "night-moon", "skill": "sci.daynight.night", "difficulty": 1, "say": { "ar": "أَيُّهُمَا نَرَاهُ فِي اللَّيْلِ؟", "en": "Which one do we see at night?" }, "answer": { "kind": "lex", "id": "crescent" }, "choices": [ { "kind": "lex", "id": "sun" }, { "kind": "lex", "id": "crescent" } ] },
+    { "id": "day-sun", "skill": "sci.daynight.day", "difficulty": 1, "say": { "ar": "أَيُّهُمَا يُضِيءُ فِي النَّهَارِ؟", "en": "Which one shines in the daytime?" }, "answer": { "kind": "lex", "id": "sun" }, "choices": [ { "kind": "lex", "id": "sun" }, { "kind": "lex", "id": "star" } ] },
+    { "id": "night-star", "skill": "sci.daynight.night", "difficulty": 2, "say": { "ar": "أَيُّهُمَا نَرَاهُ فِي سَمَاءِ اللَّيْلِ؟", "en": "Which one do we see in the night sky?" }, "answer": { "kind": "lex", "id": "star" }, "choices": [ { "kind": "lex", "id": "rainbow" }, { "kind": "lex", "id": "star" }, { "kind": "lex", "id": "sun" } ] },
+    { "id": "day-rainbow", "skill": "sci.daynight.day", "difficulty": 3, "say": { "ar": "قَوْسُ قُزَحٍ يَظْهَرُ عِنْدَمَا تَلْمَعُ الشَّمْسُ بَعْدَ الْمَطَرِ. أَيْنَ قَوْسُ قُزَحٍ؟", "en": "A rainbow appears when the sun shines after the rain. Where is the rainbow?" }, "answer": { "kind": "lex", "id": "rainbow" }, "choices": [ { "kind": "lex", "id": "crescent" }, { "kind": "lex", "id": "rainbow" }, { "kind": "lex", "id": "star" } ] }
+  ]
+}

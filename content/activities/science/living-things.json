@@ -1,0 +1,21 @@
+{
+  "id": "living-things",
+  "areaId": "science",
+  "template": "choice",
+  "langs": "any",
+  "level": 3,
+  "order": 2,
+  "sessionLength": 5,
+  "icon": { "kind": "lex", "id": "tree" },
+  "title": { "ar": "حَيٌّ أَمْ غَيْرُ حَيٍّ؟", "en": "Alive or not alive?" },
+  "intro": { "ar": "الْكَائِنَاتُ الْحَيَّةُ تَأْكُلُ وَتَشْرَبُ وَتَكْبَرُ، مِثْلَ الْحَيَوَانَاتِ وَالنَّبَاتَاتِ.", "en": "Living things eat, drink and grow — like animals and plants." },
+  "items": [
+    { "id": "cat-ball", "skill": "sci.living.alive", "difficulty": 1, "say": { "ar": "أَيُّهُمَا كَائِنٌ حَيٌّ؟", "en": "Which one is alive?" }, "answer": { "kind": "lex", "id": "cat" }, "choices": [ { "kind": "lex", "id": "cat" }, { "kind": "lex", "id": "ball" } ] },
+    { "id": "fish-rock", "skill": "sci.living.alive", "difficulty": 1, "say": { "ar": "أَيُّهُمَا كَائِنٌ حَيٌّ؟", "en": "Which one is alive?" }, "answer": { "kind": "lex", "id": "fish" }, "choices": [ { "kind": "lex", "id": "rock" }, { "kind": "lex", "id": "fish" } ] },
+    { "id": "tree-car", "skill": "sci.living.plants", "difficulty": 2, "say": { "ar": "أَيُّهُمَا كَائِنٌ حَيٌّ؟", "en": "Which one is alive?" }, "answer": { "kind": "lex", "id": "tree" }, "choices": [ { "kind": "lex", "id": "tree" }, { "kind": "lex", "id": "car" } ], "sayAfter": { "ar": "الشَّجَرَةُ حَيَّةٌ؛ تَشْرَبُ الْمَاءَ وَتَكْبَرُ.", "en": "A tree is alive. It drinks water and grows." } },
+    { "id": "flower-book", "skill": "sci.living.plants", "difficulty": 3, "say": { "ar": "أَيُّهُمَا كَائِنٌ حَيٌّ؟", "en": "Which one is alive?" }, "answer": { "kind": "lex", "id": "flower" }, "choices": [ { "kind": "lex", "id": "book" }, { "kind": "lex", "id": "flower" } ] },
+    { "id": "duck-airplane", "skill": "sci.living.alive", "difficulty": 3, "say": { "ar": "كِلَاهُمَا يَطِيرُ! أَيُّهُمَا كَائِنٌ حَيٌّ؟", "en": "Both can fly! Which one is alive?" }, "answer": { "kind": "lex", "id": "duck" }, "choices": [ { "kind": "lex", "id": "airplane" }, { "kind": "lex", "id": "duck" } ] },
+    { "id": "teddy-rabbit", "skill": "sci.living.notalive", "difficulty": 4, "say": { "ar": "أَيُّهُمَا لَيْسَ كَائِنًا حَيًّا؟", "en": "Which one is not alive?" }, "answer": { "kind": "lex", "id": "teddy" }, "choices": [ { "kind": "lex", "id": "rabbit" }, { "kind": "lex", "id": "teddy" } ] },
+    { "id": "car-horse-dog", "skill": "sci.living.notalive", "difficulty": 5, "say": { "ar": "أَيُّهَا لَيْسَ كَائِنًا حَيًّا؟", "en": "Which one is not alive?" }, "answer": { "kind": "lex", "id": "car" }, "choices": [ { "kind": "lex", "id": "horse" }, { "kind": "lex", "id": "car" }, { "kind": "lex", "id": "dog" } ] }
+  ]
+}

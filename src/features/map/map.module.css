@@ -1,0 +1,183 @@
+.filters {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding-block: 4px;
+  scrollbar-width: none;
+}
+
+.chip {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 56px;
+  padding: 4px 16px 4px 8px;
+  padding-inline: 8px 16px;
+  border-radius: 999px;
+  border: 3px solid var(--line);
+  background: var(--surface);
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.chip[aria-current='true'] {
+  border-color: var(--grape);
+  background: var(--grape-soft);
+}
+
+.quranCard {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  min-height: 110px;
+  padding: 14px 28px;
+  border-radius: var(--radius-l);
+  border: 4px solid #e6d9b8;
+  background: linear-gradient(135deg, #fffdf6, var(--teal-soft));
+  box-shadow: var(--shadow);
+  cursor: pointer;
+}
+
+.quranTitle {
+  font-family: var(--font-quran);
+  font-size: clamp(2rem, 5vw, 2.8rem);
+  color: var(--teal);
+}
+
+.level {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.levelTitle {
+  display: inline-flex;
+  align-self: center;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+  padding: 4px 16px;
+  border-radius: 999px;
+  background: var(--sun-soft);
+  font-size: 1.1rem;
+  font-weight: 800;
+}
+
+/* The winding road (positions are set inline from MapScreen). */
+.road {
+  position: relative;
+  width: min(100%, 560px);
+  margin-inline: auto;
+}
+.roadLine {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+.roadLine path {
+  fill: none;
+  stroke-linecap: round;
+  vector-effect: non-scaling-stroke;
+}
+.roadBand {
+  stroke: #ecd6b0;
+  stroke-width: 34;
+}
+.roadDash {
+  stroke: #fff;
+  stroke-width: 6;
+  stroke-dasharray: 14 16;
+}
+
+.node {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  width: 150px;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+  transform: translateX(-50%);
+}
+
+.circle {
+  display: grid;
+  place-items: center;
+  width: 132px;
+  height: 132px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 50% 35%, #fff 55%, var(--bg-2) 100%);
+  border: 6px solid var(--line);
+  box-shadow: 0 8px 0 rgba(51, 38, 74, 0.12);
+  transition: transform 0.15s;
+}
+
+/* Hala waits next to the suggested stop. */
+.hala {
+  position: absolute;
+  inset-block-start: 20px;
+  pointer-events: none;
+  animation: float 2s ease-in-out infinite;
+}
+.halaLeft {
+  left: -46px;
+}
+.halaRight {
+  right: -46px;
+}
+
+.node:active .circle {
+  transform: scale(0.94);
+}
+
+.done .circle {
+  border-color: var(--leaf);
+  background: var(--leaf-soft);
+}
+
+.recommended .circle {
+  border-color: var(--sun);
+  animation: glow 1.8s ease-in-out infinite;
+}
+
+.name {
+  font-weight: 800;
+  font-size: 1.05rem;
+  text-align: center;
+  line-height: 1.2;
+}
+
+/* Finished stop: a gold medal with a check. */
+.badge {
+  position: absolute;
+  inset-block-start: -2px;
+  inset-inline-end: 4px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  min-width: 38px;
+  height: 38px;
+  padding: 0 8px;
+  border-radius: 999px;
+  font-size: 0.95rem;
+  font-weight: 800;
+  background: var(--sun);
+  color: var(--ink);
+  border: 3px solid #fff;
+  box-shadow: 0 3px 0 rgba(0, 0, 0, 0.12);
+}
+
+.name {
+  max-width: 150px;
+  padding: 2px 10px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.85);
+}

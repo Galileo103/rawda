@@ -1,0 +1,20 @@
+{
+  "id": "habitats",
+  "areaId": "science",
+  "template": "choice",
+  "langs": "any",
+  "level": 2,
+  "order": 3,
+  "sessionLength": 5,
+  "icon": { "kind": "lex", "id": "sea" },
+  "title": { "ar": "أَيْنَ تَعِيشُ الْحَيَوَانَاتُ؟", "en": "Where do animals live?" },
+  "intro": { "ar": "لِكُلِّ حَيَوَانٍ مَكَانٌ يَعِيشُ فِيهِ: الْبَحْرُ، أَوِ الصَّحْرَاءُ، أَوِ الشَّجَرَةُ. هَيَّا نَعْرِفُ!", "en": "Every animal has a home: the sea, the desert, or the trees. Let's find out!" },
+  "items": [
+    { "id": "fish", "skill": "sci.habitat.fish", "difficulty": 1, "say": { "ar": "أَيْنَ تَعِيشُ السَّمَكَةُ؟", "en": "Where does the fish live?" }, "show": { "kind": "lex", "id": "fish" }, "answer": { "kind": "lex", "id": "sea" }, "choices": [ { "kind": "lex", "id": "sea" }, { "kind": "lex", "id": "desert" } ] },
+    { "id": "camel", "skill": "sci.habitat.camel", "difficulty": 2, "say": { "ar": "أَيْنَ يَعِيشُ الْجَمَلُ؟", "en": "Where does the camel live?" }, "show": { "kind": "lex", "id": "camel" }, "answer": { "kind": "lex", "id": "desert" }, "choices": [ { "kind": "lex", "id": "sea" }, { "kind": "lex", "id": "desert" }, { "kind": "lex", "id": "nest" } ] },
+    { "id": "bird", "skill": "sci.habitat.bird", "difficulty": 2, "say": { "ar": "أَيْنَ يَعِيشُ الطَّائِرُ الصَّغِيرُ؟", "en": "Where does the little bird live?" }, "show": { "kind": "lex", "id": "bird" }, "answer": { "kind": "lex", "id": "nest" }, "choices": [ { "kind": "lex", "id": "nest" }, { "kind": "lex", "id": "sea" }, { "kind": "lex", "id": "desert" } ] },
+    { "id": "monkey", "skill": "sci.habitat.monkey", "difficulty": 3, "say": { "ar": "أَيْنَ يَعِيشُ الْقِرْدُ؟", "en": "Where does the monkey live?" }, "show": { "kind": "lex", "id": "monkey" }, "answer": { "kind": "lex", "id": "tree" }, "choices": [ { "kind": "lex", "id": "sea" }, { "kind": "lex", "id": "tree" }, { "kind": "lex", "id": "desert" } ] },
+    { "id": "whale", "skill": "sci.habitat.whale", "difficulty": 3, "say": { "ar": "أَيْنَ يَعِيشُ الْحُوتُ؟", "en": "Where does the whale live?" }, "show": { "kind": "lex", "id": "whale" }, "answer": { "kind": "lex", "id": "sea" }, "choices": [ { "kind": "lex", "id": "tree" }, { "kind": "lex", "id": "nest" }, { "kind": "lex", "id": "sea" } ] },
+    { "id": "penguin", "skill": "sci.habitat.penguin", "difficulty": 4, "say": { "ar": "أَيْنَ يَعِيشُ الْبِطْرِيقُ؟ فِي مَكَانٍ بَارِدٍ جِدًّا!", "en": "Where does the penguin live? Somewhere very cold!" }, "show": { "kind": "lex", "id": "penguin" }, "answer": { "kind": "lex", "id": "snow" }, "choices": [ { "kind": "lex", "id": "desert" }, { "kind": "lex", "id": "snow" }, { "kind": "lex", "id": "tree" } ] }
+  ]
+}

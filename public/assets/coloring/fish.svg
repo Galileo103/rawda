@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" width="1200" height="900">
+  <!-- Rawda original coloring page: fish. Closed outlines so the paint bucket fills each region. -->
+  <g fill="none" stroke="#222" stroke-width="10" stroke-linejoin="round" stroke-linecap="round">
+    <ellipse cx="560" cy="450" rx="330" ry="200"/>
+    <path d="M870 450 L1100 270 L1100 630 Z"/>
+    <path d="M520 246 Q468 450 520 654"/>
+    <path d="M690 262 Q640 450 690 638"/>
+    <path d="M470 256 Q560 120 680 262"/>
+    <path d="M500 640 Q560 760 650 640"/>
+    <circle cx="380" cy="400" r="42"/>
+    <circle cx="380" cy="400" r="14" fill="#222"/>
+    <path d="M300 520 Q350 560 400 525"/>
+    <circle cx="170" cy="250" r="34"/>
+    <circle cx="120" cy="150" r="22"/>
+    <circle cx="200" cy="80" r="14"/>
+    <path d="M60 860 Q200 780 340 860 Q480 780 620 860 Q760 780 900 860 Q1040 780 1180 860"/>
+  </g>
+</svg>

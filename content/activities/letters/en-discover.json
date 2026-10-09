@@ -1,0 +1,1186 @@
+{
+  "id": "en-discover",
+  "areaId": "letters",
+  "template": "lesson",
+  "langs": "en",
+  "level": 1,
+  "order": 0.5,
+  "sessionLength": 1,
+  "icon": {
+    "kind": "img",
+    "hex": "1F5FA"
+  },
+  "title": {
+    "en": "Discover a new letter"
+  },
+  "intro": {
+    "en": "Let's go on a little journey and meet a new letter!"
+  },
+  "items": [
+    {
+      "id": "a",
+      "skill": "en.letter.a",
+      "difficulty": 1,
+      "teaches": [
+        "en.letter.a",
+        "en.sound.a",
+        "en.write.a"
+      ],
+      "say": {
+        "en": "Let's meet a new letter!"
+      },
+      "focus": {
+        "kind": "glyph",
+        "text": "Aa"
+      },
+      "meet": {
+        "en": "This is the letter A. Big A, and small a. A makes the first sound in apple."
+      },
+      "highlight": "a",
+      "examples": [
+        "apple"
+      ],
+      "trace": "A",
+      "check": {
+        "say": {
+          "en": "Where is the letter A?"
+        },
+        "answer": {
+          "kind": "glyph",
+          "text": "A"
+        },
+        "choices": [
+          {
+            "kind": "glyph",
+            "text": "A"
+          },
+          {
+            "kind": "glyph",
+            "text": "O"
+          }
+        ]
+      }
+    },
+    {
+      "id": "b",
+      "skill": "en.letter.b",
+      "difficulty": 1,
+      "teaches": [
+        "en.letter.b",
+        "en.sound.b",
+        "en.write.b"
+      ],
+      "say": {
+        "en": "Let's meet a new letter!"
+      },
+      "focus": {
+        "kind": "glyph",
+        "text": "Bb"
+      },
+      "meet": {
+        "en": "This is the letter B. Big B, and small b. B makes the first sound in ball."
+      },
+      "highlight": "b",
+      "examples": [
+        "ball",
+        "bee",
+        "bus"
+      ],
+      "trace": "B",
+      "check": {
+        "say": {
+          "en": "Where is the letter B?"
+        },
+        "answer": {
+          "kind": "glyph",
+          "text": "B"
+        },
+        "choices": [
+          {
+            "kind": "glyph",
+            "text": "O"
+          },
+          {
+            "kind": "glyph",
+            "text": "B"
+          }
+        ]
+      }
+    },
+    {
+      "id": "c",
+      "skill": "en.letter.c",
+      "difficulty": 1,
+      "teaches": [
+        "en.letter.c",
+        "en.sound.c",
+        "en.write.c"
+      ],
+      "say": {
+        "en": "Let's meet a new letter!"
+      },
+      "focus": {
+        "kind": "glyph",
+        "text": "Cc"
+      },
+      "meet": {
+        "en": "This is the letter C. Big C, and small c. C makes the first sound in cat."
+      },
+      "highlight": "c",
+      "examples": [
+        "cat",
+        "car",
+        "camel"
+      ],
+      "trace": "C",
+      "check": {
+        "say": {
+          "en": "Where is the letter C?"
+        },
+        "answer": {
+          "kind": "glyph",
+          "text": "C"
+        },
+        "choices": [
+          {
+            "kind": "glyph",
+            "text": "C"
+          },
+          {
+            "kind": "glyph",
+            "text": "T"
+          }
+        ]
+      }
+    },
+    {
+      "id": "d",
+      "skill": "en.letter.d",
+      "difficulty": 1,
+      "teaches": [
+        "en.letter.d",
+        "en.sound.d"
+      ],
+      "say": {
+        "en": "Let's meet a new letter!"
+      },
+      "focus": {
+        "kind": "glyph",
+        "text": "Dd"
+      },
+      "meet": {
+        "en": "This is the letter D. Big D, and small d. D makes the first sound in dog."
+      },
+      "highlight": "d",
+      "examples": [
+        "dog",
+        "duck",
+        "door"
+      ],
+      "check": {
+        "say": {
+          "en": "Where is the letter D?"
+        },
+        "answer": {
+          "kind": "glyph",
+          "text": "D"
+        },
+        "choices": [
+          {
+            "kind": "glyph",
+            "text": "L"
+          },
+          {
+            "kind": "glyph",
+            "text": "D"
+          }
+        ]
+      },
+      "trace": "D"
+    },
+    {
+      "id": "e",
+      "skill": "en.letter.e",
+      "difficulty": 1,
+      "teaches": [
+        "en.letter.e",
+        "en.sound.e",
+        "en.write.e"
+      ],
+      "say": {
+        "en": "Let's meet a new letter!"
+      },
+      "focus": {
+        "kind": "glyph",
+        "text": "Ee"
+      },
+      "meet": {
+        "en": "This is the letter E. Big E, and small e. E makes the first sound in egg."
+      },
+      "highlight": "e",
+      "examples": [
+        "egg",
+        "elephant"
+      ],
+      "trace": "E",
+      "check": {
+        "say": {
+          "en": "Where is the letter E?"
+        },
+        "answer": {
+          "kind": "glyph",
+          "text": "E"
+        },
+        "choices": [
+          {
+            "kind": "glyph",
+            "text": "E"
+          },
+          {
+            "kind": "glyph",
+            "text": "O"
+          }
+        ]
+      }
+    },
+    {
+      "id": "f",
+      "skill": "en.letter.f",
+      "difficulty": 1,
+      "teaches": [
+        "en.letter.f",
+        "en.sound.f"
+      ],
+      "say": {
+        "en": "Let's meet a new letter!"
+      },
+      "focus": {
+        "kind": "glyph",
+        "text": "Ff"
+      },
+      "meet": {
+        "en": "This is the letter F. Big F, and small f. F makes the first sound in fish."
+      },
+      "highlight": "f",
+      "examples": [
+        "fish",
+        "fox",
+        "frog"
+      ],
+      "check": {
+        "say": {
+          "en": "Where is the letter F?"
+        },
+        "answer": {
+          "kind": "glyph",
+          "text": "F"
+        },
+        "choices": [
+          {
+            "kind": "glyph",
+            "text": "O"
+          },
+          {
+            "kind": "glyph",
+            "text": "F"
+          }
+        ]
+      },
+      "trace": "F"
+    },
+    {
+      "id": "g",
+      "skill": "en.letter.g",
+      "difficulty": 1,
+      "teaches": [
+        "en.letter.g",
+        "en.sound.g"
+      ],
+      "say": {
+        "en": "Let's meet a new letter!"
+      },
+      "focus": {
+        "kind": "glyph",
+        "text": "Gg"
+      },
+      "meet": {
+        "en": "This is the letter G. Big G, and small g. G makes the first sound in gift."
+      },
+      "highlight": "g",
+      "examples": [
+        "gift",
+        "grapes",
+        "girl"
+      ],
+      "check": {
+        "say": {
+          "en": "Where is the letter G?"
+        },
+        "answer": {
+          "kind": "glyph",
+          "text": "G"
+        },
+        "choices": [
+          {
+            "kind": "glyph",
+            "text": "G"
+          },
+          {
+            "kind": "glyph",
+            "text": "L"
+          }
+        ]
+      },
+      "trace": "G"
+    },
+    {
+      "id": "h",
+      "skill": "en.letter.h",
+      "difficulty": 1,
+      "teaches": [
+        "en.letter.h",
+        "en.sound.h",
+        "en.write.h"
+      ],
+      "say": {
+        "en": "Let's meet a new letter!"
+      },
+      "focus": {
+        "kind": "glyph",
+        "text": "Hh"
+      },
+      "meet": {
+        "en": "This is the letter H. Big H, and small h. H makes the first sound in horse."
+      },
+      "highlight": "h",
+      "examples": [
+        "horse",
+        "hat",
+        "heart"
+      ],
+      "trace": "H",
+      "check": {
+        "say": {
+          "en": "Where is the letter H?"
+        },
+        "answer": {
+          "kind": "glyph",
+          "text": "H"
+        },
+        "choices": [
+          {
+            "kind": "glyph",
+            "text": "O"
+          },
+          {
+            "kind": "glyph",
+            "text": "H"
+          }
+        ]
+      }
+    },
+    {
+      "id": "i",
+      "skill": "en.letter.i",
+      "difficulty": 2,
+      "teaches": [
+        "en.letter.i",
+        "en.sound.i",
+        "en.write.i"
+      ],
+      "say": {
+        "en": "Let's meet a new letter!"
+      },
+      "focus": {
+        "kind": "glyph",
+        "text": "Ii"
+      },
+      "meet": {
+        "en": "This is the letter I. Big I, and small i. I makes the first sound in ice cream."
+      },
+      "highlight": "i",
+      "examples": [
+        "icecream"
+      ],
+      "trace": "I",
+      "check": {
+        "say": {
+          "en": "Where is the letter I?"
+        },
+        "answer": {
+          "kind": "glyph",
+          "text": "I"
+        },
+        "choices": [
+          {
+            "kind": "glyph",
+            "text": "O"
+          },
+          {
+            "kind": "glyph",
+            "text": "I"
+          }
+        ]
+      }
+    },
+    {
+      "id": "j",
+      "skill": "en.letter.j",
+      "difficulty": 2,
+      "teaches": [
+        "en.letter.j",
+        "en.sound.j",
+        "en.write.j"
+      ],
+      "say": {
+        "en": "Let's meet a new letter!"
+      },
+      "focus": {
+        "kind": "glyph",
+        "text": "Jj"
+      },
+      "meet": {
+        "en": "This is the letter J. Big J, and small j. J makes the first sound in jellyfish."
+      },
+      "highlight": "j",
+      "examples": [
+        "jellyfish"
+      ],
+      "trace": "J",
+      "check": {
+        "say": {
+          "en": "Where is the letter J?"
+        },
+        "answer": {
+          "kind": "glyph",
+          "text": "J"
+        },
+        "choices": [
+          {
+            "kind": "glyph",
+            "text": "J"
+          },
+          {
+            "kind": "glyph",
+            "text": "M"
+          }
+        ]
+      }
+    },
+    {
+      "id": "k",
+      "skill": "en.letter.k",
+      "difficulty": 2,
+      "teaches": [
+        "en.letter.k",
+        "en.sound.k",
+        "en.write.k"
+      ],
+      "say": {
+        "en": "Let's meet a new letter!"
+      },
+      "focus": {
+        "kind": "glyph",
+        "text": "Kk"
+      },
+      "meet": {
+        "en": "This is the letter K. Big K, and small k. K makes the first sound in kite."
+      },
+      "highlight": "k",
+      "examples": [
+        "kite"
+      ],
+      "trace": "K",
+      "check": {
+        "say": {
+          "en": "Where is the letter K?"
+        },
+        "answer": {
+          "kind": "glyph",
+          "text": "K"
+        },
+        "choices": [
+          {
+            "kind": "glyph",
+            "text": "O"
+          },
+          {
+            "kind": "glyph",
+            "text": "K"
+          }
+        ]
+      }
+    },
+    {
+      "id": "l",
+      "skill": "en.letter.l",
+      "difficulty": 2,
+      "teaches": [
+        "en.letter.l",
+        "en.sound.l",
+        "en.write.l"
+      ],
+      "say": {
+        "en": "Let's meet a new letter!"
+      },
+      "focus": {
+        "kind": "glyph",
+        "text": "Ll"
+      },
+      "meet": {
+        "en": "This is the letter L. Big L, and small l. L makes the first sound in lion."
+      },
+      "highlight": "l",
+      "examples": [
+        "lion",
+        "lemon",
+        "leaves"
+      ],
+      "trace": "L",
+      "check": {
+        "say": {
+          "en": "Where is the letter L?"
+        },
+        "answer": {
+          "kind": "glyph",
+          "text": "L"
+        },
+        "choices": [
+          {
+            "kind": "glyph",
+            "text": "L"
+          },
+          {
+            "kind": "glyph",
+            "text": "S"
+          }
+        ]
+      }
+    },
+    {
+      "id": "m",
+      "skill": "en.letter.m",
+      "difficulty": 2,
+      "teaches": [
+        "en.letter.m",
+        "en.sound.m",
+        "en.write.m"
+      ],
+      "say": {
+        "en": "Let's meet a new letter!"
+      },
+      "focus": {
+        "kind": "glyph",
+        "text": "Mm"
+      },
+      "meet": {
+        "en": "This is the letter M. Big M, and small m. M makes the first sound in moon."
+      },
+      "highlight": "m",
+      "examples": [
+        "crescent",
+        "monkey"
+      ],
+      "trace": "M",
+      "check": {
+        "say": {
+          "en": "Where is the letter M?"
+        },
+        "answer": {
+          "kind": "glyph",
+          "text": "M"
+        },
+        "choices": [
+          {
+            "kind": "glyph",
+            "text": "O"
+          },
+          {
+            "kind": "glyph",
+            "text": "M"
+          }
+        ]
+      }
+    },
+    {
+      "id": "n",
+      "skill": "en.letter.n",
+      "difficulty": 2,
+      "teaches": [
+        "en.letter.n",
+        "en.sound.n",
+        "en.write.n"
+      ],
+      "say": {
+        "en": "Let's meet a new letter!"
+      },
+      "focus": {
+        "kind": "glyph",
+        "text": "Nn"
+      },
+      "meet": {
+        "en": "This is the letter N. Big N, and small n. N makes the first sound in nest."
+      },
+      "highlight": "n",
+      "examples": [
+        "nest"
+      ],
+      "trace": "N",
+      "check": {
+        "say": {
+          "en": "Where is the letter N?"
+        },
+        "answer": {
+          "kind": "glyph",
+          "text": "N"
+        },
+        "choices": [
+          {
+            "kind": "glyph",
+            "text": "N"
+          },
+          {
+            "kind": "glyph",
+            "text": "C"
+          }
+        ]
+      }
+    },
+    {
+      "id": "o",
+      "skill": "en.letter.o",
+      "difficulty": 2,
+      "teaches": [
+        "en.letter.o",
+        "en.sound.o",
+        "en.write.o"
+      ],
+      "say": {
+        "en": "Let's meet a new letter!"
+      },
+      "focus": {
+        "kind": "glyph",
+        "text": "Oo"
+      },
+      "meet": {
+        "en": "This is the letter O. Big O, and small o. O makes the first sound in orange."
+      },
+      "highlight": "o",
+      "examples": [
+        "orange"
+      ],
+      "trace": "O",
+      "check": {
+        "say": {
+          "en": "Where is the letter O?"
+        },
+        "answer": {
+          "kind": "glyph",
+          "text": "O"
+        },
+        "choices": [
+          {
+            "kind": "glyph",
+            "text": "T"
+          },
+          {
+            "kind": "glyph",
+            "text": "O"
+          }
+        ]
+      }
+    },
+    {
+      "id": "p",
+      "skill": "en.letter.p",
+      "difficulty": 2,
+      "teaches": [
+        "en.letter.p",
+        "en.sound.p",
+        "en.write.p"
+      ],
+      "say": {
+        "en": "Let's meet a new letter!"
+      },
+      "focus": {
+        "kind": "glyph",
+        "text": "Pp"
+      },
+      "meet": {
+        "en": "This is the letter P. Big P, and small p. P makes the first sound in penguin."
+      },
+      "highlight": "p",
+      "examples": [
+        "penguin",
+        "pizza",
+        "plant"
+      ],
+      "trace": "P",
+      "check": {
+        "say": {
+          "en": "Where is the letter P?"
+        },
+        "answer": {
+          "kind": "glyph",
+          "text": "P"
+        },
+        "choices": [
+          {
+            "kind": "glyph",
+            "text": "P"
+          },
+          {
+            "kind": "glyph",
+            "text": "W"
+          }
+        ]
+      }
+    },
+    {
+      "id": "q",
+      "skill": "en.letter.q",
+      "difficulty": 2,
+      "teaches": [
+        "en.letter.q",
+        "en.sound.q",
+        "en.write.q"
+      ],
+      "say": {
+        "en": "Let's meet a new letter!"
+      },
+      "focus": {
+        "kind": "glyph",
+        "text": "Qq"
+      },
+      "meet": {
+        "en": "This is the letter Q. Big Q, and small q. Q makes the first sound in queen."
+      },
+      "highlight": "q",
+      "examples": [
+        "queen"
+      ],
+      "trace": "Q",
+      "check": {
+        "say": {
+          "en": "Where is the letter Q?"
+        },
+        "answer": {
+          "kind": "glyph",
+          "text": "Q"
+        },
+        "choices": [
+          {
+            "kind": "glyph",
+            "text": "H"
+          },
+          {
+            "kind": "glyph",
+            "text": "Q"
+          }
+        ]
+      }
+    },
+    {
+      "id": "r",
+      "skill": "en.letter.r",
+      "difficulty": 2,
+      "teaches": [
+        "en.letter.r",
+        "en.sound.r",
+        "en.write.r"
+      ],
+      "say": {
+        "en": "Let's meet a new letter!"
+      },
+      "focus": {
+        "kind": "glyph",
+        "text": "Rr"
+      },
+      "meet": {
+        "en": "This is the letter R. Big R, and small r. R makes the first sound in rabbit."
+      },
+      "highlight": "r",
+      "examples": [
+        "rabbit",
+        "rose",
+        "rainbow"
+      ],
+      "trace": "R",
+      "check": {
+        "say": {
+          "en": "Where is the letter R?"
+        },
+        "answer": {
+          "kind": "glyph",
+          "text": "R"
+        },
+        "choices": [
+          {
+            "kind": "glyph",
+            "text": "R"
+          },
+          {
+            "kind": "glyph",
+            "text": "C"
+          }
+        ]
+      }
+    },
+    {
+      "id": "s",
+      "skill": "en.letter.s",
+      "difficulty": 2,
+      "teaches": [
+        "en.letter.s",
+        "en.sound.s",
+        "en.write.s"
+      ],
+      "say": {
+        "en": "Let's meet a new letter!"
+      },
+      "focus": {
+        "kind": "glyph",
+        "text": "Ss"
+      },
+      "meet": {
+        "en": "This is the letter S. Big S, and small s. S makes the first sound in sun."
+      },
+      "highlight": "s",
+      "examples": [
+        "sun",
+        "sea",
+        "star"
+      ],
+      "trace": "S",
+      "check": {
+        "say": {
+          "en": "Where is the letter S?"
+        },
+        "answer": {
+          "kind": "glyph",
+          "text": "S"
+        },
+        "choices": [
+          {
+            "kind": "glyph",
+            "text": "H"
+          },
+          {
+            "kind": "glyph",
+            "text": "S"
+          }
+        ]
+      }
+    },
+    {
+      "id": "t",
+      "skill": "en.letter.t",
+      "difficulty": 2,
+      "teaches": [
+        "en.letter.t",
+        "en.sound.t",
+        "en.write.t"
+      ],
+      "say": {
+        "en": "Let's meet a new letter!"
+      },
+      "focus": {
+        "kind": "glyph",
+        "text": "Tt"
+      },
+      "meet": {
+        "en": "This is the letter T. Big T, and small t. T makes the first sound in tree."
+      },
+      "highlight": "t",
+      "examples": [
+        "tree",
+        "turtle"
+      ],
+      "trace": "T",
+      "check": {
+        "say": {
+          "en": "Where is the letter T?"
+        },
+        "answer": {
+          "kind": "glyph",
+          "text": "T"
+        },
+        "choices": [
+          {
+            "kind": "glyph",
+            "text": "T"
+          },
+          {
+            "kind": "glyph",
+            "text": "O"
+          }
+        ]
+      }
+    },
+    {
+      "id": "u",
+      "skill": "en.letter.u",
+      "difficulty": 2,
+      "teaches": [
+        "en.letter.u",
+        "en.sound.u",
+        "en.write.u"
+      ],
+      "say": {
+        "en": "Let's meet a new letter!"
+      },
+      "focus": {
+        "kind": "glyph",
+        "text": "Uu"
+      },
+      "meet": {
+        "en": "This is the letter U. Big U, and small u. U makes the first sound in umbrella."
+      },
+      "highlight": "u",
+      "examples": [
+        "umbrella"
+      ],
+      "trace": "U",
+      "check": {
+        "say": {
+          "en": "Where is the letter U?"
+        },
+        "answer": {
+          "kind": "glyph",
+          "text": "U"
+        },
+        "choices": [
+          {
+            "kind": "glyph",
+            "text": "H"
+          },
+          {
+            "kind": "glyph",
+            "text": "U"
+          }
+        ]
+      }
+    },
+    {
+      "id": "v",
+      "skill": "en.letter.v",
+      "difficulty": 2,
+      "teaches": [
+        "en.letter.v",
+        "en.sound.v",
+        "en.write.v"
+      ],
+      "say": {
+        "en": "Let's meet a new letter!"
+      },
+      "focus": {
+        "kind": "glyph",
+        "text": "Vv"
+      },
+      "meet": {
+        "en": "This is the letter V. Big V, and small v. V makes the first sound in violin."
+      },
+      "highlight": "v",
+      "examples": [
+        "violin"
+      ],
+      "trace": "V",
+      "check": {
+        "say": {
+          "en": "Where is the letter V?"
+        },
+        "answer": {
+          "kind": "glyph",
+          "text": "V"
+        },
+        "choices": [
+          {
+            "kind": "glyph",
+            "text": "V"
+          },
+          {
+            "kind": "glyph",
+            "text": "O"
+          }
+        ]
+      }
+    },
+    {
+      "id": "w",
+      "skill": "en.letter.w",
+      "difficulty": 2,
+      "teaches": [
+        "en.letter.w",
+        "en.sound.w",
+        "en.write.w"
+      ],
+      "say": {
+        "en": "Let's meet a new letter!"
+      },
+      "focus": {
+        "kind": "glyph",
+        "text": "Ww"
+      },
+      "meet": {
+        "en": "This is the letter W. Big W, and small w. W makes the first sound in whale."
+      },
+      "highlight": "w",
+      "examples": [
+        "whale",
+        "water"
+      ],
+      "trace": "W",
+      "check": {
+        "say": {
+          "en": "Where is the letter W?"
+        },
+        "answer": {
+          "kind": "glyph",
+          "text": "W"
+        },
+        "choices": [
+          {
+            "kind": "glyph",
+            "text": "C"
+          },
+          {
+            "kind": "glyph",
+            "text": "W"
+          }
+        ]
+      }
+    },
+    {
+      "id": "x",
+      "skill": "en.letter.x",
+      "difficulty": 2,
+      "teaches": [
+        "en.letter.x",
+        "en.sound.x",
+        "en.write.x"
+      ],
+      "say": {
+        "en": "Let's meet a new letter!"
+      },
+      "focus": {
+        "kind": "glyph",
+        "text": "Xx"
+      },
+      "meet": {
+        "en": "This is the letter X. Big X, and small x. X makes the sound at the end of fox."
+      },
+      "highlight": "x",
+      "examples": [
+        "fox"
+      ],
+      "trace": "X",
+      "check": {
+        "say": {
+          "en": "Where is the letter X?"
+        },
+        "answer": {
+          "kind": "glyph",
+          "text": "X"
+        },
+        "choices": [
+          {
+            "kind": "glyph",
+            "text": "X"
+          },
+          {
+            "kind": "glyph",
+            "text": "O"
+          }
+        ]
+      }
+    },
+    {
+      "id": "y",
+      "skill": "en.letter.y",
+      "difficulty": 2,
+      "teaches": [
+        "en.letter.y",
+        "en.sound.y",
+        "en.write.y"
+      ],
+      "say": {
+        "en": "Let's meet a new letter!"
+      },
+      "focus": {
+        "kind": "glyph",
+        "text": "Yy"
+      },
+      "meet": {
+        "en": "This is the letter Y. Big Y, and small y. Y makes the first sound in yo-yo."
+      },
+      "highlight": "y",
+      "examples": [
+        "yoyo"
+      ],
+      "trace": "Y",
+      "check": {
+        "say": {
+          "en": "Where is the letter Y?"
+        },
+        "answer": {
+          "kind": "glyph",
+          "text": "Y"
+        },
+        "choices": [
+          {
+            "kind": "glyph",
+            "text": "C"
+          },
+          {
+            "kind": "glyph",
+            "text": "Y"
+          }
+        ]
+      }
+    },
+    {
+      "id": "z",
+      "skill": "en.letter.z",
+      "difficulty": 2,
+      "teaches": [
+        "en.letter.z",
+        "en.sound.z",
+        "en.write.z"
+      ],
+      "say": {
+        "en": "Let's meet a new letter!"
+      },
+      "focus": {
+        "kind": "glyph",
+        "text": "Zz"
+      },
+      "meet": {
+        "en": "This is the letter Z. Big Z, and small z. Z makes the first sound in zebra."
+      },
+      "highlight": "z",
+      "examples": [
+        "zebra"
+      ],
+      "trace": "Z",
+      "check": {
+        "say": {
+          "en": "Where is the letter Z?"
+        },
+        "answer": {
+          "kind": "glyph",
+          "text": "Z"
+        },
+        "choices": [
+          {
+            "kind": "glyph",
+            "text": "Z"
+          },
+          {
+            "kind": "glyph",
+            "text": "O"
+          }
+        ]
+      }
+    }
+  ]
+}

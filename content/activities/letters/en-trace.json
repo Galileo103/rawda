@@ -1,0 +1,24 @@
+{
+  "id": "en-trace",
+  "areaId": "letters",
+  "template": "trace",
+  "langs": "en",
+  "level": 2,
+  "order": 7,
+  "sessionLength": 4,
+  "icon": { "kind": "img", "hex": "1F58A" },
+  "title": { "en": "Trace the letters" },
+  "intro": { "en": "Let's draw the letters with our finger, right on top of the line!" },
+  "items": [
+    { "id": "a", "skill": "en.write.a", "difficulty": 1, "glyph": "A", "say": { "en": "Let's trace the letter A!" } },
+    { "id": "c", "skill": "en.write.c", "difficulty": 1, "glyph": "C", "say": { "en": "Let's trace the letter C!" } },
+    { "id": "l", "skill": "en.write.l", "difficulty": 1, "glyph": "L", "say": { "en": "Let's trace the letter L!" } },
+    { "id": "o", "skill": "en.write.o", "difficulty": 1, "glyph": "O", "say": { "en": "Let's trace the letter O!" } },
+    { "id": "t", "skill": "en.write.t", "difficulty": 1, "glyph": "T", "say": { "en": "Let's trace the letter T!" } },
+    { "id": "e", "skill": "en.write.e", "difficulty": 2, "glyph": "E", "say": { "en": "Let's trace the letter E!" } },
+    { "id": "h", "skill": "en.write.h", "difficulty": 2, "glyph": "H", "say": { "en": "Let's trace the letter H!" } },
+    { "id": "m", "skill": "en.write.m", "difficulty": 2, "glyph": "M", "say": { "en": "Let's trace the letter M!" } },
+    { "id": "b", "skill": "en.write.b", "difficulty": 3, "glyph": "B", "say": { "en": "Let's trace the letter B!" } },
+    { "id": "s", "skill": "en.write.s", "difficulty": 3, "glyph": "S", "say": { "en": "Let's trace the letter S!" } }
+  ]
+}

@@ -1,0 +1,49 @@
+{
+  "name": "rawda",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "npm run validate:content && tsc -b && vite build",
+    "typecheck": "tsc -b",
+    "lint": "oxlint",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "e2e": "playwright test",
+    "preview": "vite preview --port 4173 --strictPort",
+    "validate:content": "tsx scripts/validate-content.ts",
+    "assets:fetch": "tsx scripts/fetch-assets.ts",
+    "audio:render": "tsx scripts/render-audio.ts",
+    "audio:sample": "tsx scripts/sample-voices.ts",
+    "quran:fetch": "tsx scripts/fetch-quran.ts"
+  },
+  "dependencies": {
+    "@fontsource-variable/baloo-bhaijaan-2": "^5.3.0",
+    "@fontsource/amiri-quran": "^5.3.0",
+    "dexie": "^4.4.6",
+    "dexie-react-hooks": "^4.4.0",
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8",
+    "react-router-dom": "^7.18.4",
+    "zod": "^4.6.5"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.64.0",
+    "@testing-library/jest-dom": "^7.0.1",
+    "@testing-library/react": "^16.3.3",
+    "@testing-library/user-event": "^14.6.7",
+    "@types/node": "^24.13.3",
+    "@types/react": "^19.2.18",
+    "@types/react-dom": "^19.2.7",
+    "@vitejs/plugin-react": "^6.1.1",
+    "fake-indexeddb": "^6.2.5",
+    "jsdom": "^28.1.0",
+    "oxlint": "^1.81.0",
+    "tsx": "^4.23.15",
+    "typescript": "~6.0.2",
+    "vite": "^8.3.0",
+    "vite-plugin-pwa": "^2.0.0",
+    "vitest": "^5.0.3"
+  }
+}
