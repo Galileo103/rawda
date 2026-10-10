@@ -426,6 +426,11 @@ export const en = {
     listenToYou: 'Listen to yourself!',
     streak: 'Amazing! You’re on a roll!',
     chooseNumber: 'Which number shall we learn today?',
+    chooseColor: 'Which color shall we discover today?',
+    chooseShape: 'Which shape shall we discover today?',
+    chooseIslamic: 'What shall we learn about our faith today?',
+    chooseScience: 'What shall we discover about our world today?',
+    chooseLogic: 'Which idea shall we learn today?',
     numbers: ['one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten'],
   },
 }

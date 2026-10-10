@@ -243,6 +243,7 @@ function checkActivity(
           hasLangs(i.check.say, `item ${i.id} check`)
           if (!i.check.choices.some((c) => visualKey(c) === visualKey(i.check!.answer))) problems.push(`${where}: check choices must include the answer`)
           i.check.choices.forEach((c) => visualOk(c, where))
+          if (i.check.show && !visualOk(i.check.show, where)) problems.push(`${where}: bad check picture`)
         }
         if (!i.examples.length && !i.count && !i.trace && !i.check) problems.push(`${where}: a lesson needs at least one stage after "meet"`)
       }

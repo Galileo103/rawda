@@ -30,6 +30,13 @@ export function highlightParts(word: string, letter: string | undefined): [strin
 
 const wait = (ms: number) => new Promise((r) => setTimeout(r, ms))
 
+/** A row of pictures (a pattern, a sequence) stays on one line, sized to the screen. */
+function rowSize(n: number): number {
+  const room = Math.min(typeof window === 'undefined' ? 720 : window.innerWidth - 72, 720)
+  // Each picture is drawn at 62% of the row size, with 10px gaps.
+  return Math.max(60, Math.min(200, Math.floor((room - (n - 1) * 10 - 40) / (n * 0.62))))
+}
+
 /**
  * Discover lesson: teaches ONE new concept before any testing.
  * meet it → see it in familiar words → (count it) → (trace it) → (gentle check).
@@ -109,8 +116,8 @@ export function LessonTemplate({ item, lang, hintLevel, locked, onCorrect, onWro
   switch (stage) {
     case 'meet':
       body = (
-        <button type="button" className={s.meet} onClick={() => void audio.speak(item.meet[lang] ?? '', lang)} aria-label={item.meet[lang]}>
-          <Visual v={item.focus} lang={lang} size={200} />
+        <button type="button" className={[s.meet, item.focus.kind === 'row' ? s.meetWide : ''].join(' ')} onClick={() => void audio.speak(item.meet[lang] ?? '', lang)} aria-label={item.meet[lang]}>
+          <Visual v={item.focus} lang={lang} size={item.focus.kind === 'row' ? rowSize(item.focus.items.length) : 200} />
         </button>
       )
       break
@@ -170,7 +177,7 @@ export function LessonTemplate({ item, lang, hintLevel, locked, onCorrect, onWro
     case 'check': {
       showNext = false
       const c = item.check!
-      const checkItem: ChoiceItem = { id: `${item.id}-check`, skill: item.skill, difficulty: 1, say: c.say, answer: c.answer, choices: c.choices }
+      const checkItem: ChoiceItem = { id: `${item.id}-check`, skill: item.skill, difficulty: 1, say: c.say, answer: c.answer, choices: c.choices, ...(c.show ? { show: c.show } : {}) }
       body = <ChoiceTemplate item={checkItem} pool={[]} lang={lang} hintLevel={hintLevel} locked={locked} onCorrect={onCorrect} onWrong={onWrong} rng={rng} />
       break
     }

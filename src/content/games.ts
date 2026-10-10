@@ -173,7 +173,7 @@ export const GARDEN: readonly GardenItem[] = [
 ]
 
 /** Props drawn in the games' scenes. */
-export const PROP_HEX = { fly: '1FAB0', bunny: '1F430', carrot: '1F955', engine: '1F682', frog: '1F438' } as const
+export const PROP_HEX = { playWorld: '1F3A1', fly: '1FAB0', bunny: '1F430', carrot: '1F955', engine: '1F682', frog: '1F438' } as const
 
 /** Every OpenMoji the Play World needs offline (fetched by scripts/fetch-assets.ts). */
 export const GAME_HEXES: readonly string[] = [

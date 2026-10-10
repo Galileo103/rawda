@@ -398,3 +398,47 @@ test('map area chips all fit on screen without sideways scrolling', async ({ pag
   const overflow = await nav.evaluate((el) => el.scrollWidth - el.clientWidth)
   expect(overflow).toBeLessThanOrEqual(1)
 })
+
+test('Discover first in every section: colours are discovered on a board, then practice asks only what was learned', async ({ page }) => {
+  await onboard(page)
+  await page.goto('./#/map/colors-shapes')
+  await page.getByRole('button', { name: /نَكْتَشِفُ الْأَلْوَانَ/ }).click()
+  await expect(page.getByTestId(/^discover-/)).toHaveCount(10)
+  for (const color of ['red', 'blue']) {
+    await page.goto('./#/discover/colors-discover')
+    await page.getByTestId(`discover-${color}`).click()
+    await page.getByRole('button', { name: /ابدأ/ }).click()
+    await expect(page.getByTestId('choice-answer')).toHaveCount(0) // meet first: no question yet
+    await page.getByTestId('lesson-next').click({ timeout: 15_000 }) // meet → things of that colour
+    await page.getByTestId('lesson-next').click({ timeout: 20_000 }) // → gentle check
+    await page.getByTestId('choice-answer').click({ timeout: 15_000 })
+    await expect(page.getByRole('heading', { name: /أحسنتم/ })).toBeVisible({ timeout: 15_000 })
+  }
+  await page.goto('./#/discover/colors-discover')
+  await expect(page.getByTestId('discover-red')).toHaveAccessibleName(/تعلّمناه/)
+  // Practice now only asks about the two colours the child discovered.
+  await page.goto('./#/play/colors')
+  await page.getByRole('button', { name: /ابدأ/ }).click()
+  for (let i = 0; i < 3; i++) {
+    const answer = page.getByTestId('choice-answer').first()
+    await expect(answer).toBeVisible({ timeout: 15_000 })
+    await expect(answer).toHaveAccessibleName(/أَحْمَر|أَزْرَق/)
+    await answer.click()
+    await expect(page.locator('[class*="checkBadge"]')).toHaveCount(0, { timeout: 15_000 })
+  }
+})
+
+test('every section has its own Discover board with Hala asking the right question', async ({ page }) => {
+  await onboard(page)
+  for (const [id, question] of [
+    ['shapes-discover', 'أَيَّ شَكْلٍ نَكْتَشِفُ الْيَوْمَ؟'],
+    ['islamic-discover', 'مَاذَا نَتَعَلَّمُ الْيَوْمَ عَنْ دِينِنَا؟'],
+    ['science-discover', 'مَاذَا نَكْتَشِفُ الْيَوْمَ فِي عَالَمِنَا؟'],
+    ['logic-discover', 'أَيَّ فِكْرَةٍ نَتَعَلَّمُ الْيَوْمَ؟'],
+    ['num-discover', 'أَيَّ رَقْمٍ نَتَعَلَّمُ الْيَوْمَ؟'],
+  ]) {
+    await page.goto(`./#/discover/${id}`)
+    await expect(page.getByText(question!)).toBeVisible()
+  }
+  await expect(page.getByTestId(/^discover-/)).toHaveCount(10) // numbers 1 to 10
+})

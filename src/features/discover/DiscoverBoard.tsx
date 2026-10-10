@@ -12,8 +12,28 @@ import { takenLessonItems } from '../../services/repos/progress'
 import { useSpeakOnMount, voice } from '../common'
 import s from './discover.module.css'
 
+type BoardPrompt = 'chooseLetter' | 'chooseNumber' | 'chooseColor' | 'chooseShape' | 'chooseIslamic' | 'chooseScience' | 'chooseLogic'
+
+/** Hala's question for a Discover board ("Which colour shall we discover today?"). */
+function boardPrompt(activity: { id: string; areaId: string } | undefined): BoardPrompt {
+  if (activity?.id === 'colors-discover') return 'chooseColor'
+  if (activity?.id === 'shapes-discover') return 'chooseShape'
+  switch (activity?.areaId) {
+    case 'numbers':
+      return 'chooseNumber'
+    case 'islamic':
+      return 'chooseIslamic'
+    case 'science':
+      return 'chooseScience'
+    case 'logic':
+      return 'chooseLogic'
+    default:
+      return 'chooseLetter'
+  }
+}
+
 /**
- * The whole alphabet (or all numbers) of a Discover activity, in order.
+ * Every new thing a Discover activity teaches (letters, numbers, colours, shapes, ideas…), in order.
  * A parent or child picks any letter to learn; learned ones carry a ✓,
  * and the next new one glows. Nothing is locked.
  */
@@ -24,7 +44,7 @@ export function DiscoverBoard() {
   const activity = activityId ? activityById(activityId) : undefined
   const taken = useLiveQuery(() => takenLessonItems(activityId ? [activityId] : []), [activityId], new Map<string, Set<string>>())
   const lang = settings.practiceLang
-  const prompt = activity?.areaId === 'numbers' ? voice(lang).chooseNumber : voice(lang).chooseLetter
+  const prompt = voice(lang)[boardPrompt(activity)]
 
   useSpeakOnMount(prompt, lang, !!activity)
 

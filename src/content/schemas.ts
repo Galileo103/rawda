@@ -110,7 +110,7 @@ export const LessonItemZ = z.object({
   /** Glyph to trace with a finger. */
   trace: z.string().min(1).max(3).optional(),
   /** A gentle, low-pressure check at the end (2–3 options). */
-  check: z.object({ say: LocalizedZ, answer: VisualZ, choices: z.array(VisualZ).min(2).max(3) }).optional(),
+  check: z.object({ say: LocalizedZ, answer: VisualZ, choices: z.array(VisualZ).min(2).max(3), /** Shown above the options (e.g. the pattern to finish). */ show: VisualZ.optional() }).optional(),
 })
 export type LessonItem = z.infer<typeof LessonItemZ>
 

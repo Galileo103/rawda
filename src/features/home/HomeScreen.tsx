@@ -7,7 +7,7 @@ import type { Area } from '../../content/schemas'
 import { Mascot } from '../../design/Mascot'
 import { Button, IconButton, Screen, SpeechBubble, StarCount } from '../../design/ui'
 import { OpenMoji, Visual } from '../../design/Visual'
-import { GAMES } from '../../content/games'
+import { GAMES, PROP_HEX } from '../../content/games'
 import { recommendNext } from '../../domain/recommend'
 import type { Lang } from '../../domain/types'
 import { dict, fmt } from '../../i18n'
@@ -131,7 +131,7 @@ export function HomeScreen() {
       {playGames.length > 0 && (
         <button
           type="button"
-          className={s.playWorld}
+          className={[s.continue, s.playWorld].join(' ')}
           onClick={() => {
             audio.sfx('tap')
             void audio.speak(dict(lang).games.playWorld, lang)
@@ -139,14 +139,12 @@ export function HomeScreen() {
           }}
           data-testid="play-world"
         >
-          <span className={s.playIcons} aria-hidden="true">
-            {playGames.slice(0, 3).map((g) => (
-              <OpenMoji key={g.id} hex={g.hex} alt="" size={52} />
-            ))}
+          <span className={s.continueIcon} aria-hidden="true">
+            <OpenMoji hex={PROP_HEX.playWorld} alt="" size={64} />
           </span>
           <span className={s.continueText}>
-            <span className={s.playTitle}>{t.games.playWorld}</span>
-            <span className={s.playSub}>{t.games.playWorldSub}</span>
+            <span className={s.continueLabel}>{t.games.playWorldSub}</span>
+            <span className={s.continueTitle}>{t.games.playWorld}</span>
           </span>
           <span className={s.continuePlay} aria-hidden="true">
             <Icon name="play" size={34} />

@@ -128,3 +128,41 @@ describe('narration', () => {
     expect(clipKey('ar', 'x')).not.toBe(clipKey('en', 'x'))
   })
 })
+
+describe('Discover first, then practise (every section)', () => {
+  const mapAreas = content.areas.filter((a) => a.route === 'map').map((a) => a.id)
+  const lessonsOf = (area: string) => content.activities.filter((a) => a.areaId === area && a.template === 'lesson')
+  const practiceOf = (area: string) => content.activities.filter((a) => a.areaId === area && a.template !== 'lesson')
+
+  it('every map section opens with a Discover lesson', () => {
+    for (const area of mapAreas) {
+      const lessons = lessonsOf(area)
+      expect(lessons.length, area).toBeGreaterThan(0)
+      const first = [...content.activities.filter((a) => a.areaId === area)].sort((a, b) => a.level - b.level || a.order - b.order)[0]
+      expect(first?.template, `${area} starts with ${first?.id}`).toBe('lesson')
+    }
+  })
+
+  it('everything a lesson teaches is practised somewhere in its section', () => {
+    for (const area of mapAreas) {
+      const practised = new Set(practiceOf(area).flatMap((a) => a.items.map((i) => i.skill)))
+      for (const lesson of lessonsOf(area))
+        for (const item of lesson.items) {
+          const teaches = (item as { teaches: string[] }).teaches
+          expect(teaches.some((s) => practised.has(s)), `${lesson.id}/${item.id} teaches ${teaches.join(',')}`).toBe(true)
+        }
+    }
+  })
+
+  it('practice in the newer sections narrows to what was discovered', () => {
+    // Letters and numbers also have skills that build on lessons (forms, cases, adding…).
+    for (const area of ['colors-shapes', 'islamic', 'science', 'logic']) {
+      const taught = new Set(lessonsOf(area).flatMap((l) => l.items.flatMap((i) => (i as { teaches: string[] }).teaches)))
+      for (const act of practiceOf(area)) {
+        if (act.template === 'trace') continue // finger paths are motor warm-ups, not new concepts
+        const covered = act.items.filter((i) => taught.has(i.skill)).length
+        expect(covered, `${act.id}: ${covered}/${act.items.length} items taught`).toBe(act.items.length)
+      }
+    }
+  })
+})

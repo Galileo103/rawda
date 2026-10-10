@@ -29,6 +29,16 @@
   background: var(--sun);
 }
 
+/* A row (pattern, sequence) gets a wide card and never wraps, so it reads in order. */
+.meetWide {
+  width: min(94vw, 760px) !important;
+  aspect-ratio: auto !important;
+  padding: 24px 16px;
+}
+.meetWide [role='img'] {
+  flex-wrap: nowrap;
+}
+
 .meet {
   display: grid;
   place-items: center;
