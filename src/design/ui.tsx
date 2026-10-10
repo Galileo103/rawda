@@ -1,5 +1,6 @@
 import { type ButtonHTMLAttributes, type ReactNode, useEffect, useId, useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { useOptionalApp } from '../app/AppState'
 import { Icon, type IconName } from './Icon'
 import s from './ui.module.css'
 
@@ -40,7 +41,10 @@ export function IconButton({ icon, label, showLabel, size = 30, className, ...re
 
 /** `readAloud`: voice is off and a grown-up reads this line to the child, so it is shown larger. */
 export function SpeechBubble({ text, lang, className, readAloud }: { text: string; lang?: string; className?: string; readAloud?: boolean }) {
+  const app = useOptionalApp()
   if (!text) return null
+  // Hala's lines may name the child (@name); the bubble shows the written name.
+  if (app && (lang === 'ar' || lang === 'en')) text = app.named(text, lang)
   return (
     <p className={[s.bubble, readAloud ? s.readAloud : '', className].filter(Boolean).join(' ')} lang={lang} dir="auto" aria-live="polite" data-testid={readAloud ? 'read-aloud' : undefined}>
       {text}

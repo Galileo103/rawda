@@ -1,0 +1,45 @@
+{
+  "id": "hero-sharing",
+  "title": {"ar": "@name وَالْأَرْنَبُ", "en": "@name and Rabbit"},
+  "theme": "sharing",
+  "level": 1,
+  "personalized": true,
+  "cover": {"kind": "lex", "id": "ball"},
+  "pages": [
+    {
+      "scene": {"bg": "meadow", "actors": [{"lex": "@hero", "x": 30, "y": 62, "size": "lg", "motion": "bounce"}, {"lex": "ball", "x": 62, "y": 74, "size": "sm", "motion": "bounce"}, {"lex": "tree", "x": 84, "y": 50, "size": "lg"}]},
+      "text": {"ar": {"m": "@name يَلْعَبُ بِـ{الْكُرَةِ} فِي الْحَدِيقَةِ.", "f": "@name تَلْعَبُ بِـ{الْكُرَةِ} فِي الْحَدِيقَةِ."}, "en": "@name plays with a {ball} in the park."},
+      "vocab": ["ball"]
+    },
+    {
+      "scene": {"bg": "meadow", "actors": [{"lex": "@hero", "x": 24, "y": 62, "size": "md"}, {"lex": "rabbit", "x": 68, "y": 62, "size": "lg", "motion": "sway", "flip": true}, {"lex": "sad", "x": 68, "y": 24, "size": "sm"}]},
+      "text": {"ar": "جَاءَ {الْأَرْنَبُ} حَزِينًا. لَيْسَ عِنْدَهُ لُعْبَةٌ.", "en": "{Rabbit} comes along. He is sad; he has no toy."},
+      "vocab": ["rabbit", "sad"]
+    },
+    {
+      "scene": {"bg": "meadow", "actors": [{"lex": "@hero", "x": 32, "y": 62, "size": "lg", "motion": "bounce"}, {"lex": "ball", "x": 50, "y": 74, "size": "sm"}, {"lex": "rabbit", "x": 70, "y": 62, "size": "lg", "flip": true}]},
+      "text": {"ar": {"m": "@name يَقُولُ: تَعَالَ نَلْعَبُ مَعًا!", "f": "@name تَقُولُ: تَعَالَ نَلْعَبُ مَعًا!"}, "en": "@name says: “Come, let’s play together!”"},
+      "vocab": []
+    },
+    {
+      "scene": {"bg": "garden", "actors": [{"lex": "@hero", "x": 30, "y": 62, "size": "lg", "motion": "bounce"}, {"lex": "ball", "x": 50, "y": 40, "size": "sm", "motion": "bounce"}, {"lex": "rabbit", "x": 70, "y": 62, "size": "lg", "motion": "bounce", "flip": true}]},
+      "text": {"ar": "@name وَالْأَرْنَبُ يَلْعَبَانِ بِالْكُرَةِ.", "en": "@name and Rabbit play with the ball."},
+      "vocab": ["ball"]
+    },
+    {
+      "scene": {"bg": "garden", "actors": [{"lex": "@hero", "x": 30, "y": 62, "size": "lg"}, {"lex": "teddy", "x": 50, "y": 64, "size": "sm", "motion": "bounce"}, {"lex": "rabbit", "x": 70, "y": 62, "size": "lg", "flip": true}]},
+      "text": {"ar": {"m": "@name يُعْطِي الْأَرْنَبَ {الدُّبَّ الْمَحْشُوَّ} أَيْضًا.", "f": "@name تُعْطِي الْأَرْنَبَ {الدُّبَّ الْمَحْشُوَّ} أَيْضًا."}, "en": "@name gives Rabbit the {teddy bear} too."},
+      "vocab": ["teddy"]
+    },
+    {
+      "scene": {"bg": "sky", "actors": [{"lex": "@hero", "x": 32, "y": 62, "size": "lg", "motion": "bounce"}, {"lex": "rabbit", "x": 66, "y": 62, "size": "lg", "motion": "bounce", "flip": true}, {"lex": "heart", "x": 50, "y": 24, "size": "md", "motion": "bounce"}]},
+      "text": {"ar": {"m": "قَالَ الْأَرْنَبُ: شُكْرًا! أَنْتَ صَدِيقٌ رَائِعٌ يَا @name!", "f": "قَالَ الْأَرْنَبُ: شُكْرًا! أَنْتِ صَدِيقَةٌ رَائِعَةٌ يَا @name!"}, "en": "Rabbit says: “Thank you! You are a great friend, @name!”"},
+      "vocab": ["happy", "heart"]
+    }
+  ],
+  "questions": [
+    {"id": "sad", "skill": "story.herosharing.who", "difficulty": 1, "say": {"ar": "مَنْ كَانَ حَزِينًا؟", "en": "Who was sad?"}, "answer": {"kind": "lex", "id": "rabbit"}, "choices": [{"kind": "lex", "id": "rabbit"}, {"kind": "lex", "id": "duck"}, {"kind": "lex", "id": "cat"}]},
+    {"id": "toy", "skill": "story.herosharing.toy", "difficulty": 1, "say": {"ar": {"m": "بِمَاذَا لَعِبَ @name؟", "f": "بِمَاذَا لَعِبَتْ @name؟"}, "en": "What did @name play with?"}, "answer": {"kind": "lex", "id": "ball"}, "choices": [{"kind": "lex", "id": "ball"}, {"kind": "lex", "id": "kite"}, {"kind": "lex", "id": "car"}]},
+    {"id": "feeling", "skill": "story.herosharing.feeling", "difficulty": 1, "say": {"ar": "كَيْفَ شَعَرَ الْأَرْنَبُ فِي النِّهَايَةِ؟", "en": "How did Rabbit feel at the end?"}, "answer": {"kind": "lex", "id": "happy"}, "choices": [{"kind": "lex", "id": "happy"}, {"kind": "lex", "id": "sad"}]}
+  ]
+}

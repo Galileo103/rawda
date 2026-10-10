@@ -1,4 +1,4 @@
-import { type ReactNode, useCallback, useEffect, useState } from 'react'
+import { type ReactNode, useCallback, useEffect, useMemo, useState } from 'react'
 import { Navigate, useNavigate, useParams, useSearchParams } from 'react-router-dom'
 import { useApp } from '../../app/AppState'
 import { content, storyById } from '../../content/loader'
@@ -6,6 +6,7 @@ import type { Reward, Story } from '../../content/schemas'
 import { Mascot, type MascotMood } from '../../design/Mascot'
 import { Button, IconButton, Screen, SpeechBubble, TopBar } from '../../design/ui'
 import { OpenMoji } from '../../design/Visual'
+import { resolveGender } from '../../domain/child'
 import { defaultRng } from '../../domain/rng'
 import type { Lang } from '../../domain/types'
 import { fmt, otherLang } from '../../i18n'
@@ -33,8 +34,10 @@ function richText(text: string): ReactNode[] {
 export function StoryReader() {
   const { storyId } = useParams()
   const [params] = useSearchParams()
-  const { settings, langs } = useApp()
-  const story = storyId ? storyById(storyId) : undefined
+  const { settings, langs, profile } = useApp()
+  const def = storyId ? storyById(storyId) : undefined
+  // The story in this child's form: "he" or "she", the boy or girl picture.
+  const story = useMemo(() => def && resolveGender(def, profile.gender), [def, profile.gender])
   if (!story) return <Navigate to="/stories" replace />
   const requested = params.get('lang')
   const lang: Lang = requested === 'ar' || requested === 'en' ? requested : settings.practiceLang
@@ -45,7 +48,7 @@ export function StoryReader() {
 type Phase = 'pages' | 'questions' | 'end'
 
 function Reader({ story, lang, startPage }: { story: Story; lang: Lang; startPage: number }) {
-  const { settings, t, langs } = useApp()
+  const { settings, t, langs, named } = useApp()
   const navigate = useNavigate()
   const [phase, setPhase] = useState<Phase>('pages')
   const [page, setPage] = useState(startPage)
@@ -131,7 +134,7 @@ function Reader({ story, lang, startPage }: { story: Story; lang: Lang; startPag
     ])
   }
 
-  const title = story.title[lang]
+  const title = named(story.title[lang], lang)
 
   if (phase === 'end') {
     return (
@@ -187,7 +190,7 @@ function Reader({ story, lang, startPage }: { story: Story; lang: Lang; startPag
       <TopBar backTo="/stories" backLabel={t.common.back} title={<span lang={lang}>{title}</span>} />
       <Scene scene={current.scene} lang={lang} />
       <p className={s.text} lang={lang} dir={lang === 'ar' ? 'rtl' : 'ltr'}>
-        {richText(current.text[lang])}
+        {richText(named(current.text[lang], lang))}
       </p>
       {current.vocab.length > 0 && (
         <div className={s.vocab} aria-label={t.stories.vocab}>

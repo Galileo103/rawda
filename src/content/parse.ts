@@ -13,7 +13,8 @@ import {
   QuranZ,
   type Reward,
   RewardsZ,
-  type Story,
+  HERO_ACTOR,
+  type StoryDef,
   StoryZ,
   type StudioContent,
   StudioZ,
@@ -24,7 +25,7 @@ export interface ContentBundle {
   areas: Area[]
   lexicon: ReadonlyMap<string, LexEntry>
   activities: Activity[]
-  stories: Story[]
+  stories: StoryDef[]
   rewards: Reward[]
   studio: StudioContent
   breaks: MovementBreak[]
@@ -97,7 +98,7 @@ export function parseContent(raw: Record<string, unknown>): ContentBundle {
   }
 
   const activities: Activity[] = []
-  const stories: Story[] = []
+  const stories: StoryDef[] = []
   const ids = new Set<string>()
   for (const [path, data] of files) {
     if (path.startsWith('content/activities/')) {
@@ -119,7 +120,7 @@ export function parseContent(raw: Record<string, unknown>): ContentBundle {
       if (!s) continue
       const before = errors.length
       s.pages.forEach((pg, i) => {
-        pg.scene.actors.forEach((ac) => lexOk(ac.lex, `${path} page ${i + 1}`))
+        pg.scene.actors.forEach((ac) => (ac.lex === HERO_ACTOR ? ['boy', 'girl'] : [ac.lex]).forEach((id) => lexOk(id, `${path} page ${i + 1}`)))
         pg.vocab.forEach((v) => lexOk(v, `${path} page ${i + 1}`))
       })
       s.questions.forEach((q) => {

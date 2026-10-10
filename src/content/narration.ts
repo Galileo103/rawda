@@ -1,5 +1,6 @@
+import { type Gender, HERO_WORD, resolveGender, splitName } from '../domain/child'
 import type { Lang } from '../domain/types'
-import type { Dict } from '../i18n'
+import type { Dict, RawDict } from '../i18n'
 import { gameLines } from './games'
 import type { ContentBundle } from './parse'
 import type { LexEntry, Localized, Visual } from './schemas'
@@ -33,17 +34,26 @@ export function numberWordFrom(n: number, d: Dict): string {
   return d.voice.numbers[n - 1] ?? String(n)
 }
 
-/** Every line the app can speak, per language — the input for scripts/render-audio.ts. */
-export function collectNarration(bundle: ContentBundle, dicts: Record<Lang, Dict>): { lang: Lang; text: string }[] {
+const GENDERS: (Gender | undefined)[] = ['m', 'f', undefined]
+
+/**
+ * Every line the app can speak, per language — the input for scripts/render-audio.ts.
+ * Gendered lines are collected in every form (boy, girl, not set), and lines with the
+ * child's name as the pieces around it (the name itself is the parent's recording).
+ */
+export function collectNarration(bundle: ContentBundle, dicts: Record<Lang, RawDict>): { lang: Lang; text: string }[] {
   const out = new Map<string, { lang: Lang; text: string }>()
   const add = (lang: Lang, text: string | undefined) => {
-    const t = text?.replace(/[{}]/g, '').replace(/\s+/g, ' ').trim()
-    if (t) out.set(`${lang}\u0000${t}`, { lang, text: t })
+    for (const piece of splitName(text ?? '')) {
+      const t = piece?.replace(/[{}]/g, '').replace(/\s+/g, ' ').trim()
+      if (t) out.set(`${lang}\u0000${t}`, { lang, text: t })
+    }
   }
   const addLoc = (lang: Lang, t: Localized | undefined) => add(lang, t?.[lang])
 
-  for (const lang of ['ar', 'en'] as const) {
-    const d = dicts[lang]
+  for (const [lang, gender] of (['ar', 'en'] as const).flatMap((l) => GENDERS.map((g) => [l, g] as const))) {
+    const d: Dict = resolveGender(dicts[lang], gender)
+    for (const w of Object.values(HERO_WORD[lang])) add(lang, w)
     const v = d.voice
     for (const value of Object.values(v)) {
       if (typeof value === 'string') add(lang, value)
@@ -79,7 +89,7 @@ export function collectNarration(bundle: ContentBundle, dicts: Record<Lang, Dict
       }
     }
 
-    for (const s of bundle.stories) {
+    for (const s of bundle.stories.map((st) => resolveGender(st, gender))) {
       for (const p of s.pages) add(lang, p.text[lang])
       for (const q of s.questions) {
         addLoc(lang, q.say)

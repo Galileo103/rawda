@@ -3,10 +3,11 @@ import { type ReactNode, createContext, useContext, useLayoutEffect, useMemo } f
 import { Mascot } from '../design/Mascot'
 import { type AgeProfile, ageProfile } from '../domain/ageProfile'
 import type { Lang } from '../domain/types'
-import { type Dict, dict, dirOf } from '../i18n'
+import { fillName } from '../domain/child'
+import { type Dict, dict, dirOf, setDictGender } from '../i18n'
 import { audio } from '../services/audio/AudioService'
 import { type ProfileRow, type SettingsRow, db, localDay } from '../services/db'
-import { getProfile, getSettings, updateSettings } from '../services/repos/settings'
+import { getNameClips, getProfile, getSettings, updateSettings } from '../services/repos/settings'
 
 export interface AppState {
   settings: SettingsRow
@@ -22,6 +23,8 @@ export interface AppState {
   usage: { secondsToday: number; limitReached: boolean }
   /** Age-adapted defaults (options, session length, prompts, breaks). */
   age: AgeProfile
+  /** Text with the name slot (@name) filled for display: the child's name, or "our hero/heroine". */
+  named: (text: string, lang: Lang) => string
 }
 
 const Ctx = createContext<AppState | null>(null)
@@ -41,6 +44,12 @@ export function AppStateProvider({ children }: { children: ReactNode }) {
   const settings = useLiveQuery(getSettings, [])
   const profile = useLiveQuery(getProfile, [])
   const usageRow = useLiveQuery(() => db.usage.get(localDay()), [])
+  const nameClips = useLiveQuery(getNameClips, [])
+
+  // Lines with the child's name play the parent's recording in the name slot.
+  useLayoutEffect(() => {
+    if (profile && nameClips) audio.setChild(profile.gender, nameClips)
+  }, [profile, nameClips])
 
   // Reflect settings on <html>: language, direction, motion and contrast.
   // Layout effect: direction is applied before paint, so there's no LTR flash on Arabic screens.
@@ -61,6 +70,8 @@ export function AppStateProvider({ children }: { children: ReactNode }) {
 
   const value = useMemo<AppState | null>(() => {
     if (!settings || !profile) return null
+    // Every dict() from here on speaks to this child (masculine / feminine / neutral).
+    setDictGender(profile.gender)
     const seconds = usageRow?.seconds ?? 0
     const allowance = settings.dailyLimitMin * 60 + (usageRow?.bonusSeconds ?? 0)
     return {
@@ -73,6 +84,7 @@ export function AppStateProvider({ children }: { children: ReactNode }) {
       },
       usage: { secondsToday: seconds, limitReached: settings.dailyLimitMin > 0 && seconds >= allowance },
       age: ageProfile(profile.ageBand),
+      named: (text, lang) => fillName(text, lang, profile),
     }
   }, [settings, profile, usageRow])
 

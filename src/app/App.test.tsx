@@ -30,7 +30,9 @@ describe('app', () => {
     render(<App />)
     await userEvent.click(await screen.findByRole('button', { name: 'هَيَّا' }))
     await userEvent.click(await screen.findByRole('button', { name: /التالي/ }))
-    await userEvent.type(await screen.findByLabelText(/اسم الدلع/), 'Mimi')
+    await userEvent.click(await screen.findByTestId('gender-f'))
+    await userEvent.type(screen.getByLabelText(/الاسم بالعربية/), 'Mimi')
+    await userEvent.type(screen.getByLabelText(/الاسم بالإنجليزية/), 'Mimi')
     await userEvent.click(screen.getByRole('button', { name: /التالي/ }))
     const [pin, again] = await screen.findAllByLabelText(/رمز/)
     await userEvent.type(pin!, '2468')
@@ -53,7 +55,7 @@ describe('app', () => {
 
   it('switching the app language flips direction without touching progress', async () => {
     await onboard()
-    await updateProfile({ nickname: 'Mimi' })
+    await updateProfile({ nameAr: 'Mimi' })
     window.location.hash = '#/home'
     render(<App />)
     await screen.findByText(/(صباح|مساء) الخير يا Mimi!/)

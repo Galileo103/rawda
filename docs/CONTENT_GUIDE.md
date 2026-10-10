@@ -57,6 +57,17 @@ Add a sticker for the activity in `content/rewards.json`:
 
 Each page has a `scene` (background `meadow`, `sky`, `night`, `home`, `sea` or `garden`, plus up to 6 `actors` from the lexicon placed by `x`/`y` percent), `text` in both languages, and `vocab` (lexicon ids shown as tap-to-hear chips). Wrap words in `{curly braces}` to highlight them. `questions` are choice items with explicit `choices`.
 
+### Personalized stories (the child is the hero)
+
+Set `"personalized": true`. Then:
+
+- `@name` marks where the child's name goes. It is shown as the name the parent typed, and spoken from the parent's recording (or as بَطَلُنَا / بَطَلَتُنَا, "our hero/heroine", if there is none). Put `@name` at the **start or end of a clause** ("@name يَرَى…", "…يَا @name!"), because the narration is stitched together as Salma + recording + Salma, and a name in the middle of a phrase sounds choppy.
+- Any `text` (and any question `say`) can be `{ "m": "…", "f": "…" }`, a boy form and a girl form, e.g. `{ "m": "@name يَرَى الشَّمْسَ.", "f": "@name تَرَى الشَّمْسَ." }`. English needs both forms only when it uses he/she/his/her.
+- The actor `"@hero"` is the child: the boy or girl picture.
+- Run `npm run audio:render` afterwards: every piece of both forms gets its own clip.
+
+The same `{ m, f, n? }` form works in `src/i18n/*.ts` for app lines that speak to the child. `n` is used while the parent hasn't said boy or girl.
+
 ## Religious content
 
 Quranic text and recitation must come only from the verified sources described in `RELIGIOUS_SOURCES.md`, through the fetch script. Never type Quranic text by hand.

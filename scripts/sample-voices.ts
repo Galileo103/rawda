@@ -8,7 +8,7 @@
  */
 import { mkdirSync } from 'node:fs'
 import { join } from 'node:path'
-import { ar } from '../src/i18n/ar'
+import { dictionaries } from '../src/i18n'
 import { ROOT } from './lib/contentFs'
 import { CHILD_RATE, DEFAULT_AR_VOICE, finalize, synthesize } from './render-audio'
 
@@ -24,11 +24,11 @@ const CANDIDATES = [
 ]
 
 const LINES = [
-  { key: '01-welcome', text: ar.voice.welcome },
+  { key: '01-welcome', text: dictionaries.ar.voice.welcome },
   { key: '02-letter', text: 'أَيُّ صُورَةٍ تَبْدَأُ بِحَرْفِ الْجِيمِ؟' },
   { key: '03-words', text: 'جَمَل. أَرْنَب. قِطَّة. ثَعْلَب. ضِفْدَع.' },
-  { key: '04-numbers', text: ar.voice.numbers.join('. ') + '.' },
-  { key: '05-praise', text: ar.voice.praise.join(' ') },
+  { key: '04-numbers', text: dictionaries.ar.voice.numbers.join('. ') + '.' },
+  { key: '05-praise', text: dictionaries.ar.voice.praise.join(' ') },
 ]
 
 const voices = process.argv.slice(2).length ? process.argv.slice(2) : CANDIDATES

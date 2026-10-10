@@ -2,7 +2,7 @@ import { existsSync } from 'node:fs'
 import { join } from 'node:path'
 import { describe, expect, it } from 'vitest'
 import { ROOT, loadBundle } from '../../scripts/lib/contentFs'
-import { dictionaries } from '../i18n'
+import { dictionaries, rawDictionaries } from '../i18n'
 import { clipKey } from '../services/audio/clipKey'
 import { content } from './loader'
 import { collectNarration } from './narration'
@@ -115,7 +115,7 @@ describe('i18n', () => {
 
 describe('narration', () => {
   it('covers every instruction the app speaks, in each language it is needed', () => {
-    const lines = collectNarration(content, dictionaries)
+    const lines = collectNarration(content, rawDictionaries)
     const keys = new Set(lines.map((l) => clipKey(l.lang, l.text)))
     for (const a of content.activities) {
       const langs = a.langs === 'any' ? (['ar', 'en'] as const) : ([a.langs] as const)

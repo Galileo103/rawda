@@ -1,0 +1,45 @@
+{
+  "id": "hero-market",
+  "title": {"ar": "@name فِي السُّوقِ", "en": "@name at the Market"},
+  "theme": "counting",
+  "level": 1,
+  "personalized": true,
+  "cover": {"kind": "lex", "id": "apple"},
+  "pages": [
+    {
+      "scene": {"bg": "meadow", "actors": [{"lex": "@hero", "x": 30, "y": 62, "size": "lg", "motion": "bounce"}, {"lex": "car", "x": 72, "y": 70, "size": "md", "flip": true}, {"lex": "sun", "x": 86, "y": 16, "size": "sm", "motion": "sway"}]},
+      "text": {"ar": {"m": "@name يَذْهَبُ إِلَى السُّوقِ.", "f": "@name تَذْهَبُ إِلَى السُّوقِ."}, "en": "@name goes to the market."},
+      "vocab": ["car"]
+    },
+    {
+      "scene": {"bg": "home", "actors": [{"lex": "@hero", "x": 28, "y": 62, "size": "lg"}, {"lex": "apple", "x": 66, "y": 66, "size": "md", "motion": "bounce"}]},
+      "text": {"ar": {"m": "@name يَشْتَرِي {تُفَّاحَةً} وَاحِدَةً.", "f": "@name تَشْتَرِي {تُفَّاحَةً} وَاحِدَةً."}, "en": "@name buys one {apple}."},
+      "vocab": ["apple"]
+    },
+    {
+      "scene": {"bg": "home", "actors": [{"lex": "@hero", "x": 26, "y": 62, "size": "lg"}, {"lex": "banana", "x": 60, "y": 66, "size": "md", "motion": "bounce"}, {"lex": "banana", "x": 78, "y": 66, "size": "md", "motion": "bounce"}]},
+      "text": {"ar": {"m": "@name يَشْتَرِي {مَوْزَتَيْنِ}: وَاحِدَةٌ، اثْنَتَانِ.", "f": "@name تَشْتَرِي {مَوْزَتَيْنِ}: وَاحِدَةٌ، اثْنَتَانِ."}, "en": "@name buys two {bananas}: one, two."},
+      "vocab": ["banana"]
+    },
+    {
+      "scene": {"bg": "home", "actors": [{"lex": "@hero", "x": 24, "y": 62, "size": "lg"}, {"lex": "orange", "x": 54, "y": 68, "size": "sm", "motion": "bounce"}, {"lex": "orange", "x": 68, "y": 68, "size": "sm", "motion": "bounce"}, {"lex": "orange", "x": 82, "y": 68, "size": "sm", "motion": "bounce"}]},
+      "text": {"ar": {"m": "@name يَعُدُّ {الْبُرْتُقَالَ}: وَاحِدٌ، اثْنَانِ، ثَلَاثَةٌ.", "f": "@name تَعُدُّ {الْبُرْتُقَالَ}: وَاحِدٌ، اثْنَانِ، ثَلَاثَةٌ."}, "en": "@name counts the {oranges}: one, two, three."},
+      "vocab": ["orange"]
+    },
+    {
+      "scene": {"bg": "home", "actors": [{"lex": "@hero", "x": 22, "y": 62, "size": "lg"}, {"lex": "strawberry", "x": 48, "y": 70, "size": "sm", "motion": "bounce"}, {"lex": "strawberry", "x": 60, "y": 70, "size": "sm", "motion": "bounce"}, {"lex": "strawberry", "x": 72, "y": 70, "size": "sm", "motion": "bounce"}, {"lex": "strawberry", "x": 84, "y": 70, "size": "sm", "motion": "bounce"}]},
+      "text": {"ar": {"m": "@name يَجِدُ أَرْبَعَ حَبَّاتِ {فَرَاوْلَةٍ} حَمْرَاءَ.", "f": "@name تَجِدُ أَرْبَعَ حَبَّاتِ {فَرَاوْلَةٍ} حَمْرَاءَ."}, "en": "@name finds four red {strawberries}."},
+      "vocab": ["strawberry"]
+    },
+    {
+      "scene": {"bg": "meadow", "actors": [{"lex": "@hero", "x": 32, "y": 62, "size": "lg", "motion": "bounce"}, {"lex": "happy", "x": 32, "y": 22, "size": "sm"}, {"lex": "apple", "x": 62, "y": 70, "size": "sm"}, {"lex": "banana", "x": 74, "y": 70, "size": "sm"}, {"lex": "orange", "x": 86, "y": 70, "size": "sm"}]},
+      "text": {"ar": {"m": "@name سَعِيدٌ! عِنْدَهُ فَاكِهَةٌ كَثِيرَةٌ.", "f": "@name سَعِيدَةٌ! عِنْدَهَا فَاكِهَةٌ كَثِيرَةٌ."}, "en": {"m": "@name is happy! He has lots of fruit.", "f": "@name is happy! She has lots of fruit."}},
+      "vocab": ["happy"]
+    }
+  ],
+  "questions": [
+    {"id": "bananas", "skill": "story.heromarket.bananas", "difficulty": 1, "say": {"ar": {"m": "كَمْ مَوْزَةً اشْتَرَى @name؟", "f": "كَمْ مَوْزَةً اشْتَرَتْ @name؟"}, "en": "How many bananas did @name buy?"}, "answer": {"kind": "numeral", "value": 2}, "choices": [{"kind": "numeral", "value": 1}, {"kind": "numeral", "value": 2}, {"kind": "numeral", "value": 3}]},
+    {"id": "oranges", "skill": "story.heromarket.oranges", "difficulty": 1, "say": {"ar": {"m": "كَمْ بُرْتُقَالَةً عَدَّ @name؟", "f": "كَمْ بُرْتُقَالَةً عَدَّتْ @name؟"}, "en": "How many oranges did @name count?"}, "answer": {"kind": "numeral", "value": 3}, "choices": [{"kind": "numeral", "value": 2}, {"kind": "numeral", "value": 3}, {"kind": "numeral", "value": 5}]},
+    {"id": "first", "skill": "story.heromarket.first", "difficulty": 1, "say": {"ar": {"m": "مَاذَا اشْتَرَى @name أَوَّلًا؟", "f": "مَاذَا اشْتَرَتْ @name أَوَّلًا؟"}, "en": "What did @name buy first?"}, "answer": {"kind": "lex", "id": "apple"}, "choices": [{"kind": "lex", "id": "apple"}, {"kind": "lex", "id": "banana"}, {"kind": "lex", "id": "strawberry"}]}
+  ]
+}

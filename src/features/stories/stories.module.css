@@ -175,3 +175,12 @@
   min-width: 70px;
   text-align: center;
 }
+
+.starring {
+  justify-self: center;
+  padding: 2px 12px;
+  border-radius: 999px;
+  background: var(--sun-soft);
+  font-weight: 800;
+  color: var(--ink);
+}

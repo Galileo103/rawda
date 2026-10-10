@@ -1,4 +1,4 @@
-import { AREA_IDS } from '../../domain/types'
+import { AREA_IDS, type Lang } from '../../domain/types'
 import { type ProfileRow, type SettingsRow, db } from '../db'
 
 export const DEFAULT_SETTINGS: SettingsRow = {
@@ -48,8 +48,25 @@ export async function getProfile(): Promise<ProfileRow> {
   return (await db.profile.get('main')) ?? { id: 'main' }
 }
 
+const cleanName = (v: string | undefined) => (v === undefined ? undefined : v.trim().slice(0, 24) || undefined)
+
 export async function updateProfile(patch: Partial<Omit<ProfileRow, 'id'>>): Promise<void> {
   const current = await getProfile()
-  const nickname = patch.nickname !== undefined ? patch.nickname.trim().slice(0, 24) || undefined : current.nickname
-  await db.profile.put({ ...current, ...patch, nickname, id: 'main' })
+  const next: ProfileRow = { ...current, ...patch, id: 'main' }
+  for (const k of ['nickname', 'nameAr', 'nameEn'] as const) next[k] = k in patch ? cleanName(patch[k]) : current[k]
+  await db.profile.put(next)
+}
+
+/** The parent's recording of the child's name (stays on this device). */
+export async function saveNameClip(lang: Lang, blob: Blob): Promise<void> {
+  await db.voiceClips.put({ id: `name-${lang}`, blob, createdAt: Date.now() })
+}
+
+export async function deleteNameClip(lang: Lang): Promise<void> {
+  await db.voiceClips.delete(`name-${lang}`)
+}
+
+export async function getNameClips(): Promise<Partial<Record<Lang, Blob>>> {
+  const rows = await db.voiceClips.toArray()
+  return Object.fromEntries(rows.map((r) => [r.id.slice(5), r.blob]))
 }

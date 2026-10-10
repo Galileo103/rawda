@@ -15,7 +15,7 @@ import { content } from '../../content/loader'
 import { picturePath } from '../../content/pictureSources'
 import { collectNarration } from '../../content/narration'
 import { DAILY_SEED_BONUS } from '../../domain/garden'
-import { dictionaries, fmt } from '../../i18n'
+import { dictionaries, fmt, rawDictionaries } from '../../i18n'
 import { db } from '../../services/db'
 import { hashPin } from '../../services/parentGate'
 import { gamePlays, recordGameCompletion, totalStars } from '../../services/repos/progress'
@@ -33,7 +33,7 @@ describe('Play World content', () => {
   })
 
   it('every game line is complete and reaches the narration list (so it gets a recorded clip)', () => {
-    const all = new Set(collectNarration(content, dictionaries).map((l) => `${l.lang}|${l.text}`))
+    const all = new Set(collectNarration(content, rawDictionaries).map((l) => `${l.lang}|${l.text}`))
     for (const lang of ['ar', 'en'] as const) {
       const lines = gameLines(lang, dictionaries[lang])
       expect(lines.length).toBeGreaterThan(100)

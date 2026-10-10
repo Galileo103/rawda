@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- Rawda girl: dark hair, pink headband, one hand up, purple T-shirt and pants -->
+  <path d="M32 30 C31 13 40 8 50 8 C60 8 69 13 68 30 L70.5 50 C62 53.5 38 53.5 29.5 50 Z" fill="#32161c"/>
+  <path d="M40.5 54 Q33 49 28.5 40" fill="none" stroke="#f9b591" stroke-width="6" stroke-linecap="round"/>
+  <circle cx="27.5" cy="37" r="4.4" fill="#f9b591"/>
+  <path d="M60 55 Q64 62 64 68" fill="none" stroke="#f9b591" stroke-width="6" stroke-linecap="round"/>
+  <circle cx="64" cy="70" r="4" fill="#f9b591"/>
+  <path d="M41.5 89.5 H48.5 L48 72 H41.5 Z M51.5 89.5 H58.5 V72 H52 Z" fill="#46365c"/>
+  <path d="M37.5 94.5 Q37.5 89.5 43 89.5 H48.5 V94.5 Z M51.5 89.5 H57 Q62.5 89.5 62.5 94.5 H51.5 Z" fill="#845fa9"/>
+  <rect x="37.5" y="93.5" width="11" height="2" rx="1" fill="#f7ebe4"/>
+  <rect x="51.5" y="93.5" width="11" height="2" rx="1" fill="#f7ebe4"/>
+  <rect x="46.5" y="44" width="7" height="7" fill="#e8977a"/>
+  <path d="M38 50.5 Q43 48.5 46.5 48.5 L50 53 L53.5 48.5 Q57 48.5 62 50.5 L66.5 58 L61.5 61 L62 73 H38 L38.5 61 L33.5 58 Z" fill="#845fa9"/>
+  <circle cx="35" cy="31" r="3.8" fill="#e8977a"/>
+  <circle cx="65" cy="31" r="3.8" fill="#e8977a"/>
+  <circle cx="50" cy="30" r="16" fill="#f9b591"/>
+  <path d="M34 28 C34 15 42 11 50 11 C58 11 66 15 66 28 C60 26 55 22 50 16 C45 22 40 26 34 28 Z" fill="#32161c"/>
+  <path d="M33.5 25 C33.5 13 41 9 50 9 C59 9 66.5 13 66.5 25" fill="none" stroke="#f06aa6" stroke-width="3" stroke-linecap="round"/>
+  <circle cx="44" cy="31" r="1.7" fill="#2b1418"/>
+  <circle cx="56" cy="31" r="1.7" fill="#2b1418"/>
+  <circle cx="40.5" cy="35.5" r="3.4" fill="#f5a08a"/>
+  <circle cx="59.5" cy="35.5" r="3.4" fill="#f5a08a"/>
+  <path d="M46.5 37 Q50 41 53.5 37 Z" fill="#fff"/>
+</svg>

@@ -1,5 +1,6 @@
 import manifest from '../../content/generated/audio-manifest.json'
 import { assetUrl } from '../../content/assets'
+import { type Gender, HERO_WORD, resolveGender, splitName } from '../../domain/child'
 import type { Lang } from '../../domain/types'
 import { clipKey, normalizeSpeech } from './clipKey'
 
@@ -28,6 +29,7 @@ export class AudioService {
   private current: HTMLAudioElement | undefined
   private ctx: AudioContext | undefined
   private listeners = new Set<(speaking: boolean) => void>()
+  private child: { gender?: Gender; urls: Partial<Record<Lang, string>> } = { urls: {} }
 
   configure(c: Partial<AudioConfig>): void {
     this.config = { ...this.config, ...c }
@@ -43,6 +45,24 @@ export class AudioService {
     return () => this.listeners.delete(fn)
   }
 
+  /**
+   * The child, for lines with the name slot (@name): the parent's name recordings
+   * (object URLs owned here) and gender for the "our hero/heroine" fallback.
+   */
+  setChild(gender: Gender | undefined, recordings: Partial<Record<Lang, Blob>>): void {
+    for (const url of Object.values(this.child.urls)) revoke(url)
+    const urls: Partial<Record<Lang, string>> = {}
+    for (const [lang, blob] of Object.entries(recordings) as [Lang, Blob | undefined][]) {
+      if (!blob) continue
+      try {
+        urls[lang] = URL.createObjectURL(blob)
+      } catch {
+        /* no object URLs here: the fallback word is said instead */
+      }
+    }
+    this.child = { gender, urls }
+  }
+
   /** Speak one line. Resolves when finished (or interrupted). */
   async speak(text: string, lang: Lang): Promise<SpeakResult> {
     this.stop()
@@ -52,17 +72,32 @@ export class AudioService {
     if (!this.config.narration || this.config.narrationVolume <= 0) return 'muted'
     this.emit(true)
     try {
-      const file = clips[clipKey(lang, clean)]
-      if (file) {
-        const ok = await this.playFile(assetUrl(`audio/${file}`), token)
+      let result: SpeakResult = 'none'
+      // Lines with the child's name play as pieces: Hala, then the parent's recording, then Hala.
+      for (const piece of splitName(clean)) {
+        const r = piece === null ? await this.sayName(lang, token) : await this.sayText(piece, lang, token)
         if (token !== this.token) return 'stopped'
-        if (ok) return 'file'
+        if (r !== 'none') result = r
       }
-      if (await this.speakTts(clean, lang, token)) return token === this.token ? 'tts' : 'stopped'
-      return 'none'
+      return result
     } finally {
       if (token === this.token) this.emit(false)
     }
+  }
+
+  private async sayText(clean: string, lang: Lang, token: number): Promise<'file' | 'tts' | 'none'> {
+    const file = clips[clipKey(lang, clean)]
+    if (file && (await this.playFile(assetUrl(`audio/${file}`), token))) return 'file'
+    if (token !== this.token) return 'none'
+    return (await this.speakTts(clean, lang, token)) ? 'tts' : 'none'
+  }
+
+  /** The name as the parent recorded it (either language: a name sounds the same), else "our hero/heroine". */
+  private async sayName(lang: Lang, token: number): Promise<'file' | 'tts' | 'none'> {
+    const url = this.child.urls[lang] ?? this.child.urls[lang === 'ar' ? 'en' : 'ar']
+    if (url && (await this.playFile(url, token))) return 'file'
+    if (token !== this.token) return 'none'
+    return this.sayText(resolveGender(HERO_WORD[lang], this.child.gender), lang, token)
   }
 
   /** Speak several lines in order; stops early if anything else starts speaking. */
@@ -198,6 +233,14 @@ const SFX: Record<SfxName, Note[]> = {
   complete: [[523, 0, 0.12], [659, 0.12, 0.12], [784, 0.24, 0.12], [1047, 0.36, 0.35]],
   // Streak of correct answers: a quick rising twinkle.
   sparkle: [[784, 0, 0.08, 'triangle'], [988, 0.06, 0.08, 'triangle'], [1175, 0.12, 0.08, 'triangle'], [1568, 0.18, 0.25, 'triangle'], [2093, 0.28, 0.3]],
+}
+
+function revoke(url: string): void {
+  try {
+    URL.revokeObjectURL(url)
+  } catch {
+    /* ignore */
+  }
 }
 
 function clamp(v: number): number {

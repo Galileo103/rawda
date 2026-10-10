@@ -17,7 +17,7 @@ import { existsSync, mkdirSync, readdirSync, readFileSync, rmSync, writeFileSync
 import { basename, join } from 'node:path'
 import { collectNarration } from '../src/content/narration'
 import type { Lang } from '../src/domain/types'
-import { dictionaries } from '../src/i18n'
+import { rawDictionaries } from '../src/i18n'
 import { clipKey } from '../src/services/audio/clipKey'
 import { ROOT, loadBundle } from './lib/contentFs'
 
@@ -91,7 +91,7 @@ function main() {
     process.exit(1)
   }
 
-  const lines = collectNarration(bundle, dictionaries)
+  const lines = collectNarration(bundle, rawDictionaries)
   const wanted = new Map<string, { lang: Lang; text: string }>()
   for (const l of lines) wanted.set(clipKey(l.lang, l.text), l)
   console.log(`narration: ${wanted.size} distinct lines`)

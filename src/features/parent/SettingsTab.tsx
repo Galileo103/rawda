@@ -7,12 +7,13 @@ import type { AreaId, Lang, LearningMode } from '../../domain/types'
 import type { ProfileRow } from '../../services/db'
 import { hashPin, isValidPin, newSalt } from '../../services/parentGate'
 import { updateProfile } from '../../services/repos/settings'
+import { type ChildDraft, ChildForm } from '../welcome/ChildForm'
 import { type OnDeviceStatus, installOnDevice, micSupported, onDeviceStatus } from '../speech/speechService'
 import s from './parent.module.css'
 
 export function SettingsTab() {
   const { settings, profile, t, update } = useApp()
-  const [nickname, setNickname] = useState(profile.nickname ?? '')
+  const [child, setChild] = useState<ChildDraft>({ gender: profile.gender, nameAr: profile.nameAr ?? '', nameEn: profile.nameEn ?? '' })
   const [pin, setPin] = useState('')
   const [pin2, setPin2] = useState('')
   const [pinMsg, setPinMsg] = useState<{ ok: boolean; text: string } | null>(null)
@@ -36,6 +37,19 @@ export function SettingsTab() {
   return (
     <div className={s.grid2}>
       <Panel>
+        <div className={s.section} id="child">
+          <h2>{t.parent.child}</h2>
+          <ChildForm
+            value={child}
+            onChange={(patch) => {
+              setChild((c) => ({ ...c, ...patch }))
+              if (patch.gender) void updateProfile({ gender: patch.gender })
+            }}
+            onNameBlur={() => void updateProfile({ ...(child.nameAr.trim() && { nameAr: child.nameAr }), ...(child.nameEn.trim() && { nameEn: child.nameEn }) })}
+          />
+        </div>
+      </Panel>
+      <Panel>
         <div className={s.section}>
           <Segmented<Lang>
             label={t.parent.uiLang}
@@ -56,9 +70,6 @@ export function SettingsTab() {
             ]}
             onChange={(v) => void update({ learningMode: v, practiceLang: v === 'both' ? settings.practiceLang : v })}
           />
-          <Field label={t.parent.nickname} hint={t.setup.nicknameHint}>
-            <input value={nickname} maxLength={24} onChange={(e) => setNickname(e.target.value)} onBlur={() => void updateProfile({ nickname })} />
-          </Field>
           <Segmented<NonNullable<ProfileRow['ageBand']> | ''>
             label={t.parent.ageBand}
             value={profile.ageBand ?? ''}

@@ -1,4 +1,5 @@
 import { z } from 'zod'
+import type { Resolved } from '../domain/child'
 import { AREA_IDS } from '../domain/types'
 
 /**
@@ -192,12 +193,28 @@ export type Reward = z.infer<typeof RewardZ>
 export const RewardsZ = z.array(RewardZ)
 
 export const SCENE_BACKGROUNDS = ['meadow', 'sky', 'night', 'home', 'sea', 'garden'] as const
+
+/**
+ * Text that may change with the child's gender: a plain string, or `{ "m": …, "f": … }`
+ * (optionally `"n"` for "not set"). `@name` marks where the child's name goes.
+ */
+export const GTextZ = z.union([
+  z.string().min(1),
+  z.object({ m: z.string().min(1), f: z.string().min(1), n: z.string().min(1).optional() }).strict(),
+])
+const GLocalizedZ = z.object({ ar: GTextZ.optional(), en: GTextZ.optional() })
+
+/** In a story scene, `@hero` is the child: the boy or girl picture, chosen by gender. */
+export const HERO_ACTOR = '@hero'
+
 export const StoryZ = z.object({
   id: Id,
   title: z.object({ ar: z.string().min(1), en: z.string().min(1) }),
   theme: z.string(),
   cover: VisualZ,
   level: z.number().int().min(1).max(5),
+  /** The child is the hero: listed first, and the cover shows the child's picture. */
+  personalized: z.boolean().default(false),
   pages: z
     .array(
       z.object({
@@ -206,7 +223,7 @@ export const StoryZ = z.object({
           actors: z
             .array(
               z.object({
-                lex: Id,
+                lex: z.union([Id, z.literal(HERO_ACTOR)]),
                 x: z.number().min(0).max(100),
                 y: z.number().min(0).max(100),
                 size: z.enum(['sm', 'md', 'lg']).default('md'),
@@ -217,14 +234,17 @@ export const StoryZ = z.object({
             .max(6),
         }),
         /** {curly braces} mark highlighted vocabulary words. */
-        text: z.object({ ar: z.string().min(1), en: z.string().min(1) }),
+        text: z.object({ ar: GTextZ, en: GTextZ }),
         vocab: z.array(Id).default([]),
       }),
     )
     .min(1),
-  questions: z.array(ChoiceItemZ).default([]),
+  questions: z.array(ChoiceItemZ.extend({ say: GLocalizedZ, sayAfter: GLocalizedZ.optional() })).default([]),
 })
-export type Story = z.infer<typeof StoryZ>
+/** A story as written (gendered text still in both forms). */
+export type StoryDef = z.infer<typeof StoryZ>
+/** A story in one child's form: what the reader shows. */
+export type Story = Resolved<StoryDef>
 
 /**
  * Quran data — produced ONLY by scripts/fetch-quran.ts from verified sources, never edited by hand.

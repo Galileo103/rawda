@@ -4,6 +4,7 @@ import { useApp } from '../../app/AppState'
 import { Icon } from '../../design/Icon'
 import { Mascot } from '../../design/Mascot'
 import { Button, Field, Panel, Screen, Segmented } from '../../design/ui'
+import { type ChildDraft, ChildForm, childComplete } from './ChildForm'
 import type { Lang, LearningMode } from '../../domain/types'
 import { fmt } from '../../i18n'
 import type { ProfileRow } from '../../services/db'
@@ -11,24 +12,25 @@ import { hashPin, isValidPin, newSalt } from '../../services/parentGate'
 import { updateProfile, updateSettings } from '../../services/repos/settings'
 import s from './welcome.module.css'
 
-/** First-run setup for the grown-up: languages, optional nickname, parent PIN. */
+/** First-run setup for the grown-up: languages, the child (boy/girl and name required, age), parent PIN. */
 export function SetupWizard() {
   const { settings, t, update } = useApp()
   const navigate = useNavigate()
   const [step, setStep] = useState(1)
-  const [nickname, setNickname] = useState('')
+  const [child, setChild] = useState<ChildDraft>({ nameAr: '', nameEn: '' })
   const [ageBand, setAgeBand] = useState<NonNullable<ProfileRow['ageBand']> | ''>('')
   const [pin, setPin] = useState('')
   const [pin2, setPin2] = useState('')
   const [error, setError] = useState('')
 
   if (settings.onboarded) return <Navigate to="/home" replace />
+  const childOk = childComplete(child, settings.learningMode)
 
   const finish = async () => {
     if (!isValidPin(pin)) return setError(t.setup.pinInvalid)
     if (pin !== pin2) return setError(t.setup.pinMismatch)
     const salt = newSalt()
-    await updateProfile({ nickname, ageBand: ageBand || undefined })
+    await updateProfile({ ...child, ageBand: ageBand || undefined })
     await updateSettings({ onboarded: true, pinSalt: salt, pinHash: await hashPin(pin, salt) })
     navigate('/home', { replace: true })
   }
@@ -83,9 +85,9 @@ export function SetupWizard() {
         {step === 2 && (
           <Panel>
             <div style={{ display: 'grid', gap: 18 }}>
-              <Field label={t.setup.nickname} hint={t.setup.nicknameHint}>
-                <input value={nickname} maxLength={24} onChange={(e) => setNickname(e.target.value)} autoComplete="off" />
-              </Field>
+              <h2 style={{ margin: 0 }}>{t.setup.aboutChild}</h2>
+              <ChildForm value={child} onChange={(patch) => setChild((c) => ({ ...c, ...patch }))} />
+              {!childOk && <p className={s.step}>{t.setup.needChild}</p>}
               <Segmented<NonNullable<ProfileRow['ageBand']> | ''>
                 label={t.setup.ageBand}
                 value={ageBand}
@@ -155,7 +157,7 @@ export function SetupWizard() {
             <span />
           )}
           {step < 3 ? (
-            <Button icon="next" onClick={() => setStep(step + 1)}>
+            <Button icon="next" onClick={() => setStep(step + 1)} disabled={step === 2 && !childOk} data-testid="setup-next">
               {t.common.next}
             </Button>
           ) : (

@@ -5,7 +5,7 @@ import { DEFAULT_SETTINGS } from './settings'
 
 /**
  * Parent-only data management: export / import / reset / delete.
- * Exports contain learning progress only (no drawings, no PIN).
+ * Exports contain learning progress only (no drawings, no PIN, no voice recordings).
  */
 
 const EXPORT_FORMAT = 'rawda-progress'
@@ -17,7 +17,15 @@ const ExportZ = z.object({
   format: z.literal(EXPORT_FORMAT),
   version: z.literal(EXPORT_VERSION),
   exportedAt: z.string(),
-  profile: z.object({ nickname: z.string().optional(), ageBand: z.enum(['3-4', '4-5', '5-6']).optional() }).optional(),
+  profile: z
+    .object({
+      nickname: z.string().optional(),
+      nameAr: z.string().max(24).optional(),
+      nameEn: z.string().max(24).optional(),
+      gender: z.enum(['m', 'f']).optional(),
+      ageBand: z.enum(['3-4', '4-5', '5-6']).optional(),
+    })
+    .optional(),
   attempts: z.array(
     z.object({
       activityId: z.string(),
@@ -72,7 +80,8 @@ export async function exportProgress(): Promise<ProgressExport> {
     format: EXPORT_FORMAT,
     version: EXPORT_VERSION,
     exportedAt: new Date().toISOString(),
-    profile: profile ? { nickname: profile.nickname, ageBand: profile.ageBand } : undefined,
+    // The name recordings stay on this device: they are never part of an export.
+    profile: profile ? { nameAr: profile.nameAr, nameEn: profile.nameEn, gender: profile.gender, ageBand: profile.ageBand } : undefined,
     attempts: (await db.attempts.toArray()).map(({ id: _id, ...rest }) => rest),
     mastery: await db.mastery.toArray(),
     levels: await db.levels.toArray(),

@@ -1,6 +1,7 @@
 import Dexie, { type EntityTable } from 'dexie'
 import type { LevelState, DifficultySetting } from '../domain/engine/difficulty'
 import type { MasteryRecord } from '../domain/engine/mastery'
+import type { Gender } from '../domain/child'
 import type { AreaId, Lang, LearningMode } from '../domain/types'
 
 /**
@@ -35,8 +36,21 @@ export interface SettingsRow {
 
 export interface ProfileRow {
   id: 'main'
+  /** @deprecated v1 single nickname; moved to nameAr / nameEn by the v2 upgrade. */
   nickname?: string
+  /** The child's name as written in Arabic and in English (both optional). */
+  nameAr?: string
+  nameEn?: string
+  /** Chooses masculine or feminine wording; unset = neutral. */
+  gender?: Gender
   ageBand?: '3-4' | '4-5' | '5-6'
+}
+
+/** The parent's recording of the child's name, one per language. Never exported or uploaded. */
+export interface VoiceClipRow {
+  id: `name-${Lang}`
+  blob: Blob
+  createdAt: number
 }
 
 export interface AttemptRow {
@@ -100,6 +114,8 @@ export interface UsageRow {
   bonusSeconds: number
 }
 
+const ARABIC = /[\u0600-\u06FF]/
+
 export class RawdaDB extends Dexie {
   settings!: EntityTable<SettingsRow, 'id'>
   profile!: EntityTable<ProfileRow, 'id'>
@@ -111,6 +127,7 @@ export class RawdaDB extends Dexie {
   drawings!: EntityTable<DrawingRow, 'id'>
   storyProgress!: EntityTable<StoryProgressRow, 'storyId'>
   usage!: EntityTable<UsageRow, 'day'>
+  voiceClips!: EntityTable<VoiceClipRow, 'id'>
 
   constructor(name = 'rawda') {
     super(name)
@@ -126,6 +143,19 @@ export class RawdaDB extends Dexie {
       storyProgress: 'storyId',
       usage: 'day',
     })
+    this.version(2)
+      .stores({ voiceClips: 'id' })
+      .upgrade(async (tx) => {
+        await tx
+          .table('profile')
+          .toCollection()
+          .modify((p: ProfileRow) => {
+            if (!p.nickname || p.nameAr || p.nameEn) return
+            if (ARABIC.test(p.nickname)) p.nameAr = p.nickname
+            else p.nameEn = p.nickname
+            delete p.nickname
+          })
+      })
   }
 }
 

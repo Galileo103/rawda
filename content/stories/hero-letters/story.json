@@ -1,0 +1,40 @@
+{
+  "id": "hero-letters",
+  "title": {"ar": "نُزْهَةُ الْحُرُوفِ", "en": "The Letter Picnic"},
+  "theme": "letters",
+  "level": 1,
+  "personalized": true,
+  "cover": {"kind": "lex", "id": "duck"},
+  "pages": [
+    {
+      "scene": {"bg": "meadow", "actors": [{"lex": "@hero", "x": 30, "y": 62, "size": "lg", "motion": "bounce"}, {"lex": "tree", "x": 74, "y": 50, "size": "lg"}, {"lex": "sun", "x": 88, "y": 14, "size": "sm", "motion": "sway"}]},
+      "text": {"ar": {"m": "@name يَخْرُجُ فِي نُزْهَةٍ إِلَى الْحَدِيقَةِ.", "f": "@name تَخْرُجُ فِي نُزْهَةٍ إِلَى الْحَدِيقَةِ."}, "en": "@name goes on a picnic in the park."},
+      "vocab": ["tree"]
+    },
+    {
+      "scene": {"bg": "meadow", "actors": [{"lex": "@hero", "x": 28, "y": 62, "size": "lg"}, {"lex": "rabbit", "x": 70, "y": 64, "size": "lg", "motion": "bounce", "flip": true}]},
+      "text": {"ar": {"m": "@name يَرَى {أَرْنَبًا}. كَلِمَةُ أَرْنَبٍ تَبْدَأُ بِحَرْفِ الْأَلِفِ.", "f": "@name تَرَى {أَرْنَبًا}. كَلِمَةُ أَرْنَبٍ تَبْدَأُ بِحَرْفِ الْأَلِفِ."}, "en": "@name sees a {rabbit}. Rabbit starts with the letter R."},
+      "vocab": ["rabbit"]
+    },
+    {
+      "scene": {"bg": "sea", "actors": [{"lex": "@hero", "x": 28, "y": 60, "size": "lg"}, {"lex": "duck", "x": 70, "y": 66, "size": "lg", "motion": "sway", "flip": true}]},
+      "text": {"ar": {"m": "@name يُطْعِمُ {الْبَطَّةَ}. كَلِمَةُ بَطَّةٍ تَبْدَأُ بِحَرْفِ الْبَاءِ.", "f": "@name تُطْعِمُ {الْبَطَّةَ}. كَلِمَةُ بَطَّةٍ تَبْدَأُ بِحَرْفِ الْبَاءِ."}, "en": "@name feeds the {duck}. Duck starts with the letter D."},
+      "vocab": ["duck"]
+    },
+    {
+      "scene": {"bg": "garden", "actors": [{"lex": "@hero", "x": 30, "y": 62, "size": "lg"}, {"lex": "apple", "x": 66, "y": 64, "size": "md", "motion": "bounce"}]},
+      "text": {"ar": {"m": "@name يَأْكُلُ {تُفَّاحَةً}. كَلِمَةُ تُفَّاحَةٍ تَبْدَأُ بِحَرْفِ التَّاءِ.", "f": "@name تَأْكُلُ {تُفَّاحَةً}. كَلِمَةُ تُفَّاحَةٍ تَبْدَأُ بِحَرْفِ التَّاءِ."}, "en": "@name eats an {apple}. Apple starts with the letter A."},
+      "vocab": ["apple"]
+    },
+    {
+      "scene": {"bg": "meadow", "actors": [{"lex": "@hero", "x": 24, "y": 62, "size": "lg", "motion": "bounce"}, {"lex": "rabbit", "x": 52, "y": 68, "size": "sm"}, {"lex": "duck", "x": 68, "y": 68, "size": "sm"}, {"lex": "apple", "x": 84, "y": 68, "size": "sm"}]},
+      "text": {"ar": {"m": "@name وَجَدَ ثَلَاثَةَ حُرُوفٍ: الْأَلِفَ، وَالْبَاءَ، وَالتَّاءَ!", "f": "@name وَجَدَتْ ثَلَاثَةَ حُرُوفٍ: الْأَلِفَ، وَالْبَاءَ، وَالتَّاءَ!"}, "en": "@name found three letters: R, D and A!"},
+      "vocab": ["rabbit", "duck", "apple"]
+    }
+  ],
+  "questions": [
+    {"id": "ba", "skill": "story.heroletters.ba", "difficulty": 1, "say": {"ar": "مَا الَّذِي يَبْدَأُ بِحَرْفِ الْبَاءِ؟", "en": "What starts with the letter D?"}, "answer": {"kind": "lex", "id": "duck"}, "choices": [{"kind": "lex", "id": "rabbit"}, {"kind": "lex", "id": "duck"}, {"kind": "lex", "id": "apple"}]},
+    {"id": "ta", "skill": "story.heroletters.ta", "difficulty": 1, "say": {"ar": "مَا الَّذِي يَبْدَأُ بِحَرْفِ التَّاءِ؟", "en": "What starts with the letter A?"}, "answer": {"kind": "lex", "id": "apple"}, "choices": [{"kind": "lex", "id": "apple"}, {"kind": "lex", "id": "duck"}, {"kind": "lex", "id": "rabbit"}]},
+    {"id": "alif", "skill": "story.heroletters.alif", "difficulty": 1, "say": {"ar": "مَا الَّذِي يَبْدَأُ بِحَرْفِ الْأَلِفِ؟", "en": "What starts with the letter R?"}, "answer": {"kind": "lex", "id": "rabbit"}, "choices": [{"kind": "lex", "id": "duck"}, {"kind": "lex", "id": "apple"}, {"kind": "lex", "id": "rabbit"}]}
+  ]
+}

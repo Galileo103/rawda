@@ -431,3 +431,28 @@
   margin: 0;
   font-size: 2.2rem;
 }
+
+/* Quiet grown-up prompt: tell Hala whether the child is a boy or a girl. */
+.tellHala {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding: 10px 16px;
+  border: 2px dashed var(--grape);
+  border-radius: var(--radius-s);
+  background: var(--grape-soft);
+  color: var(--ink);
+  font: inherit;
+  text-align: start;
+  cursor: pointer;
+}
+
+.tellHala > span {
+  display: grid;
+}
+
+.tellHala span span {
+  color: var(--ink-soft);
+  font-size: 0.95rem;
+}

@@ -1,12 +1,14 @@
 import { type Page, expect, test } from '@playwright/test'
 import quran from '../content/quran/surahs.json' with { type: 'json' }
 
-/** First-run setup as a parent would do it (Arabic UI, both languages, PIN 1357). */
-async function onboard(page: Page, nickname = 'Mimi') {
+/** First-run setup as a parent would do it (Arabic UI, both languages, boy or girl, PIN 1357). */
+async function onboard(page: Page, nickname = 'Mimi', gender: 'm' | 'f' = 'm') {
   await page.goto('./')
   await page.getByRole('button', { name: 'هَيَّا', exact: true }).click()
   await page.getByRole('button', { name: /التالي/ }).click()
-  await page.getByLabel(/اسم الدلع/).fill(nickname)
+  await page.getByTestId(`gender-${gender}`).click()
+  await page.getByTestId('name-ar').fill(nickname)
+  await page.getByTestId('name-en').fill(nickname)
   await page.getByRole('button', { name: /التالي/ }).click()
   const pins = page.getByLabel(/رمز/)
   await pins.nth(0).fill('1357')
@@ -384,7 +386,7 @@ test('Play World: finishing a game celebrates, saves the stars and grows Hala’
   await expect(page.getByTestId('game-odd')).toHaveAttribute('data-ready', 'true')
   await page.getByTestId('game-odd').click()
   for (let i = 0; i < 6; i++) {
-    const done = page.getByRole('heading', { name: 'أحسنت!' })
+    const done = page.getByRole('heading', { name: /^أحسنت./ })
     const answer = page.getByTestId('game-answer')
     await expect(answer.or(done)).toBeVisible({ timeout: 15_000 })
     if (await done.isVisible()) break
@@ -393,7 +395,7 @@ test('Play World: finishing a game celebrates, saves the stars and grows Hala’
     // The next round replaces this one once Hala's praise is over.
     await page.waitForFunction((el) => !el?.isConnected, handle, { timeout: 15_000 })
   }
-  await expect(page.getByRole('heading', { name: 'أحسنت!' })).toBeVisible()
+  await expect(page.getByRole('heading', { name: /^أحسنت./ })).toBeVisible()
   await page.getByRole('button', { name: /اذهب إلى الحديقة/ }).click()
   await expect(page.getByRole('group', { name: 'حديقة هالة' })).toBeVisible()
   await page.reload()
@@ -489,4 +491,36 @@ test('games use only what was learned: after discovering 1 and 2, Count & Feed a
     await expect(sign).toBeVisible()
     expect(['١', '٢']).toContain(await sign.textContent())
   }
+})
+
+test('personalized story: the child is the hero, in her or his form', async ({ page }) => {
+  await onboard(page, 'مريم', 'f')
+  await page.goto('./#/stories')
+  // Stories starring the child come first.
+  await expect(page.getByRole('heading', { level: 2 }).first()).toHaveText('مريم وَالْأَلْوَانُ')
+  await page.goto('./#/stories/hero-colors?lang=ar&page=1')
+  await expect(page.getByText(/مريم تَرَى/)).toBeVisible()
+  await expect(page.locator('img[src*="art/E002"]')).toBeVisible()
+
+  // A grown-up changes it to a boy: the same page now says يَرَى and shows the boy.
+  await page.evaluate(
+    () =>
+      new Promise<void>((resolve, reject) => {
+        const open = indexedDB.open('rawda')
+        open.onerror = () => reject(open.error)
+        open.onsuccess = () => {
+          const tx = open.result.transaction('profile', 'readwrite')
+          const store = tx.objectStore('profile')
+          const get = store.get('main')
+          get.onsuccess = () => store.put({ ...get.result, gender: 'm', nameAr: 'يوسف' })
+          tx.oncomplete = () => {
+            open.result.close()
+            resolve()
+          }
+        }
+      }),
+  )
+  await page.reload()
+  await expect(page.getByText(/يوسف يَرَى/)).toBeVisible()
+  await expect(page.locator('img[src*="art/E001"]')).toBeVisible()
 })

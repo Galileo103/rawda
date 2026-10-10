@@ -6,7 +6,7 @@
 import { existsSync, mkdirSync, writeFileSync } from 'node:fs'
 import { join } from 'node:path'
 import { GAME_HEXES } from '../src/content/games'
-import { NOTO_HEXES, NOTO_VERSION } from '../src/content/pictureSources'
+import { ART_HEXES, NOTO_HEXES, NOTO_VERSION } from '../src/content/pictureSources'
 import type { Visual } from '../src/content/schemas'
 import { ROOT, loadBundle } from './lib/contentFs'
 
@@ -67,7 +67,7 @@ async function fetchOne(hex: string): Promise<'ok' | 'skip' | 'missing'> {
   return 'missing'
 }
 
-const list = [...hexes].sort()
+const list = [...hexes].filter((h) => !ART_HEXES.has(h)).sort()
 const results = { ok: 0, skip: 0, missing: [] as string[] }
 for (let i = 0; i < list.length; i += 6) {
   const batch = list.slice(i, i + 6)

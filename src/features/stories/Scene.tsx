@@ -1,18 +1,24 @@
+import { useOptionalApp } from '../../app/AppState'
 import { content } from '../../content/loader'
-import type { Story } from '../../content/schemas'
+import { HERO_ACTOR, type Story } from '../../content/schemas'
 import { OpenMoji } from '../../design/Visual'
 import type { Lang } from '../../domain/types'
 import s from './stories.module.css'
 
 const SIZES = { sm: 0.11, md: 0.17, lg: 0.25 } as const
+/** The hero's picture; until the parent picks, the boy (as Arabic grammar defaults to the masculine). */
+export const HERO_LEX = { m: 'boy', f: 'girl', n: 'boy' } as const
 
 /** A story illustration composed from characters placed on a painted background. */
 export function Scene({ scene, lang, width = 900 }: { scene: Story['pages'][number]['scene']; lang: Lang; width?: number }) {
+  // The child is the hero: a girl or a boy.
+  const hero = HERO_LEX[useOptionalApp()?.profile.gender ?? 'n']
+  const lex = (id: string) => content.lexicon.get(id === HERO_ACTOR ? hero : id)
   return (
-    <div className={[s.scene, s[scene.bg]].join(' ')} role="img" aria-label={scene.actors.map((a) => content.lexicon.get(a.lex)?.[lang] ?? '').join('، ')}>
+    <div className={[s.scene, s[scene.bg]].join(' ')} role="img" aria-label={scene.actors.map((a) => lex(a.lex)?.[lang] ?? '').join('، ')}>
       {scene.bg === 'night' && <Stars />}
       {scene.actors.map((a, i) => {
-        const e = content.lexicon.get(a.lex)
+        const e = lex(a.lex)
         if (!e) return null
         const px = Math.round(width * SIZES[a.size])
         return (

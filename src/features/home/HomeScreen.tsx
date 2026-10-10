@@ -1,3 +1,5 @@
+import { childName } from '../../domain/child'
+import { childComplete } from '../welcome/ChildForm'
 import { useLiveQuery } from 'dexie-react-hooks'
 import { type CSSProperties, useState } from 'react'
 import { Icon } from '../../design/Icon'
@@ -55,10 +57,11 @@ export function HomeScreen() {
     void audio.speak(voice(l).homeHello, l)
   }
 
-  // Time-of-day greeting (display only; the spoken greeting stays the same short line).
+  // Time-of-day greeting on screen; Hala's spoken greeting names the child (their recording).
   const [morning] = useState(() => new Date().getHours() < 12)
-  const hello = profile.nickname
-    ? fmt(morning ? t.home.morning : t.home.evening, { name: profile.nickname })
+  const name = childName(profile, settings.uiLang)
+  const hello = name
+    ? fmt(morning ? t.home.morning : t.home.evening, { name })
     : morning
       ? t.home.morningNoName
       : t.home.eveningNoName
@@ -110,6 +113,17 @@ export function HomeScreen() {
           )}
         </div>
       </header>
+
+      {/* Until a grown-up says boy or girl and the name (installs from before this, or a new learning language). */}
+      {!childComplete({ gender: profile.gender, nameAr: profile.nameAr ?? '', nameEn: profile.nameEn ?? '' }, settings.learningMode) && (
+        <button type="button" className={s.tellHala} onClick={() => navigate('/parent/settings')} data-testid="tell-hala">
+          <Icon name="lock" size={22} />
+          <span>
+            <strong>{t.home.tellHala}</strong>
+            <span>{t.home.tellHalaSub}</span>
+          </span>
+        </button>
+      )}
 
       {next && (
         <button type="button" className={s.continue} onClick={() => navigate(`/play/${next.id}`)}>

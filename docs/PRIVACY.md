@@ -12,7 +12,8 @@
   - "Prepare word recognition on this device" lets the parent ask the browser to download its own on-device language pack. This is the only optional download, and it happens only at the parent's request.
 - Learning data, drawings and settings are stored **only in this browser/app's IndexedDB** on the device.
 - There are **no network requests at runtime**. Fonts, art, audio and content are bundled. Network downloads happen only at build time on the developer's machine.
-- The child profile is minimal: an optional nickname and an optional age band. No real name, birthday, email, photo or location.
+- The child profile is minimal: whether the child is a boy or a girl (so Arabic addresses them correctly), the first name in the language(s) the child learns, and an optional age band. No birthday, email, photo or location.
+- **Name recording (optional).** A grown-up can record themselves saying the child's name, so Hala can say it in stories. The recording is saved only in this browser's storage on this device. It is never uploaded and never included in a progress export, and it can be deleted at any time in the parent area (or with "delete all data").
 - The parent PIN is stored as a salted SHA-256 hash.
 - Parent-gated: settings, export, import, reset, delete-all, extra screen time. Destructive actions need a typed confirmation word.
 - Export contains learning progress only (no drawings, no PIN).

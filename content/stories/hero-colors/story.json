@@ -1,0 +1,45 @@
+{
+  "id": "hero-colors",
+  "title": {"ar": "@name وَالْأَلْوَانُ", "en": "@name and the Colors"},
+  "theme": "colors",
+  "level": 1,
+  "personalized": true,
+  "cover": {"kind": "lex", "id": "rainbow"},
+  "pages": [
+    {
+      "scene": {"bg": "garden", "actors": [{"lex": "@hero", "x": 34, "y": 62, "size": "lg", "motion": "bounce"}, {"lex": "flower", "x": 70, "y": 72, "size": "sm", "motion": "sway"}, {"lex": "butterfly", "x": 76, "y": 30, "size": "sm", "motion": "bounce"}]},
+      "text": {"ar": {"m": "هَذَا @name. @name يُحِبُّ الْأَلْوَانَ كَثِيرًا!", "f": "هَذِهِ @name. @name تُحِبُّ الْأَلْوَانَ كَثِيرًا!"}, "en": "This is @name. @name loves colors!"},
+      "vocab": ["flower", "butterfly"]
+    },
+    {
+      "scene": {"bg": "sky", "actors": [{"lex": "@hero", "x": 30, "y": 66, "size": "lg"}, {"lex": "sun", "x": 72, "y": 24, "size": "lg", "motion": "sway"}]},
+      "text": {"ar": {"m": "@name يَرَى {الشَّمْسَ} فِي السَّمَاءِ. الشَّمْسُ صَفْرَاءُ.", "f": "@name تَرَى {الشَّمْسَ} فِي السَّمَاءِ. الشَّمْسُ صَفْرَاءُ."}, "en": "@name sees the {sun} in the sky. The sun is yellow."},
+      "vocab": ["sun"]
+    },
+    {
+      "scene": {"bg": "garden", "actors": [{"lex": "@hero", "x": 30, "y": 62, "size": "lg"}, {"lex": "tree", "x": 70, "y": 48, "size": "lg"}, {"lex": "apple", "x": 66, "y": 40, "size": "sm", "motion": "bounce"}]},
+      "text": {"ar": {"m": "@name يَقْطِفُ {تُفَّاحَةً} حَمْرَاءَ.", "f": "@name تَقْطِفُ {تُفَّاحَةً} حَمْرَاءَ."}, "en": "@name picks a red {apple}."},
+      "vocab": ["apple"]
+    },
+    {
+      "scene": {"bg": "meadow", "actors": [{"lex": "@hero", "x": 40, "y": 60, "size": "lg", "motion": "bounce"}, {"lex": "grass", "x": 20, "y": 80, "size": "sm"}, {"lex": "grass", "x": 66, "y": 82, "size": "sm"}, {"lex": "grass", "x": 84, "y": 78, "size": "sm"}]},
+      "text": {"ar": {"m": "@name يَجْرِي عَلَى {الْعُشْبِ} الْأَخْضَرِ.", "f": "@name تَجْرِي عَلَى {الْعُشْبِ} الْأَخْضَرِ."}, "en": "@name runs on the green {grass}."},
+      "vocab": ["grass"]
+    },
+    {
+      "scene": {"bg": "sea", "actors": [{"lex": "@hero", "x": 28, "y": 58, "size": "lg"}, {"lex": "whale", "x": 70, "y": 64, "size": "lg", "motion": "sway"}, {"lex": "fish", "x": 54, "y": 80, "size": "sm", "motion": "bounce"}]},
+      "text": {"ar": {"m": "@name يَنْظُرُ إِلَى {الْبَحْرِ} الْأَزْرَقِ.", "f": "@name تَنْظُرُ إِلَى {الْبَحْرِ} الْأَزْرَقِ."}, "en": "@name looks at the blue {sea}."},
+      "vocab": ["sea", "whale"]
+    },
+    {
+      "scene": {"bg": "sky", "actors": [{"lex": "@hero", "x": 32, "y": 66, "size": "lg", "motion": "bounce"}, {"lex": "rainbow", "x": 62, "y": 30, "size": "lg"}, {"lex": "happy", "x": 80, "y": 62, "size": "sm"}]},
+      "text": {"ar": {"m": "@name يَرَى {قَوْسَ قُزَحَ}! فِيهِ كُلُّ الْأَلْوَانِ.", "f": "@name تَرَى {قَوْسَ قُزَحَ}! فِيهِ كُلُّ الْأَلْوَانِ."}, "en": "@name sees a {rainbow}! It has all the colors."},
+      "vocab": ["rainbow"]
+    }
+  ],
+  "questions": [
+    {"id": "sun", "skill": "story.herocolors.sun", "difficulty": 1, "say": {"ar": "مَا لَوْنُ الشَّمْسِ؟", "en": "What color is the sun?"}, "answer": {"kind": "color", "color": "yellow"}, "choices": [{"kind": "color", "color": "yellow"}, {"kind": "color", "color": "blue"}, {"kind": "color", "color": "green"}]},
+    {"id": "fruit", "skill": "story.herocolors.fruit", "difficulty": 1, "say": {"ar": {"m": "أَيَّ فَاكِهَةٍ قَطَفَ @name؟", "f": "أَيَّ فَاكِهَةٍ قَطَفَتْ @name؟"}, "en": "Which fruit did @name pick?"}, "answer": {"kind": "lex", "id": "apple"}, "choices": [{"kind": "lex", "id": "apple"}, {"kind": "lex", "id": "banana"}, {"kind": "lex", "id": "grapes"}]},
+    {"id": "grass", "skill": "story.herocolors.grass", "difficulty": 1, "say": {"ar": "مَا لَوْنُ الْعُشْبِ؟", "en": "What color is the grass?"}, "answer": {"kind": "color", "color": "green"}, "choices": [{"kind": "color", "color": "green"}, {"kind": "color", "color": "red"}, {"kind": "color", "color": "purple"}]}
+  ]
+}

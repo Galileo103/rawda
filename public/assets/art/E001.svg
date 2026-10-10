@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- Rawda boy: short brown hair, light-blue T-shirt, blue shorts, red sneakers (same style as the girl) -->
+  <path d="M40.5 54 Q33 49 28.5 40" fill="none" stroke="#f9b591" stroke-width="6" stroke-linecap="round"/>
+  <circle cx="27.5" cy="37" r="4.4" fill="#f9b591"/>
+  <path d="M60 55 Q64 62 64 68" fill="none" stroke="#f9b591" stroke-width="6" stroke-linecap="round"/>
+  <circle cx="64" cy="70" r="4" fill="#f9b591"/>
+  <rect x="42" y="78" width="6.5" height="12" fill="#f9b591"/>
+  <rect x="51.5" y="78" width="6.5" height="12" fill="#f9b591"/>
+  <rect x="42" y="87" width="6.5" height="3" fill="#fff"/>
+  <rect x="51.5" y="87" width="6.5" height="3" fill="#fff"/>
+  <path d="M37.5 94.5 Q37.5 89.5 43 89.5 H48.5 V94.5 Z M51.5 89.5 H57 Q62.5 89.5 62.5 94.5 H51.5 Z" fill="#e53935"/>
+  <rect x="37.5" y="93.5" width="11" height="2" rx="1" fill="#fff"/>
+  <rect x="51.5" y="93.5" width="11" height="2" rx="1" fill="#fff"/>
+  <path d="M38.5 70 H61.5 L62.5 80 H51.5 L50 75 L48.5 80 H37.5 Z" fill="#1f77b4"/>
+  <rect x="46.5" y="44" width="7" height="7" fill="#e8977a"/>
+  <path d="M38 50.5 Q50 47 62 50.5 L66.5 58 L61.5 61 L62 71 H38 L38.5 61 L33.5 58 Z" fill="#62c1ea"/>
+  <path d="M45 49.2 Q50 53 55 49.2" fill="none" stroke="#2e86c1" stroke-width="2"/>
+  <circle cx="35" cy="31" r="3.8" fill="#e8977a"/>
+  <circle cx="65" cy="31" r="3.8" fill="#e8977a"/>
+  <circle cx="50" cy="30" r="16" fill="#f9b591"/>
+  <path d="M34 28 C32.5 15 41 10 50 10 C59 10 67.5 15 66 28 C63 23 58 21 53 21.5 L55.5 17.5 C50 21 44 21 40 20 C39 23 36.5 25.5 34 28 Z" fill="#5d2e22"/>
+  <circle cx="44" cy="31" r="1.7" fill="#2b1418"/>
+  <circle cx="56" cy="31" r="1.7" fill="#2b1418"/>
+  <circle cx="40.5" cy="35.5" r="3.4" fill="#f5a08a"/>
+  <circle cx="59.5" cy="35.5" r="3.4" fill="#f5a08a"/>
+  <path d="M46.5 37 Q50 41 53.5 37 Z" fill="#fff"/>
+</svg>
