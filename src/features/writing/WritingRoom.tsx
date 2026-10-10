@@ -2,7 +2,7 @@ import { useLiveQuery } from 'dexie-react-hooks'
 import { useNavigate, useSearchParams } from 'react-router-dom'
 import { useApp } from '../../app/AppState'
 import { AR_LETTERS } from '../../content/games'
-import { type WriteEntry, type WriteSet, WRITE_FILL_ACTIVITY, WRITE_PATH_ACTIVITY, entriesOf, visibleSets } from '../../content/writing'
+import { type WriteEntry, type WriteSet, WRITE_FADE_ACTIVITY, WRITE_FILL_ACTIVITY, WRITE_PATH_ACTIVITY, entriesOf, visibleSets } from '../../content/writing'
 import { Icon } from '../../design/Icon'
 import { Mascot } from '../../design/Mascot'
 import { IconButton, Screen, SpeechBubble } from '../../design/ui'
@@ -12,11 +12,11 @@ import { db } from '../../services/db'
 import { useSpeakOnMount } from '../common'
 import s from './writing.module.css'
 
-/** How many steps (coloured in, written along the path) the child has finished for each letter. */
+/** How many steps (coloured in, written along the path, by herself) the child has finished for each letter. */
 function useWritten(): Map<string, number> {
   return useLiveQuery(
     async () => {
-      const rows = await db.attempts.where('activityId').anyOf(WRITE_FILL_ACTIVITY, WRITE_PATH_ACTIVITY).toArray()
+      const rows = await db.attempts.where('activityId').anyOf(WRITE_FILL_ACTIVITY, WRITE_PATH_ACTIVITY, WRITE_FADE_ACTIVITY).toArray()
       const steps = new Map<string, Set<string>>()
       for (const r of rows) steps.set(r.itemId, (steps.get(r.itemId) ?? new Set()).add(r.activityId))
       return new Map([...steps].map(([id, done]) => [id, done.size]))

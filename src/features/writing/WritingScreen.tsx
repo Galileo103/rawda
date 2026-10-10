@@ -3,7 +3,7 @@ import { Navigate, useNavigate, useParams, useSearchParams } from 'react-router-
 import { useApp } from '../../app/AppState'
 import { content } from '../../content/loader'
 import { hasStrokes } from '../../content/strokes'
-import { COLOR_KEYS, type ColorKey } from '../../content/schemas'
+import { COLOR_KEYS } from '../../content/schemas'
 import { type WriteEntry, WRITE_FILL_ACTIVITY, entriesOf, fillLine, writeEntryById } from '../../content/writing'
 import { Icon } from '../../design/Icon'
 import { Mascot } from '../../design/Mascot'
@@ -30,6 +30,10 @@ const OUTLINE = '#7a5cd6'
 const RING = 6
 /** White would vanish on the pale letter. */
 const PALETTE = COLOR_KEYS.filter((k) => k !== 'white')
+/** A tenth crayon for colouring letters only (not one of the colours the lessons teach). */
+const SKY = '#4fc3f7'
+type Crayon = (typeof PALETTE)[number] | 'sky'
+const crayonHex = (c: Crayon) => (c === 'sky' ? SKY : COLOR_HEX[c])
 
 type Pt = { x: number; y: number }
 
@@ -38,20 +42,23 @@ export function WritingScreen() {
   const [params] = useSearchParams()
   const entry = writeEntryById(entryId)
   if (!entry) return <Navigate to="/write" replace />
-  const mode = params.get('mode') === 'path' && hasStrokes(entry.id) ? 'path' : 'fill'
+  const asked = params.get('mode')
+  const mode: Mode = (asked === 'path' || asked === 'fade') && hasStrokes(entry.id) ? asked : 'fill'
   const modes = hasStrokes(entry.id) ? <ModeSwitch entry={entry} mode={mode} /> : null
   // A fresh board for every letter and mode.
-  return mode === 'path' ? <PathBoard key={`${entry.id}-path`} entry={entry} modes={modes} /> : <FillBoard key={entry.id} entry={entry} modes={modes} />
+  return mode === 'fill' ? <FillBoard key={entry.id} entry={entry} modes={modes} /> : <PathBoard key={`${entry.id}-${mode}`} entry={entry} modes={modes} mode={mode} />
 }
 
-/** Colour it in, or write it along the dotted path: the two steps for each letter. */
-function ModeSwitch({ entry, mode }: { entry: WriteEntry; mode: 'fill' | 'path' }) {
+type Mode = 'fill' | 'path' | 'fade'
+
+/** The three steps for each letter: colour it in, write it along the dots, write it by herself. */
+function ModeSwitch({ entry, mode }: { entry: WriteEntry; mode: Mode }) {
   const { t } = useApp()
   const navigate = useNavigate()
-  const go = (m: 'fill' | 'path') => {
+  const go = (m: Mode) => {
     if (m === mode) return
     audio.sfx('tap')
-    navigate(`/write/${entry.id}${m === 'path' ? '?mode=path' : ''}`, { replace: true })
+    navigate(`/write/${entry.id}${m === 'fill' ? '' : `?mode=${m}`}`, { replace: true })
   }
   return (
     <div className={s.modes} role="group" aria-label={t.writing.title}>
@@ -62,6 +69,10 @@ function ModeSwitch({ entry, mode }: { entry: WriteEntry; mode: 'fill' | 'path' 
       <button type="button" aria-pressed={mode === 'path'} onClick={() => go('path')} data-testid="mode-path">
         <Icon name="pencil" size={26} />
         <span>{t.writing.modes.path}</span>
+      </button>
+      <button type="button" aria-pressed={mode === 'fade'} onClick={() => go('fade')} data-testid="mode-fade">
+        <Icon name="hand" size={26} />
+        <span>{t.writing.modes.fade}</span>
       </button>
     </div>
   )
@@ -100,7 +111,7 @@ function FillBoard({ entry, modes }: { entry: WriteEntry; modes: ReactNode }) {
 
   const [ready, setReady] = useState<'loading' | 'canvas' | 'fallback'>('loading')
   const [brush, setBrush] = useState<Brush>('marker')
-  const [color, setColor] = useState<ColorKey>('blue')
+  const [color, setColor] = useState<Crayon>('blue')
   const [progress, setProgress] = useState(0)
   const [sparkles, setSparkles] = useState<Pt[] | null>(null)
   const [won, setWon] = useState(false)
@@ -225,7 +236,7 @@ function FillBoard({ entry, modes }: { entry: WriteEntry; modes: ReactNode }) {
   const paint = (from: Pt, to: Pt) => {
     const c = paintRef.current?.getContext('2d')
     if (!c || !mask.current) return
-    paintSegment(c, brush, COLOR_HEX[color], brushW.current, from, to, brushState.current)
+    paintSegment(c, brush, crayonHex(color), brushW.current, from, to, brushState.current)
     const reach = brushW.current / 2
     // Magic walls: keep only what is inside the letter.
     c.globalCompositeOperation = 'destination-in'
@@ -375,7 +386,7 @@ function FillBoard({ entry, modes }: { entry: WriteEntry; modes: ReactNode }) {
                     setBrush(b)
                   }}
                 >
-                  <span className={[s.brushDot, s[`b_${b}`]].join(' ')} style={{ '--c': COLOR_HEX[color] } as CSSProperties}>
+                  <span className={[s.brushDot, s[`b_${b}`]].join(' ')} style={{ '--c': crayonHex(color) } as CSSProperties}>
                     {b === 'stars' && <Icon name="star" size={26} />}
                   </span>
                   <span className={s.brushName}>{t.writing.brushes[b]}</span>
@@ -459,14 +470,15 @@ function FillBoard({ entry, modes }: { entry: WriteEntry; modes: ReactNode }) {
           ) : (
             <>
               <div className={[s.palette, multi ? s.paletteOff : ''].join(' ')} role="radiogroup" aria-label={t.studio.color.replace('{name}', '')}>
-                {PALETTE.map((k) => (
+                {[...PALETTE, 'sky' as const].map((k) => (
                   <button
                     key={k}
                     type="button"
                     className={s.swatch}
-                    style={{ background: COLOR_HEX[k] }}
+                    style={{ background: crayonHex(k) }}
                     aria-pressed={color === k && !multi}
-                    aria-label={fmt(t.studio.color, { name: t.colors[k] })}
+                    aria-label={fmt(t.studio.color, { name: k === 'sky' ? t.writing.sky : t.colors[k] })}
+                    data-testid={`crayon-${k}`}
                     onClick={() => {
                       audio.sfx('tap')
                       setColor(k)

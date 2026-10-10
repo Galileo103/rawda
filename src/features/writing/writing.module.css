@@ -260,8 +260,8 @@
 
 /* Brushes: a big swatch that looks like what it paints. */
 .brushes {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: repeat(2, auto);
   gap: 8px;
 }
 .brushBtn {
@@ -411,6 +411,7 @@
     flex-wrap: wrap;
   }
   .brushes {
+    display: flex;
     flex-direction: row;
   }
   .brushBtn {
@@ -422,8 +423,7 @@
     height: 36px;
   }
   .palette {
-    display: flex;
-    flex-wrap: wrap;
+    grid-template-columns: repeat(5, auto);
     justify-content: center;
   }
   .swatch {
@@ -567,4 +567,51 @@
   .modes button {
     min-width: 64px;
   }
+}
+
+/* In a lesson or activity: under Hala and the progress path, as big as the screen allows. */
+.boxCompact {
+  width: min(88vw, calc(100dvh - 330px), 540px);
+}
+/* "Watch again": a small round button in the board's corner. */
+.replay {
+  position: absolute;
+  z-index: 3;
+  inset-block-start: 10px;
+  inset-inline-start: 10px;
+  display: grid;
+  place-items: center;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  border: 3px solid var(--line);
+  background: var(--surface);
+  color: var(--grape);
+  cursor: pointer;
+  box-shadow: var(--shadow);
+  touch-action: manipulation;
+}
+
+/* Fade-away rounds: three dots, filled as each is done. */
+.rounds {
+  display: flex;
+  gap: 8px;
+}
+.rounds span {
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 3px solid var(--line);
+  background: var(--surface);
+  color: #fff;
+}
+.rounds .roundNow {
+  border-color: var(--grape);
+  transform: scale(1.15);
+}
+.rounds .roundDone {
+  border-color: var(--leaf);
+  background: var(--leaf);
 }

@@ -187,7 +187,7 @@ export function LessonTemplate({ item, lang, hintLevel, locked, onCorrect, onWro
     case 'trace': {
       showNext = false
       const traceItem: TraceItem = { id: `${item.id}-trace`, skill: item.skill, difficulty: 1, say: item.say, glyph: item.trace ?? '' }
-      body = <TraceTemplate item={traceItem} lang={lang} hintLevel={hintLevel} locked={locked} onCorrect={traced} onWrong={onWrong} rng={rng} />
+      body = <TraceTemplate item={traceItem} lang={lang} hintLevel={hintLevel} locked={locked} onCorrect={traced} onWrong={onWrong} onInstruction={onInstruction} rng={rng} />
       break
     }
     case 'check': {

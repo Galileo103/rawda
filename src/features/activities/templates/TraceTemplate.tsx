@@ -1,5 +1,7 @@
-import { type CSSProperties, type PointerEvent, useEffect, useRef, useState } from 'react'
+import { type CSSProperties, type PointerEvent, useEffect, useMemo, useRef, useState } from 'react'
 import type { TraceItem } from '../../../content/schemas'
+import { hasStrokes } from '../../../content/strokes'
+import { type WriteEntry, writeEntryForGlyph } from '../../../content/writing'
 import { Icon } from '../../../design/Icon'
 import { IconButton } from '../../../design/ui'
 import { useOptionalApp } from '../../../app/AppState'
@@ -7,6 +9,8 @@ import { ageProfile } from '../../../domain/ageProfile'
 import { audio } from '../../../services/audio/AudioService'
 import { coverPoints, layoutGlyph, maskPoints, pointParts, traceThreshold, weakestPart } from '../../studio/canvasTools'
 import s from '../activities.module.css'
+import { BOARD, PathCanvas } from '../../writing/PathCanvas'
+import { letterStrokes } from '../../writing/paths'
 import { STROKE_BOX, STROKES, strokeStart } from './strokes'
 import type { TemplateProps } from './types'
 
@@ -18,13 +22,59 @@ const STROKE_WIDTH = 54
 const CELEBRATE_MS = 1800
 
 /**
+ * Trace with a finger. A letter or digit with handwriting strokes is written along its dotted
+ * path (the Writing room's board: Hala's pen first, then stroke by stroke in order); anything
+ * else — a pre-writing stroke, a glyph without strokes — is traced by covering its shape.
+ */
+export function TraceTemplate(props: TemplateProps<TraceItem>) {
+  const entry = props.item.glyph && !props.item.stroke ? writeEntryForGlyph(props.item.glyph, props.lang) : undefined
+  return entry && hasStrokes(entry.id) ? <WriteTrace {...props} entry={entry} /> : <ShapeTrace {...props} />
+}
+
+/** Write the letter along its strokes; it shines gold for a moment, then the activity moves on. */
+function WriteTrace({ entry, lang, hintLevel, locked, onCorrect, onInstruction }: TemplateProps<TraceItem> & { entry: WriteEntry }) {
+  const strokes = useMemo(() => letterStrokes(entry.id, BOARD), [entry.id])
+  const [finished, setFinished] = useState(false)
+  const timer = useRef<ReturnType<typeof setTimeout>>(undefined)
+  useEffect(() => () => clearTimeout(timer.current), [])
+  const finish = (quality: number, wait: number) => {
+    if (finished || locked) return
+    setFinished(true)
+    timer.current = setTimeout(() => onCorrect(undefined, quality), wait)
+  }
+  return (
+    <div className={s.stage}>
+      <PathCanvas
+        compact
+        strokes={strokes}
+        label={entry.glyph}
+        lang={lang}
+        say={(text) => {
+          onInstruction?.(text)
+          void audio.speak(text, lang)
+        }}
+        onWon={(misses) => finish(1 / (1 + misses * 0.25), CELEBRATE_MS)}
+      />
+      {/* After Hala has helped twice, a big ✓ lets a child with less precise control move on. */}
+      {hintLevel >= 2 && !finished && (
+        <div className={s.actions}>
+          <button type="button" className={[s.choice, s.traceDone].join(' ')} onClick={() => finish(0.3, 0)} data-testid="choice-answer" aria-label="✓">
+            <Icon name="check" size={48} />
+          </button>
+        </div>
+      )}
+    </div>
+  )
+}
+
+/**
  * Trace with a finger: a letter/numeral, or a pre-writing stroke (line, circle, zigzag…)
  * that starts at a green dot. Success = most of the shape covered, every part of it touched
  * (the dot of ب too), checked when the finger lifts so it never ends mid-stroke. Then the
  * letter turns gold and shines for a moment so the child sees what they made. A big ✓
  * appears once the child is well along (or after hints) as a motor-friendly alternative.
  */
-export function TraceTemplate({ item, lang, hintLevel, locked, onCorrect }: TemplateProps<TraceItem>) {
+function ShapeTrace({ item, lang, hintLevel, locked, onCorrect }: TemplateProps<TraceItem>) {
   const guideRef = useRef<HTMLCanvasElement>(null)
   const inkRef = useRef<HTMLCanvasElement>(null)
   const points = useRef<Float32Array>(new Float32Array())

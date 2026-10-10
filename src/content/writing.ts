@@ -31,6 +31,8 @@ export interface WriteEntry {
 export const WRITE_FILL_ACTIVITY = 'write:fill'
 /** …and for writing it along the dotted path. */
 export const WRITE_PATH_ACTIVITY = 'write:path'
+/** …and for writing it by herself (fade-away practice). */
+export const WRITE_FADE_ACTIVITY = 'write:fade'
 
 const TATWEEL = 'ـ'
 /** Letters that never join to the next one: only a standalone and an end form. */
@@ -71,6 +73,8 @@ function build(): WriteEntry[] {
 
 export const WRITE_ENTRIES: readonly WriteEntry[] = build()
 export const writeEntryById = (id: string | undefined) => WRITE_ENTRIES.find((e) => e.id === id)
+/** The Writing room entry for a letter or digit as an activity shows it ("ب", "A"), if any. */
+export const writeEntryForGlyph = (glyph: string, lang: Lang) => WRITE_ENTRIES.find((e) => e.set !== 'arForms' && e.lang === lang && e.glyph === glyph)
 
 /** The sets a child sees: Arabic ones when learning Arabic, English when learning English; numbers always. */
 export function visibleSets(langs: readonly Lang[]): WriteSet[] {
@@ -98,7 +102,7 @@ export function digitWord(n: number, d: Dict): string {
 /** Every line the Writing room can say in `lang` (for pre-rendering the audio). */
 export function writingLines(lang: Lang, d: Dict): string[] {
   const w = d.writing.say
-  const out = [w.hello, w.inside, w.almost, w.done, w.doneNumber, w.watch, w.yourTurn, w.startGreen, w.followArrow, w.nowDot, w.wrote]
+  const out = [w.hello, w.inside, w.almost, w.done, w.doneNumber, w.watch, w.yourTurn, w.startGreen, w.followArrow, w.nowDot, w.wrote, w.fadeStart, w.fadeFewer, w.fadeLast]
   for (const e of WRITE_ENTRIES) if (e.lang === lang) out.push(fillLine(e, d))
   return out
 }

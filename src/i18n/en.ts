@@ -152,9 +152,10 @@ export const en = {
     restart: 'Start over',
     savedToGallery: 'Saved in My drawings',
     guide: 'How to write each letter',
-    modes: { fill: 'Color', path: 'Write' },
+    modes: { fill: 'Color', path: 'Write', fade: 'By myself' },
     watchAgain: 'Watch again',
     nextLetter: 'Next letter',
+    sky: 'sky blue',
     say: {
       hello: 'Pick a letter to color!',
       fillLetter: 'Let’s color the letter {letter}!',
@@ -173,6 +174,9 @@ export const en = {
       followArrow: 'Follow the arrow!',
       nowDot: 'Now the dot!',
       wrote: 'Great job, @name! You wrote it yourself!',
+      fadeStart: 'Let’s write it three times!',
+      fadeFewer: 'Great! Now with fewer dots!',
+      fadeLast: 'Now write it all by yourself!',
     },
   },
   speak: {
