@@ -8,13 +8,13 @@ import type { ColorKey, ShapeKey } from './schemas'
  * Pure (no Vite APIs) so scripts/render-audio.ts can pre-render every line a game says.
  */
 
-export const GAME_IDS = ['frog', 'balloons', 'count', 'train', 'butterflies', 'shapes', 'next', 'odd'] as const
+export const GAME_IDS = ['frog', 'balloons', 'count', 'train', 'butterflies', 'shapes', 'next', 'odd', 'silly', 'monster', 'dress', 'mixup'] as const
 export type GameId = (typeof GAME_IDS)[number]
 
 export interface GameDef {
   id: GameId
-  /** Hub section: letters & numbers, or colors, shapes & thinking. */
-  section: 'ln' | 'csl'
+  /** Hub section: letters & numbers, colors, shapes & thinking, or the silly games. */
+  section: 'ln' | 'csl' | 'fun'
   /** Learning area the game practises (parent history; hidden when the parent turns the area off). */
   areaId: AreaId
   /** OpenMoji icon. */
@@ -31,6 +31,10 @@ export const GAMES: readonly GameDef[] = [
   { id: 'shapes', section: 'csl', areaId: 'colors-shapes', hex: '1F3E0', color: '#7a5cd6' },
   { id: 'next', section: 'csl', areaId: 'logic', hex: '1F34E', color: '#3f9d33' },
   { id: 'odd', section: 'csl', areaId: 'logic', hex: '1F50D', color: '#e8613a' },
+  { id: 'silly', section: 'fun', areaId: 'letters', hex: 'E004', color: '#7a5cd6' },
+  { id: 'monster', section: 'fun', areaId: 'letters', hex: 'E003', color: '#3f9d33' },
+  { id: 'dress', section: 'fun', areaId: 'science', hex: '1F9E5', color: '#2f8fdb' },
+  { id: 'mixup', section: 'fun', areaId: 'science', hex: '1F404', color: '#e8a400' },
 ]
 
 /** Game sessions are stored as completions under this activity-id prefix. */
@@ -172,7 +176,44 @@ export const GARDEN: readonly GardenItem[] = [
 ]
 
 /** Props drawn in the games' scenes. */
-export const PROP_HEX = { playWorld: '1F3A1', fly: '1FAB0', bunny: '1F430', carrot: '1F955', engine: '1F682', frog: '1F438' } as const
+export const PROP_HEX = { playWorld: '1F3A1', bunny: '1F430', carrot: '1F955', engine: '1F682', frog: '1F438', drop: '1F4A7' } as const
+
+// ---- science the fun games play with (skills come from science-discover) ----
+
+export type WeatherId = 'rain' | 'snow' | 'sun'
+export const WEATHER_IDS: readonly WeatherId[] = ['rain', 'snow', 'sun']
+export const WEATHER_SKILL: Record<WeatherId, { skill: string; hex: string }> = {
+  rain: { skill: 'sci.weather.rain', hex: '1F327' },
+  snow: { skill: 'sci.weather.cold', hex: '2744' },
+  sun: { skill: 'sci.weather.hot', hex: '2600' },
+}
+/** Umbrella, coat, scarf, sun hat, sunglasses (Dress the Hero). */
+export const CLOTHES_HEX: readonly string[] = ['2602', '1F9E5', '1F9E3', '1F452', '1F576']
+/** Animals with a real recorded call (Animal Mix-up): cow, cat, dog, duck, sheep, hen, frog, chick. */
+export const SOUND_ANIMAL_HEX: readonly string[] = ['1F404', '1F431', '1F436', '1F986', '1F411', '1F414', '1F438', '1F423']
+
+export type HabitatAnimal = 'fish' | 'whale' | 'camel' | 'bird' | 'monkey' | 'penguin'
+export type HomeId = 'sea' | 'desert' | 'nest' | 'trees' | 'ice'
+export const HABITAT_SKILL: Record<HabitatAnimal, { skill: string; home: HomeId; hex: string; homeHex: string }> = {
+  fish: { skill: 'sci.habitat.fish', home: 'sea', hex: '1F41F', homeHex: '1F30A' },
+  whale: { skill: 'sci.habitat.whale', home: 'sea', hex: '1F40B', homeHex: '1F30A' },
+  camel: { skill: 'sci.habitat.camel', home: 'desert', hex: '1F42A', homeHex: '1F3DC' },
+  bird: { skill: 'sci.habitat.bird', home: 'nest', hex: '1F426', homeHex: '1FAB9' },
+  monkey: { skill: 'sci.habitat.monkey', home: 'trees', hex: '1F412', homeHex: '1F333' },
+  penguin: { skill: 'sci.habitat.penguin', home: 'ice', hex: '1F427', homeHex: '2744' },
+}
+
+export type FoodAnimal = 'rabbit' | 'monkey' | 'cow' | 'bee' | 'chicken' | 'giraffe' | 'penguin'
+export type FoodId = 'carrot' | 'banana' | 'grass' | 'flower' | 'corn' | 'leaves' | 'fish'
+export const FOOD_SKILL: Record<FoodAnimal, { skill: string; food: FoodId; hex: string; foodHex: string }> = {
+  rabbit: { skill: 'sci.food.rabbit', food: 'carrot', hex: '1F407', foodHex: '1F955' },
+  monkey: { skill: 'sci.food.monkey', food: 'banana', hex: '1F412', foodHex: '1F34C' },
+  cow: { skill: 'sci.food.cow', food: 'grass', hex: '1F404', foodHex: '1F33F' },
+  bee: { skill: 'sci.food.bee', food: 'flower', hex: '1F41D', foodHex: '1F33C' },
+  chicken: { skill: 'sci.food.chicken', food: 'corn', hex: '1F414', foodHex: '1F33D' },
+  giraffe: { skill: 'sci.food.giraffe', food: 'leaves', hex: '1F992', foodHex: '1F343' },
+  penguin: { skill: 'sci.food.penguin', food: 'fish', hex: '1F427', foodHex: '1F41F' },
+}
 
 /** Every OpenMoji the Play World needs offline (fetched by scripts/fetch-assets.ts). */
 export const GAME_HEXES: readonly string[] = [
@@ -182,6 +223,11 @@ export const GAME_HEXES: readonly string[] = [
     ...Object.values(CATEGORIES).flat(),
     ...GARDEN.map((g) => g.hex),
     ...Object.values(PROP_HEX),
+    ...Object.values(WEATHER_SKILL).map((w) => w.hex),
+    ...Object.values(HABITAT_SKILL).flatMap((h) => [h.hex, h.homeHex]),
+    ...Object.values(FOOD_SKILL).flatMap((f) => [f.hex, f.foodHex]),
+    ...CLOTHES_HEX,
+    ...SOUND_ANIMAL_HEX,
   ]),
 ]
 
@@ -196,12 +242,31 @@ export interface LearnedPools {
   patternAB: boolean
   patternABB: boolean
   odd: boolean
+  /** Picture words (lexicon ids) the child met in Discover lessons. */
+  words: readonly string[]
+  /** For each discovered letter (by id), the words its lesson showed. */
+  letterWords: ReadonlyMap<string, readonly string[]>
+  weathers: readonly WeatherId[]
+  habitats: readonly HabitatAnimal[]
+  foods: readonly FoodAnimal[]
+}
+
+/** Words the child met in lessons: all of them, and per letter lesson (built by useLearnedPools). */
+export interface LearnedWords {
+  words: readonly string[]
+  letterWords: ReadonlyMap<string, readonly string[]>
 }
 
 /** Turn discovered skills (see introducedSkills) into game pools for one language. */
-export function learnedPools(skills: ReadonlySet<string>, lang: Lang): LearnedPools {
+export function learnedPools(skills: ReadonlySet<string>, lang: Lang, met: LearnedWords = { words: [], letterWords: new Map() }): LearnedPools {
+  const letters = lettersFor(lang).filter((l) => skills.has(`${lang}.letter.${l.id}`))
   return {
-    letters: lettersFor(lang).filter((l) => skills.has(`${lang}.letter.${l.id}`)),
+    letters,
+    words: met.words,
+    letterWords: new Map(letters.map((l) => [l.id, met.letterWords.get(l.id) ?? []])),
+    weathers: WEATHER_IDS.filter((w) => skills.has(WEATHER_SKILL[w].skill)),
+    habitats: (Object.keys(HABITAT_SKILL) as HabitatAnimal[]).filter((a) => skills.has(HABITAT_SKILL[a].skill)),
+    foods: (Object.keys(FOOD_SKILL) as FoodAnimal[]).filter((a) => skills.has(FOOD_SKILL[a].skill)),
     numbers: Array.from({ length: 10 }, (_, i) => i + 1).filter((n) => skills.has(`num.count.${n}`)),
     colors: GAME_COLORS.filter((c) => skills.has(`color.${c}`)),
     shapes: BUILD_SHAPES.filter((s) => skills.has(`shape.${s}`)),
@@ -229,7 +294,7 @@ export function playablePuzzles(shapes: readonly ShapeKey[]): PuzzleId[] {
 }
 
 /** What a game still needs the child to discover (picks the "Discover first" message). */
-export type NeedKey = 'letters' | 'numbers' | 'run' | 'colors' | 'shapes' | 'patterns' | 'odd'
+export type NeedKey = 'letters' | 'numbers' | 'run' | 'colors' | 'shapes' | 'patterns' | 'odd' | 'weather' | 'animals'
 
 export interface Readiness {
   ready: boolean
@@ -261,7 +326,51 @@ export function gameReadiness(id: GameId, p: LearnedPools, lang: Lang): Readines
       return { ready: p.patternAB, need: 'patterns', lessonId: 'logic-discover', learned: (p.patternAB ? 1 : 0) + (p.patternABB ? 1 : 0) }
     case 'odd':
       return { ready: p.odd, need: 'odd', lessonId: 'logic-discover', learned: 1 + (p.colors.length >= 2 ? 1 : 0) + (p.shapes.length >= 2 ? 1 : 0) }
+    case 'silly':
+      return { ready: sillyKinds(p).length > 0, need: 'letters', lessonId: letterLesson, learned: p.words.length + p.letters.length + p.numbers.length }
+    case 'monster': {
+      const n = monsterLetters(p).length
+      return { ready: n >= 2, need: 'letters', lessonId: letterLesson, learned: n }
+    }
+    case 'dress':
+      return { ready: p.weathers.length >= 1, need: 'weather', lessonId: 'science-discover', learned: p.weathers.length }
+    case 'mixup':
+      return { ready: mixupModes(p).length > 0, need: 'animals', lessonId: 'science-discover', learned: p.habitats.length + p.foods.length }
   }
+}
+
+/** What Silly Hala can mix up: pictures, letters and counting, each once there is enough of it. */
+export type SillyKind = 'pictures' | 'letters' | 'counting'
+export function sillyKinds(p: LearnedPools): SillyKind[] {
+  const out: SillyKind[] = []
+  if (p.words.length >= 3) out.push('pictures')
+  if (p.letters.length >= 3) out.push('letters')
+  if (p.numbers.length >= 2) out.push('counting')
+  return out
+}
+
+/** The first letter of a word, ignoring tashkeel and a leading "ال" (Hungry Monster checks its menu with it). */
+export function firstLetterOf(word: string, lang: Lang): string {
+  if (lang === 'en') return word.trim().charAt(0).toUpperCase()
+  let w = word.normalize('NFC').replace(/[\u064B-\u065F\u0670\u0640]/g, '').trim()
+  if (w.startsWith('ال') && w.length > 3) w = w.slice(2)
+  return w.charAt(0).replace(/[أإآ]/, 'ا')
+}
+
+/**
+ * What Animal Mix-up can play: homes once two different homes are known, food once one
+ * animal's food is, and real animal sounds as soon as either is (the sounds need no lesson).
+ */
+export type MixupMode = 'sounds' | 'homes' | 'food'
+export function mixupModes(p: LearnedPools): MixupMode[] {
+  const homes = new Set(p.habitats.map((a) => HABITAT_SKILL[a].home)).size >= 2
+  const food = p.foods.length > 0
+  return [...(homes || food ? (['sounds'] as const) : []), ...(homes ? (['homes'] as const) : []), ...(food ? (['food'] as const) : [])]
+}
+
+/** Discovered letters that have lesson words to feed Hungry Monster. */
+export function monsterLetters(p: LearnedPools): Letter[] {
+  return p.letters.filter((l) => (p.letterWords.get(l.id) ?? []).length > 0)
 }
 
 // ---- what the games say ----

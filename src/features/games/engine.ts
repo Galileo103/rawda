@@ -1,5 +1,6 @@
 import { useEffect, useRef } from 'react'
 import type { LearnedPools, Stage } from '../../content/games'
+import type { MascotMood } from '../../design/Mascot'
 import type { Rng } from '../../domain/rng'
 import type { Lang } from '../../domain/types'
 import type { Dict } from '../../i18n'
@@ -22,6 +23,13 @@ export interface RoundCtl {
   correct(el?: Element | null, line?: string): void
   /** A gentle "let's try again" — never a penalty. */
   wrong(el?: Element | null, line?: string): void
+  /** Hala's face for a silly moment ("oops!" when she got it wrong). Reset by the next prompt. */
+  mood(m: MascotMood): void
+  /**
+   * The skill this round practises (`ar.letter.ba`, `num.count.3`, `sci.food.cow`…). When the
+   * round is solved, the session records it, first try or not, so spaced review learns from play.
+   */
+  practise(skill: string): void
 }
 
 export interface RoundProps {
@@ -38,6 +46,8 @@ export interface RoundProps {
   ctl: RoundCtl
   /** Only what the child has discovered: every round draws its content from here. */
   learned: LearnedPools
+  /** The child's own hero picture (boy E001 / girl E002), for Dress the Hero. */
+  hero: string
 }
 
 export const cx = (...c: (string | false | null | undefined)[]) => c.filter(Boolean).join(' ')

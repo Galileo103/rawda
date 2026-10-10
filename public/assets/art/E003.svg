@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 220">
+  <!-- Rawda's Hungry Monster: a friendly round green monster with mismatched googly eyes -->
+  <path d="M62 54 48 14l34 30z" fill="#2f8a42"/>
+  <path d="M158 54l14-40-34 30z" fill="#2f8a42"/>
+  <path d="M28 150C18 84 58 34 110 34s92 50 82 116c-6 46-158 46-164 0z" fill="#5cc46a"/>
+  <circle cx="52" cy="120" r="7" fill="#49ad58"/>
+  <circle cx="172" cy="112" r="9" fill="#49ad58"/>
+  <circle cx="160" cy="160" r="6" fill="#49ad58"/>
+  <ellipse cx="110" cy="176" rx="44" ry="18" fill="#8fdc96"/>
+  <circle cx="78" cy="84" r="24" fill="#fff" stroke="#24502c" stroke-width="3"/>
+  <circle cx="82" cy="88" r="10" fill="#1b1b1b"/>
+  <circle cx="142" cy="78" r="30" fill="#fff" stroke="#24502c" stroke-width="3"/>
+  <circle cx="137" cy="83" r="12" fill="#1b1b1b"/>
+  <ellipse cx="110" cy="134" rx="40" ry="16" fill="#7a1f3d"/>
+  <rect x="94" y="120" width="9" height="9" rx="2" fill="#fff"/>
+  <rect x="117" y="120" width="9" height="9" rx="2" fill="#fff"/>
+</svg>

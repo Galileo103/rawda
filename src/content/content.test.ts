@@ -167,3 +167,17 @@ describe('Discover first, then practise (every section)', () => {
     }
   })
 })
+
+describe('Discover boards', () => {
+  it('show every lesson item with its own picture, so no two tiles look the same', () => {
+    for (const act of content.activities) {
+      if (act.template !== 'lesson') continue
+      const seen = new Map<string, string>()
+      for (const item of act.items) {
+        const key = JSON.stringify((item as { focus: unknown }).focus)
+        expect(seen.get(key), `${act.id}: "${item.id}" looks the same as "${seen.get(key)}"`).toBeUndefined()
+        seen.set(key, item.id)
+      }
+    }
+  })
+})

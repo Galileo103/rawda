@@ -6,7 +6,11 @@ import { beforeEach, describe, expect, it, vi } from 'vitest'
 import { App } from '../../app/App'
 import type { AreaId } from '../../domain/types'
 import { type ComponentType } from 'react'
-import { GAME_HEXES, GAMES, type LearnedPools, gameLines, gameReadiness, learnedPools, longestRun, playablePuzzles } from '../../content/games'
+import { SOUND_ANIMAL_IDS, funGameLines, soundPath } from '../../content/funGames'
+import { splitName } from '../../domain/child'
+import { GAME_HEXES, GAMES, type LearnedPools, firstLetterOf, gameLines, gameReadiness, learnedPools, longestRun, mixupModes, playablePuzzles } from '../../content/games'
+import { MonsterRound, SillyRound } from './sillyRounds'
+import { DressRound, MixupRound } from './worldRounds'
 import { seededRng } from '../../domain/rng'
 import { ButterfliesRound } from './colorLogicRounds'
 import type { RoundProps } from './engine'
@@ -30,6 +34,8 @@ beforeEach(async () => {
 describe('Play World content', () => {
   it('ships every game picture offline', () => {
     for (const hex of GAME_HEXES) expect(existsSync(join(process.cwd(), 'public', 'assets', picturePath(hex))), hex).toBe(true)
+    // Animal Mix-up's real recordings (CC0) ship with the app too.
+    for (const a of SOUND_ANIMAL_IDS) expect(existsSync(join(process.cwd(), 'public', 'assets', soundPath(a) ?? '')), a).toBe(true)
   })
 
   it('every game line is complete and reaches the narration list (so it gets a recorded clip)', () => {
@@ -77,13 +83,13 @@ describe('Play World screens', () => {
     await updateSettings({ onboarded: true, pinSalt: 'salt', pinHash: await hashPin('1234', 'salt') })
   }
 
-  it('home opens the Play World with all eight games', async () => {
+  it('home opens the Play World with all its games', async () => {
     await onboard()
     window.location.hash = '#/home'
     render(<App />)
     await userEvent.click(await screen.findByTestId('play-world'))
     for (const g of GAMES) expect(await screen.findByTestId(`game-${g.id}`)).toBeInTheDocument()
-    expect(screen.getByText('الضفدع الجائع')).toBeInTheDocument()
+    expect(screen.getByText('الضفدع القافز')).toBeInTheDocument()
   })
 
   it('playing Odd One Out to the end celebrates, saves the stars and grows the garden', async () => {
@@ -134,12 +140,105 @@ describe('games play only with what the child discovered', () => {
     expect(gameReadiness('count', none, 'ar')).toMatchObject({ need: 'numbers', lessonId: 'num-discover' })
     expect(gameReadiness('frog', none, 'en').lessonId).toBe('en-discover')
     const ready = Object.fromEntries(GAMES.map((g) => [g.id, gameReadiness(g.id, some, 'ar').ready]))
-    expect(ready).toEqual({ frog: true, balloons: true, count: true, train: false, butterflies: true, shapes: true, next: true, odd: false })
+    expect(ready).toEqual({ frog: true, balloons: true, count: true, train: false, butterflies: true, shapes: true, next: true, odd: false, silly: true, monster: false, dress: false, mixup: false })
+  })
+
+  it('the silly games open once their science and letter words are discovered', () => {
+    const sci = learnedPools(new Set(['sci.weather.rain', 'sci.habitat.fish', 'sci.habitat.camel', 'sci.food.monkey']), 'ar')
+    expect(sci.weathers).toEqual(['rain'])
+    expect(mixupModes(sci)).toEqual(['sounds', 'homes', 'food'])
+    expect(gameReadiness('dress', sci, 'ar').ready).toBe(true)
+    expect(gameReadiness('mixup', sci, 'ar').ready).toBe(true)
+    // Fish and whale share the sea: one home is not enough to mix up.
+    expect(mixupModes(learnedPools(new Set(['sci.habitat.fish', 'sci.habitat.whale']), 'ar'))).toEqual([])
+    const words = { words: [], letterWords: new Map([['ba', ['duck', 'cow']], ['ta', ['apple']]]) }
+    const two = learnedPools(new Set(['ar.letter.ba', 'ar.letter.ta']), 'ar', words)
+    expect(gameReadiness('monster', two, 'ar')).toMatchObject({ ready: true, learned: 2 })
+    expect(gameReadiness('monster', learnedPools(new Set(['ar.letter.ba']), 'ar', words), 'ar').ready).toBe(false)
+  })
+
+  it('reads the first letter of a word the way a child hears it', () => {
+    expect(firstLetterOf('بَطَّة', 'ar')).toBe('ب')
+    expect(firstLetterOf('أَرْنَب', 'ar')).toBe('ا')
+    expect(firstLetterOf('الْقِرْد', 'ar')).toBe('ق')
+    expect(firstLetterOf('ball', 'en')).toBe('B')
+  })
+
+  it('every silly-game line is complete and gets a recorded clip', () => {
+    const all = new Set(collectNarration(content, rawDictionaries).map((l) => `${l.lang}|${l.text}`))
+    for (const lang of ['ar', 'en'] as const) {
+      const lines = funGameLines(lang, dictionaries[lang], content.lexicon, content.activities)
+      expect(lines.length).toBeGreaterThan(300)
+      // Kind words only: a polite "no, thank you", never "yuck", laughing at a mistake, or "أف".
+      for (const line of [...lines, ...gameLines(lang, dictionaries[lang])]) expect(line, line).not.toMatch(/يَعْ|يع!|هِهِهْ|أُفّ|أف!|yuck|hee hee|phew|ptooey|silly!/i)
+      for (const line of lines) {
+        expect(line, line).not.toMatch(/[{}]/)
+        for (const piece of splitName(line)) {
+          const t = piece?.replace(/\s+/g, ' ').trim()
+          if (t) expect(all.has(`${lang}|${t}`), t).toBe(true)
+        }
+      }
+    }
+  })
+
+  const fun = learnedPools(
+    new Set(['ar.letter.ba', 'ar.letter.ta', 'ar.letter.tha', 'num.count.2', 'num.count.3', 'sci.weather.rain', 'sci.weather.hot', 'sci.habitat.fish', 'sci.habitat.camel', 'sci.food.monkey']),
+    'ar',
+    { words: ['duck', 'cow', 'apple', 'fox'], letterWords: new Map([['ba', ['duck', 'cow', 'egg']], ['ta', ['apple']], ['tha', ['fox']]]) },
+  )
+
+  it('Silly Hala: says "Wrong!" or "Right" honestly, then the child shows her the right one', async () => {
+    for (let seed = 1; seed <= 12; seed++) {
+      const { ctl, view } = play(SillyRound, fun, seed)
+      const claim = ctl.prompt.mock.calls[0]?.[0] as string
+      expect(claim).toMatch(/صَحٌّ أَمْ غَلَطٌ/)
+      await userEvent.click(view.getByTestId('game-answer'))
+      if (!ctl.correct.mock.calls.length) {
+        // Hala was wrong: "Oops!" and a choice to fix her.
+        expect(ctl.mood).toHaveBeenCalledWith('oops')
+        await userEvent.click(view.getByTestId('game-answer'))
+      }
+      expect(ctl.correct).toHaveBeenCalledTimes(1)
+      expect(ctl.wrong).not.toHaveBeenCalled()
+      view.unmount()
+    }
+  })
+
+  it('Hungry Monster: only words from the letter lessons, and a wrong one gets a polite "no, thank you"', async () => {
+    for (let seed = 1; seed <= 10; seed++) {
+      const { ctl, view } = play(MonsterRound, fun, seed)
+      const labels = view.getAllByRole('button').map((b) => b.getAttribute('aria-label'))
+      for (const l of labels) expect(['بَطَّة', 'بَقَرَة', 'بَيْضَة', 'تُفَّاحَة', 'ثَعْلَب']).toContain(l)
+      const target = String(ctl.practise.mock.calls[0]?.[0]).replace('ar.sound.', '')
+      expect(['ba', 'ta', 'tha']).toContain(target)
+      const mine = { ba: ['بَطَّة', 'بَقَرَة', 'بَيْضَة'], ta: ['تُفَّاحَة'], tha: ['ثَعْلَب'] }[target] ?? []
+      const wrong = view.getAllByRole('button').find((b) => !mine.includes(b.getAttribute('aria-label') ?? ''))
+      if (wrong) {
+        await userEvent.click(wrong)
+        expect(ctl.wrong).toHaveBeenCalledWith(expect.anything(), expect.stringMatching(/^لَا، شُكْرًا!/))
+      }
+      while (!ctl.correct.mock.calls.length) await userEvent.click(view.getByTestId('game-answer'))
+      expect(ctl.correct.mock.calls[0]?.[1]).toMatch(/^يَمْ يَمْ، شُكْرًا!/)
+      view.unmount()
+    }
+  })
+
+  it('Dress the Hero and Animal Mix-up play only with discovered weather, homes and food', async () => {
+    for (let seed = 1; seed <= 8; seed++) {
+      const dress = play(DressRound, fun, seed)
+      expect(dress.ctl.practise).toHaveBeenCalledWith(expect.stringMatching(/^sci\.weather\.(rain|hot)$/))
+      dress.view.unmount()
+      const mix = play(MixupRound, fun, seed)
+      expect(mix.ctl.prompt).toHaveBeenCalled()
+      const labels = mix.view.getAllByRole('button').map((b) => b.getAttribute('aria-label'))
+      expect(labels.length).toBeGreaterThan(1)
+      mix.view.unmount()
+    }
   })
 
   function play(Round: ComponentType<RoundProps>, learned: LearnedPools, seed: number) {
-    const ctl = { prompt: vi.fn(), hint: vi.fn(), say: vi.fn(), step: vi.fn(), correct: vi.fn(), wrong: vi.fn() }
-    const view = render(<Round lang="ar" d={dictionaries.ar} stage={3} choices={4} maxN={10} round={seed % 2} locked={false} rng={seededRng(seed)} ctl={ctl} learned={learned} />)
+    const ctl = { prompt: vi.fn(), hint: vi.fn(), say: vi.fn(), step: vi.fn(), correct: vi.fn(), wrong: vi.fn(), mood: vi.fn(), practise: vi.fn() }
+    const view = render(<Round lang="ar" d={dictionaries.ar} stage={3} choices={4} maxN={10} round={seed % 2} locked={false} rng={seededRng(seed)} ctl={ctl} learned={learned} hero="E002" />)
     return { ctl, view }
   }
 
@@ -155,7 +254,8 @@ describe('games play only with what the child discovered', () => {
   it('letters, colours and numbers in a round all come from what was learned', () => {
     for (let seed = 1; seed <= 15; seed++) {
       const frog = play(FrogRound, some, seed)
-      expect(frog.view.getAllByRole('button').map((b) => b.getAttribute('aria-label')).filter((l) => l && l !== 'الضفدع').sort()).toEqual(['الأَلِف', 'البَاء'].sort())
+      expect(frog.view.getAllByRole('button').map((b) => b.getAttribute('aria-label')).filter((l) => l && l !== dictionaries.ar.games.titles.frog).sort()).toEqual(['الأَلِف', 'البَاء'].sort())
+      expect(frog.ctl.practise).toHaveBeenCalledWith(expect.stringMatching(/^ar\.letter\.(alif|ba)$/))
       frog.view.unmount()
       const butterflies = play(ButterfliesRound, some, seed)
       for (const b of butterflies.view.getAllByRole('button')) expect([dictionaries.ar.colors.red, dictionaries.ar.colors.blue]).toContain(b.getAttribute('aria-label'))

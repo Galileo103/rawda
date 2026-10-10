@@ -2,6 +2,7 @@ import { type LevelState, initialLevelState, levelKey, nextLevelState } from '..
 import { type MasteryRecord, applyOutcome, masteryKey } from '../../domain/engine/mastery'
 import { GAME_ACTIVITY_PREFIX, type GameId, gameActivityId, gameFromActivityId } from '../../content/games'
 import { DAILY_SEED_BONUS, gameStars } from '../../domain/garden'
+import { REMEMBER_ACTIVITY, REMEMBER_STARS } from '../../domain/remember'
 import { type RewardDefLike, rewardsToGrant, starsForSession } from '../../domain/rewards'
 import type { AreaId, ItemOutcome, Lang } from '../../domain/types'
 import { db, localDay } from '../db'
@@ -132,6 +133,24 @@ export async function recordGameCompletion<T extends RewardDefLike>(
   })
   const newRewards = await grantEarnedRewards(rewardDefs, now)
   return { stars, bonus, starsBefore, newRewards }
+}
+
+// ---- the Remember Box ----
+
+/** Whether today's Remember Box was already opened (it comes once a day). */
+export async function rememberedToday(now = Date.now()): Promise<boolean> {
+  const dayStart = new Date(now).setHours(0, 0, 0, 0)
+  return (await db.completions.where('ts').aboveOrEqual(dayStart).filter((c) => c.activityId === REMEMBER_ACTIVITY).count()) > 0
+}
+
+/** Today's box is done: its stars count everywhere stars count (stickers, garden). */
+export async function recordRemember<T extends RewardDefLike>(
+  input: { areaId: AreaId; lang: Lang; items: number },
+  rewardDefs: readonly T[],
+  now = Date.now(),
+): Promise<{ stars: number; newRewards: T[] }> {
+  await db.completions.add({ activityId: REMEMBER_ACTIVITY, ...input, stars: REMEMBER_STARS, ts: now })
+  return { stars: REMEMBER_STARS, newRewards: await grantEarnedRewards(rewardDefs, now) }
 }
 
 /** Finished sessions per game id. */

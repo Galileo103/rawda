@@ -39,6 +39,9 @@ async def edge_all(voice, rate, jobs):
                     await edge_tts.Communicate(job["text"], voice, rate=rate).save(job["out"])
                     break
                 except Exception as e:  # network hiccups and throttling are common; retry with backoff
+                    # A refused request still leaves an empty file behind; never let it pass as a clip.
+                    if os.path.exists(job["out"]) and os.path.getsize(job["out"]) == 0:
+                        os.remove(job["out"])
                     if attempt == RETRIES:
                         failed.append((job["text"], str(e)))
                         break

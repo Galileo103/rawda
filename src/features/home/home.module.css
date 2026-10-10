@@ -228,6 +228,43 @@
   color: var(--grape);
 }
 
+/* The Remember Box: a rose-pink card whose gift shakes, only on days something is due. */
+.continue.rememberBox {
+  background: linear-gradient(135deg, #e5487a, #f58fb0);
+  box-shadow: 0 8px 0 #b02e5a;
+}
+.continue.rememberBox:active {
+  box-shadow: 0 4px 0 #b02e5a;
+}
+.rememberBox .continuePlay {
+  color: #e5487a;
+}
+.giftShake {
+  animation: giftShake 1.8s ease-in-out infinite;
+  transform-origin: 50% 90%;
+}
+@keyframes giftShake {
+  0%,
+  60%,
+  100% {
+    transform: rotate(0);
+  }
+  68% {
+    transform: rotate(-10deg);
+  }
+  76% {
+    transform: rotate(10deg);
+  }
+  84% {
+    transform: rotate(-5deg);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .giftShake {
+    animation: none;
+  }
+}
+
 .continueIcon {
   flex: none;
   display: grid;
@@ -388,6 +425,10 @@
   }
   .quick:has(> :nth-child(3)) .continueTitle {
     font-size: clamp(1.2rem, 2.6vw, 1.6rem);
+  }
+  /* Four banners (the Remember Box is due): two rows of two, so every title fits. */
+  .quick:has(> :nth-child(4)) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 /* Phones: slimmer banners so four subjects show without scrolling. */

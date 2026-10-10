@@ -2,7 +2,7 @@ import { useLiveQuery } from 'dexie-react-hooks'
 import { type ComponentType, type CSSProperties, useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { Navigate, useNavigate, useParams } from 'react-router-dom'
 import { useApp } from '../../app/AppState'
-import { GARDEN, type GameDef, type GameId, type GardenItem, type LearnedPools, gameById, gameReadiness } from '../../content/games'
+import { GARDEN, type GameDef, type GameId, type GardenItem, type LearnedPools, gameActivityId, gameById, gameReadiness } from '../../content/games'
 import { content } from '../../content/loader'
 import type { Reward } from '../../content/schemas'
 import { Mascot, type MascotMood } from '../../design/Mascot'
@@ -12,12 +12,15 @@ import { gameRounds, gameStage, gardenUnlocked } from '../../domain/garden'
 import { defaultRng } from '../../domain/rng'
 import { dict, fmt, numeral } from '../../i18n'
 import { audio } from '../../services/audio/AudioService'
-import { gamePlays, recordGameCompletion } from '../../services/repos/progress'
+import type { AreaId } from '../../domain/types'
+import { gamePlays, recordGameCompletion, recordItemResult } from '../../services/repos/progress'
 import { pick, randomLine } from '../common'
 import { ButterfliesRound, NextRound, OddRound, ShapesRound } from './colorLogicRounds'
 import { type RoundCtl, type RoundProps, burst, cx, flash, flyStar } from './engine'
 import s from './games.module.css'
 import { BalloonsRound, CountRound, FrogRound, TrainRound } from './letterNumberRounds'
+import { MonsterRound, SillyRound } from './sillyRounds'
+import { DressRound, MixupRound } from './worldRounds'
 import { useLearnedPools } from './useLearned'
 
 const ROUNDS: Record<GameId, ComponentType<RoundProps>> = {
@@ -29,6 +32,23 @@ const ROUNDS: Record<GameId, ComponentType<RoundProps>> = {
   shapes: ShapesRound,
   next: NextRound,
   odd: OddRound,
+  silly: SillyRound,
+  monster: MonsterRound,
+  dress: DressRound,
+  mixup: MixupRound,
+}
+
+/** The child's hero picture (Rawda's own boy and girl drawings; a boy when not set, like the stories). */
+const HERO_ART = { m: 'E001', f: 'E002', n: 'E001' } as const
+
+/** Which learning area a practised skill belongs to (`ar.letter.ba` → letters, `sci.food.cow` → science). */
+function areaOfSkill(skill: string, fallback: AreaId): AreaId {
+  if (/^(ar|en)\.(letter|sound|write)\./.test(skill)) return 'letters'
+  if (skill.startsWith('num.')) return 'numbers'
+  if (skill.startsWith('color.') || skill.startsWith('shape.')) return 'colors-shapes'
+  if (skill.startsWith('sci.')) return 'science'
+  if (skill.startsWith('logic.')) return 'logic'
+  return fallback
 }
 
 const CONFETTI = ['#e8613a', '#ffc83d', '#13897f', '#7a5cd6', '#2f8fdb', '#d94a86']
@@ -57,7 +77,7 @@ interface Result {
 }
 
 function GameSession({ game, plays, learned: learnedNow, onAgain }: { game: GameDef; plays: number; learned: LearnedPools; onAgain: () => void }) {
-  const { settings, t, age, named } = useApp()
+  const { settings, t, age, named, profile } = useApp()
   const navigate = useNavigate()
   const lang = settings.practiceLang
   const d = dict(lang)
@@ -75,7 +95,18 @@ function GameSession({ game, plays, learned: learnedNow, onAgain }: { game: Game
   const [lit, setLit] = useState(0)
   const [result, setResult] = useState<Result | null>(null)
   const stones = useRef<HTMLDivElement>(null)
-  const st = useRef({ prompt: '', hint: null as (() => Element | null | undefined) | null, locked: false, idle: 0, timers: [] as number[], alive: true })
+  const st = useRef({
+    prompt: '',
+    hint: null as (() => Element | null | undefined) | null,
+    locked: false,
+    idle: 0,
+    timers: [] as number[],
+    alive: true,
+    /** What this round practises, and how it went so far (recorded when solved). */
+    skill: '',
+    misses: 0,
+    started: 0,
+  })
 
   const later = useCallback((fn: () => void, ms: number) => {
     st.current.timers.push(window.setTimeout(() => st.current.alive && fn(), ms))
@@ -84,11 +115,13 @@ function GameSession({ game, plays, learned: learnedNow, onAgain }: { game: Game
   useEffect(() => {
     const cur = st.current
     cur.alive = true
+    cur.started = Date.now()
     return () => {
       cur.alive = false
       cur.timers.forEach(clearTimeout)
       clearTimeout(cur.idle)
       audio.stop()
+      audio.stopSound()
     }
   }, [])
 
@@ -127,8 +160,15 @@ function GameSession({ game, plays, learned: learnedNow, onAgain }: { game: Game
       prompt(text) {
         cur.prompt = text
         setBubble(text)
+        setMood('idle')
         void audio.speak(text, lang)
         armIdle()
+      },
+      mood(m) {
+        if (thisRound.live) setMood(m)
+      },
+      practise(skill) {
+        cur.skill = skill
       },
       hint(get) {
         cur.hint = get
@@ -147,6 +187,21 @@ function GameSession({ game, plays, learned: learnedNow, onAgain }: { game: Game
         cur.locked = true
         setLocked(true)
         clearTimeout(cur.idle)
+        if (cur.skill) {
+          void recordItemResult({
+            activityId: gameActivityId(game.id),
+            itemId: cur.skill,
+            skill: cur.skill,
+            areaId: areaOfSkill(cur.skill, game.areaId),
+            lang,
+            firstTry: cur.misses === 0,
+            misses: cur.misses,
+            hintsUsed: 0,
+            durationMs: Date.now() - cur.started,
+          })
+        }
+        cur.skill = ''
+        cur.misses = 0
         audio.sfx((round + 1) % 3 === 0 ? 'sparkle' : 'correct')
         burst(el, true)
         setMood('cheer')
@@ -162,6 +217,7 @@ function GameSession({ game, plays, learned: learnedNow, onAgain }: { game: Game
             else {
               cur.locked = false
               cur.hint = null
+              cur.started = Date.now()
               setLocked(false)
               setMood('idle')
               setRound(round + 1)
@@ -171,6 +227,7 @@ function GameSession({ game, plays, learned: learnedNow, onAgain }: { game: Game
       },
       wrong(el, line) {
         if (!thisRound.live || cur.locked) return
+        cur.misses++
         audio.sfx('try')
         flash(el, s.wiggle, 600)
         setMood('think')
@@ -186,7 +243,7 @@ function GameSession({ game, plays, learned: learnedNow, onAgain }: { game: Game
         armIdle()
       },
     }
-  }, [armIdle, d, finish, lang, later, round, total])
+  }, [armIdle, d, finish, game, lang, later, round, total])
 
   const replay = () => {
     const p = st.current.prompt
@@ -228,7 +285,7 @@ function GameSession({ game, plays, learned: learnedNow, onAgain }: { game: Game
         <IconButton icon="speaker" label={t.games.replay} onClick={replay} />
       </div>
       <div className={cx(s.stage, s[`scene_${game.id}`])} onPointerDown={armIdle} data-testid="game-stage">
-        <Round key={round} lang={lang} d={d} stage={stage} choices={choices} maxN={maxN} round={round} locked={locked} rng={defaultRng} ctl={ctl} learned={learned} />
+        <Round key={round} lang={lang} d={d} stage={stage} choices={choices} maxN={maxN} round={round} locked={locked} rng={defaultRng} ctl={ctl} learned={learned} hero={HERO_ART[profile.gender ?? 'n']} />
       </div>
     </Screen>
   )

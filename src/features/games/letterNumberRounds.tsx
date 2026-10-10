@@ -6,76 +6,95 @@ import { fmt, numeral } from '../../i18n'
 import { audio } from '../../services/audio/AudioService'
 import { useDrag } from '../activities/templates/useDrag'
 import { Ghost } from './drawings'
-import { type RoundProps, cx, range, useLatest, useMount } from './engine'
+import { type RoundProps, cx, flash, range, useLatest, useMount } from './engine'
 import s from './games.module.css'
 
 const others = <T,>(pool: readonly T[], target: T, n: number, rng: Rng): T[] => shuffle(pool.filter((x) => x !== target), rng).slice(0, Math.max(0, n))
 
-/** Hungry Frog — Hala names a letter; feed the frog the fly that carries it (tap or drag). */
+/** A lily pad with a notch, drawn once (Jumping Frog). */
+function LilyPad() {
+  return (
+    <svg className={s.padSvg} viewBox="0 0 100 100" aria-hidden="true">
+      <path d="M50 50 93 34A46 46 0 1 1 76 12z" fill="#4caf50" stroke="#2e7d32" strokeWidth="3" strokeLinejoin="round" />
+      <path d="M50 50 12 42M50 50 24 82M50 50 60 94M50 50 90 70" stroke="#3d9a42" strokeWidth="2.5" strokeLinecap="round" />
+      <circle cx="50" cy="54" r="22" fill="#eaf8dc" />
+    </svg>
+  )
+}
+
+/** Jumping Frog — Hala names a letter; the frog hops onto the lily pad that carries it (tap the pad, or drag the frog). */
 export function FrogRound({ lang, d, choices, locked, rng, ctl, learned }: RoundProps) {
   const [r] = useState(() => {
     const pool = learned.letters
     const target = pickOne(pool, rng)
     return { target, opts: shuffle([target, ...others(pool, target, choices - 1, rng)], rng) }
   })
-  const frog = useRef<HTMLDivElement>(null)
-  const flies = useRef(new Map<string, HTMLButtonElement>())
-  const [eaten, setEaten] = useState(false)
+  const frog = useRef<HTMLButtonElement>(null)
+  const pads = useRef(new Map<string, HTMLButtonElement>())
+  const [landed, setLanded] = useState(false)
 
   useMount(() => {
     ctl.prompt(fmt(d.games.say.frog, { letter: r.target.name }))
-    ctl.hint(() => flies.current.get(r.target.glyph))
+    ctl.hint(() => pads.current.get(r.target.glyph))
+    ctl.practise(`${lang}.letter.${r.target.id}`)
   })
 
-  const feed = (glyph: string) => {
-    if (locked) return
-    if (glyph === r.target.glyph) {
-      setEaten(true)
-      ctl.correct(frog.current)
-    } else ctl.wrong(flies.current.get(glyph))
+  const hop = (glyph: string) => {
+    if (locked || landed) return
+    const pad = pads.current.get(glyph)
+    if (glyph !== r.target.glyph) return ctl.wrong(pad)
+    const f = frog.current
+    if (f && pad && typeof f.animate === 'function') {
+      const a = f.getBoundingClientRect()
+      const b = pad.getBoundingClientRect()
+      const dx = b.left + b.width / 2 - (a.left + a.width / 2)
+      const dy = b.top + b.height / 2 - (a.top + a.height * 0.7)
+      f.animate(
+        [{ transform: 'translate(0, 0)' }, { transform: `translate(${dx / 2}px, ${dy / 2 - 90}px) scale(1.2)` }, { transform: `translate(${dx}px, ${dy}px)` }],
+        { duration: 650, easing: 'ease-in-out', fill: 'forwards' },
+      )
+    }
+    audio.sfx('hop')
+    setLanded(true)
+    window.setTimeout(() => audio.sfx('splash'), 600)
+    ctl.correct(pad)
   }
-  const { drag, bind } = useDrag<string>({ disabled: locked, onTap: feed, onDrop: (g, target) => target === 'frog' && feed(g) })
+  const { drag, bind } = useDrag<string>({ disabled: locked, onTap: () => flash(frog.current, s.wiggle, 600), onDrop: (_, target) => target.startsWith('pad:') && hop(target.slice(4)) })
 
   return (
-    <>
-      <div className={s.flies}>
-        {r.opts.map((l, i) => {
-          const b = bind(l.glyph)
-          return (
-            <button
-              key={l.glyph}
-              ref={(el) => {
-                if (el) flies.current.set(l.glyph, el)
-              }}
-              type="button"
-              lang={lang}
-              className={cx(s.fly, eaten && l === r.target && s.eaten, drag?.payload === l.glyph && s.lifted)}
-              aria-label={l.name}
-              data-testid={l === r.target ? 'game-answer' : undefined}
-              {...b}
-              style={{ ...b.style, animationDelay: `${i * 0.35}s` }}
-            >
-              <span className={s.flyBug}>
-                <OpenMoji hex={PROP_HEX.fly} alt="" size={34} />
-              </span>
-              <span className={s.flyLetter}>{l.glyph}</span>
-            </button>
-          )
-        })}
+    <div className={s.lilyPond}>
+      <div className={s.pads}>
+        {r.opts.map((l, i) => (
+          <button
+            key={l.glyph}
+            ref={(el) => {
+              if (el) pads.current.set(l.glyph, el)
+            }}
+            type="button"
+            lang={lang}
+            data-drop={`pad:${l.glyph}`}
+            className={cx(s.pad, drag?.over === `pad:${l.glyph}` && s.over)}
+            aria-label={l.name}
+            data-testid={l === r.target ? 'game-answer' : undefined}
+            style={{ animationDelay: `${-i * 0.8}s` }}
+            onClick={() => hop(l.glyph)}
+          >
+            <LilyPad />
+            <span className={s.padLetter}>{l.glyph}</span>
+            {landed && l === r.target && <i className={s.splash} />}
+          </button>
+        ))}
       </div>
-      <div className={s.pond}>
-        <div ref={frog} data-drop="frog" className={cx(s.frog, eaten && s.gulp, drag?.over === 'frog' && s.over)}>
-          <OpenMoji hex={PROP_HEX.frog} alt="" size={130} />
-        </div>
-      </div>
+      <div className={s.rock} />
+      <button ref={frog} type="button" className={cx(s.hopFrog, drag && s.lifted)} aria-label={d.games.titles.frog} {...bind('frog')}>
+        <OpenMoji hex={PROP_HEX.frog} alt="" size={110} />
+      </button>
       {drag && (
         <Ghost x={drag.x} y={drag.y}>
-          <span className={s.fly}>
-            <span className={s.flyLetter}>{drag.payload}</span>
-          </span>
+          <OpenMoji hex={PROP_HEX.frog} alt="" size={100} />
         </Ghost>
       )}
-    </>
+    </div>
   )
 }
 
@@ -97,6 +116,7 @@ export function BalloonsRound({ lang, d, choices, maxN, round, locked, rng, ctl,
       const items = shuffle([target, ...others(pool, target, choices - 1, rng)], rng)
       return {
         prompt: fmt(d.games.say.balloonNumber, { number: numberName(target, d) }),
+        skill: `num.count.${target}`,
         items: items.map((v, i) => ({ key: String(v), label: numeral(v, lang), name: numberName(v, d), hit: v === target, ...motion(i) })),
       }
     }
@@ -105,6 +125,7 @@ export function BalloonsRound({ lang, d, choices, maxN, round, locked, rng, ctl,
     const items = shuffle([target, ...others(pool, target, choices - 1, rng)], rng)
     return {
       prompt: fmt(d.games.say.balloonLetter, { letter: target.name }),
+      skill: `${lang}.letter.${target.id}`,
       items: items.map((l, i) => ({ key: l.glyph, label: l.glyph, name: l.name, hit: l === target, ...motion(i) })),
     }
   })
@@ -114,6 +135,7 @@ export function BalloonsRound({ lang, d, choices, maxN, round, locked, rng, ctl,
   useMount(() => {
     ctl.prompt(r.prompt)
     ctl.hint(() => bodies.current.get(r.items.find((i) => i.hit)?.key ?? ''))
+    ctl.practise(r.skill)
   })
 
   return (
@@ -169,6 +191,7 @@ export function CountRound({ lang, d, maxN, locked, rng, ctl, learned }: RoundPr
 
   useMount(() => {
     ctl.prompt(countPrompt(r.n, d))
+    ctl.practise(`num.count.${r.n}`)
     ctl.hint(() => (kNow.current < r.n ? pile.current?.querySelector('button') : kNow.current === r.n ? doneBtn.current : basket.current?.querySelector('button')))
   })
 

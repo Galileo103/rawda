@@ -18,6 +18,7 @@ import { content } from '../../content/loader'
 import { db } from '../../services/db'
 import { getMasteryMap, totalStars } from '../../services/repos/progress'
 import { forRecommend, iconFor, journeyCompleted, pick, playableActivities, useSpeakOnMount, visibleAreas, voice } from '../common'
+import { useReview } from '../remember/useReview'
 import { VoiceToggle } from '../VoiceToggle'
 import s from './home.module.css'
 
@@ -37,6 +38,7 @@ export function HomeScreen() {
   }, [], { ids: new Set<string>(), storiesRead: 0 })
   const completed = useLiveQuery(() => journeyCompleted(vis), [settings.disabledAreas.join(), langs.join()], new Set<string>())
   const mastery = useLiveQuery(getMasteryMap, [], new Map())
+  const review = useReview()
 
   const areas = visibleAreas(vis)
   const playGames = GAMES.filter((g) => !settings.disabledAreas.includes(g.areaId))
@@ -127,6 +129,29 @@ export function HomeScreen() {
 
       {/* Continue, Play World and the Writing room: side by side on tablets, so the subjects fit on the first screen. */}
       <div className={s.quick}>
+        {review && !review.done && review.cards.length > 0 && (
+          <button
+            type="button"
+            className={[s.continue, s.rememberBox].join(' ')}
+            onClick={() => {
+              audio.sfx('sparkle')
+              navigate('/remember')
+            }}
+            data-testid="remember-box"
+          >
+            <span className={[s.continueIcon, s.giftShake].join(' ')} aria-hidden="true">
+              <OpenMoji hex="1F381" alt="" size={64} />
+            </span>
+            <span className={s.continueText}>
+              <span className={s.continueLabel}>{t.games.rememberCard}</span>
+              <span className={s.continueTitle}>{t.games.remember}</span>
+            </span>
+            <span className={s.continuePlay} aria-hidden="true">
+              <Icon name="play" size={34} />
+            </span>
+          </button>
+        )}
+
         {next && (
           <button type="button" className={s.continue} onClick={() => navigate(`/play/${next.id}`)}>
             <span className={s.continueIcon}>

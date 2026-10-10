@@ -5,7 +5,7 @@ import type { Lang } from '../../domain/types'
 import { clipKey, normalizeSpeech } from './clipKey'
 
 export type SpeakResult = 'file' | 'tts' | 'none' | 'muted' | 'stopped'
-export type SfxName = 'tap' | 'correct' | 'try' | 'complete' | 'pop' | 'flip' | 'sparkle' | 'boing'
+export type SfxName = 'tap' | 'correct' | 'try' | 'complete' | 'pop' | 'flip' | 'sparkle' | 'boing' | 'munch' | 'nope' | 'gasp' | 'hop' | 'splash'
 
 export interface AudioConfig {
   narration: boolean
@@ -27,6 +27,7 @@ export class AudioService {
   private config: AudioConfig = { narration: true, narrationVolume: 0.9, sfxVolume: 0.5, speechRate: 1 }
   private token = 0
   private current: HTMLAudioElement | undefined
+  private sound: HTMLAudioElement | undefined
   private ctx: AudioContext | undefined
   private listeners = new Set<(speaking: boolean) => void>()
   private child: { gender?: Gender; urls: Partial<Record<Lang, string>> } = { urls: {} }
@@ -127,7 +128,15 @@ export class AudioService {
     this.emit(false)
   }
 
+  private speakingNow = false
+
+  /** Whether Hala is talking right now (a game waits for quiet before an animal's call). */
+  get speaking(): boolean {
+    return this.speakingNow
+  }
+
   private emit(speaking: boolean) {
+    this.speakingNow = speaking
     for (const l of this.listeners) l(speaking)
   }
 
@@ -193,6 +202,37 @@ export class AudioService {
   }
 
   /** Short synthesized effects (no audio files needed, no licensing). */
+  /**
+   * A short recorded sound (an animal's real call) on its own player, so it never cuts
+   * Hala's narration. Plays at the effects volume; resolves when it ends or fails.
+   */
+  playSound(url: string): Promise<void> {
+    if (this.config.sfxVolume <= 0) return Promise.resolve()
+    return new Promise((resolve) => {
+      try {
+        this.sound?.pause()
+        const el = new Audio(url)
+        this.sound = el
+        el.volume = clamp(Math.min(1, this.config.sfxVolume * 1.6))
+        el.onended = el.onerror = () => resolve()
+        const p = el.play()
+        if (p && typeof p.catch === 'function') p.catch(() => resolve())
+      } catch {
+        resolve()
+      }
+    })
+  }
+
+  /** Stop a recorded sound (leaving a game). */
+  stopSound(): void {
+    try {
+      this.sound?.pause()
+    } catch {
+      /* ignore */
+    }
+    this.sound = undefined
+  }
+
   sfx(name: SfxName): void {
     if (this.config.sfxVolume <= 0) return
     try {
@@ -235,6 +275,12 @@ const SFX: Record<SfxName, Note[]> = {
   sparkle: [[784, 0, 0.08, 'triangle'], [988, 0.06, 0.08, 'triangle'], [1175, 0.12, 0.08, 'triangle'], [1568, 0.18, 0.25, 'triangle'], [2093, 0.28, 0.3]],
   // A finger bumping a "magic wall" (Writing room): a soft, low bounce, never a buzzer.
   boing: [[392, 0, 0.09], [294, 0.07, 0.16]],
+  // Play World's silly moments: little chews, a soft "no, thank you", a surprised gasp, a frog's hop and splash.
+  munch: [[330, 0, 0.06, 'triangle'], [294, 0.13, 0.06, 'triangle'], [330, 0.26, 0.07, 'triangle']],
+  nope: [[330, 0, 0.14, 'triangle'], [262, 0.12, 0.22, 'triangle']],
+  gasp: [[523, 0, 0.06], [784, 0.05, 0.16]],
+  hop: [[392, 0, 0.08], [587, 0.07, 0.12]],
+  splash: [[1175, 0, 0.05, 'triangle'], [784, 0.04, 0.08, 'triangle'], [440, 0.1, 0.16]],
 }
 
 function revoke(url: string): void {

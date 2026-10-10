@@ -8,6 +8,7 @@ import { MapScreen } from '../features/map/MapScreen'
 import { ParentArea } from '../features/parent/ParentArea'
 import { QuranScreen } from '../features/quran/QuranScreen'
 import { SurahScreen } from '../features/quran/SurahScreen'
+import { RememberScreen } from '../features/remember/RememberScreen'
 import { RewardsScreen } from '../features/rewards/RewardsScreen'
 import { StoryLibrary } from '../features/stories/StoryLibrary'
 import { StoryReader } from '../features/stories/StoryReader'
@@ -44,6 +45,7 @@ export function App() {
               <Route path="/write/guide" element={<StrokeGuide />} />
               <Route path="/write/:entryId" element={<WritingScreen />} />
               <Route path="/rewards" element={<RewardsScreen />} />
+              <Route path="/remember" element={<RememberScreen />} />
               <Route path="/quran" element={<QuranScreen />} />
               <Route path="/quran/:number" element={<SurahScreen />} />
               <Route path="/games" element={<GamesHub />} />

@@ -57,7 +57,7 @@ export function GamesHub() {
     setTimeout(() => navigate(`/discover/${r.lessonId}`), 650)
   }
 
-  const section = (key: 'ln' | 'csl', title: string) => {
+  const section = (key: 'ln' | 'csl' | 'fun', title: string) => {
     const list = games.filter((g) => g.section === key)
     if (!list.length) return null
     return (
@@ -134,6 +134,7 @@ export function GamesHub() {
       </div>
       {section('ln', t.games.secLN)}
       {section('csl', t.games.secCSL)}
+      {section('fun', t.games.secFun)}
       {settings.rewardsEnabled && (
         <button type="button" className={s.gardenTeaser} onClick={() => navigate('/garden')} data-testid="garden-teaser">
           <span className={s.teaserText}>

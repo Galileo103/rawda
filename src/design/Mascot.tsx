@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { audio } from '../services/audio/AudioService'
 import s from './Mascot.module.css'
 
-export type MascotMood = 'idle' | 'happy' | 'cheer' | 'think' | 'sleep'
+export type MascotMood = 'idle' | 'happy' | 'cheer' | 'think' | 'sleep' | 'oops'
 
 /**
  * Hala (هالة), the little teacher owl — original artwork. Moods are always kind:
@@ -34,7 +34,15 @@ export function Mascot({ mood = 'idle', size = 160, label }: { mood?: MascotMood
           <circle cx="90" cy="96" r="34" fill="#fff8ec" />
           <circle cx="150" cy="96" r="34" fill="#fff8ec" />
           {/* eyes */}
-          {closedEyes ? (
+          {mood === 'oops' ? (
+            // "Oops, I got it wrong!" — wide eyes and a little round mouth (Silly Hala).
+            <g>
+              <circle cx="90" cy="96" r="22" fill="#fff" stroke="#33264a" strokeWidth="4" />
+              <circle cx="150" cy="96" r="22" fill="#fff" stroke="#33264a" strokeWidth="4" />
+              <circle cx="92" cy="98" r="7" fill="#33264a" />
+              <circle cx="148" cy="98" r="7" fill="#33264a" />
+            </g>
+          ) : closedEyes ? (
             <g stroke="#33264a" strokeWidth="6" fill="none" strokeLinecap="round">
               {mood === 'sleep' ? (
                 <>
@@ -60,7 +68,14 @@ export function Mascot({ mood = 'idle', size = 160, label }: { mood?: MascotMood
           <circle cx="66" cy="120" r="9" fill="#ff9fb8" opacity=".7" />
           <circle cx="174" cy="120" r="9" fill="#ff9fb8" opacity=".7" />
           {/* beak */}
-          <path className={s.beak} d="M108 114h24l-12 18z" fill="#ffb02e" stroke="#e8902a" strokeWidth="2" strokeLinejoin="round" />
+          {mood === 'oops' ? (
+            <>
+              <ellipse cx="120" cy="124" rx="10" ry="13" fill="#e8902a" stroke="#c86f12" strokeWidth="2" />
+              <path d="M188 52c-6 10-8 15-4 19s10 0 9-6c0-4-2-8-5-13z" fill="#7cc4ff" />
+            </>
+          ) : (
+            <path className={s.beak} d="M108 114h24l-12 18z" fill="#ffb02e" stroke="#e8902a" strokeWidth="2" strokeLinejoin="round" />
+          )}
           {/* feet */}
           <path d="M98 216v10M106 216v10M134 216v10M142 216v10" stroke="#ffb02e" strokeWidth="6" strokeLinecap="round" />
           {mood === 'sleep' && (

@@ -13,7 +13,7 @@
  * Compare Arabic voices first with `npm run audio:sample`.
  */
 import { execFileSync } from 'node:child_process'
-import { existsSync, mkdirSync, readdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs'
+import { existsSync, mkdirSync, readdirSync, readFileSync, rmSync, statSync, writeFileSync } from 'node:fs'
 import { basename, join } from 'node:path'
 import { collectNarration } from '../src/content/narration'
 import type { Lang } from '../src/domain/types'
@@ -63,7 +63,8 @@ export function synthesize(spec: VoiceSpec, jobs: { key: string; text: string }[
   } else {
     execFileSync(PYTHON, [join(ROOT, 'scripts', 'piper_batch.py'), spec.model, jobsFile], { stdio: 'inherit' })
   }
-  for (const [key, file] of files) if (!existsSync(file)) files.delete(key)
+  // A refused request can leave an empty file: that is a missing clip, not a silent one.
+  for (const [key, file] of files) if (!existsSync(file) || statSync(file).size === 0) files.delete(key)
   return files
 }
 
@@ -99,7 +100,13 @@ function main() {
   const previous = readManifest()
   const voices: Partial<Record<Lang, string>> = {}
 
+  // RENDER_LANGS=en renders one language only (e.g. while the online Arabic voice is unavailable).
+  const only = process.env.RENDER_LANGS?.split(',')
   for (const lang of ['ar', 'en'] as const) {
+    if (only && !only.includes(lang)) {
+      if (previous.voices?.[lang]) voices[lang] = previous.voices[lang]
+      continue
+    }
     const spec = VOICES[lang]
     const id = voiceId(spec)
     const dir = join(AUDIO_DIR, lang)

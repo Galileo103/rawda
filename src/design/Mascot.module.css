@@ -32,6 +32,11 @@
   animation: talk 0.28s ease-in-out infinite alternate;
 }
 
+.oops .body {
+  animation: oops 0.45s ease 2;
+  transform-origin: 120px 200px;
+}
+
 .think .body {
   animation: tilt 2.4s ease-in-out infinite;
   transform-origin: 120px 200px;
@@ -92,5 +97,17 @@
   }
   50% {
     transform: scale(1.03);
+  }
+}
+@keyframes oops {
+  0%,
+  100% {
+    transform: rotate(0);
+  }
+  25% {
+    transform: rotate(-6deg);
+  }
+  75% {
+    transform: rotate(6deg);
   }
 }

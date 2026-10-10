@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240">
+  <!-- Hala the owl saying "Oops!" (Silly Hala): wide eyes and a little round mouth -->
+  <path d="M58 112c-22 12-28 48-14 72 12-4 26-22 30-44z" fill="#6a4cc4"/>
+  <path d="M182 112c22 12 28 48 14 72-12-4-26-22-30-44z" fill="#6a4cc4"/>
+  <path d="M120 38c-46 0-74 34-74 84 0 58 32 98 74 98s74-40 74-98c0-50-28-84-74-84z" fill="#8a6de0"/>
+  <path d="M62 64 54 26l36 22z" fill="#8a6de0"/>
+  <path d="M178 64l8-38-36 22z" fill="#8a6de0"/>
+  <path d="M120 120c-30 0-46 24-46 52 0 26 20 44 46 44s46-18 46-44c0-28-16-52-46-52z" fill="#ffe7c2"/>
+  <circle cx="90" cy="96" r="34" fill="#fff8ec"/>
+  <circle cx="150" cy="96" r="34" fill="#fff8ec"/>
+  <circle cx="90" cy="96" r="22" fill="#fff" stroke="#33264a" stroke-width="4"/>
+  <circle cx="150" cy="96" r="22" fill="#fff" stroke="#33264a" stroke-width="4"/>
+  <circle cx="92" cy="98" r="7" fill="#33264a"/>
+  <circle cx="148" cy="98" r="7" fill="#33264a"/>
+  <circle cx="66" cy="120" r="9" fill="#ff9fb8" opacity=".7"/>
+  <circle cx="174" cy="120" r="9" fill="#ff9fb8" opacity=".7"/>
+  <ellipse cx="120" cy="126" rx="10" ry="13" fill="#e8902a" stroke="#c86f12" stroke-width="2"/>
+  <path d="M188 52c-6 10-8 15-4 19s10 0 9-6c0-4-2-8-5-13z" fill="#7cc4ff"/>
+</svg>

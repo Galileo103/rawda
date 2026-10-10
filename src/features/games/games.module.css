@@ -198,7 +198,7 @@
   -webkit-user-select: none;
 }
 .scene_frog {
-  background: linear-gradient(180deg, #d6ecfc 0%, #eaf6ff 45%, #a7dcef 46%, #7ec8e3 100%);
+  background: linear-gradient(180deg, #d6ecfc 0%, #eaf6ff 14%, #a7dcef 15%, #7ec8e3 100%);
 }
 .scene_balloons {
   background: linear-gradient(180deg, #a9d8ff 0%, #d6ecfc 60%, #f4fbe9 100%);
@@ -290,55 +290,580 @@
   box-shadow: 0 0 0 6px var(--leaf) !important;
 }
 
-/* ---------- Hungry Frog ---------- */
-.flies {
+/* ---------- Jumping Frog: letters on lily pads, the frog hops to the right one ---------- */
+.lilyPond {
+  position: relative;
+  flex: 1;
+  min-height: 380px;
+}
+.pads {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
-  gap: 18px;
-  padding-top: 8px;
+  justify-content: space-around;
+  align-items: center;
+  gap: 10px;
+  padding-top: 12%;
 }
-.fly {
+.pad {
   position: relative;
   display: grid;
   place-items: center;
-  width: 96px;
-  height: 96px;
+  width: 120px;
+  height: 120px;
+  padding: 0;
   border: 0;
   border-radius: 50%;
-  background: var(--surface);
-  box-shadow: var(--shadow);
-  color: var(--ink);
+  background: none;
   cursor: pointer;
-  animation: bob 2.6s ease-in-out infinite;
-  transition: transform 0.35s ease, opacity 0.35s ease;
+  animation: drift 3s ease-in-out infinite;
 }
-.flyLetter {
+.padSvg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  filter: drop-shadow(0 6px 0 rgba(30, 90, 60, 0.25));
+}
+.padLetter {
+  position: relative;
+  margin-top: 8%;
+  color: #1d5a2a;
   font-size: 46px;
   font-weight: 800;
   line-height: 1;
 }
-.flyBug {
+.splash {
   position: absolute;
-  top: -10px;
-  inset-inline-end: -8px;
+  inset: -6%;
+  border: 4px solid rgba(255, 255, 255, 0.9);
+  border-radius: 50%;
+  animation: ring 0.8s ease-out 0.55s both;
 }
-.eaten {
-  transform: scale(0) !important;
-  opacity: 0;
-  animation: none;
+.rock {
+  position: absolute;
+  bottom: 3%;
+  left: 50%;
+  width: 150px;
+  height: 44px;
+  translate: -50% 0;
+  border-radius: 50% 50% 40% 40%;
+  background: #8d8f94;
+  box-shadow: inset 0 -6px 0 #6f7176;
 }
-.pond {
+.hopFrog {
+  position: absolute;
+  bottom: calc(3% + 22px);
+  left: 50%;
+  z-index: 2;
+  padding: 0;
+  border: 0;
+  background: none;
+  translate: -50% 0;
+  cursor: grab;
+}
+@keyframes drift {
+  0%,
+  100% {
+    transform: translateY(0) rotate(-2deg);
+  }
+  50% {
+    transform: translateY(6px) rotate(2deg);
+  }
+}
+@keyframes ring {
+  from {
+    transform: scale(0.4);
+    opacity: 1;
+  }
+  to {
+    transform: scale(1.5);
+    opacity: 0;
+  }
+}
+
+/* ---------- Silly Hala ---------- */
+.scene_silly {
+  background: radial-gradient(circle at 15% 0, #fff 0, transparent 45%), var(--grape-soft);
+}
+.sillyWrap {
   display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: center;
   justify-content: center;
+  gap: 22px;
 }
-.frog {
+.sillyCard {
   display: grid;
   place-items: center;
-  width: 190px;
-  height: 150px;
+  min-width: 220px;
+  min-height: 220px;
+  padding: 18px;
+  border-radius: 32px;
+  background: var(--surface);
+  box-shadow: var(--shadow);
+}
+.sillyCountCard {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  max-width: 440px;
+  min-height: 0;
+}
+.sillyGlyph {
+  color: var(--grape);
+  font-size: 150px;
+  font-weight: 800;
+  line-height: 1;
+}
+.countThing {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 84px;
+  height: 84px;
+  border: 0;
+  border-radius: 20px;
+  background: #eef6ff;
+  cursor: pointer;
+}
+.countThing b {
+  position: absolute;
+  top: -8px;
+  inset-inline-end: -8px;
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
   border-radius: 50%;
-  background: radial-gradient(ellipse at 50% 70%, #4fae3c 0 58%, transparent 59%);
+  background: var(--sun);
+  font-size: 1rem;
+}
+.judge {
+  display: flex;
+  gap: 18px;
+}
+.judgeYes,
+.judgeNo {
+  min-width: 140px;
+  padding: 12px 28px;
+  border: 0;
+  border-radius: 24px;
+  color: #fff;
+  font: inherit;
+  font-size: 1.7rem;
+  font-weight: 800;
+  box-shadow: 0 6px 0 rgba(0, 0, 0, 0.18);
+  cursor: pointer;
+}
+.judgeYes {
+  background: var(--leaf);
+}
+.judgeNo {
+  background: #e5484d;
+  font-size: 2rem;
+}
+.judgeYes:active,
+.judgeNo:active {
+  transform: translateY(4px);
+  box-shadow: 0 2px 0 rgba(0, 0, 0, 0.18);
+}
+.sillyOptions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 16px;
+}
+.sillyOption {
+  display: grid;
+  place-items: center;
+  width: 116px;
+  height: 116px;
+  border: 0;
+  border-radius: 26px;
+  background: var(--surface);
+  box-shadow: var(--shadow);
+  color: var(--grape);
+  font-size: 3.6rem;
+  font-weight: 800;
+  cursor: pointer;
+  animation: popIn 0.35s cubic-bezier(0.3, 1.6, 0.5, 1);
+}
+@keyframes popIn {
+  from {
+    transform: scale(0.4);
+    opacity: 0;
+  }
+}
+
+/* ---------- Hungry Monster ---------- */
+.scene_monster {
+  background: linear-gradient(180deg, #e9f8e4 0%, #f4fbe9 60%, #ffe9c7 100%);
+}
+.monsterField {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+.monsterWrap {
+  position: relative;
+  width: min(260px, 62vw);
+  border-radius: 40px;
+}
+.monster {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+.monsterBody {
+  transform-origin: 110px 200px;
+  transform: scaleX(calc(1 + var(--belly, 0) * 0.07)) scaleY(calc(1 + var(--belly, 0) * 0.02));
+  transition: transform 0.5s cubic-bezier(0.3, 1.6, 0.5, 1);
+}
+.monsterMouth {
+  transform-box: fill-box;
+  transform-origin: center;
+  transform: scaleY(0.35);
+  transition: transform 0.18s;
+}
+.monsterOpen .monsterMouth {
+  transform: scaleY(2.3);
+}
+.monsterSign {
+  position: absolute;
+  top: 0;
+  inset-inline-end: -14px;
+  padding: 2px 14px;
+  border-radius: 18px;
+  background: var(--sun);
+  box-shadow: 0 4px 0 #e9a800;
+  font-size: 2.3rem;
+  font-weight: 800;
+  transform: rotate(8deg);
+}
+.plate {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 14px;
+  min-height: 110px;
+  padding: 10px 22px;
+  border-radius: 999px;
+  background: #fff3df;
+}
+.dish {
+  display: grid;
+  place-items: center;
+  width: 96px;
+  height: 96px;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: grab;
+}
+.gone {
+  visibility: hidden;
+}
+/* "No, thank you": the monster gently hands the food back to the plate. */
+.giveBack {
+  animation: giveBack 0.7s ease-out;
+}
+@keyframes giveBack {
+  0% {
+    transform: translateY(-60px) scale(0.8);
+  }
+  60% {
+    transform: translateY(6px) scale(1.04);
+  }
+  100% {
+    transform: none;
+  }
+}
+
+/* ---------- Dress the Hero ---------- */
+.dressField {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 14px;
+}
+.dressSky {
+  position: relative;
+  display: grid;
+  flex: 1;
+  place-items: end center;
+  min-height: 320px;
+  overflow: hidden;
+  border-radius: 26px;
+  transition: background 0.6s;
+}
+.dressSky::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+.skyRain {
+  background: linear-gradient(#7f97b0, #c3d1de);
+}
+.skyRain::after {
+  background-image: repeating-linear-gradient(105deg, transparent 0 22px, rgba(255, 255, 255, 0.55) 22px 24px);
+  background-size: 60px 60px;
+  animation: rainfall 0.45s linear infinite;
+}
+.skySnow {
+  background: linear-gradient(#cfe3f5, #f7fbff);
+}
+.skySnow::after {
+  background-image: radial-gradient(circle, #fff 2.5px, transparent 3.5px), radial-gradient(circle, #9fc3e6 2px, transparent 3px);
+  background-position: 0 0, 20px 30px;
+  background-size: 46px 46px, 70px 70px;
+  animation: snowfall 4s linear infinite;
+}
+.skySun {
+  background: linear-gradient(#ffd75e, #fff1c4);
+}
+.weatherIcon {
+  position: absolute;
+  top: 12px;
+  inset-inline-end: 14px;
+  width: 84px;
+}
+.skySun .weatherIcon {
+  animation: spin 12s linear infinite;
+}
+.feel {
+  position: absolute;
+  top: 14px;
+  inset-inline-start: 16px;
+  color: #fff;
+  font-size: 1.7rem;
+  font-weight: 800;
+  text-shadow: 0 2px 0 rgba(0, 0, 0, 0.25);
+}
+.feelHot {
+  color: #c25400;
+  text-shadow: none;
+}
+.hero {
+  position: relative;
+  width: min(260px, 60vw);
+  aspect-ratio: 1;
+}
+.hero > img:first-child {
+  display: block;
+  width: 100%;
+}
+.wear {
+  position: absolute;
+  translate: -50% -50%;
+  pointer-events: none;
+  animation: popIn 0.35s cubic-bezier(0.3, 1.6, 0.5, 1);
+}
+.slotHead {
+  top: 12%;
+  left: 50%;
+  width: 44%;
+}
+.slotEyes {
+  top: 31%;
+  left: 50%;
+  width: 30%;
+}
+.slotNeck {
+  top: 49%;
+  left: 50%;
+  width: 30%;
+}
+.slotBody {
+  top: 62%;
+  left: 50%;
+  width: 42%;
+}
+.slotUmb {
+  top: 9%;
+  left: 23%;
+  width: 46%;
+}
+.shiver {
+  animation: shiver 0.12s linear infinite;
+}
+.sweatDrop {
+  position: absolute;
+  top: 8%;
+  left: 66%;
+  width: 16%;
+  animation: drip 1s ease-in infinite;
+}
+.trayItem {
+  display: grid;
+  place-items: center;
+  width: 96px;
+  height: 96px;
+  padding: 0;
+  border: 0;
+  border-radius: 22px;
+  background: var(--surface);
+  box-shadow: var(--shadow);
+  cursor: grab;
+}
+@keyframes rainfall {
+  to {
+    background-position: -16px 60px;
+  }
+}
+@keyframes snowfall {
+  to {
+    background-position: 20px 46px, 0 100px;
+  }
+}
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@keyframes shiver {
+  0%,
+  100% {
+    transform: translateX(-2px);
+  }
+  50% {
+    transform: translateX(2px);
+  }
+}
+@keyframes drip {
+  from {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateY(40px);
+    opacity: 0;
+  }
+}
+
+/* ---------- Animal Mix-up ---------- */
+.scene_mixup {
+  background: linear-gradient(180deg, #d6ecfc 0%, #f4fbe9 55%, #bfe3a6 56%, #a6d68a 100%);
+}
+.mixField {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  gap: 18px;
+}
+.animalCard {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 220px;
+  height: 220px;
+  border-radius: 32px;
+  background: var(--surface);
+  box-shadow: var(--shadow);
+}
+.listen {
+  position: absolute;
+  bottom: -14px;
+  inset-inline-end: -14px;
+  display: grid;
+  place-items: center;
+  width: 64px;
+  height: 64px;
+  border: 0;
+  border-radius: 50%;
+  background: var(--sun);
+  box-shadow: 0 4px 0 #e9a800;
+  color: var(--ink);
+  cursor: pointer;
+}
+.listen svg {
+  width: 32px;
+  height: 32px;
+}
+.listening {
+  animation: listenHop 0.4s ease 3;
+}
+@keyframes listenHop {
+  50% {
+    transform: translateY(-8px);
+  }
+}
+.mixOptions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 16px;
+}
+.mixOption {
+  display: grid;
+  place-items: center;
+  width: 112px;
+  height: 112px;
+  border: 0;
+  border-radius: 26px;
+  background: var(--surface);
+  box-shadow: var(--shadow);
+  cursor: pointer;
+}
+.held {
+  position: absolute;
+  bottom: 6px;
+  inset-inline-end: -20px;
+  width: 44%;
+  transform: rotate(-14deg);
+}
+.homes {
+  display: grid;
+  flex: 1;
+  grid-auto-columns: minmax(0, 1fr);
+  grid-auto-flow: column;
+  gap: 12px;
+}
+.homeCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+  padding: 12px 8px;
+  border-radius: 24px;
+  background: var(--surface);
+  box-shadow: var(--shadow-soft);
+}
+.homeLabel {
+  font-weight: 800;
+}
+.homeSpot {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 6px;
+  min-height: 84px;
+}
+.homeAnimal {
+  display: grid;
+  place-items: center;
+  width: 80px;
+  height: 80px;
+  padding: 0;
+  border: 0;
+  border-radius: 20px;
+  background: none;
+  cursor: grab;
+}
+.homeAnimal:disabled {
+  cursor: default;
+}
+.lost {
+  animation: wobble 1.6s ease-in-out infinite;
 }
 .gulp {
   animation: gulp 0.6s ease 2;
@@ -1028,12 +1553,42 @@
   .build {
     grid-template-columns: 1fr;
   }
-  .fly {
+  .pad {
+    width: 92px;
+    height: 92px;
+  }
+  .padLetter {
+    font-size: 36px;
+  }
+  .sillyGlyph {
+    font-size: 110px;
+  }
+  .sillyOption,
+  .mixOption {
+    width: 92px;
+    height: 92px;
+    font-size: 2.8rem;
+  }
+  .judgeYes,
+  .judgeNo {
+    min-width: 116px;
+    padding: 10px 18px;
+  }
+  .dish,
+  .trayItem {
     width: 80px;
     height: 80px;
   }
-  .flyLetter {
-    font-size: 38px;
+  .animalCard {
+    width: 180px;
+    height: 180px;
+  }
+  .homes {
+    gap: 6px;
+  }
+  .homeAnimal {
+    width: 60px;
+    height: 60px;
   }
   .wagonSlot,
   .wagon {
@@ -1110,6 +1665,17 @@
     animation: none !important;
     bottom: var(--rest) !important;
   }
+  .pad,
+  .shiver,
+  .lost,
+  .skyRain::after,
+  .skySnow::after,
+  .skySun .weatherIcon {
+    animation: none !important;
+  }
+}
+:global(:root[data-motion='reduced']) :is(.pad, .shiver, .lost, .skySun .weatherIcon) {
+  animation: none !important;
 }
 :global(:root[data-motion='reduced']) .balloon {
   animation: none !important;

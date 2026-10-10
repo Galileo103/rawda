@@ -561,22 +561,97 @@ test('Play World: finishing a game celebrates, saves the stars and grows Hala’
   await expect(page.getByRole('button', { name: /زَهْرَة التُّولِيب/ })).toBeVisible()
 })
 
-test('Hungry Frog: a real finger drag feeds the frog', async ({ page }) => {
+test('Jumping Frog: a real finger drag hops the frog onto the right lily pad', async ({ page }) => {
   await onboard(page)
   await discovered(page, [
     { activityId: 'ar-discover', itemId: 'alif', skill: 'ar.letter.alif', areaId: 'letters' },
     { activityId: 'ar-discover', itemId: 'ba', skill: 'ar.letter.ba', areaId: 'letters' },
   ])
   await page.goto('./#/games/frog')
-  const fly = page.getByTestId('game-answer')
-  await expect(fly).toBeVisible()
-  const from = (await fly.boundingBox())!
-  const to = (await page.locator('[data-drop="frog"]').boundingBox())!
+  const pad = page.getByTestId('game-answer')
+  await expect(pad).toBeVisible()
+  const from = (await page.getByRole('button', { name: 'الضفدع القافز' }).boundingBox())!
+  const to = (await pad.boundingBox())!
   await page.mouse.move(from.x + from.width / 2, from.y + from.height / 2)
   await page.mouse.down()
   await page.mouse.move(to.x + to.width / 2, to.y + to.height / 2, { steps: 12 })
   await page.mouse.up()
   await expect(page.locator('[class*="stoneOn"]')).toHaveCount(1, { timeout: 10_000 })
+})
+
+/** Play a Play World game to the end by always choosing the right thing. */
+async function playGame(page: Page, gameId: string) {
+  await page.goto(`./#/games/${gameId}`)
+  const done = page.getByRole('heading', { name: /^أحسنت./ })
+  for (let i = 0; i < 14; i++) {
+    const answer = page.getByTestId('game-answer')
+    await expect(answer.or(done)).toBeVisible({ timeout: 20_000 })
+    if (await done.isVisible()) break
+    const handle = await answer.elementHandle()
+    await answer.click()
+    // Either the round moves on (Hala's praise first) or the next step of the same round appears.
+    await page.waitForFunction((el) => !el?.isConnected, handle, { timeout: 20_000 })
+  }
+  await expect(done).toBeVisible()
+}
+
+test('the silly games play to the end with only what was discovered', async ({ page }) => {
+  test.setTimeout(240_000)
+  await onboard(page)
+  await discovered(page, [
+    { activityId: 'ar-discover', itemId: 'alif', skill: 'ar.letter.alif', areaId: 'letters' },
+    { activityId: 'ar-discover', itemId: 'ba', skill: 'ar.letter.ba', areaId: 'letters' },
+    { activityId: 'ar-discover', itemId: 'ta', skill: 'ar.letter.ta', areaId: 'letters' },
+    { activityId: 'science-discover', itemId: 'rain', skill: 'sci.weather.rain', areaId: 'science' },
+    { activityId: 'science-discover', itemId: 'sea', skill: 'sci.habitat.fish', areaId: 'science' },
+    { activityId: 'science-discover', itemId: 'desert', skill: 'sci.habitat.camel', areaId: 'science' },
+    { activityId: 'science-discover', itemId: 'food-monkey', skill: 'sci.food.monkey', areaId: 'science' },
+  ])
+  await page.goto('./#/games')
+  for (const id of ['silly', 'monster', 'dress', 'mixup']) await expect(page.getByTestId(`game-${id}`)).toHaveAttribute('data-ready', 'true')
+  for (const id of ['silly', 'monster', 'dress', 'mixup']) await playGame(page, id)
+})
+
+test('the Remember Box brings back what is due, once a day, with stars', async ({ page }) => {
+  await onboard(page)
+  await discovered(page, [
+    { activityId: 'ar-discover', itemId: 'ba', skill: 'ar.letter.ba', areaId: 'letters' },
+    { activityId: 'num-discover', itemId: 'three', skill: 'num.count.3', areaId: 'numbers' },
+  ])
+  // Learned three days ago and due again today (the spaced-review schedule).
+  await page.evaluate(
+    (skills) =>
+      new Promise<void>((resolve, reject) => {
+        const open = indexedDB.open('rawda')
+        open.onerror = () => reject(open.error)
+        open.onsuccess = () => {
+          const tx = open.result.transaction('mastery', 'readwrite')
+          const day = 86_400_000
+          for (const skillId of skills)
+            tx.objectStore('mastery').put({ key: `${skillId}|ar`, skillId, lang: 'ar', score: 0.4, box: 2, attempts: 2, firstTryCorrect: 1, lastSeen: Date.now() - 3 * day, dueAt: Date.now() - day })
+          tx.oncomplete = () => {
+            open.result.close()
+            resolve()
+          }
+          tx.onerror = () => reject(tx.error)
+        }
+      }),
+    ['ar.letter.ba', 'num.count.3'],
+  )
+  await page.reload()
+  await page.getByTestId('remember-box').click()
+  await page.getByTestId('remember-open').click()
+  for (let i = 0; i < 2; i++) {
+    const answer = page.getByTestId('remember-answer')
+    await expect(answer).toBeVisible()
+    const handle = await answer.elementHandle()
+    await answer.click()
+    await page.waitForFunction((el) => !el?.isConnected, handle, { timeout: 10_000 })
+  }
+  await expect(page.getByTestId('remember-done')).toBeVisible()
+  await page.goto('./#/home')
+  await expect(page.getByTestId('play-world')).toBeVisible()
+  await expect(page.getByTestId('remember-box')).toHaveCount(0)
 })
 
 test('map area chips all fit on screen without sideways scrolling', async ({ page }) => {

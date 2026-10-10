@@ -6,6 +6,7 @@ import { activityById, content, pick } from '../../content/loader'
 import { Button, Panel } from '../../design/ui'
 import { visualText } from '../../design/Visual'
 import type { MasteryRecord } from '../../domain/engine/mastery'
+import { REMEMBER_ACTIVITY } from '../../domain/remember'
 import { recommendNext } from '../../domain/recommend'
 import type { Lang } from '../../domain/types'
 import { db } from '../../services/db'
@@ -146,7 +147,7 @@ export function ProgressTab() {
                 {data.completions.slice(0, 15).map((c) => (
                   <tr key={c.id}>
                     <td>{fmtDate.format(c.ts)}</td>
-                    <td dir="auto">{pick(activityById(c.activityId)?.title, ui) || gameTitle(c.activityId, t) || c.activityId}</td>
+                    <td dir="auto">{pick(activityById(c.activityId)?.title, ui) || gameTitle(c.activityId, t) || (c.activityId === REMEMBER_ACTIVITY ? t.games.remember : c.activityId)}</td>
                     <td>{c.lang === 'ar' ? 'العربية' : 'English'}</td>
                     <td>★ {c.stars}</td>
                   </tr>

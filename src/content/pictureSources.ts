@@ -13,8 +13,9 @@ export const NOTO_HEXES: ReadonlySet<string> = new Set(['1F431', '1F436', '1F981
  * Rawda's own drawings, under private-use codes (no emoji has them). The child's hero in
  * personalized stories must be obviously a boy or a girl, and the emoji boy and girl are
  * just two similar faces; these are full-body characters in public/assets/art.
+ * E003 is Hungry Monster and E004 is Hala saying "Oops!" (Play World game icons).
  */
-export const ART_HEXES: ReadonlySet<string> = new Set(['E001', 'E002'])
+export const ART_HEXES: ReadonlySet<string> = new Set(['E001', 'E002', 'E003', 'E004'])
 
 /** Path under public/assets for a picture code. */
 export function picturePath(hex: string): string {
