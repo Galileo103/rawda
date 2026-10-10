@@ -8,7 +8,6 @@ import { AREA_IDS } from '../domain/types'
  * and again at runtime (invalid files are skipped, never crash the app).
  */
 
-export const LangZ = z.enum(['ar', 'en'])
 export const AreaIdZ = z.enum(AREA_IDS)
 const Id = z.string().regex(/^[a-z0-9][a-z0-9.-]*$/, 'ids are lowercase slugs: a-z 0-9 . -')
 const Hex = z.string().regex(/^[0-9A-F]{4,5}(-[0-9A-F]{4,5})*$/, 'OpenMoji hex code, e.g. 1F34E')

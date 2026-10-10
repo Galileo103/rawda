@@ -126,7 +126,6 @@ export const PATTERN_SETS: readonly (readonly string[])[] = [
   ['1F436', '1F431', '1F430', '1F43B', '1F438', '1F43C'],
   ['1F697', '1F68C', '1F6B2', '2708', '1F680', '26F5'],
 ]
-export const PATTERN_KINDS: Record<Stage, readonly string[]> = { 1: ['AB'], 2: ['AAB', 'ABB'], 3: ['ABC', 'AABB'] }
 
 export const CATEGORY_IDS = ['animals', 'fruits', 'vehicles'] as const
 export type CategoryId = (typeof CATEGORY_IDS)[number]
