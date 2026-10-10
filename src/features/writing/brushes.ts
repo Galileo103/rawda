@@ -93,3 +93,23 @@ function line(c: CanvasRenderingContext2D, color: string, width: number, from: P
   c.lineTo(to.x + 0.1, to.y + 0.1)
   c.stroke()
 }
+
+/**
+ * A brush as wide as the letter's strokes (so one pass along a stroke colours it, leaving only
+ * small gaps): the shape's average thickness, 2 × area / outline length, measured on the mask.
+ */
+export function brushFor(mask: { data: Uint8ClampedArray; width: number; height: number }, fallback = 70): number {
+  const { data, width, height } = mask
+  const on = (x: number, y: number) => x >= 0 && y >= 0 && x < width && y < height && (data[(y * width + x) * 4 + 3] ?? 0) > 100
+  let area = 0
+  let edge = 0
+  for (let y = 0; y < height; y++) {
+    for (let x = 0; x < width; x++) {
+      if (!on(x, y)) continue
+      area++
+      if (!on(x + 1, y) || !on(x - 1, y) || !on(x, y + 1) || !on(x, y - 1)) edge++
+    }
+  }
+  if (!edge) return fallback
+  return Math.round(Math.min(120, Math.max(56, (2 * area) / edge)))
+}

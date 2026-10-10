@@ -1,7 +1,8 @@
-import { type CSSProperties, type PointerEvent, useEffect, useRef, useState } from 'react'
-import { Navigate, useNavigate, useParams } from 'react-router-dom'
+import { type CSSProperties, type PointerEvent, type ReactNode, useEffect, useRef, useState } from 'react'
+import { Navigate, useNavigate, useParams, useSearchParams } from 'react-router-dom'
 import { useApp } from '../../app/AppState'
 import { content } from '../../content/loader'
+import { hasStrokes } from '../../content/strokes'
 import { COLOR_KEYS, type ColorKey } from '../../content/schemas'
 import { type WriteEntry, WRITE_FILL_ACTIVITY, entriesOf, fillLine, writeEntryById } from '../../content/writing'
 import { Icon } from '../../design/Icon'
@@ -13,12 +14,13 @@ import { audio } from '../../services/audio/AudioService'
 import { saveDrawing } from '../../services/repos/drawings'
 import { grantEarnedRewards, recordItemResult } from '../../services/repos/progress'
 import { coverPoints, layoutGlyph, maskPoints, pointParts, weakestPart } from '../studio/canvasTools'
-import { BRUSHES, type Brush, newBrushState, paintSegment } from './brushes'
+import { BRUSHES, type Brush, brushFor, newBrushState, paintSegment } from './brushes'
+import { PathBoard } from './PathBoard'
 import s from './writing.module.css'
 
 const SIZE = 600
-const BRUSH = 50
-const REACH = BRUSH / 2
+/** Brush width before the letter is measured; then it matches the letter's own strokes. */
+const BRUSH = 70
 const STEP = 10
 /** Quiet this long (ms) with work left: the spots still to colour start to sparkle. */
 const IDLE_MS = 5000
@@ -33,10 +35,36 @@ type Pt = { x: number; y: number }
 
 export function WritingScreen() {
   const { entryId } = useParams()
+  const [params] = useSearchParams()
   const entry = writeEntryById(entryId)
   if (!entry) return <Navigate to="/write" replace />
-  // A fresh board for every letter.
-  return <FillBoard key={entry.id} entry={entry} />
+  const mode = params.get('mode') === 'path' && hasStrokes(entry.id) ? 'path' : 'fill'
+  const modes = hasStrokes(entry.id) ? <ModeSwitch entry={entry} mode={mode} /> : null
+  // A fresh board for every letter and mode.
+  return mode === 'path' ? <PathBoard key={`${entry.id}-path`} entry={entry} modes={modes} /> : <FillBoard key={entry.id} entry={entry} modes={modes} />
+}
+
+/** Colour it in, or write it along the dotted path: the two steps for each letter. */
+function ModeSwitch({ entry, mode }: { entry: WriteEntry; mode: 'fill' | 'path' }) {
+  const { t } = useApp()
+  const navigate = useNavigate()
+  const go = (m: 'fill' | 'path') => {
+    if (m === mode) return
+    audio.sfx('tap')
+    navigate(`/write/${entry.id}${m === 'path' ? '?mode=path' : ''}`, { replace: true })
+  }
+  return (
+    <div className={s.modes} role="group" aria-label={t.writing.title}>
+      <button type="button" aria-pressed={mode === 'fill'} onClick={() => go('fill')} data-testid="mode-fill">
+        <Icon name="fill" size={26} />
+        <span>{t.writing.modes.fill}</span>
+      </button>
+      <button type="button" aria-pressed={mode === 'path'} onClick={() => go('path')} data-testid="mode-path">
+        <Icon name="pencil" size={26} />
+        <span>{t.writing.modes.path}</span>
+      </button>
+    </div>
+  )
 }
 
 /**
@@ -45,7 +73,7 @@ export function WritingScreen() {
  * nothing is ever a mistake. Done when the whole letter is coloured — every part of it, the
  * dots too — then it celebrates, and the picture goes to "My drawings".
  */
-function FillBoard({ entry }: { entry: WriteEntry }) {
+function FillBoard({ entry, modes }: { entry: WriteEntry; modes: ReactNode }) {
   const { t, settings, langs, age } = useApp()
   const navigate = useNavigate()
   const lang = entry.lang
@@ -68,6 +96,7 @@ function FillBoard({ entry }: { entry: WriteEntry }) {
   const stats = useRef({ sparkles: 0, startedAt: Date.now() })
   const lastActive = useRef(Date.now())
   const done = useRef(false)
+  const brushW = useRef(BRUSH)
 
   const [ready, setReady] = useState<'loading' | 'canvas' | 'fallback'>('loading')
   const [brush, setBrush] = useState<Brush>('marker')
@@ -129,6 +158,7 @@ function FillBoard({ entry }: { entry: WriteEntry }) {
       points.current = maskPoints(maskData.current, STEP)
       covered.current = new Uint8Array(points.current.length / 2)
       parts.current = pointParts(points.current, STEP)
+      brushW.current = brushFor(maskData.current)
       setReady(points.current.length ? 'canvas' : 'fallback')
     })()
     void audio.speak(intro, lang)
@@ -177,7 +207,7 @@ function FillBoard({ entry }: { entry: WriteEntry }) {
   const inside = (p: Pt) => {
     const data = maskData.current
     if (!data) return true
-    const near = BRUSH * 0.35
+    const near = brushW.current * 0.35
     const probes: [number, number][] = [
       [0, 0],
       [near, 0],
@@ -195,15 +225,16 @@ function FillBoard({ entry }: { entry: WriteEntry }) {
   const paint = (from: Pt, to: Pt) => {
     const c = paintRef.current?.getContext('2d')
     if (!c || !mask.current) return
-    paintSegment(c, brush, COLOR_HEX[color], BRUSH, from, to, brushState.current)
+    paintSegment(c, brush, COLOR_HEX[color], brushW.current, from, to, brushState.current)
+    const reach = brushW.current / 2
     // Magic walls: keep only what is inside the letter.
     c.globalCompositeOperation = 'destination-in'
     c.drawImage(mask.current, 0, 0)
     c.globalCompositeOperation = 'source-over'
     // Count coverage all along the segment (a quick swipe sends events far apart).
-    const steps = Math.max(1, Math.ceil(Math.hypot(to.x - from.x, to.y - from.y) / (REACH / 2)))
+    const steps = Math.max(1, Math.ceil(Math.hypot(to.x - from.x, to.y - from.y) / (reach / 2)))
     let added = 0
-    for (let i = 0; i <= steps; i++) added += coverPoints(points.current, covered.current, from.x + ((to.x - from.x) * i) / steps, from.y + ((to.y - from.y) * i) / steps, REACH)
+    for (let i = 0; i <= steps; i++) added += coverPoints(points.current, covered.current, from.x + ((to.x - from.x) * i) / steps, from.y + ((to.y - from.y) * i) / steps, reach)
     if (added) setProgress(coverage())
   }
 
@@ -323,6 +354,7 @@ function FillBoard({ entry }: { entry: WriteEntry }) {
 
       <div className={s.stage}>
         <div className={s.side}>
+          {modes}
           {won ? (
             <>
               <IconButton icon="again" label={t.writing.again} showLabel onClick={restart} />
@@ -369,6 +401,7 @@ function FillBoard({ entry }: { entry: WriteEntry }) {
             aria-label={entry.glyph}
             data-testid="write-canvas"
             data-progress={Math.round(progress * 100)}
+            data-brush={ready === 'canvas' ? brushW.current : undefined}
           />
           <canvas ref={outlineRef} width={SIZE} height={SIZE} className={[s.layer, s.outline].join(' ')} aria-hidden="true" />
           {ready === 'fallback' && (
@@ -400,13 +433,24 @@ function FillBoard({ entry }: { entry: WriteEntry }) {
         <div className={s.side}>
           {won ? (
             <>
-              {next && (
-                <button type="button" className={s.nextBtn} onClick={() => navigate(`/write/${next.id}`)} data-testid="write-next" aria-label={`${t.writing.next} ${next.glyph}`}>
-                  <span lang={next.lang}>{next.glyph}</span>
-                  <span className={s.nextArrow} aria-hidden="true">
-                    <Icon name="next" size={40} />
-                  </span>
-                </button>
+              {hasStrokes(entry.id) ? (
+                // Coloured in: now write the same letter along its dotted path.
+                <>
+                  <button type="button" className={s.nextBtn} onClick={() => navigate(`/write/${entry.id}?mode=path`)} data-testid="write-next-step" aria-label={t.writing.modes.path}>
+                    <Icon name="pencil" size={48} />
+                    <span className={s.nextLabel}>{t.writing.modes.path}</span>
+                  </button>
+                  {next && <IconButton icon="next" label={`${t.writing.nextLetter} ${next.glyph}`} showLabel onClick={() => navigate(`/write/${next.id}`)} data-testid="write-next" />}
+                </>
+              ) : (
+                next && (
+                  <button type="button" className={s.nextBtn} onClick={() => navigate(`/write/${next.id}`)} data-testid="write-next" aria-label={`${t.writing.next} ${next.glyph}`}>
+                    <span lang={next.lang}>{next.glyph}</span>
+                    <span className={s.nextArrow} aria-hidden="true">
+                      <Icon name="next" size={40} />
+                    </span>
+                  </button>
+                )
               )}
               <p className={s.saved} role="status">
                 <Icon name="gallery" size={22} /> {t.writing.savedToGallery}

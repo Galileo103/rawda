@@ -92,6 +92,7 @@
 }
 .tileStar {
   position: absolute;
+  display: flex;
   inset-block-start: 6px;
   inset-inline-end: 6px;
   color: #f5a300;
@@ -455,5 +456,115 @@
     width: 48px;
     height: 48px;
     font-size: 1.6rem;
+  }
+}
+
+/* ---- Stroke guide (review page) ---- */
+.guideGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 10px;
+}
+.guideCell {
+  margin: 0;
+  padding: 6px;
+  border-radius: 18px;
+  background: #fff;
+  border: 2px solid var(--line);
+  text-align: center;
+}
+.guideCell figcaption {
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: var(--grape);
+  line-height: 1.2;
+}
+
+/* ---- Colour / write switch ---- */
+.modes {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 5px;
+  border-radius: 24px;
+  background: var(--surface);
+  border: 3px solid var(--line);
+}
+.modes button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  min-width: 76px;
+  padding: 6px 8px;
+  border: 0;
+  border-radius: 18px;
+  background: transparent;
+  color: var(--ink);
+  font-weight: 800;
+  font-size: 0.9rem;
+  cursor: pointer;
+  touch-action: manipulation;
+}
+.modes button[aria-pressed='true'] {
+  background: var(--grape);
+  color: #fff;
+}
+.nextLabel {
+  font-size: 1.3rem;
+}
+
+/* ---- Dotted path board ---- */
+.overlay {
+  pointer-events: none;
+}
+.guideWon {
+  z-index: 1;
+  filter: drop-shadow(0 0 3px #fff) drop-shadow(0 3px 0 rgba(160, 100, 0, 0.35));
+}
+.arrow {
+  fill: #e8613a;
+  stroke: #fff;
+  stroke-width: 3;
+}
+.startDot circle {
+  fill: #3f9d33;
+  stroke: #fff;
+  stroke-width: 5;
+}
+.startDot text {
+  fill: #fff;
+  font-size: 34px;
+  font-weight: 800;
+}
+.startDot {
+  animation: start-pop 1.4s ease-in-out infinite;
+}
+@keyframes start-pop {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.18);
+  }
+}
+.pen circle {
+  fill: #e8613a;
+  stroke: #fff;
+  stroke-width: 4;
+}
+.pen path {
+  fill: #f5a300;
+  stroke: #8a5a00;
+  stroke-width: 2;
+}
+
+@media (orientation: portrait), (max-width: 760px) {
+  .modes {
+    flex-direction: row;
+  }
+  .modes button {
+    min-width: 64px;
   }
 }

@@ -1,4 +1,5 @@
 import { type Page, expect, test } from '@playwright/test'
+import { letterStrokes } from '../src/features/writing/paths'
 import quran from '../content/quran/surahs.json' with { type: 'json' }
 
 /** First-run setup as a parent would do it (Arabic UI, both languages, boy or girl, PIN 1357). */
@@ -440,6 +441,45 @@ test('Writing room: colour a letter inside its magic walls, then it celebrates a
   await page.getByRole('button', { name: /كل الحروف/ }).first().click()
   await expect(page.getByTestId('write-ar-ba').locator('[class*="tileStar"]')).toBeVisible()
   await expect(page.getByTestId('write-ar-ta').locator('[class*="tileStar"]')).toHaveCount(0)
+})
+
+/** Move a finger along board points (600×600) of the dotted-path canvas. */
+async function drawAlong(page: Page, pts: { x: number; y: number }[]) {
+  const box = (await page.getByTestId('path-canvas').boundingBox())!
+  const k = box.width / 600
+  await page.mouse.move(box.x + pts[0]!.x * k, box.y + pts[0]!.y * k)
+  await page.mouse.down()
+  for (let i = 3; i < pts.length; i += 3) await page.mouse.move(box.x + pts[i]!.x * k, box.y + pts[i]!.y * k)
+  await page.mouse.move(box.x + pts[pts.length - 1]!.x * k, box.y + pts[pts.length - 1]!.y * k)
+  await page.mouse.up()
+}
+
+test('Writing room: after colouring, write the letter along its dotted path, in order and direction', async ({ page }) => {
+  await onboard(page)
+  await page.goto('./#/write/ar-ba')
+  await expect(page.getByTestId('mode-path')).toBeVisible()
+  await page.getByTestId('mode-path').click()
+  const canvas = page.getByTestId('path-canvas')
+  // Hala's pen shows it first, then it's the child's turn.
+  await expect(canvas).toHaveAttribute('data-phase', 'demo')
+  await expect(canvas).toHaveAttribute('data-phase', 'play', { timeout: 15_000 })
+  await expect(page.getByTestId('path-start')).toBeVisible()
+  const [body, dot] = letterStrokes('ar-ba', 600)
+  // Backwards, or half and lift: the stroke is not done yet.
+  await drawAlong(page, [...body!.pts].reverse())
+  await expect(canvas).toHaveAttribute('data-stroke', '0')
+  const half = Math.floor(body!.pts.length / 2)
+  await drawAlong(page, body!.pts.slice(0, half))
+  await expect(canvas).toHaveAttribute('data-stroke', '0')
+  // Carry on from where the finger stopped: the body is done, now the dot.
+  await drawAlong(page, body!.pts.slice(half - 2))
+  await expect(canvas).toHaveAttribute('data-stroke', '1')
+  const box = (await canvas.boundingBox())!
+  await page.mouse.click(box.x + (dot!.pts[0]!.x * box.width) / 600, box.y + (dot!.pts[0]!.y * box.width) / 600)
+  await expect(canvas).toHaveAttribute('data-phase', 'won')
+  await expect(page.getByTestId('write-next')).toBeVisible()
+  await page.goto('./#/write')
+  await expect(page.getByTestId('write-ar-ba').locator('[class*="tileStar"] svg')).toHaveCount(1)
 })
 
 test('finger paths: a pre-writing stroke with a green start dot can be traced', async ({ page }) => {

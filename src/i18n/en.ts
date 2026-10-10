@@ -151,6 +151,10 @@ export const en = {
     all: 'All letters',
     restart: 'Start over',
     savedToGallery: 'Saved in My drawings',
+    guide: 'How to write each letter',
+    modes: { fill: 'Color', path: 'Write' },
+    watchAgain: 'Watch again',
+    nextLetter: 'Next letter',
     say: {
       hello: 'Pick a letter to color!',
       fillLetter: 'Let’s color the letter {letter}!',
@@ -163,6 +167,12 @@ export const en = {
       almost: 'Almost done! Color the sparkly spots!',
       done: 'Wonderful, @name! You colored it all!',
       doneNumber: 'Wonderful, @name! You colored the whole number!',
+      watch: 'Watch how we write it!',
+      yourTurn: 'Your turn! Start at the green dot.',
+      startGreen: 'Start at the green dot!',
+      followArrow: 'Follow the arrow!',
+      nowDot: 'Now the dot!',
+      wrote: 'Great job, @name! You wrote it yourself!',
     },
   },
   speak: {

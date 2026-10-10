@@ -29,6 +29,8 @@ export interface WriteEntry {
 
 /** Activity id that writing results are stored under (attempts table). */
 export const WRITE_FILL_ACTIVITY = 'write:fill'
+/** …and for writing it along the dotted path. */
+export const WRITE_PATH_ACTIVITY = 'write:path'
 
 const TATWEEL = 'ـ'
 /** Letters that never join to the next one: only a standalone and an end form. */
@@ -96,7 +98,7 @@ export function digitWord(n: number, d: Dict): string {
 /** Every line the Writing room can say in `lang` (for pre-rendering the audio). */
 export function writingLines(lang: Lang, d: Dict): string[] {
   const w = d.writing.say
-  const out = [w.hello, w.inside, w.almost, w.done, w.doneNumber]
+  const out = [w.hello, w.inside, w.almost, w.done, w.doneNumber, w.watch, w.yourTurn, w.startGreen, w.followArrow, w.nowDot, w.wrote]
   for (const e of WRITE_ENTRIES) if (e.lang === lang) out.push(fillLine(e, d))
   return out
 }
