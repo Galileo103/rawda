@@ -12,7 +12,7 @@ async function onboard(page: Page, nickname = 'Mimi') {
   await pins.nth(0).fill('1357')
   await pins.nth(1).fill('1357')
   await page.getByRole('button', { name: /إنهاء/ }).click()
-  await expect(page.getByText(`أهلًا يا ${nickname}!`)).toBeVisible()
+  await expect(page.getByText(new RegExp(`(صباح|مساء) الخير يا ${nickname}!`))).toBeVisible()
 }
 
 /** Play an activity to the end by always choosing the right answer. */
@@ -72,7 +72,7 @@ test('works offline after the first visit (cold start in airplane mode)', async 
   await context.setOffline(true)
   await page.goto('./#/home')
   await page.reload()
-  await expect(page.getByText('أهلًا يا Mimi!')).toBeVisible()
+  await expect(page.getByText(/(صباح|مساء) الخير يا Mimi!/)).toBeVisible()
   await page.goto('./#/play/count-objects')
   await expect(page.getByRole('button', { name: /ابدأ/ })).toBeVisible()
   // Illustrations come from the offline cache too.
@@ -267,8 +267,9 @@ test('a movement break appears after a few activities and waits for "Done"', asy
 test('voice off: press-and-hold silences Hala and a grown-up reads the big on-screen text', async ({ page }) => {
   await onboard(page)
   const toggle = page.getByTestId('voice-toggle')
-  await toggle.click() // a quick tap (a curious child) changes nothing
+  await toggle.click() // a quick tap (a curious child) changes nothing…
   await expect(toggle).toHaveAttribute('aria-pressed', 'false')
+  await expect(page.getByRole('status').filter({ hasText: 'اضغط باستمرار' })).toBeVisible() // …but explains itself (no hover on phones)
   await toggle.hover()
   await page.mouse.down()
   await page.waitForTimeout(1500)

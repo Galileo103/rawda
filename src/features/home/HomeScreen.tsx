@@ -1,5 +1,5 @@
 import { useLiveQuery } from 'dexie-react-hooks'
-import type { CSSProperties } from 'react'
+import { type CSSProperties, useState } from 'react'
 import { Icon } from '../../design/Icon'
 import { useNavigate } from 'react-router-dom'
 import { useApp } from '../../app/AppState'
@@ -11,6 +11,8 @@ import { recommendNext } from '../../domain/recommend'
 import type { Lang } from '../../domain/types'
 import { fmt } from '../../i18n'
 import { audio } from '../../services/audio/AudioService'
+import { content } from '../../content/loader'
+import { db } from '../../services/db'
 import { getMasteryMap, totalStars } from '../../services/repos/progress'
 import { forRecommend, iconFor, journeyCompleted, pick, playableActivities, useSpeakOnMount, visibleAreas, voice } from '../common'
 import { VoiceToggle } from '../VoiceToggle'
@@ -23,6 +25,13 @@ export function HomeScreen() {
   const vis = { disabledAreas: settings.disabledAreas, langs }
 
   const stars = useLiveQuery(totalStars, [], 0)
+  // Per-area progress: distinct activities finished (stories: stories read to the end).
+  const doneIds = useLiveQuery(async () => {
+    const ids = new Set<string>()
+    await db.completions.each((c) => ids.add(c.activityId))
+    const storiesRead = (await db.storyProgress.toArray()).filter((p) => p.finished).length
+    return { ids, storiesRead }
+  }, [], { ids: new Set<string>(), storiesRead: 0 })
   const completed = useLiveQuery(() => journeyCompleted(vis), [settings.disabledAreas.join(), langs.join()], new Set<string>())
   const mastery = useLiveQuery(getMasteryMap, [], new Map())
 
@@ -44,14 +53,36 @@ export function HomeScreen() {
     void audio.speak(voice(l).homeHello, l)
   }
 
-  const hello = profile.nickname ? fmt(t.home.hello, { name: profile.nickname }) : t.home.helloNoName
+  // Time-of-day greeting (display only; the spoken greeting stays the same short line).
+  const [morning] = useState(() => new Date().getHours() < 12)
+  const hello = profile.nickname
+    ? fmt(morning ? t.home.morning : t.home.evening, { name: profile.nickname })
+    : morning
+      ? t.home.morningNoName
+      : t.home.eveningNoName
+
+  /** 0..1 progress for an area card (studio has no "progress": creativity is open-ended). */
+  const progressOf = (area: Area): number | undefined => {
+    if (area.route === 'studio') return undefined
+    if (area.route === 'stories') return content.stories.length ? doneIds.storiesRead / content.stories.length : undefined
+    const acts = playableActivities(vis, area.id)
+    return acts.length ? acts.filter((a) => doneIds.ids.has(a.id)).length / acts.length : undefined
+  }
 
   return (
-    <Screen>
+    <Screen className={s.home}>
       <header className={s.header}>
+        {/* Welcome banner: a little sky with Hala greeting the child. */}
         <div className={s.greeting}>
-          <Mascot mood="happy" size={110} />
-          <SpeechBubble text={hello} readAloud={!settings.narration} />
+          <span className={s.sky} aria-hidden="true">
+            <i className={s.sun} />
+            <i className={s.cloud} />
+            <i className={[s.cloud, s.cloud2].join(' ')} />
+          </span>
+          <span className={s.halaWave}>
+            <Mascot mood="happy" size={120} />
+          </span>
+          <SpeechBubble text={hello} readAloud={!settings.narration} className={s.helloBubble} />
         </div>
         {/* Grown-up controls: small, quiet and out of the child's main area. */}
         <div className={s.grownups}>
@@ -96,20 +127,34 @@ export function HomeScreen() {
       )}
 
       <nav className={s.grid} aria-label={t.map.title}>
-        {areas.map((area, i) => (
-          <button
-            key={area.id}
-            type="button"
-            className={s.card}
-            style={{ background: `linear-gradient(160deg, #fff 0%, ${area.color}33 45%, ${area.color}66 100%)`, '--accent': area.color, animationDelay: `${i * 45}ms` } as CSSProperties}
-            onClick={() => openArea(area)}
-          >
-            <Visual v={iconFor(area, lang)} lang={lang} size={86} />
-            <span className={s.cardTitle} lang={settings.uiLang}>
-              {area.title[settings.uiLang]}
-            </span>
-          </button>
-        ))}
+        {areas.map((area, i) => {
+          const progress = progressOf(area)
+          const lit = progress === undefined ? 0 : Math.round(progress * 5)
+          return (
+            <button
+              key={area.id}
+              type="button"
+              className={s.card}
+              style={{ background: `linear-gradient(160deg, #fff 0%, ${area.color}33 45%, ${area.color}66 100%)`, '--accent': area.color, animationDelay: `${i * 45}ms` } as CSSProperties}
+              onClick={() => openArea(area)}
+            >
+              <span className={s.cardIcon}>
+                <Visual v={iconFor(area, lang)} lang={lang} size={iconFor(area, lang).kind === 'glyph' ? 60 : 76} />
+              </span>
+              <span className={s.cardTitle} lang={settings.uiLang}>
+                {area.title[settings.uiLang]}
+              </span>
+              {/* Five little stars fill up as the child explores the area (no numbers to read). */}
+              {progress !== undefined && (
+                <span className={s.cardStars} aria-hidden="true">
+                  {Array.from({ length: 5 }, (_, k) => (
+                    <Icon key={k} name="star" size={18} className={k < lit ? s.starOn : s.starOff} />
+                  ))}
+                </span>
+              )}
+            </button>
+          )
+        })}
       </nav>
 
       {usage.limitReached && (

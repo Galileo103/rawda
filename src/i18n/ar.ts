@@ -53,6 +53,10 @@ export const ar: Dict = {
   home: {
     hello: 'أهلًا يا {name}!',
     helloNoName: 'أهلًا!',
+    morning: 'صباح الخير يا {name}!',
+    evening: 'مساء الخير يا {name}!',
+    morningNoName: 'صباح الخير!',
+    eveningNoName: 'مساء الخير!',
     continue: 'نُكْمِل',
     stickers: 'ملصقاتي',
     learnIn: 'نتعلّم بـ',

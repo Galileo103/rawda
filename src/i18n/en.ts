@@ -50,6 +50,10 @@ export const en = {
   home: {
     hello: 'Hi, {name}!',
     helloNoName: 'Hi there!',
+    morning: 'Good morning, {name}!',
+    evening: 'Good evening, {name}!',
+    morningNoName: 'Good morning!',
+    eveningNoName: 'Good evening!',
     continue: 'Continue',
     stickers: 'Stickers',
     learnIn: 'Learn in',

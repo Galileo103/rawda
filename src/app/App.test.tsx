@@ -36,7 +36,7 @@ describe('app', () => {
     await userEvent.type(pin!, '2468')
     await userEvent.type(again!, '2468')
     await userEvent.click(screen.getByRole('button', { name: /إنهاء/ }))
-    expect(await screen.findByText('أهلًا يا Mimi!')).toBeInTheDocument()
+    expect(await screen.findByText(/(صباح|مساء) الخير يا Mimi!/)).toBeInTheDocument()
     expect(screen.getByRole('button', { name: /الحروف والأصوات/ })).toBeInTheDocument()
     const s = await db.settings.get('main')
     expect(s?.pinHash).toBeTruthy()
@@ -56,9 +56,9 @@ describe('app', () => {
     await updateProfile({ nickname: 'Mimi' })
     window.location.hash = '#/home'
     render(<App />)
-    await screen.findByText('أهلًا يا Mimi!')
+    await screen.findByText(/(صباح|مساء) الخير يا Mimi!/)
     await updateSettings({ practiceLang: 'en' }) // the ع / A switch
-    expect(await screen.findByText('Hi, Mimi!')).toBeInTheDocument()
+    expect(await screen.findByText(/Good (morning|evening), Mimi!/)).toBeInTheDocument()
     await waitFor(() => expect(document.documentElement.dir).toBe('ltr'))
   })
 
