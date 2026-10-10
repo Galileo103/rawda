@@ -1115,3 +1115,25 @@
   animation: none !important;
   bottom: var(--rest) !important;
 }
+
+/* "Discover first": still inviting, just softer, with a sunny tag that says what to learn. */
+.cardWaiting {
+  background: linear-gradient(160deg, color-mix(in srgb, var(--c) 10%, #fff), var(--surface) 85%);
+  box-shadow: 0 7px 0 color-mix(in srgb, var(--c) 18%, transparent);
+}
+.cardWaiting .cardIcon {
+  filter: saturate(0.55);
+  opacity: 0.85;
+}
+.discoverTag {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 12px;
+  border-radius: 999px;
+  background: var(--sun-soft);
+  border: 2px solid var(--sun);
+  color: var(--ink);
+  font-size: 0.85rem;
+  font-weight: 800;
+}

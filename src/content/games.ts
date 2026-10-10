@@ -51,27 +51,26 @@ export function gameFromActivityId(activityId: string): GameDef | undefined {
 export type Stage = 1 | 2 | 3
 
 export interface Letter {
+  /** Lesson item id ("ba", "b"): the skill is `${lang}.letter.${id}`. */
+  id: string
   glyph: string
   /** Spoken/display name ("البَاء"); English uses the glyph itself. */
   name: string
 }
+
+/** ar-discover item ids, in alphabet order (matches AR_LETTERS). */
+const AR_LETTER_IDS = 'alif ba ta tha jim hha kha dal dhal ra zay sin shin sad dad tta dha ayn ghayn fa qaf kaf lam mim nun ha waw ya'.split(' ')
 
 export const AR_LETTERS: readonly Letter[] = ([
   ['ا', 'الأَلِف'], ['ب', 'البَاء'], ['ت', 'التَّاء'], ['ث', 'الثَّاء'], ['ج', 'الجِيم'], ['ح', 'الحَاء'], ['خ', 'الخَاء'],
   ['د', 'الدَّال'], ['ذ', 'الذَّال'], ['ر', 'الرَّاء'], ['ز', 'الزَّاي'], ['س', 'السِّين'], ['ش', 'الشِّين'], ['ص', 'الصَّاد'],
   ['ض', 'الضَّاد'], ['ط', 'الطَّاء'], ['ظ', 'الظَّاء'], ['ع', 'العَيْن'], ['غ', 'الغَيْن'], ['ف', 'الفَاء'], ['ق', 'القَاف'],
   ['ك', 'الكَاف'], ['ل', 'اللَّام'], ['م', 'المِيم'], ['ن', 'النُّون'], ['ه', 'الهَاء'], ['و', 'الوَاو'], ['ي', 'اليَاء'],
-] as [string, string][]).map(([glyph, name]) => ({ glyph, name }))
+] as [string, string][]).map(([glyph, name], i) => ({ id: AR_LETTER_IDS[i] ?? glyph, glyph, name }))
 
-export const EN_LETTERS: readonly Letter[] = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('').map((c) => ({ glyph: c, name: c }))
+export const EN_LETTERS: readonly Letter[] = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('').map((c) => ({ id: c.toLowerCase(), glyph: c, name: c }))
 
 export const lettersFor = (lang: Lang) => (lang === 'ar' ? AR_LETTERS : EN_LETTERS)
-
-/** Letters in play per stage (alphabet order, so early stages meet the first letters). */
-export function letterPool(lang: Lang, stage: Stage): readonly Letter[] {
-  const cut = lang === 'ar' ? [7, 16, 28] : [8, 16, 26]
-  return lettersFor(lang).slice(0, cut[stage - 1])
-}
 
 export const GAME_COLORS: readonly ColorKey[] = ['red', 'blue', 'yellow', 'green', 'orange', 'purple', 'pink']
 export const ODD_SHAPES: readonly ShapeKey[] = ['circle', 'square', 'triangle', 'star', 'heart']
@@ -186,6 +185,85 @@ export const GAME_HEXES: readonly string[] = [
   ]),
 ]
 
+// ---- what the child has discovered ----
+
+/** The letters, numbers, colours, shapes and ideas a child has met in Discover lessons. Games play only with these. */
+export interface LearnedPools {
+  letters: readonly Letter[]
+  numbers: readonly number[]
+  colors: readonly ColorKey[]
+  shapes: readonly ShapeKey[]
+  patternAB: boolean
+  patternABB: boolean
+  odd: boolean
+}
+
+/** Turn discovered skills (see introducedSkills) into game pools for one language. */
+export function learnedPools(skills: ReadonlySet<string>, lang: Lang): LearnedPools {
+  return {
+    letters: lettersFor(lang).filter((l) => skills.has(`${lang}.letter.${l.id}`)),
+    numbers: Array.from({ length: 10 }, (_, i) => i + 1).filter((n) => skills.has(`num.count.${n}`)),
+    colors: GAME_COLORS.filter((c) => skills.has(`color.${c}`)),
+    shapes: BUILD_SHAPES.filter((s) => skills.has(`shape.${s}`)),
+    patternAB: skills.has('logic.pattern.ab'),
+    patternABB: skills.has('logic.pattern.abb'),
+    odd: skills.has('logic.odd'),
+  }
+}
+
+/** Longest run of consecutive numbers (1, 2, 3, 5 → [1, 2, 3]). */
+export function longestRun(nums: readonly number[]): number[] {
+  const sorted = [...new Set(nums)].sort((a, b) => a - b)
+  let best: number[] = []
+  let cur: number[] = []
+  for (const n of sorted) {
+    cur = cur.length && cur[cur.length - 1] === n - 1 ? [...cur, n] : [n]
+    if (cur.length > best.length) best = cur
+  }
+  return best
+}
+
+/** Shape-builder pictures made only of shapes the child knows. */
+export function playablePuzzles(shapes: readonly ShapeKey[]): PuzzleId[] {
+  return PUZZLE_IDS.filter((id) => PUZZLES[id].every((s) => shapes.includes(s.shape)))
+}
+
+/** What a game still needs the child to discover (picks the "Discover first" message). */
+export type NeedKey = 'letters' | 'numbers' | 'run' | 'colors' | 'shapes' | 'patterns' | 'odd'
+
+export interface Readiness {
+  ready: boolean
+  need: NeedKey
+  /** The Discover lesson that teaches what's missing. */
+  lessonId: string
+  /** How many learned things the game plays with (shown on its card). */
+  learned: number
+}
+
+export function gameReadiness(id: GameId, p: LearnedPools, lang: Lang): Readiness {
+  const letterLesson = lang === 'ar' ? 'ar-discover' : 'en-discover'
+  switch (id) {
+    case 'frog':
+      return { ready: p.letters.length >= 2, need: 'letters', lessonId: letterLesson, learned: p.letters.length }
+    case 'balloons': {
+      const ready = p.letters.length >= 2 || p.numbers.length >= 2
+      return { ready, need: 'letters', lessonId: letterLesson, learned: (p.letters.length >= 2 ? p.letters.length : 0) + (p.numbers.length >= 2 ? p.numbers.length : 0) }
+    }
+    case 'count':
+      return { ready: p.numbers.length >= 1, need: 'numbers', lessonId: 'num-discover', learned: p.numbers.length }
+    case 'train':
+      return { ready: longestRun(p.numbers).length >= 3, need: 'run', lessonId: 'num-discover', learned: longestRun(p.numbers).length }
+    case 'butterflies':
+      return { ready: p.colors.length >= 2, need: 'colors', lessonId: 'colors-discover', learned: p.colors.length }
+    case 'shapes':
+      return { ready: playablePuzzles(p.shapes).length > 0, need: 'shapes', lessonId: 'shapes-discover', learned: p.shapes.length }
+    case 'next':
+      return { ready: p.patternAB, need: 'patterns', lessonId: 'logic-discover', learned: (p.patternAB ? 1 : 0) + (p.patternABB ? 1 : 0) }
+    case 'odd':
+      return { ready: p.odd, need: 'odd', lessonId: 'logic-discover', learned: 1 + (p.colors.length >= 2 ? 1 : 0) + (p.shapes.length >= 2 ? 1 : 0) }
+  }
+}
+
 // ---- what the games say ----
 
 /** Spoken name of a number 1..10 (falls back to digits). */
@@ -203,7 +281,7 @@ export function gameLines(lang: Lang, d: Dict): string[] {
   const g = d.games
   const s = g.say
   const out: string[] = [g.hubHello, ...Object.values(g.titles), ...Object.values(g.gardenItems)]
-  for (const key of ['countMore', 'countLess', 'train', 'trainDone', 'butterflies', 'butterfliesDone', 'shapes', 'next', 'odd', 'done', 'grew', 'garden'] as const) out.push(s[key])
+  for (const key of ['countMore', 'countLess', 'train', 'trainDone', 'butterflies', 'butterfliesDone', 'shapes', 'next', 'odd', 'done', 'grew', 'garden', 'discoverFirst'] as const) out.push(s[key])
   for (const l of lettersFor(lang)) out.push(fmt(s.frog, { letter: l.name }), fmt(s.balloonLetter, { letter: l.name }))
   for (let n = 1; n <= 10; n++) {
     out.push(fmt(s.balloonNumber, { number: numberName(n, d) }), countPrompt(n, d), fmt(s.countDone, { number: numberName(n, d) }))

@@ -15,6 +15,27 @@ async function onboard(page: Page, nickname = 'Mimi') {
   await expect(page.getByText(new RegExp(`(صباح|مساء) الخير يا ${nickname}!`))).toBeVisible()
 }
 
+/** Record Discover lesson items as finished, straight in the app's local database (what the child "learned"). */
+async function discovered(page: Page, items: { activityId: string; itemId: string; skill: string; areaId: string }[]) {
+  await page.evaluate(
+    (rows) =>
+      new Promise<void>((resolve, reject) => {
+        const open = indexedDB.open('rawda')
+        open.onerror = () => reject(open.error)
+        open.onsuccess = () => {
+          const tx = open.result.transaction('attempts', 'readwrite')
+          for (const r of rows) tx.objectStore('attempts').add({ ...r, lang: 'ar', firstTry: true, misses: 0, hintsUsed: 0, durationMs: 1000, ts: Date.now() })
+          tx.oncomplete = () => {
+            open.result.close()
+            resolve()
+          }
+          tx.onerror = () => reject(tx.error)
+        }
+      }),
+    items,
+  )
+}
+
 /** Play an activity to the end by always choosing the right answer. */
 async function playThrough(page: Page, activityId: string) {
   await page.goto(`./#/play/${activityId}`)
@@ -356,7 +377,11 @@ test('phone layout has no horizontal scrolling', async ({ page }) => {
 test('Play World: finishing a game celebrates, saves the stars and grows Hala’s garden', async ({ page }) => {
   await onboard(page)
   await page.getByTestId('play-world').click()
-  await expect(page.getByTestId('game-odd')).toBeVisible()
+  // Before the idea is discovered, the card invites the child to learn it first.
+  await expect(page.getByTestId('game-odd')).toHaveAttribute('data-ready', 'false')
+  await discovered(page, [{ activityId: 'logic-discover', itemId: 'odd', skill: 'logic.odd', areaId: 'logic' }])
+  await page.reload()
+  await expect(page.getByTestId('game-odd')).toHaveAttribute('data-ready', 'true')
   await page.getByTestId('game-odd').click()
   for (let i = 0; i < 6; i++) {
     const done = page.getByRole('heading', { name: 'أحسنت!' })
@@ -377,6 +402,10 @@ test('Play World: finishing a game celebrates, saves the stars and grows Hala’
 
 test('Hungry Frog: a real finger drag feeds the frog', async ({ page }) => {
   await onboard(page)
+  await discovered(page, [
+    { activityId: 'ar-discover', itemId: 'alif', skill: 'ar.letter.alif', areaId: 'letters' },
+    { activityId: 'ar-discover', itemId: 'ba', skill: 'ar.letter.ba', areaId: 'letters' },
+  ])
   await page.goto('./#/games/frog')
   const fly = page.getByTestId('game-answer')
   await expect(fly).toBeVisible()
@@ -441,4 +470,23 @@ test('every section has its own Discover board with Hala asking the right questi
     await expect(page.getByText(question!)).toBeVisible()
   }
   await expect(page.getByTestId(/^discover-/)).toHaveCount(10) // numbers 1 to 10
+})
+
+test('games use only what was learned: after discovering 1 and 2, Count & Feed asks for 1 or 2', async ({ page }) => {
+  await onboard(page)
+  await page.goto('./#/games')
+  await page.getByTestId('game-count').click()
+  // Not learned yet → Hala opens the numbers Discover board instead.
+  await expect(page.getByTestId(/^discover-/)).toHaveCount(10)
+  await discovered(page, [
+    { activityId: 'num-discover', itemId: 'one', skill: 'num.count.1', areaId: 'numbers' },
+    { activityId: 'num-discover', itemId: 'two', skill: 'num.count.2', areaId: 'numbers' },
+  ])
+  for (let i = 0; i < 3; i++) {
+    await page.goto('./#/home')
+    await page.goto('./#/games/count')
+    const sign = page.locator('[class*="_sign_"]')
+    await expect(sign).toBeVisible()
+    expect(['١', '٢']).toContain(await sign.textContent())
+  }
 })

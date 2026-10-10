@@ -1,5 +1,5 @@
 import { type CSSProperties, useRef, useState } from 'react'
-import { BUILD_SHAPES, CATEGORIES, CATEGORY_IDS, type CategoryId, GAME_COLORS, ODD_SHAPES, PATTERN_KINDS, PATTERN_SETS, PUZZLES, PUZZLES_BY_STAGE } from '../../content/games'
+import { CATEGORIES, CATEGORY_IDS, type CategoryId, ODD_SHAPES, PATTERN_SETS, PUZZLES, PUZZLES_BY_STAGE, type PuzzleId, playablePuzzles } from '../../content/games'
 import type { ColorKey, ShapeKey } from '../../content/schemas'
 import { COLOR_HEX, OpenMoji, ShapeSvg } from '../../design/Visual'
 import { pickOne, shuffle } from '../../domain/rng'
@@ -11,10 +11,11 @@ import { type RoundProps, cx, useLatest, useMount } from './engine'
 import s from './games.module.css'
 
 /** Color Butterflies — take each butterfly to the flower of its colour (drag, or tap then tap). */
-export function ButterfliesRound({ d, stage, choices, locked, rng, ctl }: RoundProps) {
+export function ButterfliesRound({ d, stage, choices, locked, rng, ctl, learned }: RoundProps) {
   const [r] = useState(() => {
-    const pairs = Math.min([2, 3, 4][stage - 1] ?? 2, stage === 1 ? 2 : choices)
-    const cols = shuffle(GAME_COLORS, rng).slice(0, pairs)
+    // Only colours the child has discovered.
+    const pairs = Math.max(1, Math.min([2, 3, 4][stage - 1] ?? 2, stage === 1 ? 2 : choices, learned.colors.length))
+    const cols = shuffle(learned.colors, rng).slice(0, pairs)
     return { flowers: shuffle(cols, rng), flies: shuffle(cols, rng) }
   })
   const [landed, setLanded] = useState<ColorKey[]>([])
@@ -115,14 +116,18 @@ export function ButterfliesRound({ d, stage, choices, locked, rng, ctl }: RoundP
 }
 
 /** Shape Builder — fill the dotted outline of a picture with the matching shapes. */
-export function ShapesRound({ d, stage, locked, rng, ctl }: RoundProps) {
+export function ShapesRound({ d, stage, locked, rng, ctl, learned }: RoundProps) {
   const [r] = useState(() => {
-    const id = pickOne(PUZZLES_BY_STAGE[stage], rng)
+    // Pictures made only of shapes the child knows; harder pictures come with later stages.
+    const known = playablePuzzles(learned.shapes)
+    const forStage = PUZZLES_BY_STAGE[stage].filter((p) => known.includes(p))
+    const id: PuzzleId = pickOne(forStage.length ? forStage : known.length ? known : PUZZLES_BY_STAGE[1], rng)
     const slots = PUZZLES[id]
     const pieces = slots.map((sl, i) => ({ key: `p${i}`, shape: sl.shape, fill: sl.fill }))
     if (stage >= 2) {
       const used = new Set(slots.map((x) => x.shape))
-      pieces.push({ key: 'extra', shape: pickOne(BUILD_SHAPES.filter((x) => !used.has(x)), rng), fill: COLOR_HEX[pickOne(GAME_COLORS, rng)] })
+      const spare = learned.shapes.filter((x) => !used.has(x))
+      if (spare.length) pieces.push({ key: 'extra', shape: pickOne(spare, rng), fill: COLOR_HEX[pickOne(learned.colors.length ? learned.colors : ['blue' as const], rng)] })
     }
     return { id, slots, pieces: shuffle(pieces, rng) }
   })
@@ -234,10 +239,12 @@ export function ShapesRound({ d, stage, locked, rng, ctl }: RoundProps) {
 }
 
 /** What Comes Next? — finish the pattern (AB, AAB, ABC…). */
-export function NextRound({ d, stage, choices, locked, rng, ctl }: RoundProps) {
+export function NextRound({ d, stage, choices, locked, rng, ctl, learned }: RoundProps) {
   const [r] = useState(() => {
     const set = pickOne(PATTERN_SETS, rng)
-    const kind = pickOne(PATTERN_KINDS[stage], rng)
+    // AB is the pattern taught first; AAB/ABB (and later ABC/AABB) only once "abb" was discovered.
+    const kinds = ['AB', ...(learned.patternABB && stage >= 2 ? ['AAB', 'ABB'] : []), ...(learned.patternABB && stage === 3 ? ['ABC', 'AABB'] : [])]
+    const kind = pickOne(kinds, rng)
     const distinct = new Set(kind).size
     const syms = shuffle(set, rng).slice(0, distinct)
     const unit = kind.split('').map((ch) => syms[ch.charCodeAt(0) - 65] ?? set[0] ?? '')
@@ -297,23 +304,27 @@ export function NextRound({ d, stage, choices, locked, rng, ctl }: RoundProps) {
 
 type OddItem = { key: string; odd: boolean } & ({ hex: string } | { shape: ShapeKey; color: ColorKey })
 type OddKind = 'color' | 'shape' | 'category'
-const ODD_KINDS: Record<1 | 2 | 3, readonly OddKind[]> = { 1: ['color'], 2: ['color', 'shape'], 3: ['shape', 'category', 'category'] }
 
 /** Odd One Out — tap the one that doesn't belong (colour, then shape, then kind of thing). */
-export function OddRound({ d, stage, choices, locked, rng, ctl }: RoundProps) {
+export function OddRound({ d, stage, choices, locked, rng, ctl, learned }: RoundProps) {
   const [r] = useState(() => {
     const n = Math.max(3, choices)
-    const kind = pickOne(ODD_KINDS[stage], rng)
+    // Colour and shape puzzles use only discovered colours and shapes; kinds of things are always fine.
+    const colors = learned.colors
+    const shapes = ODD_SHAPES.filter((x) => learned.shapes.includes(x))
+    const kinds: OddKind[] = [...(colors.length >= 2 ? (['color'] as const) : []), ...(shapes.length >= 2 && stage >= 2 ? (['shape'] as const) : [])]
+    if (stage >= 2 || !kinds.length) kinds.push('category')
+    const kind = pickOne(kinds, rng)
     let items: OddItem[]
     let line: string
     if (kind === 'color') {
-      const shape = pickOne(ODD_SHAPES, rng)
-      const [c1, c2] = shuffle(GAME_COLORS, rng) as [ColorKey, ColorKey]
+      const shape = pickOne(shapes.length ? shapes : (['circle'] as const), rng)
+      const [c1, c2] = shuffle(colors, rng) as [ColorKey, ColorKey]
       items = [...Array.from({ length: n - 1 }, (_, i) => ({ key: `a${i}`, odd: false, shape, color: c1 })), { key: 'odd', odd: true, shape, color: c2 }]
       line = fmt(d.games.say.oddColor, { color: d.colors[c2] })
     } else if (kind === 'shape') {
-      const color = pickOne(GAME_COLORS, rng)
-      const [s1, s2] = shuffle(ODD_SHAPES, rng) as [ShapeKey, ShapeKey]
+      const color = pickOne(colors.length ? colors : (['blue'] as const), rng)
+      const [s1, s2] = shuffle(shapes, rng) as [ShapeKey, ShapeKey]
       items = [...Array.from({ length: n - 1 }, (_, i) => ({ key: `a${i}`, odd: false, shape: s1, color })), { key: 'odd', odd: true, shape: s2, color }]
       line = fmt(d.games.say.oddShape, { shape: d.shapes[s2] })
     } else {

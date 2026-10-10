@@ -2,7 +2,7 @@ import { useLiveQuery } from 'dexie-react-hooks'
 import { type CSSProperties, useState } from 'react'
 import { Navigate, useLocation, useNavigate } from 'react-router-dom'
 import { useApp } from '../../app/AppState'
-import { GAMES, GARDEN, type GameDef } from '../../content/games'
+import { GAMES, GARDEN, type GameDef, type NeedKey, type Readiness, gameReadiness } from '../../content/games'
 import { Mascot } from '../../design/Mascot'
 import { Button, Screen, SpeechBubble, StarCount, TopBar } from '../../design/ui'
 import { OpenMoji } from '../../design/Visual'
@@ -14,6 +14,10 @@ import { gamePlays, totalStars } from '../../services/repos/progress'
 import { useSpeakOnMount } from '../common'
 import { cx } from './engine'
 import s from './games.module.css'
+import { useLearnedPools } from './useLearned'
+
+/** Games whose card can say how many learned things they play with. */
+const COUNTED: ReadonlySet<NeedKey> = new Set(['letters', 'numbers', 'run', 'colors', 'shapes'])
 
 function toNextText(n: number, t: Dict, lang: Lang): string {
   if (n <= 0) return t.games.gardenFull
@@ -31,6 +35,7 @@ export function GamesHub() {
   const d = dict(lang)
   const plays = useLiveQuery(gamePlays, [], new Map<string, number>())
   const stars = useLiveQuery(totalStars, [], 0)
+  const learned = useLearnedPools()
   useSpeakOnMount(d.games.hubHello, lang)
 
   const games = GAMES.filter((g) => !settings.disabledAreas.includes(g.areaId))
@@ -40,6 +45,12 @@ export function GamesHub() {
     audio.sfx('tap')
     void audio.speak(d.games.titles[g.id], lang)
     navigate(`/games/${g.id}`)
+  }
+  /** Not enough discovered yet: Hala takes the child to the lesson that teaches it. */
+  const discoverFirst = (r: Readiness) => {
+    audio.sfx('tap')
+    void audio.speak(d.games.say.discoverFirst, lang)
+    navigate(`/discover/${r.lessonId}`)
   }
 
   const section = (key: 'ln' | 'csl', title: string) => {
@@ -51,21 +62,41 @@ export function GamesHub() {
         <div className={s.cards}>
           {list.map((g, i) => {
             const stage = gameStage(plays.get(g.id) ?? 0)
+            const r = learned ? gameReadiness(g.id, learned, lang) : undefined
+            const waiting = r && !r.ready
+            const counts = r?.ready && COUNTED.has(r.need)
             return (
-              <button key={g.id} type="button" className={s.card} style={{ '--c': g.color, animationDelay: `${i * 50}ms` } as CSSProperties} onClick={() => open(g)} data-testid={`game-${g.id}`}>
+              <button
+                key={g.id}
+                type="button"
+                className={cx(s.card, waiting && s.cardWaiting)}
+                style={{ '--c': g.color, animationDelay: `${i * 50}ms` } as CSSProperties}
+                onClick={() => r && (r.ready ? open(g) : discoverFirst(r))}
+                data-testid={`game-${g.id}`}
+                data-ready={r ? String(r.ready) : undefined}
+              >
                 <span className={s.cardIcon}>
                   <OpenMoji hex={g.hex} alt="" size={56} />
                 </span>
                 <span className={s.cardTitle} lang={lang}>
                   {d.games.titles[g.id]}
                 </span>
-                <span className={s.cardGoal}>{t.games.goals[g.id]}</span>
-                <span className={s.dots} aria-label={fmt(t.games.stage, { n: numeral(stage, ui) })}>
-                  {[1, 2, 3].map((k) => (
-                    <i key={k} className={cx(k <= stage && s.dotOn)} />
-                  ))}
-                  <span>{fmt(t.games.stage, { n: numeral(stage, ui) })}</span>
-                </span>
+                {waiting ? (
+                  <>
+                    <span className={s.discoverTag}>🔭 {t.games.discoverFirst}</span>
+                    <span className={s.cardGoal}>{t.games.need[r.need]}</span>
+                  </>
+                ) : (
+                  <>
+                    <span className={s.cardGoal}>{counts ? fmt(t.games.learnedWith, { n: numeral(r.learned, ui) }) : t.games.goals[g.id]}</span>
+                    <span className={s.dots} aria-label={fmt(t.games.stage, { n: numeral(stage, ui) })}>
+                      {[1, 2, 3].map((k) => (
+                        <i key={k} className={cx(k <= stage && s.dotOn)} />
+                      ))}
+                      <span>{fmt(t.games.stage, { n: numeral(stage, ui) })}</span>
+                    </span>
+                  </>
+                )}
               </button>
             )
           })}

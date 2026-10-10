@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react'
-import type { Stage } from '../../content/games'
+import type { LearnedPools, Stage } from '../../content/games'
 import type { Rng } from '../../domain/rng'
 import type { Lang } from '../../domain/types'
 import type { Dict } from '../../i18n'
@@ -36,6 +36,8 @@ export interface RoundProps {
   locked: boolean
   rng: Rng
   ctl: RoundCtl
+  /** Only what the child has discovered: every round draws its content from here. */
+  learned: LearnedPools
 }
 
 export const cx = (...c: (string | false | null | undefined)[]) => c.filter(Boolean).join(' ')

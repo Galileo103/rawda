@@ -2,7 +2,7 @@ import { useLiveQuery } from 'dexie-react-hooks'
 import { type ComponentType, type CSSProperties, useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { Navigate, useNavigate, useParams } from 'react-router-dom'
 import { useApp } from '../../app/AppState'
-import { GARDEN, type GameDef, type GameId, type GardenItem, gameById } from '../../content/games'
+import { GARDEN, type GameDef, type GameId, type GardenItem, type LearnedPools, gameById, gameReadiness } from '../../content/games'
 import { content } from '../../content/loader'
 import type { Reward } from '../../content/schemas'
 import { Mascot, type MascotMood } from '../../design/Mascot'
@@ -18,6 +18,7 @@ import { ButterfliesRound, NextRound, OddRound, ShapesRound } from './colorLogic
 import { type RoundCtl, type RoundProps, burst, cx, flash, flyStar } from './engine'
 import s from './games.module.css'
 import { BalloonsRound, CountRound, FrogRound, TrainRound } from './letterNumberRounds'
+import { useLearnedPools } from './useLearned'
 
 const ROUNDS: Record<GameId, ComponentType<RoundProps>> = {
   frog: FrogRound,
@@ -36,10 +37,14 @@ export function GameScreen() {
   const { gameId } = useParams()
   const game = gameById(gameId)
   const plays = useLiveQuery(gamePlays)
+  const learned = useLearnedPools()
+  const { settings } = useApp()
   const [run, setRun] = useState(0)
   if (!game) return <Navigate to="/games" replace />
-  if (!plays) return null
-  return <GameSession key={`${game.id}-${run}`} game={game} plays={plays.get(game.id) ?? 0} onAgain={() => setRun((r) => r + 1)} />
+  if (!plays || !learned) return null
+  // A game only opens once the child has discovered what it plays with (the hub shows "Discover first").
+  if (!gameReadiness(game.id, learned, settings.practiceLang).ready) return <Navigate to="/games" replace />
+  return <GameSession key={`${game.id}-${run}`} game={game} plays={plays.get(game.id) ?? 0} learned={learned} onAgain={() => setRun((r) => r + 1)} />
 }
 
 interface Result {
@@ -51,12 +56,14 @@ interface Result {
   newStage: number
 }
 
-function GameSession({ game, plays, onAgain }: { game: GameDef; plays: number; onAgain: () => void }) {
+function GameSession({ game, plays, learned: learnedNow, onAgain }: { game: GameDef; plays: number; learned: LearnedPools; onAgain: () => void }) {
   const { settings, t, age } = useApp()
   const navigate = useNavigate()
   const lang = settings.practiceLang
   const d = dict(lang)
   const [stage] = useState(() => gameStage(plays))
+  // Fixed for the whole session, so a round never changes under the child's fingers.
+  const [learned] = useState(learnedNow)
   const total = gameRounds(age.sessionCap)
   const choices = Math.max(2, age.maxChoices - (stage === 1 ? 1 : 0))
   const maxN = age.maxChoices <= 3 ? 5 : 10
@@ -221,7 +228,7 @@ function GameSession({ game, plays, onAgain }: { game: GameDef; plays: number; o
         <IconButton icon="speaker" label={t.games.replay} onClick={replay} />
       </div>
       <div className={cx(s.stage, s[`scene_${game.id}`])} onPointerDown={armIdle} data-testid="game-stage">
-        <Round key={round} lang={lang} d={d} stage={stage} choices={choices} maxN={maxN} round={round} locked={locked} rng={defaultRng} ctl={ctl} />
+        <Round key={round} lang={lang} d={d} stage={stage} choices={choices} maxN={maxN} round={round} locked={locked} rng={defaultRng} ctl={ctl} learned={learned} />
       </div>
     </Screen>
   )

@@ -1,5 +1,5 @@
 import { type CSSProperties, useRef, useState } from 'react'
-import { PROP_HEX, countPrompt, letterPool, numberName } from '../../content/games'
+import { PROP_HEX, countPrompt, longestRun, numberName } from '../../content/games'
 import { OpenMoji } from '../../design/Visual'
 import { type Rng, pickOne, shuffle } from '../../domain/rng'
 import { fmt, numeral } from '../../i18n'
@@ -12,9 +12,9 @@ import s from './games.module.css'
 const others = <T,>(pool: readonly T[], target: T, n: number, rng: Rng): T[] => shuffle(pool.filter((x) => x !== target), rng).slice(0, Math.max(0, n))
 
 /** Hungry Frog — Hala names a letter; feed the frog the fly that carries it (tap or drag). */
-export function FrogRound({ lang, d, stage, choices, locked, rng, ctl }: RoundProps) {
+export function FrogRound({ lang, d, choices, locked, rng, ctl, learned }: RoundProps) {
   const [r] = useState(() => {
-    const pool = letterPool(lang, stage)
+    const pool = learned.letters
     const target = pickOne(pool, rng)
     return { target, opts: shuffle([target, ...others(pool, target, choices - 1, rng)], rng) }
   })
@@ -82,13 +82,17 @@ export function FrogRound({ lang, d, stage, choices, locked, rng, ctl }: RoundPr
 const BALLOON_COLORS = ['#e8613a', '#2f8fdb', '#7a5cd6', '#13897f', '#d94a86', '#f28a1c']
 
 /** Balloon Pop — balloons float up slowly (and come round again); pop the named letter or number. */
-export function BalloonsRound({ lang, d, stage, choices, maxN, round, locked, rng, ctl }: RoundProps) {
+export function BalloonsRound({ lang, d, choices, maxN, round, locked, rng, ctl, learned }: RoundProps) {
   const [r] = useState(() => {
     const cols = shuffle(BALLOON_COLORS, rng)
     const slow = maxN <= 5 ? 4 : 0
     const motion = (i: number) => ({ color: cols[i % cols.length] ?? '#e8613a', dur: 8 + slow + Math.floor(rng() * 4), delay: i * 2.3 + rng() * 2, rest: 18 + Math.floor(rng() * 40) })
-    if (round % 2 === 1) {
-      const pool = range(1, Math.min(maxN, [5, 9, 10][stage - 1] ?? 10))
+    const capped = learned.numbers.filter((n) => n <= maxN)
+    const numberPool = capped.length >= 2 ? capped : learned.numbers
+    const canLetters = learned.letters.length >= 2
+    // Letters and numbers take turns when both are learned; otherwise whichever is.
+    if (numberPool.length >= 2 && (!canLetters || round % 2 === 1)) {
+      const pool = numberPool
       const target = pickOne(pool, rng)
       const items = shuffle([target, ...others(pool, target, choices - 1, rng)], rng)
       return {
@@ -96,7 +100,7 @@ export function BalloonsRound({ lang, d, stage, choices, maxN, round, locked, rn
         items: items.map((v, i) => ({ key: String(v), label: numeral(v, lang), name: numberName(v, d), hit: v === target, ...motion(i) })),
       }
     }
-    const pool = letterPool(lang, stage)
+    const pool = learned.letters
     const target = pickOne(pool, rng)
     const items = shuffle([target, ...others(pool, target, choices - 1, rng)], rng)
     return {
@@ -148,10 +152,11 @@ export function BalloonsRound({ lang, d, stage, choices, maxN, round, locked, rn
 }
 
 /** Count & Feed — put exactly N carrots in the bunny's basket (each one is counted aloud), then "I'm done". */
-export function CountRound({ lang, d, stage, maxN, locked, rng, ctl }: RoundProps) {
+export function CountRound({ lang, d, maxN, locked, rng, ctl, learned }: RoundProps) {
   const [r] = useState(() => {
-    const top = Math.min(maxN, [3, 5, 10][stage - 1] ?? 10)
-    const n = 1 + Math.floor(rng() * top)
+    // Only numbers the child has discovered (and not past what suits their age).
+    const capped = learned.numbers.filter((x) => x <= maxN)
+    const n = pickOne(capped.length ? capped : learned.numbers.length ? learned.numbers : [1], rng)
     return { n, pile: Math.min(10, n + 2 + Math.floor(rng() * 2)) }
   })
   const [inBasket, setInBasket] = useState<number[]>([])
@@ -240,13 +245,15 @@ const WAGON_COLORS = ['#e8613a', '#2f8fdb', '#13897f', '#7a5cd6', '#d94a86', '#f
 const wagonColor = (v: number) => WAGON_COLORS[(v - 1) % WAGON_COLORS.length] ?? '#2f8fdb'
 
 /** Number Train — the first car is in place; add the others in order, then the train sets off. */
-export function TrainRound({ lang, d, stage, maxN, locked, rng, ctl }: RoundProps) {
+export function TrainRound({ lang, d, stage, maxN, locked, rng, ctl, learned }: RoundProps) {
   const [r] = useState(() => {
-    let len = [3, 4, 5][stage - 1] ?? 3
+    // A stretch of consecutive numbers the child has discovered (e.g. 1, 2, 3).
+    const run = longestRun(learned.numbers)
+    const known = run.length >= 3 ? run : range(1, 3)
+    let len = Math.min([3, 4, 5][stage - 1] ?? 3, known.length)
     if (maxN <= 5) len = Math.min(len, 4)
-    const top = Math.min(maxN, 10)
-    const start = stage === 1 ? 1 : 1 + Math.floor(rng() * Math.max(1, top - len + 1))
-    const seq = range(start, start + len - 1)
+    const from = stage === 1 ? 0 : Math.floor(rng() * (known.length - len + 1))
+    const seq = known.slice(from, from + len)
     return { seq, yard: shuffle(seq.slice(1), rng) }
   })
   const [placed, setPlaced] = useState<number[]>(() => r.seq.slice(0, 1))
