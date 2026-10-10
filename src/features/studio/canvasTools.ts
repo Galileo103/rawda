@@ -152,9 +152,58 @@ export function coverPoints(points: Float32Array, covered: Uint8Array, x: number
   return added
 }
 
-/** Coverage needed to finish a trace: generous, and easier with each hint. */
+/**
+ * Split mask points into the separate parts of a shape (the body of ب and its dot, the two
+ * strokes of ت…): points on neighbouring grid cells belong to the same part. Returns each
+ * point's part number and how many parts there are.
+ */
+export function pointParts(points: Float32Array, step = 12): { part: Int32Array; count: number } {
+  const n = points.length / 2
+  const part = new Int32Array(n).fill(-1)
+  const at = new Map<string, number>()
+  const key = (x: number, y: number) => `${Math.round(x / step)},${Math.round(y / step)}`
+  for (let i = 0; i < n; i++) at.set(key(points[i * 2] ?? 0, points[i * 2 + 1] ?? 0), i)
+  let count = 0
+  for (let i = 0; i < n; i++) {
+    if (part[i] !== -1) continue
+    part[i] = count
+    const queue = [i]
+    while (queue.length) {
+      const j = queue.pop() as number
+      const x = points[j * 2] ?? 0
+      const y = points[j * 2 + 1] ?? 0
+      for (let dy = -1; dy <= 1; dy++) {
+        for (let dx = -1; dx <= 1; dx++) {
+          const k = at.get(key(x + dx * step, y + dy * step))
+          if (k !== undefined && part[k] === -1) {
+            part[k] = count
+            queue.push(k)
+          }
+        }
+      }
+    }
+    count++
+  }
+  return { part, count }
+}
+
+/** The least-covered part of the shape (0–1), so a trace can't finish with the dot of ب untouched. */
+export function weakestPart(covered: Uint8Array, parts: { part: Int32Array; count: number }): number {
+  if (parts.count === 0) return 0
+  const hit = new Array<number>(parts.count).fill(0)
+  const all = new Array<number>(parts.count).fill(0)
+  for (let i = 0; i < covered.length; i++) {
+    const p = parts.part[i] ?? 0
+    all[p] = (all[p] ?? 0) + 1
+    if (covered[i]) hit[p] = (hit[p] ?? 0) + 1
+  }
+  // A speck of a few points (edge smoothing) isn't a part the child should have to find.
+  return Math.min(...all.map((a, p) => (a >= 3 ? (hit[p] ?? 0) / a : 1)))
+}
+
+/** Coverage needed to finish a trace: most of the shape, a little easier with each hint. */
 export function traceThreshold(hintLevel: number): number {
-  return Math.max(0.4, 0.7 - 0.12 * hintLevel)
+  return Math.max(0.55, 0.85 - 0.1 * hintLevel)
 }
 
 export function loadImage(src: string): Promise<HTMLImageElement> {

@@ -6,7 +6,7 @@ import { Icon } from '../../../design/Icon'
 import { OpenMoji, Visual } from '../../../design/Visual'
 import { numeral } from '../../../i18n'
 import { audio } from '../../../services/audio/AudioService'
-import { numberWord } from '../../common'
+import { numberWord, randomLine, voice } from '../../common'
 import { ChoiceTemplate } from './ChoiceTemplate'
 import s from './lesson.module.css'
 import { TraceTemplate } from './TraceTemplate'
@@ -55,6 +55,13 @@ export function LessonTemplate({ item, lang, hintLevel, locked, onCorrect, onWro
   const [active, setActive] = useState<string | null>(null)
   const [counted, setCounted] = useState(0)
   const finished = useRef(false)
+  const alive = useRef(true)
+  useEffect(() => {
+    alive.current = true
+    return () => {
+      alive.current = false
+    }
+  }, [])
   const stage = stages[index] ?? 'meet'
 
   // Narrate each stage once when it starts; "next" becomes available when the narration ends.
@@ -109,6 +116,15 @@ export function LessonTemplate({ item, lang, hintLevel, locked, onCorrect, onWro
       finished.current = true
       onCorrect()
     }
+  }
+
+  // The traced letter is something to be proud of: Hala praises it before the lesson moves on.
+  const traced = () => {
+    const praise = randomLine(voice(lang).praise)
+    onInstruction?.(praise)
+    void Promise.all([audio.speak(praise, lang), wait(parentReads ? 2200 : 900)]).then(() => {
+      if (alive.current) advance()
+    })
   }
 
   let body: ReactNode = null
@@ -171,7 +187,7 @@ export function LessonTemplate({ item, lang, hintLevel, locked, onCorrect, onWro
     case 'trace': {
       showNext = false
       const traceItem: TraceItem = { id: `${item.id}-trace`, skill: item.skill, difficulty: 1, say: item.say, glyph: item.trace ?? '' }
-      body = <TraceTemplate item={traceItem} lang={lang} hintLevel={hintLevel} locked={locked} onCorrect={advance} onWrong={onWrong} rng={rng} />
+      body = <TraceTemplate item={traceItem} lang={lang} hintLevel={hintLevel} locked={locked} onCorrect={traced} onWrong={onWrong} rng={rng} />
       break
     }
     case 'check': {

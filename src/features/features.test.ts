@@ -7,7 +7,7 @@ import { ageProfile } from '../domain/ageProfile'
 import { buildChoices, numberChoices, optionsToHide } from './activities/choices'
 import { isBreakDue } from './activities/sessionStats'
 import { computeStats } from './parent/progressStats'
-import { coverPoints, floodFill, maskPoints, traceThreshold } from './studio/canvasTools'
+import { coverPoints, floodFill, maskPoints, pointParts, traceThreshold, weakestPart } from './studio/canvasTools'
 
 const glyph = (t: string): Visual => ({ kind: 'glyph', text: t })
 
@@ -111,10 +111,28 @@ describe('tracing', () => {
     expect(coverPoints(pts, covered, 20, 20, 5)).toBe(0) // nothing new to cover
   })
 
-  it('needs generous coverage, lowered by hints but never trivial', () => {
-    expect(traceThreshold(0)).toBeCloseTo(0.7)
+  it('needs most of the shape, lowered by hints but never trivial', () => {
+    expect(traceThreshold(0)).toBeCloseTo(0.85)
     expect(traceThreshold(1)).toBeLessThan(traceThreshold(0))
-    expect(traceThreshold(3)).toBe(0.4)
+    expect(traceThreshold(3)).toBe(0.55)
+  })
+
+  it('finds the separate parts of a letter, so the dot of ب has to be traced too', () => {
+    // A bar of 10 points and, apart from it, a dot of 3 points.
+    const bar = Array.from({ length: 10 }, (_, i) => [6 + i * 12, 6])
+    const dot = [
+      [66, 78],
+      [78, 78],
+      [66, 90],
+    ]
+    const pts = Float32Array.from([...bar, ...dot].flat())
+    const parts = pointParts(pts)
+    expect(parts.count).toBe(2)
+    const covered = new Uint8Array(13)
+    covered.fill(1, 0, 10) // the whole bar, no dot
+    expect(weakestPart(covered, parts)).toBe(0)
+    covered.fill(1, 10, 12)
+    expect(weakestPart(covered, parts)).toBeCloseTo(2 / 3)
   })
 })
 

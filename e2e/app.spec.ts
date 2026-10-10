@@ -324,6 +324,92 @@ test('sorting game: drag pictures into baskets with a real finger-style drag', a
   await expect(page.locator('[class*="checkBadge"], [class*="stoneDone"]').first()).toBeVisible({ timeout: 10_000 })
 })
 
+/** The letter's parts as rows of runs [y, x0, x1] (canvas pixels), biggest part first, read from the guide canvas. */
+async function letterParts(page: Page): Promise<[number, number, number][][]> {
+  return page.evaluate(() => {
+    const guide = document.querySelector<HTMLCanvasElement>('[data-testid="trace-canvas"]')!.parentElement!.querySelector('canvas')!
+    const { data, width, height } = guide.getContext('2d')!.getImageData(0, 0, guide.width, guide.height)
+    const step = 12
+    const cells: [number, number][] = []
+    for (let y = step / 2; y < height; y += step) for (let x = step / 2; x < width; x += step) if ((data[(y * width + x) * 4 + 3] ?? 0) > 100) cells.push([x, y])
+    const key = (x: number, y: number) => `${x},${y}`
+    const index = new Map(cells.map(([x, y], i) => [key(x, y), i]))
+    const part = new Array<number>(cells.length).fill(-1)
+    let count = 0
+    for (let i = 0; i < cells.length; i++) {
+      if (part[i] !== -1) continue
+      part[i] = count
+      const queue = [i]
+      while (queue.length) {
+        const [x, y] = cells[queue.pop()!]!
+        for (let dy = -step; dy <= step; dy += step)
+          for (let dx = -step; dx <= step; dx += step) {
+            const k = index.get(key(x + dx, y + dy))
+            if (k !== undefined && part[k] === -1) {
+              part[k] = count
+              queue.push(k)
+            }
+          }
+      }
+      count++
+    }
+    // Each part as horizontal runs, so a finger can sweep it row by row without touching the others.
+    const runs = Array.from({ length: count }, (_, p) => {
+      const out: [number, number, number][] = []
+      cells.forEach(([x, y], i) => {
+        if (part[i] !== p) return
+        const last = out[out.length - 1]
+        if (last && last[0] === y && last[2] === x - step) last[2] = x
+        else out.push([y, x, x])
+      })
+      return out
+    })
+    return runs.filter((r) => r.length > 0).sort((a, b) => b.length - a.length)
+  })
+}
+
+async function sweep(page: Page, runs: [number, number, number][]) {
+  const box = (await page.getByTestId('trace-canvas').boundingBox())!
+  const k = box.width / 480
+  for (const [y, x0, x1] of runs) {
+    await page.mouse.move(box.x + x0 * k, box.y + y * k)
+    await page.mouse.down()
+    await page.mouse.move(box.x + x1 * k + 1, box.y + y * k, { steps: Math.max(2, Math.round((x1 - x0) / 10)) })
+    await page.mouse.up()
+  }
+}
+
+test('tracing a letter waits for every part (the dot of ب), then the letter shines before moving on', async ({ page }) => {
+  await onboard(page)
+  await page.goto('./#/play/ar-trace')
+  await page.getByRole('button', { name: /ابدأ/ }).click()
+  await expect(page.getByTestId('trace-canvas')).toBeVisible()
+  await page.waitForTimeout(500)
+  // Find a letter with a separate part (a dot): skip ahead with ✓ (after hints) until one appears.
+  let parts = await letterParts(page)
+  for (let i = 0; i < 4 && parts.length < 2; i++) {
+    for (let h = 0; h < 2; h++) await page.getByRole('button', { name: 'مساعدة' }).click()
+    await page.getByTestId('choice-answer').click()
+    await expect(page.locator('[class*="traceWin"]')).toBeVisible()
+    await expect(page.locator('[class*="traceWin"]')).toHaveCount(0, { timeout: 10_000 })
+    await page.waitForTimeout(500)
+    parts = await letterParts(page)
+  }
+  expect(parts.length).toBeGreaterThan(1)
+  // The whole body but not the dot: the letter isn't finished and nothing moves on.
+  for (const p of parts.slice(0, -1)) await sweep(page, p)
+  await page.waitForTimeout(600)
+  await expect(page.locator('[class*="traceWin"]')).toHaveCount(0)
+  // Now the dot: the letter turns gold and stays on screen for a moment.
+  await sweep(page, parts[parts.length - 1]!)
+  await expect(page.locator('[class*="traceWin"]')).toBeVisible()
+  await page.waitForTimeout(1000)
+  await expect(page.locator('[class*="traceWin"]')).toBeVisible()
+  await page.screenshot({ path: 'test-results/trace-win.png' })
+  // Then it moves on: to the next letter, or (if it was the last one) to the "well done" screen.
+  await expect(page.locator('[class*="traceWin"]')).toHaveCount(0, { timeout: 10_000 })
+})
+
 test('finger paths: a pre-writing stroke with a green start dot can be traced', async ({ page }) => {
   await onboard(page)
   await page.goto('./#/play/finger-paths')

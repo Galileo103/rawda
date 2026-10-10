@@ -10,7 +10,7 @@
   "title": { "ar": "نَكْتُبُ بِإِصْبَعِنَا" },
   "intro": { "ar": "هَيَّا نَرْسُمُ الْحُرُوفَ بِإِصْبَعِنَا عَلَى الْخَطِّ!" },
   "items": [
-    { "id": "alif", "skill": "ar.write.alif", "difficulty": 1, "glyph": "ا", "say": { "ar": "هَيَّا نَرْسُمُ حَرْفَ الْأَلِفِ!" } },
+    { "id": "alif", "skill": "ar.write.alif", "difficulty": 1, "glyph": "أ", "say": { "ar": "هَيَّا نَرْسُمُ حَرْفَ الْأَلِفِ!" } },
     { "id": "ba", "skill": "ar.write.ba", "difficulty": 1, "glyph": "ب", "say": { "ar": "هَيَّا نَرْسُمُ حَرْفَ الْبَاءِ!" } },
     { "id": "dal", "skill": "ar.write.dal", "difficulty": 1, "glyph": "د", "say": { "ar": "هَيَّا نَرْسُمُ حَرْفَ الدَّالِ!" } },
     { "id": "ra", "skill": "ar.write.ra", "difficulty": 1, "glyph": "ر", "say": { "ar": "هَيَّا نَرْسُمُ حَرْفَ الرَّاءِ!" } },

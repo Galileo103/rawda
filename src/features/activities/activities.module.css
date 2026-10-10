@@ -344,6 +344,76 @@
   transition: width 0.2s;
 }
 
+/* Finished: the letter turns gold, the box glows and pops, stars ring it. */
+.traceWin {
+  border-color: var(--leaf);
+  animation: trace-win 0.9s ease;
+  box-shadow:
+    0 0 0 8px var(--sun-soft),
+    0 0 40px 10px rgba(255, 200, 61, 0.55);
+}
+@keyframes trace-win {
+  0% {
+    transform: scale(1);
+  }
+  35% {
+    transform: scale(1.08);
+  }
+  60% {
+    transform: scale(0.97);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+/* The clean gold letter comes up over the child's ink, so they see the letter they made. */
+.traceGold {
+  z-index: 1;
+  filter: drop-shadow(0 0 3px #fff) drop-shadow(0 3px 0 rgba(160, 100, 0, 0.35));
+  animation: trace-gold 0.6s ease;
+}
+@keyframes trace-gold {
+  from {
+    opacity: 0;
+    transform: scale(0.85);
+  }
+}
+.traceStars {
+  position: absolute;
+  z-index: 2;
+  inset: 50% auto auto 50%;
+  pointer-events: none;
+}
+.traceStars svg {
+  position: absolute;
+  margin: -20px;
+  color: var(--sun);
+  filter: drop-shadow(0 2px 0 rgba(0, 0, 0, 0.15));
+  opacity: 0;
+  animation: trace-star 1.5s ease-out forwards;
+}
+.traceStars svg:nth-child(odd) {
+  color: var(--coral);
+}
+/* Stars fly out from the centre to a ring just inside the box edge, and stay there. */
+@keyframes trace-star {
+  0% {
+    transform: rotate(var(--a)) translateY(0) scale(0.3);
+    opacity: 0;
+  }
+  30% {
+    opacity: 1;
+  }
+  70% {
+    transform: rotate(var(--a)) translateY(max(-36vw, -20dvh, -190px)) scale(1.25);
+    opacity: 1;
+  }
+  100% {
+    transform: rotate(var(--a)) translateY(max(-36vw, -20dvh, -190px)) scale(1);
+    opacity: 1;
+  }
+}
+
 .traceDone {
   min-width: 96px !important;
   min-height: 96px !important;
