@@ -6,10 +6,11 @@ import { useApp } from '../../app/AppState'
 import type { Area } from '../../content/schemas'
 import { Mascot } from '../../design/Mascot'
 import { Button, IconButton, Screen, SpeechBubble, StarCount } from '../../design/ui'
-import { Visual } from '../../design/Visual'
+import { OpenMoji, Visual } from '../../design/Visual'
+import { GAMES } from '../../content/games'
 import { recommendNext } from '../../domain/recommend'
 import type { Lang } from '../../domain/types'
-import { fmt } from '../../i18n'
+import { dict, fmt } from '../../i18n'
 import { audio } from '../../services/audio/AudioService'
 import { content } from '../../content/loader'
 import { db } from '../../services/db'
@@ -36,6 +37,7 @@ export function HomeScreen() {
   const mastery = useLiveQuery(getMasteryMap, [], new Map())
 
   const areas = visibleAreas(vis)
+  const playGames = GAMES.filter((g) => !settings.disabledAreas.includes(g.areaId))
   const next = recommendNext(forRecommend(playableActivities(vis), lang), completed, mastery)
 
   useSpeakOnMount(usage.limitReached ? voice(lang).rest : voice(lang).homeHello, lang)
@@ -119,6 +121,32 @@ export function HomeScreen() {
             <span className={s.continueTitle} lang={next.lang} dir="auto">
               {pick(next.activity.title, next.lang)}
             </span>
+          </span>
+          <span className={s.continuePlay} aria-hidden="true">
+            <Icon name="play" size={34} />
+          </span>
+        </button>
+      )}
+
+      {playGames.length > 0 && (
+        <button
+          type="button"
+          className={s.playWorld}
+          onClick={() => {
+            audio.sfx('tap')
+            void audio.speak(dict(lang).games.playWorld, lang)
+            navigate('/games')
+          }}
+          data-testid="play-world"
+        >
+          <span className={s.playIcons} aria-hidden="true">
+            {playGames.slice(0, 3).map((g) => (
+              <OpenMoji key={g.id} hex={g.hex} alt="" size={52} />
+            ))}
+          </span>
+          <span className={s.continueText}>
+            <span className={s.playTitle}>{t.games.playWorld}</span>
+            <span className={s.playSub}>{t.games.playWorldSub}</span>
           </span>
           <span className={s.continuePlay} aria-hidden="true">
             <Icon name="play" size={34} />

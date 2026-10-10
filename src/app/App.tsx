@@ -1,6 +1,8 @@
 import { HashRouter, Navigate, Route, Routes } from 'react-router-dom'
 import { ActivityPlayer } from '../features/activities/ActivityPlayer'
 import { DiscoverBoard } from '../features/discover/DiscoverBoard'
+import { GameScreen } from '../features/games/GameScreen'
+import { GamesHub, GardenScreen } from '../features/games/GamesHub'
 import { HomeScreen } from '../features/home/HomeScreen'
 import { MapScreen } from '../features/map/MapScreen'
 import { ParentArea } from '../features/parent/ParentArea'
@@ -38,6 +40,9 @@ export function App() {
               <Route path="/rewards" element={<RewardsScreen />} />
               <Route path="/quran" element={<QuranScreen />} />
               <Route path="/quran/:number" element={<SurahScreen />} />
+              <Route path="/games" element={<GamesHub />} />
+              <Route path="/games/:gameId" element={<GameScreen />} />
+              <Route path="/garden" element={<GardenScreen />} />
             </Route>
             <Route path="/parent/*" element={<ParentArea />} />
             <Route path="*" element={<Navigate to="/" replace />} />

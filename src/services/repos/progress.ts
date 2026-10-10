@@ -1,5 +1,7 @@
 import { type LevelState, initialLevelState, levelKey, nextLevelState } from '../../domain/engine/difficulty'
 import { type MasteryRecord, applyOutcome, masteryKey } from '../../domain/engine/mastery'
+import { GAME_ACTIVITY_PREFIX, type GameId, gameActivityId, gameFromActivityId } from '../../content/games'
+import { DAILY_SEED_BONUS, gameStars } from '../../domain/garden'
 import { type RewardDefLike, rewardsToGrant, starsForSession } from '../../domain/rewards'
 import type { AreaId, ItemOutcome, Lang } from '../../domain/types'
 import { db, localDay } from '../db'
@@ -99,6 +101,47 @@ export async function recordCompletion<T extends RewardDefLike>(
   await db.completions.add({ ...input, stars, ts: now })
   const newRewards = await grantEarnedRewards(rewardDefs, now)
   return { stars, newRewards }
+}
+
+// ---- Play World games ----
+
+/**
+ * One finished game session. Stored as a completion (activity id `game:<id>`) so its
+ * stars count everywhere stars count: the stars pill, star stickers and the garden.
+ * The first game of the day adds the surprise-seed bonus.
+ */
+export async function recordGameCompletion<T extends RewardDefLike>(
+  input: { gameId: GameId; areaId: AreaId; lang: Lang; rounds: number },
+  rewardDefs: readonly T[],
+  now = Date.now(),
+): Promise<{ stars: number; bonus: number; starsBefore: number; newRewards: T[] }> {
+  const { stars, bonus, starsBefore } = await db.transaction('rw', db.completions, async () => {
+    const dayStart = new Date(now).setHours(0, 0, 0, 0)
+    const gamesToday = await db.completions
+      .where('ts')
+      .aboveOrEqual(dayStart)
+      .filter((c) => c.activityId.startsWith(GAME_ACTIVITY_PREFIX))
+      .count()
+    let starsBefore = 0
+    await db.completions.each((c) => {
+      starsBefore += c.stars
+    })
+    const stars = gameStars(input.rounds, gamesToday === 0)
+    await db.completions.add({ activityId: gameActivityId(input.gameId), areaId: input.areaId, lang: input.lang, items: input.rounds, stars, ts: now })
+    return { stars, bonus: gamesToday === 0 ? DAILY_SEED_BONUS : 0, starsBefore }
+  })
+  const newRewards = await grantEarnedRewards(rewardDefs, now)
+  return { stars, bonus, starsBefore, newRewards }
+}
+
+/** Finished sessions per game id. */
+export async function gamePlays(): Promise<Map<string, number>> {
+  const out = new Map<string, number>()
+  await db.completions.each((c) => {
+    const g = gameFromActivityId(c.activityId)
+    if (g) out.set(g.id, (out.get(g.id) ?? 0) + 1)
+  })
+  return out
 }
 
 /** Which lesson items (per lesson activity) the child has already been through. */

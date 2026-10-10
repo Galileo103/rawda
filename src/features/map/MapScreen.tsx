@@ -9,6 +9,7 @@ import { Mascot } from '../../design/Mascot'
 import { IconButton, Screen } from '../../design/ui'
 import { Visual } from '../../design/Visual'
 import { recommendNext } from '../../domain/recommend'
+import { audio } from '../../services/audio/AudioService'
 import { db } from '../../services/db'
 import { getMasteryMap } from '../../services/repos/progress'
 import { forRecommend, iconFor, journeyCompleted, pick, playableActivities, useSpeakOnMount, visibleAreas } from '../common'
@@ -121,9 +122,22 @@ export function MapScreen() {
         {visible
           .filter((a) => a.route === 'map')
           .map((a) => (
-            <button key={a.id} type="button" className={s.chip} aria-current={a.id === area.id} onClick={() => navigate(`/map/${a.id}`, { replace: true })}>
-              <Visual v={iconFor(a, lang)} lang={lang} size={40} />
-              {a.title[settings.uiLang]}
+            <button
+              key={a.id}
+              type="button"
+              className={s.chip}
+              style={{ '--accent': a.color } as CSSProperties}
+              aria-current={a.id === area.id}
+              onClick={() => {
+                if (a.id === area.id) return
+                audio.sfx('tap')
+                navigate(`/map/${a.id}`, { replace: true })
+              }}
+            >
+              <span className={s.chipIcon}>
+                <Visual v={iconFor(a, lang)} lang={lang} size={iconFor(a, lang).kind === 'glyph' ? 26 : 38} />
+              </span>
+              <span className={s.chipLabel}>{a.title[settings.uiLang]}</span>
             </button>
           ))}
       </nav>

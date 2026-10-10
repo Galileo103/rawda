@@ -204,6 +204,58 @@
   box-shadow: 0 4px 0 #c64f2d;
 }
 
+/* Play World entry: same shape as Continue, in the garden's green. */
+.playWorld {
+  align-self: center;
+  justify-self: center;
+  margin-inline: auto;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  width: min(100%, 560px);
+  min-height: 100px;
+  padding: 10px 12px;
+  padding-inline-end: 16px;
+  border-radius: 40px;
+  border: 0;
+  background: linear-gradient(135deg, #2f9e5b, #6cc35b);
+  color: #fff;
+  box-shadow: 0 8px 0 #24743f;
+  cursor: pointer;
+  text-align: start;
+  transition: transform 0.15s;
+}
+.playWorld:active {
+  transform: translateY(4px);
+  box-shadow: 0 4px 0 #24743f;
+}
+.playIcons {
+  flex: none;
+  display: flex;
+  align-items: center;
+  padding: 6px 10px;
+  border-radius: 28px;
+  background: rgba(255, 255, 255, 0.95);
+}
+.playIcons > * + * {
+  margin-inline-start: -10px;
+}
+.playTitle {
+  font-size: clamp(1.3rem, 3.6vw, 1.8rem);
+  font-weight: 800;
+  line-height: 1.3;
+}
+.playSub {
+  font-size: 1rem;
+  font-weight: 700;
+  opacity: 0.92;
+}
+@media (max-width: 420px) {
+  .playIcons > :nth-child(3) {
+    display: none;
+  }
+}
+
 .continueIcon {
   flex: none;
   display: grid;
@@ -338,7 +390,8 @@
   max-width: 1200px;
   margin-inline: auto;
 }
-.home > .continue {
+.home > .continue,
+.home > .playWorld {
   width: min(100%, 600px);
 }
 /* Short landscape screens (laptops, tablets on their side): compact cards so all areas fit. */

@@ -5,6 +5,7 @@
  */
 import { existsSync, mkdirSync, writeFileSync } from 'node:fs'
 import { join } from 'node:path'
+import { GAME_HEXES } from '../src/content/games'
 import type { Visual } from '../src/content/schemas'
 import { ROOT, loadBundle } from './lib/contentFs'
 
@@ -39,6 +40,7 @@ for (const a of bundle.activities) {
   }
 }
 for (const s of bundle.stories) visit(s.cover)
+for (const h of GAME_HEXES) hexes.add(h)
 
 mkdirSync(OUT, { recursive: true })
 

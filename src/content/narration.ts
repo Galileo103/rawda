@@ -1,5 +1,6 @@
 import type { Lang } from '../domain/types'
 import type { Dict } from '../i18n'
+import { gameLines } from './games'
 import type { ContentBundle } from './parse'
 import type { LexEntry, Localized, Visual } from './schemas'
 
@@ -54,6 +55,7 @@ export function collectNarration(bundle: ContentBundle, dicts: Record<Lang, Dict
     for (const a of bundle.areas) add(lang, a.title[lang])
     for (const r of bundle.rewards) add(lang, r.name[lang])
     for (const b of bundle.breaks) add(lang, b.say[lang])
+    for (const line of gameLines(lang, d)) add(lang, line)
 
     for (const a of bundle.activities) {
       if (a.langs !== 'any' && a.langs !== lang) continue

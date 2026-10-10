@@ -1,0 +1,1117 @@
+/* Play World: hub, game sessions and Hala's garden. Logical properties where direction matters (RTL/LTR safe). */
+
+.screen {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-content: flex-start;
+  gap: 14px;
+}
+
+/* ---------- hub ---------- */
+.hubHello {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.hubSection {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.sectionTitle {
+  margin: 4px 0 0;
+  font-size: 1.35rem;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.sectionTitle::after {
+  content: '';
+  flex: 1;
+  height: 3px;
+  border-radius: 3px;
+  background: var(--line);
+}
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 16px;
+}
+.card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+  min-width: 0;
+  padding: 16px;
+  border: 0;
+  border-radius: var(--radius);
+  background: linear-gradient(160deg, color-mix(in srgb, var(--c) 22%, #fff), var(--surface) 85%);
+  box-shadow: 0 7px 0 color-mix(in srgb, var(--c) 35%, transparent);
+  color: var(--ink);
+  text-align: start;
+  cursor: pointer;
+  animation: pop-in 0.4s ease backwards;
+  transition: transform 0.15s ease;
+}
+.card:hover {
+  transform: translateY(-3px);
+}
+.card:active {
+  transform: translateY(3px);
+  box-shadow: 0 3px 0 color-mix(in srgb, var(--c) 35%, transparent);
+}
+.cardIcon {
+  display: grid;
+  place-items: center;
+  width: 76px;
+  height: 76px;
+  border-radius: 24px;
+  background: var(--surface);
+  box-shadow: inset 0 -4px 0 color-mix(in srgb, var(--c) 20%, #fff);
+}
+.cardTitle {
+  margin-top: 4px;
+  font-size: 1.3rem;
+  font-weight: 800;
+  line-height: 1.2;
+}
+.cardGoal {
+  color: var(--ink-soft);
+  font-size: 0.9rem;
+}
+.dots {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--ink-soft);
+}
+.dots i {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--line);
+}
+.dots i.dotOn {
+  background: var(--c);
+}
+.starPill {
+  border: 0;
+  background: var(--surface);
+  border-radius: 999px;
+  padding: 6px 14px;
+  box-shadow: var(--shadow);
+  cursor: pointer;
+}
+.gardenTeaser {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 14px 18px;
+  border: 0;
+  border-radius: var(--radius);
+  background: linear-gradient(180deg, #cfeaff, #e9f7dc);
+  box-shadow: 0 7px 0 rgba(63, 157, 51, 0.3);
+  color: var(--ink);
+  text-align: start;
+  cursor: pointer;
+}
+.teaserText {
+  display: flex;
+  flex-direction: column;
+  flex: none;
+  max-width: 50%;
+}
+.teaserText b {
+  font-size: 1.35rem;
+}
+.teaserText span {
+  color: var(--ink-soft);
+  font-size: 0.95rem;
+}
+.teaserRow {
+  display: flex;
+  gap: 4px;
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+}
+
+/* ---------- session chrome ---------- */
+.stageTag {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--ink-soft);
+}
+.stones {
+  display: flex;
+  gap: 6px;
+}
+.stone {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 3px dashed var(--line);
+  background: var(--surface);
+  font-size: 18px;
+}
+.stoneOn {
+  border: 3px solid var(--sun);
+  background: var(--sun-soft);
+  animation: pop-in 0.4s ease;
+}
+.talk {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.bubble {
+  flex: 1;
+  min-width: 0;
+  min-height: 1.5em;
+  margin: 0;
+  padding: 10px 18px;
+  border-radius: 22px;
+  background: var(--surface);
+  box-shadow: var(--shadow-soft);
+  font-size: clamp(1.15rem, 3.4vw, 1.55rem);
+  font-weight: 700;
+}
+
+.stage {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 16px;
+  min-height: 440px;
+  padding: 18px;
+  border-radius: var(--radius-l);
+  overflow: hidden;
+  user-select: none;
+  -webkit-user-select: none;
+}
+.scene_frog {
+  background: linear-gradient(180deg, #d6ecfc 0%, #eaf6ff 45%, #a7dcef 46%, #7ec8e3 100%);
+}
+.scene_balloons {
+  background: linear-gradient(180deg, #a9d8ff 0%, #d6ecfc 60%, #f4fbe9 100%);
+  height: 460px;
+}
+.scene_count,
+.scene_butterflies {
+  background: linear-gradient(180deg, #d6ecfc 0%, #f4fbe9 50%, #bfe3a6 51%, #a6d68a 100%);
+}
+.scene_train {
+  background: linear-gradient(180deg, #d6ecfc 0%, var(--sun-soft) 100%);
+}
+.scene_shapes {
+  background: radial-gradient(circle at 20% 10%, #fff 0, transparent 40%), var(--grape-soft);
+}
+.scene_next {
+  background: radial-gradient(circle at 80% 0, #fff 0, transparent 45%), var(--sun-soft);
+}
+.scene_odd {
+  background: radial-gradient(circle at 10% 0, #fff 0, transparent 45%), var(--rose-soft);
+}
+
+/* ---------- shared states ---------- */
+.ghost {
+  position: fixed;
+  z-index: 50;
+  pointer-events: none;
+  transform: translate(-50%, -50%) scale(1.1) rotate(-4deg);
+  filter: drop-shadow(0 12px 12px rgba(51, 38, 74, 0.25));
+}
+.lifted {
+  opacity: 0.35;
+}
+.over {
+  outline: 5px dashed var(--sun);
+  outline-offset: 4px;
+}
+.selected {
+  outline: 5px solid var(--sun) !important;
+  outline-offset: 3px;
+}
+.ready {
+  outline: 3px dashed color-mix(in srgb, var(--sun) 70%, transparent);
+  outline-offset: 3px;
+}
+.wiggle {
+  animation: wobble 0.5s ease !important;
+}
+.hinting {
+  animation: hint 1.4s ease 2 !important;
+}
+@keyframes hint {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(255, 200, 61, 0);
+  }
+  50% {
+    box-shadow: 0 0 0 14px rgba(255, 200, 61, 0.75);
+    transform: scale(1.08);
+  }
+}
+@keyframes bob {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+@keyframes gulp {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  30% {
+    transform: scale(1.25, 0.85);
+  }
+  60% {
+    transform: scale(0.92, 1.1);
+  }
+}
+.center {
+  display: flex;
+  justify-content: center;
+}
+.right {
+  background: var(--leaf-soft) !important;
+  box-shadow: 0 0 0 6px var(--leaf) !important;
+}
+
+/* ---------- Hungry Frog ---------- */
+.flies {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 18px;
+  padding-top: 8px;
+}
+.fly {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 96px;
+  height: 96px;
+  border: 0;
+  border-radius: 50%;
+  background: var(--surface);
+  box-shadow: var(--shadow);
+  color: var(--ink);
+  cursor: pointer;
+  animation: bob 2.6s ease-in-out infinite;
+  transition: transform 0.35s ease, opacity 0.35s ease;
+}
+.flyLetter {
+  font-size: 46px;
+  font-weight: 800;
+  line-height: 1;
+}
+.flyBug {
+  position: absolute;
+  top: -10px;
+  inset-inline-end: -8px;
+}
+.eaten {
+  transform: scale(0) !important;
+  opacity: 0;
+  animation: none;
+}
+.pond {
+  display: flex;
+  justify-content: center;
+}
+.frog {
+  display: grid;
+  place-items: center;
+  width: 190px;
+  height: 150px;
+  border-radius: 50%;
+  background: radial-gradient(ellipse at 50% 70%, #4fae3c 0 58%, transparent 59%);
+}
+.gulp {
+  animation: gulp 0.6s ease 2;
+}
+
+/* ---------- Balloon Pop ---------- */
+.sky {
+  position: absolute;
+  inset: 0;
+}
+.balloon {
+  position: absolute;
+  left: var(--x);
+  bottom: -160px;
+  width: 100px;
+  height: 150px;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+  animation: rise var(--dur) linear infinite;
+  animation-delay: var(--delay);
+}
+.balloon::after {
+  content: '';
+  position: absolute;
+  left: 49px;
+  top: 120px;
+  width: 2px;
+  height: 30px;
+  background: rgba(51, 38, 74, 0.4);
+}
+.balloonBody {
+  display: grid;
+  place-items: center;
+  width: 100px;
+  height: 122px;
+  border-radius: 50% 50% 48% 48% / 55% 55% 45% 45%;
+  background: radial-gradient(circle at 32% 28%, rgba(255, 255, 255, 0.7) 0 10%, transparent 11%), var(--c);
+  box-shadow: inset -8px -10px 0 rgba(0, 0, 0, 0.08);
+  color: #fff;
+  font-size: 50px;
+  font-weight: 800;
+  line-height: 1;
+  text-shadow: 0 2px 0 rgba(51, 38, 74, 0.3);
+}
+.popped {
+  animation-play-state: paused;
+  pointer-events: none;
+}
+.popped .balloonBody {
+  animation: poof 0.35s ease forwards;
+}
+.popped::after {
+  opacity: 0;
+}
+@keyframes rise {
+  from {
+    bottom: -160px;
+  }
+  to {
+    bottom: 110%;
+  }
+}
+@keyframes poof {
+  to {
+    transform: scale(1.6);
+    opacity: 0;
+  }
+}
+
+/* ---------- Count & Feed ---------- */
+.countWrap {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: end;
+  gap: 16px;
+}
+.pile {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-content: flex-end;
+  gap: 6px;
+  min-height: 140px;
+  padding: 10px;
+  border-radius: var(--radius);
+  background: rgba(255, 255, 255, 0.5);
+}
+.carrot {
+  display: grid;
+  place-items: center;
+  width: 64px;
+  height: 64px;
+  border: 0;
+  border-radius: 18px;
+  background: transparent;
+  cursor: pointer;
+}
+.carrotSmall {
+  width: 48px;
+  height: 48px;
+}
+.bunnySide {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+.bunnyHead {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.bunny {
+  display: inline-block;
+}
+.sign {
+  display: grid;
+  place-items: center;
+  min-width: 72px;
+  height: 72px;
+  border-radius: 18px;
+  background: var(--surface);
+  box-shadow: var(--shadow);
+  color: var(--coral);
+  font-size: 46px;
+  font-weight: 800;
+}
+.basket {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  min-height: 120px;
+  padding: 6px;
+  border: 4px solid #a8692d;
+  border-radius: 18px 18px 40px 40px;
+  background: repeating-linear-gradient(45deg, #d99a55 0 10px, #c98a45 10px 20px);
+}
+.basketItems {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2px;
+  min-height: 56px;
+}
+.basketCount {
+  padding: 0 16px;
+  border-radius: 999px;
+  background: var(--surface);
+  font-size: 24px;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+}
+.doneBtn {
+  min-height: var(--touch);
+  padding: 10px 32px;
+  border: 0;
+  border-radius: 999px;
+  background: linear-gradient(135deg, var(--leaf), #6cc35b);
+  box-shadow: 0 6px 0 #2c7424;
+  color: #fff;
+  font-size: 1.4rem;
+  font-weight: 800;
+  cursor: pointer;
+}
+.doneBtn:active {
+  transform: translateY(3px);
+  box-shadow: 0 3px 0 #2c7424;
+}
+
+/* ---------- Number Train ---------- */
+.railWrap {
+  overflow: hidden;
+  padding-top: 10px;
+}
+.track {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 6px;
+  padding-block-end: 14px;
+  border-bottom: 8px solid #8a6a4a;
+  transition: transform 1.4s ease-in;
+}
+.trainGo {
+  transform: translateX(-120%);
+}
+:global([dir='rtl']) .trainGo {
+  transform: translateX(120%);
+}
+.engine {
+  display: inline-block;
+}
+:global([dir='rtl']) .engine {
+  transform: scaleX(-1);
+}
+.wagonSlot {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 78px;
+  height: 70px;
+  border: 4px dashed rgba(51, 38, 74, 0.3);
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.55);
+}
+.wagonSlotFull {
+  border-color: transparent;
+  background: transparent;
+}
+.wagon {
+  position: relative;
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 78px;
+  height: 70px;
+  border: 0;
+  border-radius: 14px;
+  background: var(--c);
+  box-shadow: inset 0 -6px 0 rgba(0, 0, 0, 0.15);
+  color: #fff;
+  font-size: 40px;
+  font-weight: 800;
+  line-height: 1;
+  text-shadow: 0 2px 0 rgba(51, 38, 74, 0.3);
+  cursor: pointer;
+}
+.wagon::before,
+.wagon::after {
+  content: '';
+  position: absolute;
+  bottom: -12px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #33264a;
+  border: 4px solid #6b5e80;
+}
+.wagon::before {
+  left: 10px;
+}
+.wagon::after {
+  right: 10px;
+}
+.yard {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 22px 16px;
+  padding-block: 12px 18px;
+}
+
+/* ---------- Color Butterflies ---------- */
+.butterflies {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 14px;
+  min-height: 84px;
+}
+.butterfly {
+  display: block;
+  width: 100px;
+  height: 84px;
+  padding: 6px;
+  border: 0;
+  border-radius: 22px;
+  background: rgba(255, 255, 255, 0.6);
+  cursor: pointer;
+  animation: bob 3s ease-in-out infinite;
+}
+.butterflySvg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.wingL,
+.wingR {
+  transform-origin: 50px 40px;
+  animation: flap 0.5s ease-in-out infinite alternate;
+}
+@keyframes flap {
+  to {
+    transform: scaleX(0.75);
+  }
+}
+.flowers {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  gap: 10px;
+}
+.flower {
+  position: relative;
+  width: 110px;
+  height: 150px;
+  padding: 0;
+  border: 0;
+  border-radius: 24px;
+  background: none;
+  cursor: pointer;
+}
+.flowerSvg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.perch {
+  position: absolute;
+  top: -8px;
+  left: 50%;
+  width: 80px;
+  height: 66px;
+  transform: translateX(-50%);
+}
+
+/* ---------- Shape Builder ---------- */
+.build {
+  flex: 1;
+  display: grid;
+  grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+  align-items: center;
+  gap: 16px;
+}
+.board {
+  position: relative;
+  width: 100%;
+  max-width: 360px;
+  aspect-ratio: 1;
+  margin-inline: auto;
+  border-radius: 28px;
+  background: rgba(255, 255, 255, 0.7);
+}
+.boardDone {
+  animation: glow 1.2s ease 2;
+}
+.slot {
+  position: absolute;
+  padding: 0;
+  border: 0;
+  border-radius: 10px;
+  background: none;
+  cursor: pointer;
+}
+.slotFilled {
+  pointer-events: none;
+}
+.shapeFill {
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+.tray {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-content: center;
+  gap: 14px;
+}
+.piece {
+  display: block;
+  width: 96px;
+  height: 96px;
+  padding: 10px;
+  border: 0;
+  border-radius: 18px;
+  background: var(--surface);
+  box-shadow: var(--shadow);
+  cursor: pointer;
+}
+.pieceWide {
+  width: 120px;
+  height: 80px;
+}
+
+/* ---------- What comes next? / Odd one out ---------- */
+.seq {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  padding: 14px;
+  border-radius: var(--radius);
+  background: rgba(255, 255, 255, 0.7);
+}
+.tile {
+  display: grid;
+  place-items: center;
+  width: 76px;
+  height: 76px;
+  border-radius: 18px;
+  background: var(--surface);
+  box-shadow: 0 4px 0 rgba(51, 38, 74, 0.08);
+  animation: pop-in 0.35s ease backwards;
+}
+.tileQ {
+  border: 4px dashed var(--grape);
+  background: var(--grape-soft);
+  color: var(--grape);
+  font-size: 44px;
+  font-weight: 800;
+}
+.tileSolved {
+  border-style: solid;
+  background: var(--surface);
+}
+.choices {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 16px;
+}
+.choice {
+  display: grid;
+  place-items: center;
+  width: 104px;
+  height: 104px;
+  border: 0;
+  border-radius: 26px;
+  background: var(--surface);
+  box-shadow: var(--shadow);
+  cursor: pointer;
+}
+.oddGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 140px));
+  justify-content: center;
+  gap: 18px;
+  margin-block: auto;
+}
+.oddThree {
+  grid-template-columns: repeat(3, minmax(0, 140px));
+}
+.oddChoice {
+  width: 100%;
+  height: 140px;
+}
+
+/* ---------- done ---------- */
+.done {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  padding-block: 16px;
+  text-align: center;
+}
+.doneTitle {
+  margin: 0;
+  font-size: clamp(2rem, 6vw, 2.9rem);
+  font-weight: 800;
+}
+.doneGame {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+  color: var(--ink-soft);
+  font-weight: 700;
+}
+.bigStars {
+  padding: 6px 22px;
+  border-radius: 999px;
+  background: var(--sun-soft);
+  font-size: 1.8rem;
+  font-weight: 800;
+}
+.chip {
+  padding: 10px 18px;
+  border-radius: var(--radius);
+  background: var(--surface);
+  box-shadow: var(--shadow-soft);
+  font-weight: 700;
+}
+.newItems {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 14px;
+}
+.newItems figure {
+  margin: 0;
+  padding: 10px 14px;
+  border-radius: 22px;
+  background: var(--surface);
+  box-shadow: var(--shadow);
+  animation: pop-in 0.5s ease backwards;
+}
+.newItems figcaption {
+  font-size: 0.95rem;
+  font-weight: 700;
+}
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+}
+.confetti {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 40;
+}
+.confetti i {
+  position: absolute;
+  top: -20px;
+  left: var(--x);
+  width: 12px;
+  height: 18px;
+  border-radius: 3px;
+  background: var(--c);
+  animation: fall 2.8s linear forwards;
+  animation-delay: var(--d);
+}
+@keyframes fall {
+  to {
+    transform: translateY(110vh) rotate(720deg);
+  }
+}
+
+/* ---------- Hala's garden ---------- */
+.garden {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  max-height: 68vh;
+  border-radius: var(--radius-l);
+  overflow: hidden;
+  background:
+    radial-gradient(120% 40% at 20% 100%, #a6d68a 60%, transparent 61%),
+    radial-gradient(110% 36% at 85% 100%, #bfe3a6 60%, transparent 61%),
+    linear-gradient(180deg, #a9d8ff 0%, #d6ecfc 52%, #bfe3a6 53%, #a6d68a 100%);
+}
+.gardenSun {
+  position: absolute;
+  top: 6%;
+  inset-inline-end: 6%;
+  width: 13%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: radial-gradient(circle, #ffe27a 0%, #ffc83d 70%);
+  box-shadow: 0 0 40px rgba(255, 200, 61, 0.7);
+}
+.gardenItem {
+  position: absolute;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+  transform: translate(-50%, -50%);
+  line-height: 0;
+}
+.size_sm img {
+  width: clamp(36px, 7vw, 64px) !important;
+  height: clamp(36px, 7vw, 64px) !important;
+}
+.size_md img {
+  width: clamp(52px, 10vw, 92px) !important;
+  height: clamp(52px, 10vw, 92px) !important;
+}
+.size_lg img {
+  width: clamp(72px, 15vw, 140px) !important;
+  height: clamp(72px, 15vw, 140px) !important;
+}
+.fresh {
+  animation: grow 1s cubic-bezier(0.3, 1.6, 0.5, 1) backwards;
+}
+.boing {
+  animation: boing 0.6s ease;
+}
+@keyframes grow {
+  from {
+    transform: translate(-50%, -50%) scale(0);
+  }
+  to {
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+@keyframes boing {
+  0%,
+  100% {
+    transform: translate(-50%, -50%) scale(1);
+  }
+  40% {
+    transform: translate(-50%, -62%) scale(1.2);
+  }
+}
+.gardenBottom {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+}
+.gardenTalk {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: 1 1 280px;
+  min-width: 0;
+}
+.gardenTalk > :last-child {
+  flex: 1;
+  min-width: 0;
+}
+.drops {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  border-radius: 999px;
+  background: var(--surface);
+  box-shadow: var(--shadow);
+  font-weight: 700;
+}
+.drop {
+  font-size: 26px;
+  filter: grayscale(1) opacity(0.35);
+}
+.dropOn {
+  filter: none;
+}
+
+/* ---------- fx layer (outside React) ---------- */
+.fx {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  overflow: hidden;
+  pointer-events: none;
+}
+.spark {
+  position: fixed;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--c);
+  animation: spark 0.7s ease-out forwards;
+}
+@keyframes spark {
+  from {
+    transform: translate(-50%, -50%) rotate(var(--a)) translateY(0) scale(1);
+    opacity: 1;
+  }
+  to {
+    transform: translate(-50%, -50%) rotate(var(--a)) translateY(var(--r)) scale(0.3);
+    opacity: 0;
+  }
+}
+.flyingStar {
+  position: fixed;
+  font-size: 40px;
+  transform: translate(-50%, -50%);
+}
+
+/* ---------- phones ---------- */
+@media (max-width: 560px) {
+  .cards {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+  }
+  .card {
+    padding: 12px;
+  }
+  .cardIcon {
+    width: 60px;
+    height: 60px;
+    border-radius: 18px;
+  }
+  .cardTitle {
+    font-size: 1.1rem;
+  }
+  .stage {
+    min-height: 420px;
+    padding: 12px;
+  }
+  .countWrap,
+  .build {
+    grid-template-columns: 1fr;
+  }
+  .fly {
+    width: 80px;
+    height: 80px;
+  }
+  .flyLetter {
+    font-size: 38px;
+  }
+  .wagonSlot,
+  .wagon {
+    width: 52px;
+    height: 52px;
+    font-size: 28px;
+  }
+  .wagon::before,
+  .wagon::after {
+    width: 14px;
+    height: 14px;
+    bottom: -9px;
+    border-width: 3px;
+  }
+  .wagon::before {
+    left: 6px;
+  }
+  .wagon::after {
+    right: 6px;
+  }
+  .flower {
+    width: 80px;
+    height: 112px;
+  }
+  .butterfly {
+    width: 80px;
+    height: 68px;
+  }
+  .tile {
+    width: 54px;
+    height: 54px;
+  }
+  .choice {
+    width: 86px;
+    height: 86px;
+  }
+  .oddThree {
+    grid-template-columns: repeat(3, minmax(0, 100px));
+  }
+  .oddChoice {
+    height: 110px;
+  }
+  .stone {
+    width: 24px;
+    height: 24px;
+    font-size: 13px;
+  }
+  .teaserText {
+    max-width: none;
+  }
+  .teaserRow {
+    display: none;
+  }
+  .gardenBottom {
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-start;
+  }
+  .gardenTalk {
+    flex: none;
+  }
+  .drops {
+    justify-content: center;
+    border-radius: var(--radius);
+  }
+  .garden {
+    aspect-ratio: 3 / 4;
+  }
+}
+
+/* Reduced motion: balloons rest in place instead of floating. */
+@media (prefers-reduced-motion: reduce) {
+  .balloon {
+    animation: none !important;
+    bottom: var(--rest) !important;
+  }
+}
+:global(:root[data-motion='reduced']) .balloon {
+  animation: none !important;
+  bottom: var(--rest) !important;
+}

@@ -52,31 +52,79 @@
 }
 
 /* ---- other areas ---- */
+/* Every area is visible at once (no hidden sideways scrolling): the chips wrap into a grid. */
 .filters {
-  display: flex;
-  gap: 8px;
-  overflow-x: auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+  gap: 10px;
   padding-block: 4px;
-  scrollbar-width: none;
 }
 
 .chip {
-  flex: none;
-  display: inline-flex;
+  display: flex;
   align-items: center;
-  gap: 6px;
-  min-height: 56px;
-  padding-inline: 8px 16px;
-  border-radius: 999px;
-  border: 3px solid var(--line);
-  background: var(--surface);
+  gap: 10px;
+  min-height: 64px;
+  min-width: 0;
+  padding-block: 6px;
+  padding-inline: 6px 14px;
+  border-radius: 22px;
+  border: 0;
+  background: color-mix(in srgb, var(--accent, var(--grape)) 12%, var(--surface));
+  box-shadow: 0 5px 0 color-mix(in srgb, var(--accent, var(--grape)) 30%, transparent);
+  color: var(--ink);
   font-weight: 800;
+  font-size: 1rem;
+  line-height: 1.2;
+  text-align: start;
   cursor: pointer;
+  transition: transform 0.15s ease, background 0.15s ease;
+}
+.chip:active {
+  transform: translateY(3px);
+  box-shadow: 0 2px 0 color-mix(in srgb, var(--accent, var(--grape)) 30%, transparent);
 }
 
+.chipIcon {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 52px;
+  height: 52px;
+  border-radius: 16px;
+  background: var(--surface);
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.chipLabel {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+/* The area you're in: filled with its own colour. */
 .chip[aria-current='true'] {
-  border-color: var(--grape);
-  background: var(--grape-soft);
+  background: var(--accent, var(--grape));
+  color: #fff;
+  box-shadow: 0 5px 0 color-mix(in srgb, var(--accent, var(--grape)) 60%, #000);
+  cursor: default;
+}
+
+@media (max-width: 520px) {
+  .filters {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+  }
+  .chip {
+    min-height: 56px;
+    gap: 6px;
+    font-size: 0.9rem;
+  }
+  .chipIcon {
+    width: 42px;
+    height: 42px;
+    border-radius: 12px;
+  }
 }
 
 .quranCard {

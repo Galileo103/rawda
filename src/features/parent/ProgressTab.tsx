@@ -1,6 +1,7 @@
 import { useLiveQuery } from 'dexie-react-hooks'
 import { useState } from 'react'
 import { useApp } from '../../app/AppState'
+import { gameTitle } from '../../content/games'
 import { activityById, content, pick } from '../../content/loader'
 import { Button, Panel } from '../../design/ui'
 import { visualText } from '../../design/Visual'
@@ -145,7 +146,7 @@ export function ProgressTab() {
                 {data.completions.slice(0, 15).map((c) => (
                   <tr key={c.id}>
                     <td>{fmtDate.format(c.ts)}</td>
-                    <td dir="auto">{pick(activityById(c.activityId)?.title, ui) || c.activityId}</td>
+                    <td dir="auto">{pick(activityById(c.activityId)?.title, ui) || gameTitle(c.activityId, t) || c.activityId}</td>
                     <td>{c.lang === 'ar' ? 'العربية' : 'English'}</td>
                     <td>★ {c.stars}</td>
                   </tr>

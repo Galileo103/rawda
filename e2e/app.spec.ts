@@ -352,3 +352,49 @@ test('phone layout has no horizontal scrolling', async ({ page }) => {
     expect(overflow, route).toBeLessThanOrEqual(1)
   }
 })
+
+test('Play World: finishing a game celebrates, saves the stars and grows Hala’s garden', async ({ page }) => {
+  await onboard(page)
+  await page.getByTestId('play-world').click()
+  await expect(page.getByTestId('game-odd')).toBeVisible()
+  await page.getByTestId('game-odd').click()
+  for (let i = 0; i < 6; i++) {
+    const done = page.getByRole('heading', { name: 'أحسنت!' })
+    const answer = page.getByTestId('game-answer')
+    await expect(answer.or(done)).toBeVisible({ timeout: 15_000 })
+    if (await done.isVisible()) break
+    const handle = await answer.elementHandle()
+    await answer.click()
+    // The next round replaces this one once Hala's praise is over.
+    await page.waitForFunction((el) => !el?.isConnected, handle, { timeout: 15_000 })
+  }
+  await expect(page.getByRole('heading', { name: 'أحسنت!' })).toBeVisible()
+  await page.getByRole('button', { name: /اذهب إلى الحديقة/ }).click()
+  await expect(page.getByRole('group', { name: 'حديقة هالة' })).toBeVisible()
+  await page.reload()
+  await expect(page.getByRole('button', { name: /زَهْرَة التُّولِيب/ })).toBeVisible()
+})
+
+test('Hungry Frog: a real finger drag feeds the frog', async ({ page }) => {
+  await onboard(page)
+  await page.goto('./#/games/frog')
+  const fly = page.getByTestId('game-answer')
+  await expect(fly).toBeVisible()
+  const from = (await fly.boundingBox())!
+  const to = (await page.locator('[data-drop="frog"]').boundingBox())!
+  await page.mouse.move(from.x + from.width / 2, from.y + from.height / 2)
+  await page.mouse.down()
+  await page.mouse.move(to.x + to.width / 2, to.y + to.height / 2, { steps: 12 })
+  await page.mouse.up()
+  await expect(page.locator('[class*="stoneOn"]')).toHaveCount(1, { timeout: 10_000 })
+})
+
+test('map area chips all fit on screen without sideways scrolling', async ({ page }) => {
+  await onboard(page)
+  await page.setViewportSize({ width: 390, height: 844 })
+  await page.goto('./#/map/numbers')
+  const nav = page.getByRole('navigation', { name: 'طريق التعلّم' })
+  await expect(nav).toBeVisible()
+  const overflow = await nav.evaluate((el) => el.scrollWidth - el.clientWidth)
+  expect(overflow).toBeLessThanOrEqual(1)
+})
