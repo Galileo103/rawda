@@ -71,7 +71,8 @@ export function computePillars(input: {
 
   for (const a of input.attempts) {
     activeDays.add(localDay(a.ts))
-    const p = activityPillar.get(a.activityId)
+    // Writing room colouring is fine-motor practice too.
+    const p = activityPillar.get(a.activityId) ?? (a.activityId.startsWith('write:') ? 'motor' : undefined)
     if (!p) continue
     total[p]++
     if (now - a.ts < 7 * DAY) week[p]++
@@ -95,7 +96,7 @@ export function computePillars(input: {
 
   const levelOf = (p: Pillar): number => {
     if (p === 'creativity') return Math.min(1, input.drawings.filter((d) => now - d.createdAt < 30 * DAY).length / 10)
-    const recs = input.mastery.filter((m) => skillPillar.get(m.skillId) === p)
+    const recs = input.mastery.filter((m) => (skillPillar.get(m.skillId) ?? (m.skillId.includes('.write.') ? 'motor' : undefined)) === p)
     return recs.length ? recs.reduce((s, m) => s + m.score, 0) / recs.length : 0
   }
   const detailOf = (p: Pillar): number => {

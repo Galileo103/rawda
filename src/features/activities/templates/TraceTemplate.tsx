@@ -5,7 +5,7 @@ import { IconButton } from '../../../design/ui'
 import { useOptionalApp } from '../../../app/AppState'
 import { ageProfile } from '../../../domain/ageProfile'
 import { audio } from '../../../services/audio/AudioService'
-import { coverPoints, maskPoints, pointParts, traceThreshold, weakestPart } from '../../studio/canvasTools'
+import { coverPoints, layoutGlyph, maskPoints, pointParts, traceThreshold, weakestPart } from '../../studio/canvasTools'
 import s from '../activities.module.css'
 import { STROKE_BOX, STROKES, strokeStart } from './strokes'
 import type { TemplateProps } from './types'
@@ -75,25 +75,7 @@ export function TraceTemplate({ item, lang, hintLevel, locked, onCorrect }: Temp
         g.setTransform(1, 0, 0, 1, 0, 0)
       } else {
         g.fillStyle = fill
-        g.textAlign = 'center'
-        g.textBaseline = 'alphabetic'
-        g.direction = /[؀-ۿ]/.test(glyph) ? 'rtl' : 'ltr'
-        // Centre the letter by its real outline and keep it inside the box: a tall أ keeps its
-        // hamza, a low ي its dots.
-        const font = (px: number) => `800 ${px}px 'Baloo Bhaijaan 2 Variable', 'Baloo Bhaijaan 2', sans-serif`
-        let px = glyph.length > 1 ? 250 : 340
-        g.font = font(px)
-        let m = g.measureText(glyph)
-        const tall = m.actualBoundingBoxAscent + m.actualBoundingBoxDescent
-        const wide = m.actualBoundingBoxLeft + m.actualBoundingBoxRight
-        const fit = (SIZE * 0.8) / Math.max(tall, wide, 1)
-        if (fit < 1) {
-          px = Math.floor(px * fit)
-          g.font = font(px)
-          m = g.measureText(glyph)
-        }
-        const x = SIZE / 2 + (m.actualBoundingBoxLeft - m.actualBoundingBoxRight) / 2
-        const y = SIZE / 2 + (m.actualBoundingBoxAscent - m.actualBoundingBoxDescent) / 2
+        const { x, y } = layoutGlyph(g, glyph, SIZE, glyph.length > 1 ? 250 : 340)
         g.fillText(glyph, x, y)
       }
       if (points.current.length === 0) {

@@ -410,6 +410,38 @@ test('tracing a letter waits for every part (the dot of ب), then the letter shi
   await expect(page.locator('[class*="traceWin"]')).toHaveCount(0, { timeout: 10_000 })
 })
 
+test('Writing room: colour a letter inside its magic walls, then it celebrates and earns a star', async ({ page }) => {
+  await onboard(page)
+  await page.getByTestId('writing-room').click()
+  await expect(page.getByTestId('write-set-arForms')).toBeVisible()
+  await page.getByTestId('write-ar-ba').click()
+  const canvas = page.getByTestId('write-canvas')
+  await expect(canvas).toBeVisible()
+  await page.waitForTimeout(500)
+  const box = (await canvas.boundingBox())!
+  // One stroke across the middle, going out of the letter on both sides: not finished.
+  await page.mouse.move(box.x + 30, box.y + box.height * 0.5)
+  await page.mouse.down()
+  await page.mouse.move(box.x + box.width - 30, box.y + box.height * 0.5, { steps: 20 })
+  await page.mouse.up()
+  expect(Number(await canvas.getAttribute('data-progress'))).toBeLessThan(60)
+  await expect(page.getByTestId('write-next')).toHaveCount(0)
+  // Now colour the whole box: the walls keep the paint in the letter, and it's done.
+  await page.getByTestId('brush-rainbow').click()
+  await page.mouse.move(box.x + 30, box.y + 30)
+  await page.mouse.down()
+  for (let y = 30; y < box.height - 20; y += 14) {
+    await page.mouse.move(box.x + 30, box.y + y, { steps: 2 })
+    await page.mouse.move(box.x + box.width - 30, box.y + y, { steps: 12 })
+  }
+  await page.mouse.up()
+  await expect(page.getByTestId('write-next')).toBeVisible()
+  await expect(page.getByRole('status')).toBeVisible() // saved to "My drawings"
+  await page.getByRole('button', { name: /كل الحروف/ }).first().click()
+  await expect(page.getByTestId('write-ar-ba').locator('[class*="tileStar"]')).toBeVisible()
+  await expect(page.getByTestId('write-ar-ta').locator('[class*="tileStar"]')).toHaveCount(0)
+})
+
 test('finger paths: a pre-writing stroke with a green start dot can be traced', async ({ page }) => {
   await onboard(page)
   await page.goto('./#/play/finger-paths')

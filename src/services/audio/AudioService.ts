@@ -5,7 +5,7 @@ import type { Lang } from '../../domain/types'
 import { clipKey, normalizeSpeech } from './clipKey'
 
 export type SpeakResult = 'file' | 'tts' | 'none' | 'muted' | 'stopped'
-export type SfxName = 'tap' | 'correct' | 'try' | 'complete' | 'pop' | 'flip' | 'sparkle'
+export type SfxName = 'tap' | 'correct' | 'try' | 'complete' | 'pop' | 'flip' | 'sparkle' | 'boing'
 
 export interface AudioConfig {
   narration: boolean
@@ -233,6 +233,8 @@ const SFX: Record<SfxName, Note[]> = {
   complete: [[523, 0, 0.12], [659, 0.12, 0.12], [784, 0.24, 0.12], [1047, 0.36, 0.35]],
   // Streak of correct answers: a quick rising twinkle.
   sparkle: [[784, 0, 0.08, 'triangle'], [988, 0.06, 0.08, 'triangle'], [1175, 0.12, 0.08, 'triangle'], [1568, 0.18, 0.25, 'triangle'], [2093, 0.28, 0.3]],
+  // A finger bumping a "magic wall" (Writing room): a soft, low bounce, never a buzzer.
+  boing: [[392, 0, 0.09], [294, 0.07, 0.16]],
 }
 
 function revoke(url: string): void {

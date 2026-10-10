@@ -2,6 +2,7 @@ import { type Gender, HERO_WORD, resolveGender, splitName } from '../domain/chil
 import type { Lang } from '../domain/types'
 import type { Dict, RawDict } from '../i18n'
 import { gameLines } from './games'
+import { writingLines } from './writing'
 import type { ContentBundle } from './parse'
 import type { LexEntry, Localized, Visual } from './schemas'
 
@@ -66,6 +67,7 @@ export function collectNarration(bundle: ContentBundle, dicts: Record<Lang, RawD
     for (const r of bundle.rewards) add(lang, r.name[lang])
     for (const b of bundle.breaks) add(lang, b.say[lang])
     for (const line of gameLines(lang, d)) add(lang, line)
+    for (const line of writingLines(lang, d)) add(lang, line)
 
     for (const a of bundle.activities) {
       if (a.langs !== 'any' && a.langs !== lang) continue

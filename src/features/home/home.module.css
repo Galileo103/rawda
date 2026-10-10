@@ -216,6 +216,18 @@
   color: #2f9e5b;
 }
 
+/* Writing room entry: the same card in grape. */
+.continue.writingRoom {
+  background: linear-gradient(135deg, var(--grape), #a17ff0);
+  box-shadow: 0 8px 0 #563ba8;
+}
+.continue.writingRoom:active {
+  box-shadow: 0 4px 0 #563ba8;
+}
+.writingRoom .continuePlay {
+  color: var(--grape);
+}
+
 .continueIcon {
   flex: none;
   display: grid;
@@ -364,6 +376,18 @@
   }
   .quick > .continue {
     width: 100%;
+  }
+  /* Three banners in a row: drop the play circles and shrink the pictures so titles fit. */
+  .quick:has(> :nth-child(3)) .continuePlay {
+    display: none;
+  }
+  .quick:has(> :nth-child(3)) .continueIcon {
+    width: 72px;
+    height: 72px;
+    border-radius: 24px;
+  }
+  .quick:has(> :nth-child(3)) .continueTitle {
+    font-size: clamp(1.2rem, 2.6vw, 1.6rem);
   }
 }
 /* Phones: slimmer banners so four subjects show without scrolling. */

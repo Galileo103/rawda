@@ -259,6 +259,7 @@ export function StudioScreen() {
           <IconButton icon="home" label={t.common.home} onClick={() => void leave('/home')} />
           <IconButton icon="gallery" label={t.studio.gallery} showLabel onClick={() => void leave('/studio/gallery')} />
           <IconButton icon="plus" label={t.studio.newPage} showLabel onClick={() => setChoosingPage(true)} />
+          <IconButton icon="pencil" label={t.writing.title} showLabel onClick={() => void leave('/write')} data-testid="studio-writing" />
         </div>
         <div style={{ display: 'flex', gap: 10 }}>
           <IconButton icon="undo" label={t.studio.undo} showLabel onClick={undo} disabled={undoCount === 0} />

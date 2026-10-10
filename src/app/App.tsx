@@ -13,6 +13,8 @@ import { StoryLibrary } from '../features/stories/StoryLibrary'
 import { StoryReader } from '../features/stories/StoryReader'
 import { GalleryScreen } from '../features/studio/GalleryScreen'
 import { StudioScreen } from '../features/studio/StudioScreen'
+import { WritingRoom } from '../features/writing/WritingRoom'
+import { WritingScreen } from '../features/writing/WritingScreen'
 import { SetupWizard } from '../features/welcome/SetupWizard'
 import { WelcomeScreen } from '../features/welcome/WelcomeScreen'
 import { AppStateProvider } from './AppState'
@@ -37,6 +39,8 @@ export function App() {
               <Route path="/stories/:storyId" element={<StoryReader />} />
               <Route path="/studio" element={<StudioScreen />} />
               <Route path="/studio/gallery" element={<GalleryScreen />} />
+              <Route path="/write" element={<WritingRoom />} />
+              <Route path="/write/:entryId" element={<WritingScreen />} />
               <Route path="/rewards" element={<RewardsScreen />} />
               <Route path="/quran" element={<QuranScreen />} />
               <Route path="/quran/:number" element={<SurahScreen />} />

@@ -125,6 +125,34 @@ export function shapePath(ctx: CanvasRenderingContext2D, shape: 'circle' | 'squa
   }
 }
 
+const GLYPH_FONT = (px: number) => `800 ${px}px 'Baloo Bhaijaan 2 Variable', 'Baloo Bhaijaan 2', sans-serif`
+
+/**
+ * Set up `g` to draw `glyph` centred in a size×size box by its real outline: `basePx` tall,
+ * shrunk so it never takes more than `fit` of the box (a tall أ keeps its hamza, a low ي its
+ * dots), or with `grow` scaled to fill exactly `fit` of it. Returns where to call fillText.
+ */
+export function layoutGlyph(g: CanvasRenderingContext2D, glyph: string, size: number, basePx: number, fit = 0.8, grow = false): { x: number; y: number } {
+  g.textAlign = 'center'
+  g.textBaseline = 'alphabetic'
+  g.direction = /[؀-ۿ]/.test(glyph) ? 'rtl' : 'ltr'
+  let px = basePx
+  g.font = GLYPH_FONT(px)
+  let m = g.measureText(glyph)
+  const tall = m.actualBoundingBoxAscent + m.actualBoundingBoxDescent
+  const wide = m.actualBoundingBoxLeft + m.actualBoundingBoxRight
+  const scale = (size * fit) / Math.max(tall, wide, 1)
+  if (scale < 1 || grow) {
+    px = Math.floor(px * scale)
+    g.font = GLYPH_FONT(px)
+    m = g.measureText(glyph)
+  }
+  return {
+    x: size / 2 + (m.actualBoundingBoxLeft - m.actualBoundingBoxRight) / 2,
+    y: size / 2 + (m.actualBoundingBoxAscent - m.actualBoundingBoxDescent) / 2,
+  }
+}
+
 /** Sample points (x0,y0,x1,y1,…) on a grid where the buffer is painted — the shape to trace. */
 export function maskPoints(buf: PixelBuffer, step = 12): Float32Array {
   const pts: number[] = []

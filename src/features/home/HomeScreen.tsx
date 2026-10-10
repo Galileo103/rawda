@@ -125,7 +125,7 @@ export function HomeScreen() {
         </button>
       )}
 
-      {/* Continue + Play World: side by side on tablets, so the subjects fit on the first screen. */}
+      {/* Continue, Play World and the Writing room: side by side on tablets, so the subjects fit on the first screen. */}
       <div className={s.quick}>
         {next && (
           <button type="button" className={s.continue} onClick={() => navigate(`/play/${next.id}`)}>
@@ -167,6 +167,28 @@ export function HomeScreen() {
             </span>
           </button>
         )}
+
+        <button
+          type="button"
+          className={[s.continue, s.writingRoom].join(' ')}
+          onClick={() => {
+            audio.sfx('tap')
+            void audio.speak(dict(lang).writing.say.hello, lang)
+            navigate('/write')
+          }}
+          data-testid="writing-room"
+        >
+          <span className={s.continueIcon} aria-hidden="true">
+            <OpenMoji hex="270F" alt="" size={64} />
+          </span>
+          <span className={s.continueText}>
+            <span className={s.continueLabel}>{t.writing.sub}</span>
+            <span className={s.continueTitle}>{t.writing.title}</span>
+          </span>
+          <span className={s.continuePlay} aria-hidden="true">
+            <Icon name="play" size={34} />
+          </span>
+        </button>
       </div>
 
       <nav className={s.grid} aria-label={t.map.title}>
