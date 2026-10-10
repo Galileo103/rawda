@@ -147,7 +147,7 @@ export const ar: RawDict = {
   writing: {
     title: 'غرفة الكتابة',
     sub: 'نلوّن الحروف والأرقام',
-    sets: { ar: 'الحروف', arForms: 'أشكال الحروف', en: 'ABC', num: 'الأرقام' },
+    sets: { ar: 'الحروف', arForms: 'أشكال الحروف', en: 'ABC', num: 'الأرقام', name: '⭐ اسمي' },
     forms: { start: 'أول الكلمة', middle: 'وسط الكلمة', end: 'آخر الكلمة' },
     brushes: { marker: 'قلم', crayon: 'ألوان شمع', rainbow: 'قوس قزح', glitter: 'لامع', stars: 'نجوم' },
     again: 'مرة أخرى',
@@ -160,6 +160,7 @@ export const ar: RawDict = {
     watchAgain: 'شاهد مرة أخرى',
     nextLetter: 'الحرف التالي',
     sky: 'سماوي',
+    certificate: 'كتبتُ اسمي!',
     say: {
       hello: { m: 'اِخْتَرْ حَرْفًا نُلَوِّنُهُ!', f: 'اِخْتَارِي حَرْفًا نُلَوِّنُهُ!' },
       fillLetter: 'هَيَّا نُلَوِّنُ حَرْفَ {letter}!',
@@ -185,6 +186,8 @@ export const ar: RawDict = {
       fadeStart: 'هَيَّا نَكْتُبُهُ ثَلَاثَ مَرَّاتٍ!',
       fadeFewer: 'رَائِعٌ! وَالْآنَ بِنُقَطٍ أَقَلَّ!',
       fadeLast: { m: 'وَالْآنَ اُكْتُبْهُ وَحْدَكَ!', f: 'وَالْآنَ اُكْتُبِيهِ وَحْدَكِ!' },
+      nameStart: { m: 'هَيَّا نَكْتُبُ اسْمَكَ يَا @name!', f: 'هَيَّا نَكْتُبُ اسْمَكِ يَا @name!' },
+      nameDone: { m: 'رَائِعٌ! كَتَبْتَ اسْمَكَ يَا @name!', f: 'رَائِعٌ! كَتَبْتِ اسْمَكِ يَا @name!' },
     },
   },
   speak: {

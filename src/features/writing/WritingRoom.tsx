@@ -2,7 +2,7 @@ import { useLiveQuery } from 'dexie-react-hooks'
 import { useNavigate, useSearchParams } from 'react-router-dom'
 import { useApp } from '../../app/AppState'
 import { AR_LETTERS } from '../../content/games'
-import { type WriteEntry, type WriteSet, WRITE_FADE_ACTIVITY, WRITE_FILL_ACTIVITY, WRITE_PATH_ACTIVITY, entriesOf, visibleSets } from '../../content/writing'
+import { type WriteEntry, type WriteSet, WRITE_FADE_ACTIVITY, WRITE_FILL_ACTIVITY, WRITE_NAME_ACTIVITY, WRITE_PATH_ACTIVITY, entriesOf, nameEntry, visibleSets } from '../../content/writing'
 import { Icon } from '../../design/Icon'
 import { Mascot } from '../../design/Mascot'
 import { IconButton, Screen, SpeechBubble } from '../../design/ui'
@@ -16,7 +16,7 @@ import s from './writing.module.css'
 function useWritten(): Map<string, number> {
   return useLiveQuery(
     async () => {
-      const rows = await db.attempts.where('activityId').anyOf(WRITE_FILL_ACTIVITY, WRITE_PATH_ACTIVITY, WRITE_FADE_ACTIVITY).toArray()
+      const rows = await db.attempts.where('activityId').anyOf(WRITE_FILL_ACTIVITY, WRITE_PATH_ACTIVITY, WRITE_FADE_ACTIVITY, WRITE_NAME_ACTIVITY).toArray()
       const steps = new Map<string, Set<string>>()
       for (const r of rows) steps.set(r.itemId, (steps.get(r.itemId) ?? new Set()).add(r.activityId))
       return new Map([...steps].map(([id, done]) => [id, done.size]))
@@ -31,11 +31,13 @@ function useWritten(): Map<string, number> {
  * Tabs follow the learning languages; a star marks each one already coloured.
  */
 export function WritingRoom() {
-  const { t, settings, langs } = useApp()
+  const { t, settings, langs, profile } = useApp()
   const navigate = useNavigate()
   const [params, setParams] = useSearchParams()
   const lang = settings.practiceLang
-  const sets = visibleSets(langs)
+  // Her own name, in each language she is learning (when a grown-up has written it in).
+  const names = [langs.includes('ar') ? nameEntry('ar', profile.nameAr) : undefined, langs.includes('en') ? nameEntry('en', profile.nameEn) : undefined].filter((e): e is WriteEntry => !!e)
+  const sets: WriteSet[] = [...visibleSets(langs), ...(names.length ? (['name'] as const) : [])]
   const defaultSet: WriteSet = lang === 'en' && sets.includes('en') ? 'en' : (sets[0] ?? 'num')
   const set = sets.find((x) => x === params.get('set')) ?? defaultSet
   const written = useWritten()
@@ -49,7 +51,7 @@ export function WritingRoom() {
   }
 
   const tile = (e: WriteEntry, label?: string) => (
-    <button key={e.id} type="button" className={s.tile} onClick={() => open(e)} data-testid={`write-${e.id}`} aria-label={label ? `${e.glyph} ${label}` : e.glyph}>
+    <button key={e.id} type="button" className={[s.tile, e.set === 'name' ? s.nameTile : ''].join(' ')} onClick={() => open(e)} data-testid={`write-${e.id}`} aria-label={label ? `${e.glyph} ${label}` : e.glyph}>
       <span className={s.tileGlyph} lang={e.lang} dir={e.lang === 'ar' ? 'rtl' : 'ltr'}>
         {e.glyph}
       </span>
@@ -64,7 +66,7 @@ export function WritingRoom() {
     </button>
   )
 
-  const entries = entriesOf(set, langs)
+  const entries = set === 'name' ? names : entriesOf(set, langs)
 
   return (
     <Screen className={s.room}>

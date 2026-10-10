@@ -56,14 +56,21 @@ describe('stroke paths', () => {
     expect(follow(st!, reached, { x: at(15).x, y: at(15).y + 100 }, 20)).toBe(reached)
     expect(strokeProgress(st!, st!.pts.length - 1)).toBe(1)
   })
+
+  it('does not jump ahead where a stroke passes close to itself (the hamza of أ)', () => {
+    const st = letterStrokes('ar-alif', 600)[1]!
+    const part = st.pts.slice(0, Math.floor(st.pts.length * 0.7))
+    let reached = 0
+    for (let i = 3; i < part.length; i += 3) reached = follow(st, reached, part[i]!, 34, 12)
+    reached = follow(st, reached, part[part.length - 1]!, 34, 12)
+    // Where the finger is (give or take a point), not on the tail further along (it used to jump to ~62 of 71).
+    expect(Math.abs(reached - (part.length - 1))).toBeLessThanOrEqual(2)
+  })
 })
 
 describe('stroke data', () => {
-  it('covers every Arabic letter, English letter and digit', () => {
-    for (const e of WRITE_ENTRIES) {
-      if (e.set === 'arForms') continue
-      expect(STROKES[e.id], e.id).toBeDefined()
-    }
+  it('covers every Arabic letter and its forms, English letter and digit', () => {
+    for (const e of WRITE_ENTRIES) expect(STROKES[e.id], e.id).toBeDefined()
     for (const id of Object.keys(STROKES)) expect(writeEntryById(id), id).toBeDefined()
   })
 

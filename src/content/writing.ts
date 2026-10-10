@@ -9,7 +9,8 @@ import { AR_LETTERS } from './games'
  */
 
 export const WRITE_SETS = ['ar', 'arForms', 'en', 'num'] as const
-export type WriteSet = (typeof WRITE_SETS)[number]
+/** The letter sets, plus the child's own name (built from the profile, see nameEntry). */
+export type WriteSet = (typeof WRITE_SETS)[number] | 'name'
 export type FormPos = 'start' | 'middle' | 'end'
 
 export interface WriteEntry {
@@ -33,6 +34,19 @@ export const WRITE_FILL_ACTIVITY = 'write:fill'
 export const WRITE_PATH_ACTIVITY = 'write:path'
 /** …and for writing it by herself (fade-away practice). */
 export const WRITE_FADE_ACTIVITY = 'write:fade'
+/** …and for writing her own name. */
+export const WRITE_NAME_ACTIVITY = 'write:name'
+
+/**
+ * The child's name as something to write: Arabic stays joined (coloured in as one word),
+ * English is written letter by letter. Only letters are kept (no spaces or marks).
+ */
+export function nameEntry(lang: Lang, name: string | undefined): WriteEntry | undefined {
+  const glyph = (name ?? '').trim()
+  const letters = lang === 'ar' ? glyph.replace(/[^ء-ي\s]/g, '').replace(/\s+/g, ' ').trim() : glyph.replace(/[^A-Za-z]/g, '')
+  if (!letters) return undefined
+  return { id: `name-${lang}`, set: 'name', glyph: letters, lang, skill: `${lang}.write.name`, areaId: 'letters', key: 'name' }
+}
 
 const TATWEEL = 'ـ'
 /** Letters that never join to the next one: only a standalone and an end form. */
@@ -89,6 +103,7 @@ export function entriesOf(set: WriteSet, langs: readonly Lang[]): WriteEntry[] {
 /** What Hala says to start: "Let's colour the letter ba!", "…at the start of a word", "…the number three". */
 export function fillLine(e: WriteEntry, d: Dict): string {
   const w = d.writing.say
+  if (e.set === 'name') return w.nameStart
   if (e.set === 'num') return fmt(w.fillNumber, { n: digitWord(Number(e.key), d) })
   if (e.lang === 'en') return fmt(e.glyph === e.glyph.toUpperCase() ? w.fillCapital : w.fillSmall, { letter: e.glyph })
   const name = AR_LETTERS.find((l) => l.id === e.key)?.name ?? e.glyph
@@ -102,7 +117,7 @@ export function digitWord(n: number, d: Dict): string {
 /** Every line the Writing room can say in `lang` (for pre-rendering the audio). */
 export function writingLines(lang: Lang, d: Dict): string[] {
   const w = d.writing.say
-  const out = [w.hello, w.inside, w.almost, w.done, w.doneNumber, w.watch, w.yourTurn, w.startGreen, w.followArrow, w.nowDot, w.wrote, w.fadeStart, w.fadeFewer, w.fadeLast]
+  const out = [w.hello, w.inside, w.almost, w.done, w.doneNumber, w.watch, w.yourTurn, w.startGreen, w.followArrow, w.nowDot, w.wrote, w.fadeStart, w.fadeFewer, w.fadeLast, w.nameStart, w.nameDone]
   for (const e of WRITE_ENTRIES) if (e.lang === lang) out.push(fillLine(e, d))
   return out
 }

@@ -172,16 +172,22 @@ function transformPath(d: string, scale: number, ox: number, oy: number): string
 
 /**
  * Follow a finger along a stroke. `reached` is how far along it the child has come (a point
- * index). The finger moves it to the furthest point within `tol` a little way ahead — only
- * forward, so drawing it backwards doesn't count, and a stroke that goes back over itself
- * (u, 8) is followed in order. Returns the new `reached`.
+ * index). The finger moves it to the point of the stroke nearest to it, a little way ahead
+ * and within `tol` — only forward, so drawing it backwards doesn't count. Nearest (not
+ * furthest): where a stroke passes close to itself (the tail of a hamza, a loop), progress
+ * stays where the finger really is instead of jumping ahead. Returns the new `reached`.
  */
 export function follow(stroke: Stroke, reached: number, p: Pt, tol: number, lookahead = 40): number {
   let best = reached
+  let bestD = tol
   const end = Math.min(stroke.pts.length - 1, reached + lookahead)
   for (let i = reached + 1; i <= end; i++) {
     const q = stroke.pts[i] as Pt
-    if (Math.hypot(q.x - p.x, q.y - p.y) <= tol) best = i
+    const d = Math.hypot(q.x - p.x, q.y - p.y)
+    if (d <= bestD) {
+      best = i
+      bestD = d
+    }
   }
   return best
 }

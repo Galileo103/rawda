@@ -143,7 +143,7 @@ export const en = {
   writing: {
     title: 'Writing room',
     sub: 'Color letters and numbers',
-    sets: { ar: 'Arabic letters', arForms: 'Letter forms', en: 'ABC', num: 'Numbers' },
+    sets: { ar: 'Arabic letters', arForms: 'Letter forms', en: 'ABC', num: 'Numbers', name: '⭐ My name' },
     forms: { start: 'Start', middle: 'Middle', end: 'End' },
     brushes: { marker: 'Marker', crayon: 'Crayon', rainbow: 'Rainbow', glitter: 'Glitter', stars: 'Stars' },
     again: 'Again',
@@ -156,6 +156,7 @@ export const en = {
     watchAgain: 'Watch again',
     nextLetter: 'Next letter',
     sky: 'sky blue',
+    certificate: 'I wrote my name!',
     say: {
       hello: 'Pick a letter to color!',
       fillLetter: 'Let’s color the letter {letter}!',
@@ -177,6 +178,8 @@ export const en = {
       fadeStart: 'Let’s write it three times!',
       fadeFewer: 'Great! Now with fewer dots!',
       fadeLast: 'Now write it all by yourself!',
+      nameStart: 'Let’s write your name, @name!',
+      nameDone: 'Wonderful! You wrote your name, @name!',
     },
   },
   speak: {

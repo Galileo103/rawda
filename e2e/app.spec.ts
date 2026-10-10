@@ -439,6 +439,50 @@ test('Writing room "by myself": three rounds with less and less help, then she w
   await expect(page.getByTestId('write-ar-ba').locator('[class*="tileStar"] svg')).toHaveCount(1)
 })
 
+test('Write my name: colour the Arabic name, write the English one letter by letter, both saved', async ({ page }) => {
+  await page.goto('./')
+  await page.getByRole('button', { name: 'هَيَّا', exact: true }).click()
+  await page.getByRole('button', { name: /التالي/ }).click()
+  await page.getByTestId('gender-f').click()
+  await page.getByTestId('name-ar').fill('مريم')
+  await page.getByTestId('name-en').fill('Mira')
+  await page.getByRole('button', { name: /التالي/ }).click()
+  const pins = page.getByLabel(/رمز/)
+  await pins.nth(0).fill('1357')
+  await pins.nth(1).fill('1357')
+  await page.getByRole('button', { name: /إنهاء/ }).click()
+  await page.getByTestId('writing-room').click()
+  await page.getByTestId('write-set-name').click()
+  await page.getByTestId('write-name-ar').click()
+  // Arabic: the joined name, coloured inside its walls.
+  const c = page.getByTestId('write-canvas')
+  await expect(c).toHaveAttribute('data-brush', /[0-9]+/)
+  const box = (await c.boundingBox())!
+  await page.mouse.move(box.x + 30, box.y + 30)
+  await page.mouse.down()
+  for (let y = 30; y < box.height - 20; y += 10) {
+    await page.mouse.move(box.x + 30, box.y + y, { steps: 2 })
+    await page.mouse.move(box.x + box.width - 30, box.y + y, { steps: 14 })
+  }
+  await page.mouse.up()
+  await expect(page.getByRole('status')).toBeVisible() // saved to My drawings
+  // English: letter by letter on the dotted-path board.
+  await page.goto('./#/write/name-en')
+  const pc = page.getByTestId('path-canvas')
+  for (const ch of 'Mira') {
+    await expect(pc).toHaveAttribute('aria-label', ch, { timeout: 10_000 })
+    await expect(pc).toHaveAttribute('data-phase', 'play', { timeout: 15_000 })
+    const b = (await pc.boundingBox())!
+    for (const st of letterStrokes('en-' + ch, 600)) {
+      if (st.dot) await page.mouse.click(b.x + (st.pts[0]!.x * b.width) / 600, b.y + (st.pts[0]!.y * b.width) / 600)
+      else await drawAlong(page, st.pts)
+    }
+  }
+  await expect(page.getByTestId('name-card')).toHaveText('Mira')
+  await page.goto('./#/studio/gallery')
+  await expect(page.locator('img[src^="data:image/png"]')).toHaveCount(2)
+})
+
 test('finger paths: a pre-writing stroke with a green start dot can be traced', async ({ page }) => {
   await onboard(page)
   await page.goto('./#/play/finger-paths')

@@ -4,7 +4,7 @@ import { useApp } from '../../app/AppState'
 import { content } from '../../content/loader'
 import { hasStrokes } from '../../content/strokes'
 import { COLOR_KEYS } from '../../content/schemas'
-import { type WriteEntry, WRITE_FILL_ACTIVITY, entriesOf, fillLine, writeEntryById } from '../../content/writing'
+import { type WriteEntry, WRITE_FILL_ACTIVITY, WRITE_NAME_ACTIVITY, entriesOf, fillLine, nameEntry, writeEntryById } from '../../content/writing'
 import { Icon } from '../../design/Icon'
 import { Mascot } from '../../design/Mascot'
 import { IconButton, Screen, SpeechBubble } from '../../design/ui'
@@ -14,7 +14,8 @@ import { audio } from '../../services/audio/AudioService'
 import { saveDrawing } from '../../services/repos/drawings'
 import { grantEarnedRewards, recordItemResult } from '../../services/repos/progress'
 import { coverPoints, layoutGlyph, maskPoints, pointParts, weakestPart } from '../studio/canvasTools'
-import { BRUSHES, type Brush, brushFor, newBrushState, paintSegment } from './brushes'
+import { BRUSHES, type Brush, brushFor, galleryPicture, newBrushState, paintSegment } from './brushes'
+import { NameLetters } from './NameLetters'
 import { PathBoard } from './PathBoard'
 import s from './writing.module.css'
 
@@ -40,6 +41,14 @@ type Pt = { x: number; y: number }
 export function WritingScreen() {
   const { entryId } = useParams()
   const [params] = useSearchParams()
+  const { profile } = useApp()
+  // Her own name: Arabic is coloured in as one joined word, English written letter by letter.
+  if (entryId === 'name-ar' || entryId === 'name-en') {
+    const lang = entryId === 'name-ar' ? 'ar' : 'en'
+    const name = nameEntry(lang, lang === 'ar' ? profile.nameAr : profile.nameEn)
+    if (!name) return <Navigate to="/write" replace />
+    return lang === 'ar' ? <FillBoard key={name.id} entry={name} modes={null} /> : <NameLetters key={name.id} entry={name} />
+  }
   const entry = writeEntryById(entryId)
   if (!entry) return <Navigate to="/write" replace />
   const asked = params.get('mode')
@@ -169,7 +178,8 @@ function FillBoard({ entry, modes }: { entry: WriteEntry; modes: ReactNode }) {
       points.current = maskPoints(maskData.current, STEP)
       covered.current = new Uint8Array(points.current.length / 2)
       parts.current = pointParts(points.current, STEP)
-      brushW.current = brushFor(maskData.current)
+      // A whole name is a smaller, thinner word than one letter: a finer brush is allowed.
+      brushW.current = brushFor(maskData.current, BRUSH, entry.set === 'name' ? 30 : 56)
       setReady(points.current.length ? 'canvas' : 'fallback')
     })()
     void audio.speak(intro, lang)
@@ -300,9 +310,9 @@ function FillBoard({ entry, modes }: { entry: WriteEntry; modes: ReactNode }) {
     setSparkles(null)
     setProgress(1)
     audio.sfx('sparkle')
-    say(entry.set === 'num' ? w.doneNumber : w.done)
+    say(entry.set === 'name' ? w.nameDone : entry.set === 'num' ? w.doneNumber : w.done)
     void recordItemResult({
-      activityId: WRITE_FILL_ACTIVITY,
+      activityId: entry.set === 'name' ? WRITE_NAME_ACTIVITY : WRITE_FILL_ACTIVITY,
       itemId: entry.id,
       skill: entry.skill,
       areaId: entry.areaId,
@@ -315,17 +325,21 @@ function FillBoard({ entry, modes }: { entry: WriteEntry; modes: ReactNode }) {
     }).catch((err) => console.error('[rawda] could not save writing result', err))
     // The finished letter goes to "My drawings", just as the child sees it.
     try {
-      const comp = document.createElement('canvas')
-      comp.width = SIZE
-      comp.height = SIZE
-      const o = comp.getContext('2d')
-      if (o && baseRef.current && paintRef.current && outlineRef.current) {
-        o.fillStyle = '#fff'
-        o.fillRect(0, 0, SIZE, SIZE)
-        o.drawImage(baseRef.current, 0, 0)
-        o.drawImage(paintRef.current, 0, 0)
-        o.drawImage(outlineRef.current, 0, 0)
-        const png = comp.toDataURL('image/png')
+      const base = baseRef.current
+      const paint = paintRef.current
+      const outline = outlineRef.current
+      const png =
+        base && paint && outline
+          ? galleryPicture(
+              (o) => {
+                o.drawImage(base, 0, 0)
+                o.drawImage(paint, 0, 0)
+                o.drawImage(outline, 0, 0)
+              },
+              entry.set === 'name' ? { title: t.writing.certificate, rtl: settings.uiLang === 'ar' } : undefined,
+            )
+          : undefined
+      if (png) {
         await saveDrawing({ pngDataUrl: png, layerDataUrl: png })
         await grantEarnedRewards(content.rewards).catch(() => [])
       }

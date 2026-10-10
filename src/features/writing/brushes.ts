@@ -98,7 +98,7 @@ function line(c: CanvasRenderingContext2D, color: string, width: number, from: P
  * A brush as wide as the letter's strokes (so one pass along a stroke colours it, leaving only
  * small gaps): the shape's average thickness, 2 × area / outline length, measured on the mask.
  */
-export function brushFor(mask: { data: Uint8ClampedArray; width: number; height: number }, fallback = 70): number {
+export function brushFor(mask: { data: Uint8ClampedArray; width: number; height: number }, fallback = 70, min = 56): number {
   const { data, width, height } = mask
   const on = (x: number, y: number) => x >= 0 && y >= 0 && x < width && y < height && (data[(y * width + x) * 4 + 3] ?? 0) > 100
   let area = 0
@@ -111,5 +111,37 @@ export function brushFor(mask: { data: Uint8ClampedArray; width: number; height:
     }
   }
   if (!edge) return fallback
-  return Math.round(Math.min(120, Math.max(56, (2 * area) / edge)))
+  return Math.round(Math.min(120, Math.max(min, (2 * area) / edge)))
+}
+
+/**
+ * A picture for My drawings in the gallery's 4:3 shape (800×600): white, the square 600×600
+ * board centred, and for her name an "I wrote my name!" heading and a row of stars.
+ */
+export function galleryPicture(drawBoard: (o: CanvasRenderingContext2D) => void, heading?: { title: string; rtl: boolean }): string | undefined {
+  const comp = document.createElement('canvas')
+  comp.width = 800
+  comp.height = 600
+  const o = comp.getContext('2d')
+  if (!o) return undefined
+  o.fillStyle = '#fff'
+  o.fillRect(0, 0, 800, 600)
+  o.save()
+  o.translate(100, 0)
+  drawBoard(o)
+  o.restore()
+  if (heading) {
+    o.fillStyle = '#7a5cd6'
+    o.font = "800 46px 'Baloo Bhaijaan 2 Variable', 'Baloo Bhaijaan 2', sans-serif"
+    o.textAlign = 'center'
+    o.textBaseline = 'middle'
+    o.direction = heading.rtl ? 'rtl' : 'ltr'
+    o.fillText(heading.title, 400, 60)
+    o.fillStyle = '#f5a300'
+    for (let i = 0; i < 7; i++) {
+      shapePath(o, 'star', 160 + i * 80, 548, 22)
+      o.fill()
+    }
+  }
+  return comp.toDataURL('image/png')
 }
