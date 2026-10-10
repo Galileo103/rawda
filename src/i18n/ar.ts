@@ -285,6 +285,7 @@ export const ar: Dict = {
     creditsTitle: 'الشكر والتراخيص',
     credits: [
       'الرسوم: OpenMoji — مشروع رموز تعبيرية مفتوح المصدر (CC BY-SA 4.0)، openmoji.org',
+      'صور القطة والكلب والأسد: Noto Emoji من Google (رخصة Apache 2.0)',
       'الخطوط: Baloo Bhaijaan 2 و Amiri Quran (رخصة SIL المفتوحة للخطوط)',
       'المقاطع الصوتية: مولّدة دون إنترنت بمحرّك Piper؛ انظر docs/ASSETS_LICENSES.md',
       'الشخصية والمشاهد وصفحات التلوين: رسوم أصلية لتطبيق الروضة',

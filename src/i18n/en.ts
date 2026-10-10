@@ -282,6 +282,7 @@ export const en = {
     creditsTitle: 'Credits & licenses',
     credits: [
       'Illustrations: OpenMoji — the open-source emoji project (CC BY-SA 4.0), openmoji.org',
+      'Cat, dog and lion pictures: Noto Emoji by Google (Apache License 2.0)',
       'Fonts: Baloo Bhaijaan 2 and Amiri Quran (SIL Open Font License)',
       'Voice clips: generated offline with Piper text-to-speech; see docs/ASSETS_LICENSES.md',
       'Mascot, scenes and coloring pages: original artwork for Al Rawda',

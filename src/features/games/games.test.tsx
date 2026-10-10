@@ -6,6 +6,7 @@ import { beforeEach, describe, expect, it } from 'vitest'
 import { App } from '../../app/App'
 import { GAME_HEXES, GAMES, gameLines } from '../../content/games'
 import { content } from '../../content/loader'
+import { picturePath } from '../../content/pictureSources'
 import { collectNarration } from '../../content/narration'
 import { DAILY_SEED_BONUS } from '../../domain/garden'
 import { dictionaries, fmt } from '../../i18n'
@@ -22,7 +23,7 @@ beforeEach(async () => {
 
 describe('Play World content', () => {
   it('ships every game picture offline', () => {
-    for (const hex of GAME_HEXES) expect(existsSync(join(process.cwd(), 'public', 'assets', 'openmoji', `${hex}.svg`)), hex).toBe(true)
+    for (const hex of GAME_HEXES) expect(existsSync(join(process.cwd(), 'public', 'assets', picturePath(hex))), hex).toBe(true)
   })
 
   it('every game line is complete and reaches the narration list (so it gets a recorded clip)', () => {

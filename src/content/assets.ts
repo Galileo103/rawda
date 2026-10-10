@@ -2,10 +2,13 @@
  * Asset resolution. All art and audio is bundled under public/assets so it works offline.
  * Missing files never crash: images fall back to the system emoji, then a soft placeholder.
  */
+import { picturePath } from './pictureSources'
+
 const BASE = import.meta.env.BASE_URL ?? './'
 
+/** URL of a picture by its emoji hex code (OpenMoji, or Noto for the few listed in pictureSources). */
 export function openmojiUrl(hex: string): string {
-  return `${BASE}assets/openmoji/${hex}.svg`
+  return `${BASE}assets/${picturePath(hex)}`
 }
 
 export function assetUrl(path: string): string {

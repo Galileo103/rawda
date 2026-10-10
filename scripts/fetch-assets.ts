@@ -6,6 +6,7 @@
 import { existsSync, mkdirSync, writeFileSync } from 'node:fs'
 import { join } from 'node:path'
 import { GAME_HEXES } from '../src/content/games'
+import { NOTO_HEXES, NOTO_VERSION } from '../src/content/pictureSources'
 import type { Visual } from '../src/content/schemas'
 import { ROOT, loadBundle } from './lib/contentFs'
 
@@ -81,3 +82,20 @@ if (results.missing.length) {
   console.log(`missing (the app falls back to the system emoji): ${results.missing.join(', ')}`)
   process.exitCode = 1
 }
+
+// A few animals come from Noto Emoji (clearer for small children; see src/content/pictureSources.ts).
+// Noto Emoji © Google — Apache License 2.0.
+const NOTO_OUT = join(ROOT, 'public', 'assets', 'noto')
+mkdirSync(NOTO_OUT, { recursive: true })
+for (const hex of NOTO_HEXES) {
+  const target = join(NOTO_OUT, `${hex}.svg`)
+  if (existsSync(target)) continue
+  const res = await fetch(`https://cdn.jsdelivr.net/gh/googlefonts/noto-emoji@${NOTO_VERSION}/svg/emoji_u${hex.toLowerCase()}.svg`)
+  const svg = res.ok ? await res.text() : ''
+  if (svg.includes('<svg')) writeFileSync(target, svg)
+  else {
+    console.log(`noto: ${hex} missing (HTTP ${res.status})`)
+    process.exitCode = 1
+  }
+}
+console.log(`noto: ${NOTO_HEXES.size} pictures in public/assets/noto`)

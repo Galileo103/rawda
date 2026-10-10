@@ -3,6 +3,7 @@
 | Asset | Source | License | Notes |
 |---|---|---|---|
 | Illustrations (`public/assets/openmoji/*.svg`, 123 files) | OpenMoji 15.1.0, https://openmoji.org (fetched by `scripts/fetch-assets.ts` from the npm package via jsDelivr) | **CC BY-SA 4.0** | Attribution is shown in Parent area → Privacy & about. Modifications would have to be shared alike. |
+| Illustrations (`public/assets/noto/*.svg`: cat, dog and lion faces) | Noto Emoji v2.047, https://github.com/googlefonts/noto-emoji (fetched by `scripts/fetch-assets.ts`) | **Apache License 2.0** | Used where OpenMoji's art is hard for small children to tell apart; list in `src/content/pictureSources.ts`. Credit shown in Parent area → Privacy & about. |
 | Mascot "Hala", app icon, story backgrounds, UI icons | Original artwork for Al Rawda (SVG in source code) | Project-owned | |
 | Coloring pages (`public/assets/coloring/*.svg`) | Original artwork for Al Rawda | Project-owned | |
 | Font: Baloo Bhaijaan 2 | `@fontsource-variable/baloo-bhaijaan-2` (Ek Type) | SIL Open Font License 1.1 | Bundled, offline |

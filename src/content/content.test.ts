@@ -7,6 +7,7 @@ import { clipKey } from '../services/audio/clipKey'
 import { content } from './loader'
 import { collectNarration } from './narration'
 import { parseContent } from './parse'
+import { picturePath } from './pictureSources'
 
 describe('bundled content', () => {
   it('is valid through the app loader (Vite glob)', () => {
@@ -34,7 +35,7 @@ describe('bundled content', () => {
     const hexes = new Set<string>([...content.lexicon.values()].map((e) => e.image))
     content.rewards.forEach((r) => hexes.add(r.hex))
     content.studio.stamps.forEach((h) => hexes.add(h))
-    for (const hex of hexes) expect(existsSync(join(ROOT, 'public', 'assets', 'openmoji', `${hex}.svg`)), hex).toBe(true)
+    for (const hex of hexes) expect(existsSync(join(ROOT, 'public', 'assets', picturePath(hex))), hex).toBe(true)
     for (const p of content.studio.pages) expect(existsSync(join(ROOT, 'public', 'assets', 'coloring', p.file)), p.file).toBe(true)
   })
 

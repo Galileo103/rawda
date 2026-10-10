@@ -169,7 +169,7 @@ export const GARDEN: readonly GardenItem[] = [
   { id: 'squirrel', hex: '1F43F', x: 17, y: 72, size: 'sm' },
   { id: 'rainbow', hex: '1F308', x: 46, y: 18, size: 'lg' },
   { id: 'house', hex: '1F3E1', x: 68, y: 60, size: 'lg' },
-  { id: 'cat', hex: '1F408', x: 39, y: 85, size: 'sm' },
+  { id: 'cat', hex: '1F431', x: 39, y: 85, size: 'sm' },
 ]
 
 /** Props drawn in the games' scenes. */
