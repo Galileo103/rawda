@@ -23,7 +23,17 @@
 .tabs {
   display: flex;
   gap: 8px;
-  flex-wrap: wrap;
+  /* One row that scrolls sideways on phones, and stays at the top while the page scrolls. */
+  overflow-x: auto;
+  scrollbar-width: none;
+  position: sticky;
+  inset-block-start: 0;
+  z-index: 5;
+  padding-block: 8px;
+  background: var(--bg);
+}
+.tab {
+  flex: none;
 }
 
 .tab {
@@ -44,7 +54,7 @@
 
 .tiles {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 150px), 1fr));
   gap: 12px;
 }
 
@@ -349,4 +359,9 @@
 .msDone .msBadge {
   background: var(--leaf);
   color: #fff;
+}
+
+.dangerZone {
+  border: 2px solid #f1b8b0;
+  background: #fff6f4;
 }

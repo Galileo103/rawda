@@ -217,7 +217,9 @@
 .memGrid {
   display: grid;
   gap: clamp(10px, 2vw, 18px);
-  width: min(100%, 680px);
+  /* Every card visible without scrolling: the grid is as wide as the screen height allows. */
+  width: min(100%, 680px, calc((100dvh - 300px) * var(--cols) / var(--rows)));
+  margin-inline: auto;
 }
 
 .memCard {
@@ -326,10 +328,12 @@
 }
 
 .traceBar {
-  width: min(80vw, 440px);
+  width: min(80vw, 46dvh, 440px);
   height: 18px;
   border-radius: 999px;
-  background: var(--bg-2);
+  /* A visible empty track, so the child sees the bar fill up as they trace. */
+  background: var(--sun-soft);
+  box-shadow: inset 0 0 0 2px var(--line);
   overflow: hidden;
 }
 
@@ -349,11 +353,27 @@
 /* path-to-a-star progress */
 .trail {
   flex: 1;
+  min-width: 0;
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: clamp(6px, 1.4vw, 12px);
-  flex-wrap: wrap;
+  gap: clamp(3px, 1.4vw, 12px);
+  /* One line, always: a path that breaks in two no longer reads as "how far am I". */
+  flex-wrap: nowrap;
+}
+@media (max-width: 520px) {
+  .trail .stone {
+    width: 14px;
+    height: 11px;
+  }
+  .trail .stoneDone {
+    width: 18px;
+    height: 18px;
+  }
+  .trail .stoneNow {
+    width: 20px;
+    height: 15px;
+  }
 }
 .stone {
   width: 22px;

@@ -56,7 +56,9 @@
   box-shadow: 0 2px 0 rgba(51, 38, 74, 0.12);
 }
 .btn:disabled {
-  opacity: 0.5;
+  opacity: 0.55;
+  filter: grayscale(0.7);
+  box-shadow: none;
   cursor: default;
 }
 .lg {
@@ -204,27 +206,30 @@
   height: 36px;
   flex: none;
   border-radius: 999px;
-  border: 0;
-  background: #cfc6d9;
+  /* "Off" is a clearly grey track with an edge, distinct from the page background. */
+  border: 2px solid #9a90a8;
+  background: #d9d4df;
   cursor: pointer;
   transition: background 0.15s;
 }
 .switch::after {
   content: '';
   position: absolute;
-  inset-block-start: 4px;
-  inset-inline-start: 4px;
+  inset-block-start: 2px;
+  inset-inline-start: 2px;
   width: 28px;
   height: 28px;
   border-radius: 50%;
   background: #fff;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
   transition: inset-inline-start 0.15s;
 }
 .switch[aria-checked='true'] {
   background: var(--teal);
+  border-color: var(--teal);
 }
 .switch[aria-checked='true']::after {
-  inset-inline-start: 32px;
+  inset-inline-start: 30px;
 }
 
 .backdrop {

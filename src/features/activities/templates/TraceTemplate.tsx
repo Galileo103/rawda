@@ -53,7 +53,8 @@ export function TraceTemplate({ item, lang, hintLevel, locked, onCorrect }: Temp
       if (!g) return setReady('fallback')
       g.setTransform(1, 0, 0, 1, 0, 0)
       g.clearRect(0, 0, SIZE, SIZE)
-      const fill = hintLevel >= 1 ? '#c9b8f2' : '#e7dfd2'
+      // Clearly visible on white for a small child; stronger once Hala starts helping.
+      const fill = hintLevel >= 1 ? '#b39ae8' : '#d6c8f2'
       if (stroke) {
         if (typeof Path2D === 'undefined') return setReady('fallback')
         if (rtl && stroke.directional) g.setTransform(-1, 0, 0, 1, SIZE, 0)

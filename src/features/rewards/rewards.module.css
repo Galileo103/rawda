@@ -7,7 +7,7 @@
 
 .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(min(30%, 120px), 1fr));
   gap: 16px;
 }
 
@@ -36,6 +36,31 @@
 
 .locked img,
 .locked span[role='img'] {
-  filter: grayscale(1) brightness(1.4);
-  opacity: 0.25;
+  /* A clear silhouette to look forward to, not a washed-out blank. */
+  filter: grayscale(1) brightness(0.55);
+  opacity: 0.35;
+}
+
+.bookProgress {
+  position: relative;
+  width: min(100%, 420px);
+  height: 26px;
+  margin: 0 auto 8px;
+  border-radius: 999px;
+  background: var(--sun-soft);
+  box-shadow: inset 0 0 0 2px var(--line);
+  overflow: hidden;
+}
+.bookProgress span {
+  position: absolute;
+  inset-block: 0;
+  inset-inline-start: 0;
+  background: linear-gradient(90deg, var(--sun), var(--coral));
+}
+.bookProgress b {
+  position: relative;
+  display: grid;
+  place-items: center;
+  height: 100%;
+  font-size: 0.95rem;
 }

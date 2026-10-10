@@ -219,7 +219,12 @@ function Reader({ story, lang, startPage }: { story: Story; lang: Lang; startPag
       <div className={s.controls}>
         <IconButton icon="back" label={t.common.previous} disabled={page === 0} onClick={() => setPage(Math.max(0, page - 1))} size={36} />
         {settings.narration && <IconButton icon="speaker" label={t.player.listen} onClick={() => void audio.speak(current.text[lang], lang)} size={36} />}
-        <span className={s.pageNum}>{fmt(t.stories.page, { n: page + 1, total: story.pages.length })}</span>
+        {/* Page dots instead of "1 / 6": a child can see how much of the story is left. */}
+        <span className={s.pageDots} role="img" aria-label={fmt(t.stories.page, { n: page + 1, total: story.pages.length })}>
+          {story.pages.map((_, i) => (
+            <i key={i} className={i === page ? s.dotNow : i < page ? s.dotDone : undefined} />
+          ))}
+        </span>
         <Button icon={isLast ? 'check' : 'next'} onClick={nextPage} autoFocus>
           {isLast ? t.stories.finish : t.common.next}
         </Button>

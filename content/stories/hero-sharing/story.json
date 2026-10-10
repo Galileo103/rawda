@@ -4,7 +4,7 @@
   "theme": "sharing",
   "level": 1,
   "personalized": true,
-  "cover": {"kind": "lex", "id": "ball"},
+  "cover": {"kind": "lex", "id": "rabbit"},
   "pages": [
     {
       "scene": {"bg": "meadow", "actors": [{"lex": "@hero", "x": 30, "y": 62, "size": "lg", "motion": "bounce"}, {"lex": "ball", "x": 62, "y": 74, "size": "sm", "motion": "bounce"}, {"lex": "tree", "x": 84, "y": 50, "size": "lg"}]},

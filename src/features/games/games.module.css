@@ -871,8 +871,8 @@
 .garden {
   position: relative;
   width: 100%;
-  aspect-ratio: 4 / 3;
-  max-height: 68vh;
+  /* Fills the screen above the bottom bar, which always stays visible. */
+  height: clamp(240px, calc(100dvh - 290px), 80vw);
   border-radius: var(--radius-l);
   overflow: hidden;
   background:
@@ -900,8 +900,8 @@
   line-height: 0;
 }
 .size_sm img {
-  width: clamp(36px, 7vw, 64px) !important;
-  height: clamp(36px, 7vw, 64px) !important;
+  width: clamp(48px, 9vw, 80px) !important;
+  height: clamp(48px, 9vw, 80px) !important;
 }
 .size_md img {
   width: clamp(52px, 10vw, 92px) !important;
@@ -1122,8 +1122,41 @@
   box-shadow: 0 7px 0 color-mix(in srgb, var(--c) 18%, transparent);
 }
 .cardWaiting .cardIcon {
-  filter: saturate(0.55);
-  opacity: 0.85;
+  position: relative;
+}
+.cardWaiting .cardIcon img {
+  filter: grayscale(0.85);
+  opacity: 0.6;
+}
+.cardWaiting .cardTitle {
+  color: var(--ink-soft);
+}
+/* A padlock on the picture: "not yet" without words. */
+.lockBadge {
+  position: absolute;
+  inset-block-end: -6px;
+  inset-inline-end: -6px;
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--grape);
+  color: #fff;
+  box-shadow: 0 3px 0 rgba(0, 0, 0, 0.15);
+}
+.cardShake {
+  animation: lockedShake 0.5s ease-in-out;
+}
+@keyframes lockedShake {
+  20%,
+  60% {
+    transform: translateX(-7px);
+  }
+  40%,
+  80% {
+    transform: translateX(7px);
+  }
 }
 .discoverTag {
   display: inline-flex;

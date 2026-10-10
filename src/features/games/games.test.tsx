@@ -19,7 +19,7 @@ import { dictionaries, fmt, rawDictionaries } from '../../i18n'
 import { db } from '../../services/db'
 import { hashPin } from '../../services/parentGate'
 import { gamePlays, recordGameCompletion, totalStars } from '../../services/repos/progress'
-import { updateSettings } from '../../services/repos/settings'
+import { updateProfile, updateSettings } from '../../services/repos/settings'
 
 beforeEach(async () => {
   await db.delete()
@@ -88,9 +88,14 @@ describe('Play World screens', () => {
 
   it('playing Odd One Out to the end celebrates, saves the stars and grows the garden', async () => {
     await onboard()
+    await updateProfile({ gender: 'f', nameAr: 'مريم' })
     await discovered('logic-discover', 'odd', 'logic.odd', 'logic')
     window.location.hash = '#/games/odd'
     render(<App />)
+    // Hala's lines may name the child: the bubble always shows the name, never the raw slot.
+    const shown = new Set<string>()
+    const watch = new MutationObserver(() => shown.add(document.body.textContent ?? ''))
+    watch.observe(document.body, { subtree: true, childList: true, characterData: true })
     // A wrong tap never ends the round.
     await userEvent.click((await screen.findAllByTestId('game-other'))[0]!)
     expect(screen.getAllByTestId('game-answer')).toHaveLength(1)
@@ -100,10 +105,12 @@ describe('Play World screens', () => {
       // Praise, the star flies, then the next round replaces this one.
       await waitFor(() => expect(answer.isConnected).toBe(false), { timeout: 6000 })
     }
-    expect(await screen.findByRole('heading', { name: 'أحسنت!' }, { timeout: 8000 })).toBeInTheDocument()
+    expect(await screen.findByRole('heading', { name: 'أحسنتِ!' }, { timeout: 8000 })).toBeInTheDocument()
+    watch.disconnect()
+    expect([...shown].some((text) => text.includes('@name'))).toBe(false)
     expect(await totalStars()).toBe(4 + DAILY_SEED_BONUS)
     expect((await gamePlays()).get('odd')).toBe(1)
-    await userEvent.click(screen.getByRole('button', { name: /اذهب إلى الحديقة/ }))
+    await userEvent.click(screen.getByRole('button', { name: /اذهبي إلى الحديقة/ }))
     expect(await screen.findByRole('group', { name: 'حديقة هالة' })).toBeInTheDocument()
     // 6 stars → the sprout plus two new friends.
     expect(screen.getAllByRole('button', { name: /نَبْتَة صَغِيرَة|زَهْرَة التُّولِيب|زَهْرَة عَبَّاد الشَّمْس/ })).toHaveLength(3)

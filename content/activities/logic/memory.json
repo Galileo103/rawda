@@ -6,7 +6,7 @@
   "level": 1,
   "order": 1,
   "sessionLength": 2,
-  "icon": { "kind": "img", "hex": "1F0CF" },
+  "icon": { "kind": "img", "hex": "1F9E0" },
   "title": { "ar": "لُعْبَةُ الذَّاكِرَةِ", "en": "Memory game" },
   "intro": { "ar": "نَقْلِبُ بِطَاقَتَيْنِ وَنَبْحَثُ عَنِ الصُّوَرِ الْمُتَشَابِهَةِ!", "en": "Turn over two cards and look for pictures that match!" },
   "items": [

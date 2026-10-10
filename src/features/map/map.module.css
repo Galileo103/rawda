@@ -55,9 +55,29 @@
 /* Every area is visible at once (no hidden sideways scrolling): the chips wrap into a grid. */
 .filters {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+  /* Narrow enough that all the other areas share one row on a tablet (no orphan on a 2nd line). */
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 136px), 1fr));
   gap: 10px;
   padding-block: 4px;
+}
+/* Phones: compact chips, so the path starts sooner. */
+@media (max-width: 520px) {
+  .filters {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+  }
+  .filters .chip {
+    flex-direction: column;
+    min-height: 0;
+    padding: 6px 4px;
+    gap: 4px;
+    font-size: 0.8rem;
+    text-align: center;
+  }
+  .filters .chipIcon {
+    width: 40px;
+    height: 40px;
+  }
 }
 
 .chip {

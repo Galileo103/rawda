@@ -52,7 +52,7 @@ export function DataTab() {
       <Panel>
         <div className={s.section}>
           <h2>{t.parent.storage}</h2>
-          <p style={{ margin: 0 }}>{estimate ? `${mb(estimate.usage)} / ${mb(estimate.quota)}` : estimate === undefined ? t.parent.storageUnknown : '…'}</p>
+          <p style={{ margin: 0 }}>{estimate ? <bdi dir="ltr">{`${mb(estimate.usage)} / ${mb(estimate.quota)}`}</bdi> : estimate === undefined ? t.parent.storageUnknown : '…'}</p>
           {persisted && <p className={s.ok}>{t.parent.persisted}</p>}
           <div className={s.row}>
             <Button variant="teal" icon="save" onClick={() => void doExport()}>
@@ -82,10 +82,16 @@ export function DataTab() {
           <h2>{t.parent.reset}</h2>
           <p style={{ margin: 0 }}>{t.parent.resetHelp}</p>
           <div>
-            <Button variant="danger" icon="again" onClick={() => setConfirm('reset')}>
+            <Button variant="secondary" icon="again" onClick={() => setConfirm('reset')}>
               {t.parent.reset}
             </Button>
           </div>
+        </div>
+      </Panel>
+
+      {/* The one action that can't be undone, on its own and clearly marked. */}
+      <Panel className={s.dangerZone}>
+        <div className={s.section}>
           <h2>{t.parent.deleteAll}</h2>
           <p style={{ margin: 0 }}>{t.parent.deleteHelp}</p>
           <div>

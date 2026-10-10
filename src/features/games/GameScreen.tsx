@@ -57,7 +57,7 @@ interface Result {
 }
 
 function GameSession({ game, plays, learned: learnedNow, onAgain }: { game: GameDef; plays: number; learned: LearnedPools; onAgain: () => void }) {
-  const { settings, t, age } = useApp()
+  const { settings, t, age, named } = useApp()
   const navigate = useNavigate()
   const lang = settings.practiceLang
   const d = dict(lang)
@@ -223,7 +223,7 @@ function GameSession({ game, plays, learned: learnedNow, onAgain }: { game: Game
       <div className={s.talk}>
         <Mascot mood={mood} size={84} />
         <p className={s.bubble} lang={lang} dir="auto" aria-live="polite">
-          {bubble}
+          {named(bubble, lang)}
         </p>
         <IconButton icon="speaker" label={t.games.replay} onClick={replay} />
       </div>

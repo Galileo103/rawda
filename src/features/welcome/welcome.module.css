@@ -165,3 +165,20 @@
     opacity: 0.3;
   }
 }
+
+.needHint {
+  margin: 0;
+  padding: 8px 14px;
+  border-radius: var(--radius-s);
+  background: var(--sun-soft);
+  font-weight: 700;
+  text-align: center;
+}
+
+/* The buttons stay on screen while the grown-up fills in a long step. */
+.actions {
+  position: sticky;
+  inset-block-end: 0;
+  padding-block: 10px max(10px, env(safe-area-inset-bottom));
+  background: linear-gradient(transparent, var(--bg) 30%);
+}

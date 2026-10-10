@@ -3,6 +3,7 @@ import { type CSSProperties, useState } from 'react'
 import { Navigate, useLocation, useNavigate } from 'react-router-dom'
 import { useApp } from '../../app/AppState'
 import { GAMES, GARDEN, type GameDef, type NeedKey, type Readiness, gameReadiness } from '../../content/games'
+import { Icon } from '../../design/Icon'
 import { Mascot } from '../../design/Mascot'
 import { Button, Screen, SpeechBubble, StarCount, TopBar } from '../../design/ui'
 import { OpenMoji } from '../../design/Visual'
@@ -47,10 +48,13 @@ export function GamesHub() {
     navigate(`/games/${g.id}`)
   }
   /** Not enough discovered yet: Hala takes the child to the lesson that teaches it. */
-  const discoverFirst = (r: Readiness) => {
-    audio.sfx('tap')
+  const [shaking, setShaking] = useState<string>()
+  const discoverFirst = (g: GameDef, r: Readiness) => {
+    // Locked: the card wiggles and Hala says why, then she takes the child to the lesson.
+    audio.sfx('try')
+    setShaking(g.id)
     void audio.speak(d.games.say.discoverFirst, lang)
-    navigate(`/discover/${r.lessonId}`)
+    setTimeout(() => navigate(`/discover/${r.lessonId}`), 650)
   }
 
   const section = (key: 'ln' | 'csl', title: string) => {
@@ -69,14 +73,19 @@ export function GamesHub() {
               <button
                 key={g.id}
                 type="button"
-                className={cx(s.card, waiting && s.cardWaiting)}
+                className={cx(s.card, waiting && s.cardWaiting, shaking === g.id && s.cardShake)}
                 style={{ '--c': g.color, animationDelay: `${i * 50}ms` } as CSSProperties}
-                onClick={() => r && (r.ready ? open(g) : discoverFirst(r))}
+                onClick={() => r && (r.ready ? open(g) : discoverFirst(g, r))}
                 data-testid={`game-${g.id}`}
                 data-ready={r ? String(r.ready) : undefined}
               >
                 <span className={s.cardIcon}>
                   <OpenMoji hex={g.hex} alt="" size={56} />
+                  {waiting && (
+                    <span className={s.lockBadge} aria-hidden="true">
+                      <Icon name="lock" size={18} />
+                    </span>
+                  )}
                 </span>
                 <span className={s.cardTitle} lang={lang}>
                   {d.games.titles[g.id]}

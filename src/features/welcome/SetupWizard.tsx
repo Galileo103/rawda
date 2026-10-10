@@ -87,15 +87,15 @@ export function SetupWizard() {
             <div style={{ display: 'grid', gap: 18 }}>
               <h2 style={{ margin: 0 }}>{t.setup.aboutChild}</h2>
               <ChildForm value={child} onChange={(patch) => setChild((c) => ({ ...c, ...patch }))} />
-              {!childOk && <p className={s.step}>{t.setup.needChild}</p>}
               <Segmented<NonNullable<ProfileRow['ageBand']> | ''>
                 label={t.setup.ageBand}
                 value={ageBand}
                 options={[
                   { value: '', label: '—' },
-                  { value: '3-4', label: '3–4' },
-                  { value: '4-5', label: '4–5' },
-                  { value: '5-6', label: '5–6' },
+                  // Isolated left-to-right so Arabic screens show 3–4, not 4–3.
+                  { value: '3-4', label: '\u20663–4\u2069' },
+                  { value: '4-5', label: '\u20664–5\u2069' },
+                  { value: '5-6', label: '\u20665–6\u2069' },
                 ]}
                 onChange={setAgeBand}
               />
@@ -148,6 +148,12 @@ export function SetupWizard() {
           </Panel>
         )}
 
+        {/* Why "Next" is greyed out, right beside it. */}
+        {step === 2 && !childOk && (
+          <p className={s.needHint} role="status">
+            {t.setup.needChild}
+          </p>
+        )}
         <div className={s.actions}>
           {step > 1 ? (
             <Button variant="secondary" icon="back" onClick={() => setStep(step - 1)}>

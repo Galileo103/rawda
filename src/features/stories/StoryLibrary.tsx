@@ -28,13 +28,17 @@ export function StoryLibrary() {
         {/* Stories starring the child come first. */}
         {[...content.stories].sort((a, b) => Number(b.personalized) - Number(a.personalized)).map((story) => {
           const p = progress.find((x) => x.storyId === story.id)
-          const cover: VisualDef = story.personalized ? { kind: 'lex', id: HERO_LEX[profile.gender ?? 'n'] } : story.cover
+          const hero: VisualDef | undefined = story.personalized ? { kind: 'lex', id: HERO_LEX[profile.gender ?? 'n'] } : undefined
           const canResume = !!p && !p.finished && p.page > 0
           return (
             <article key={story.id} className={s.card}>
               {/* Book cover: the story's first scene colours behind its picture. */}
               <button type="button" className={[s.cover, s[story.pages[0]?.scene.bg ?? 'meadow']].join(' ')} onClick={() => navigate(`/stories/${story.id}?lang=${lang}`)} tabIndex={-1} aria-hidden="true">
-                <Visual v={cover} lang={lang} size={130} />
+                {/* Each book shows its own picture; stories about the child also show the child. */}
+                <span className={s.coverArt}>
+                  {hero && <Visual v={hero} lang={lang} size={120} />}
+                  <Visual v={story.cover} lang={lang} size={hero ? 96 : 130} />
+                </span>
               </button>
               <h2 className={s.cardTitle} lang={lang} dir="auto">
                 {named(story.title[lang], lang)}

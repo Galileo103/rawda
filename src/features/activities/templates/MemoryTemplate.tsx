@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { type CSSProperties, useEffect, useRef, useState } from 'react'
 import { content } from '../../../content/loader'
 import type { MemoryItem } from '../../../content/schemas'
 import { OpenMoji } from '../../../design/Visual'
@@ -53,7 +53,7 @@ export function MemoryTemplate({ item, lang, hintLevel, locked, onCorrect, rng }
 
   return (
     <div className={s.stage}>
-      <div className={s.memGrid} style={{ gridTemplateColumns: `repeat(${cols}, 1fr)` }}>
+      <div className={s.memGrid} style={{ gridTemplateColumns: `repeat(${cols}, 1fr)`, '--cols': cols, '--rows': Math.ceil(deck.length / cols) } as CSSProperties}>
         {deck.map((id, i) => {
           const e = content.lexicon.get(id)
           const isMatched = matched.has(id)

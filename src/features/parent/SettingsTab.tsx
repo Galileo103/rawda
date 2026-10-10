@@ -75,9 +75,10 @@ export function SettingsTab() {
             value={profile.ageBand ?? ''}
             options={[
               { value: '', label: '—' },
-              { value: '3-4', label: '3–4' },
-              { value: '4-5', label: '4–5' },
-              { value: '5-6', label: '5–6' },
+              // Isolated left-to-right so Arabic screens show 3–4, not 4–3.
+              { value: '3-4', label: '\u20663–4\u2069' },
+              { value: '4-5', label: '\u20664–5\u2069' },
+              { value: '5-6', label: '\u20665–6\u2069' },
             ]}
             onChange={(v) => void updateProfile({ ageBand: v || undefined })}
           />

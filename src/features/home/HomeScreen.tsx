@@ -125,46 +125,49 @@ export function HomeScreen() {
         </button>
       )}
 
-      {next && (
-        <button type="button" className={s.continue} onClick={() => navigate(`/play/${next.id}`)}>
-          <span className={s.continueIcon}>
-            <Visual v={iconFor(next.activity, next.lang)} lang={next.lang} size={64} />
-          </span>
-          <span className={s.continueText}>
-            <span className={s.continueLabel}>{t.home.continue}</span>
-            <span className={s.continueTitle} lang={next.lang} dir="auto">
-              {pick(next.activity.title, next.lang)}
+      {/* Continue + Play World: side by side on tablets, so the subjects fit on the first screen. */}
+      <div className={s.quick}>
+        {next && (
+          <button type="button" className={s.continue} onClick={() => navigate(`/play/${next.id}`)}>
+            <span className={s.continueIcon}>
+              <Visual v={iconFor(next.activity, next.lang)} lang={next.lang} size={64} />
             </span>
-          </span>
-          <span className={s.continuePlay} aria-hidden="true">
-            <Icon name="play" size={34} />
-          </span>
-        </button>
-      )}
+            <span className={s.continueText}>
+              <span className={s.continueLabel}>{t.home.continue}</span>
+              <span className={s.continueTitle} lang={next.lang} dir="auto">
+                {pick(next.activity.title, next.lang)}
+              </span>
+            </span>
+            <span className={s.continuePlay} aria-hidden="true">
+              <Icon name="play" size={34} />
+            </span>
+          </button>
+        )}
 
-      {playGames.length > 0 && (
-        <button
-          type="button"
-          className={[s.continue, s.playWorld].join(' ')}
-          onClick={() => {
-            audio.sfx('tap')
-            void audio.speak(dict(lang).games.playWorld, lang)
-            navigate('/games')
-          }}
-          data-testid="play-world"
-        >
-          <span className={s.continueIcon} aria-hidden="true">
-            <OpenMoji hex={PROP_HEX.playWorld} alt="" size={64} />
-          </span>
-          <span className={s.continueText}>
-            <span className={s.continueLabel}>{t.games.playWorldSub}</span>
-            <span className={s.continueTitle}>{t.games.playWorld}</span>
-          </span>
-          <span className={s.continuePlay} aria-hidden="true">
-            <Icon name="play" size={34} />
-          </span>
-        </button>
-      )}
+        {playGames.length > 0 && (
+          <button
+            type="button"
+            className={[s.continue, s.playWorld].join(' ')}
+            onClick={() => {
+              audio.sfx('tap')
+              void audio.speak(dict(lang).games.playWorld, lang)
+              navigate('/games')
+            }}
+            data-testid="play-world"
+          >
+            <span className={s.continueIcon} aria-hidden="true">
+              <OpenMoji hex={PROP_HEX.playWorld} alt="" size={64} />
+            </span>
+            <span className={s.continueText}>
+              <span className={s.continueLabel}>{t.games.playWorldSub}</span>
+              <span className={s.continueTitle}>{t.games.playWorld}</span>
+            </span>
+            <span className={s.continuePlay} aria-hidden="true">
+              <Icon name="play" size={34} />
+            </span>
+          </button>
+        )}
+      </div>
 
       <nav className={s.grid} aria-label={t.map.title}>
         {areas.map((area, i) => {
