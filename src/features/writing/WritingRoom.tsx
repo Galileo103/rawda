@@ -6,7 +6,7 @@ import { type WriteEntry, type WriteSet, WRITE_FADE_ACTIVITY, WRITE_FILL_ACTIVIT
 import { Icon } from '../../design/Icon'
 import { Mascot } from '../../design/Mascot'
 import { IconButton, Screen, SpeechBubble } from '../../design/ui'
-import { dict } from '../../i18n'
+import { dict, fmt } from '../../i18n'
 import { audio } from '../../services/audio/AudioService'
 import { db } from '../../services/db'
 import { useSpeakOnMount } from '../common'
@@ -67,6 +67,9 @@ export function WritingRoom() {
   )
 
   const entries = set === 'name' ? names : entriesOf(set, langs)
+  const done = entries.filter((e) => (written.get(e.id) ?? 0) > 0).length
+  // English letters come as big + small pairs (A a, B b…): one card each, so a pair never splits across rows.
+  const pairs = set === 'en' ? Array.from({ length: Math.ceil(entries.length / 2) }, (_, i) => entries.slice(i * 2, i * 2 + 2)) : []
 
   return (
     <Screen className={s.room}>
@@ -102,7 +105,25 @@ export function WritingRoom() {
         </div>
       )}
 
-      {set === 'arForms' ? (
+      {entries.length > 0 && (
+        <div className={s.summary} data-testid="write-summary">
+          <Icon name="star" size={26} />
+          <span className={s.summaryText}>{fmt(t.writing.done, { n: done, total: entries.length })}</span>
+          <div className={s.summaryBar} role="progressbar" aria-label={t.writing.sets[set]} aria-valuemin={0} aria-valuemax={entries.length} aria-valuenow={done}>
+            <span style={{ width: `${Math.round((done / entries.length) * 100)}%` }} />
+          </div>
+        </div>
+      )}
+
+      {set === 'en' ? (
+        <div className={s.pairGrid}>
+          {pairs.map((pair) => (
+            <div key={pair[0]?.id} className={s.pair} data-testid={`write-pair-${pair[0]?.key}`}>
+              {pair.map((e) => tile(e))}
+            </div>
+          ))}
+        </div>
+      ) : set === 'arForms' ? (
         <div className={s.forms}>
           {AR_LETTERS.map((l) => (
             <div key={l.id} className={s.formRow}>

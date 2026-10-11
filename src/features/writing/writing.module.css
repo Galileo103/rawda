@@ -99,6 +99,59 @@
   filter: drop-shadow(0 1px 0 rgba(0, 0, 0, 0.15));
 }
 
+/* How many in this tab are done: a star, "3 of 52 done" and a bar, above the letters. */
+.summary {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 16px;
+  border-radius: 999px;
+  border: 3px solid var(--line);
+  background: var(--surface);
+  box-shadow: var(--shadow);
+  color: #f5a300;
+}
+.summaryText {
+  flex: none;
+  font-weight: 800;
+  font-size: 1.1rem;
+  color: var(--ink);
+}
+.summaryBar {
+  flex: 1;
+  min-width: 60px;
+  height: 16px;
+  border-radius: 999px;
+  background: var(--sun-soft);
+  box-shadow: inset 0 0 0 2px var(--line);
+  overflow: hidden;
+}
+.summaryBar span {
+  display: block;
+  height: 100%;
+  background: linear-gradient(90deg, var(--sun), var(--leaf));
+  transition: width 0.2s;
+}
+
+/* English: big and small letter side by side in one card (A a). */
+.pairGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+  gap: 12px;
+}
+.pair {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  padding: 8px;
+  border-radius: 30px;
+  border: 3px solid var(--line);
+  background: var(--grape-soft);
+}
+.pair .tile {
+  box-shadow: none;
+}
+
 .forms {
   display: flex;
   flex-direction: column;
@@ -166,6 +219,18 @@
   background: #fff;
   border: 5px solid var(--sun);
   box-shadow: var(--shadow-soft);
+}
+/* The colouring board with its progress meter right underneath, so both fit on screen. */
+.boxCol {
+  justify-self: center;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: min(100%, calc(100dvh - 240px), 620px);
+  min-width: 0;
+}
+.boxCol > .box {
+  width: 100%;
 }
 .layer {
   position: absolute;
@@ -371,9 +436,9 @@
 }
 
 .meter {
-  align-self: center;
-  width: min(100%, 620px);
-  height: 14px;
+  flex: none;
+  width: 100%;
+  height: 20px;
   border-radius: 999px;
   background: var(--sun-soft);
   box-shadow: inset 0 0 0 2px var(--line);
@@ -430,7 +495,8 @@
     width: 44px;
     height: 44px;
   }
-  .box {
+  .box,
+  .boxCol {
     width: min(100%, calc(100dvh - 400px), 620px);
   }
 }

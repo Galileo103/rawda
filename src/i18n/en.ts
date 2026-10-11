@@ -149,6 +149,7 @@ export const en = {
     again: 'Again',
     next: 'Next',
     all: 'All letters',
+    done: '{n} of {total} done',
     restart: 'Start over',
     savedToGallery: 'Saved in My drawings',
     guide: 'How to write each letter',

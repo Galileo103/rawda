@@ -153,6 +153,7 @@ export const ar: RawDict = {
     again: 'مرة أخرى',
     next: 'التالي',
     all: 'كل الحروف',
+    done: 'أنجزنا {n} من {total}',
     restart: 'نبدأ من جديد',
     savedToGallery: 'حفظناها في رسوماتي',
     guide: 'كيف نكتب كل حرف',

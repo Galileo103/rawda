@@ -410,49 +410,55 @@ function FillBoard({ entry, modes }: { entry: WriteEntry; modes: ReactNode }) {
           )}
         </div>
 
-        <div className={[s.box, won ? s.boxWin : ''].join(' ')}>
-          <canvas ref={baseRef} width={SIZE} height={SIZE} className={s.layer} aria-hidden="true" />
-          <canvas
-            ref={paintRef}
-            width={SIZE}
-            height={SIZE}
-            className={s.layer}
-            style={{ touchAction: 'none' }}
-            onPointerDown={onDown}
-            onPointerMove={onMove}
-            onPointerUp={onUp}
-            onPointerCancel={onUp}
-            role="img"
-            aria-label={entry.glyph}
-            data-testid="write-canvas"
-            data-progress={Math.round(progress * 100)}
-            data-brush={ready === 'canvas' ? brushW.current : undefined}
-          />
-          <canvas ref={outlineRef} width={SIZE} height={SIZE} className={[s.layer, s.outline].join(' ')} aria-hidden="true" />
-          {ready === 'fallback' && (
-            <span className={s.fallback} lang={lang}>
-              {entry.glyph}
-            </span>
-          )}
-          {sparkles && (
-            <svg className={s.layer} viewBox={`0 0 ${SIZE} ${SIZE}`} aria-hidden="true" data-testid="write-sparkles">
-              {sparkles.map((p, i) => (
-                <path
-                  key={i}
-                  className={s.sparkle}
-                  style={{ animationDelay: `${(i % 5) * 0.15}s`, transformOrigin: `${p.x}px ${p.y}px` }}
-                  d={`M${p.x} ${p.y - 18}L${p.x + 5} ${p.y - 5}L${p.x + 18} ${p.y}L${p.x + 5} ${p.y + 5}L${p.x} ${p.y + 18}L${p.x - 5} ${p.y + 5}L${p.x - 18} ${p.y}L${p.x - 5} ${p.y - 5}Z`}
-                />
-              ))}
-            </svg>
-          )}
-          {won && (
-            <div className={s.winStars} aria-hidden="true">
-              {Array.from({ length: 8 }, (_, i) => (
-                <Icon key={i} name="star" size={44} style={{ '--a': `${i * 45}deg`, animationDelay: `${(i % 4) * 0.12}s` } as CSSProperties} />
-              ))}
-            </div>
-          )}
+        <div className={s.boxCol}>
+          <div className={[s.box, won ? s.boxWin : ''].join(' ')}>
+            <canvas ref={baseRef} width={SIZE} height={SIZE} className={s.layer} aria-hidden="true" />
+            <canvas
+              ref={paintRef}
+              width={SIZE}
+              height={SIZE}
+              className={s.layer}
+              style={{ touchAction: 'none' }}
+              onPointerDown={onDown}
+              onPointerMove={onMove}
+              onPointerUp={onUp}
+              onPointerCancel={onUp}
+              role="img"
+              aria-label={entry.glyph}
+              data-testid="write-canvas"
+              data-progress={Math.round(progress * 100)}
+              data-brush={ready === 'canvas' ? brushW.current : undefined}
+            />
+            <canvas ref={outlineRef} width={SIZE} height={SIZE} className={[s.layer, s.outline].join(' ')} aria-hidden="true" />
+            {ready === 'fallback' && (
+              <span className={s.fallback} lang={lang}>
+                {entry.glyph}
+              </span>
+            )}
+            {sparkles && (
+              <svg className={s.layer} viewBox={`0 0 ${SIZE} ${SIZE}`} aria-hidden="true" data-testid="write-sparkles">
+                {sparkles.map((p, i) => (
+                  <path
+                    key={i}
+                    className={s.sparkle}
+                    style={{ animationDelay: `${(i % 5) * 0.15}s`, transformOrigin: `${p.x}px ${p.y}px` }}
+                    d={`M${p.x} ${p.y - 18}L${p.x + 5} ${p.y - 5}L${p.x + 18} ${p.y}L${p.x + 5} ${p.y + 5}L${p.x} ${p.y + 18}L${p.x - 5} ${p.y + 5}L${p.x - 18} ${p.y}L${p.x - 5} ${p.y - 5}Z`}
+                  />
+                ))}
+              </svg>
+            )}
+            {won && (
+              <div className={s.winStars} aria-hidden="true">
+                {Array.from({ length: 8 }, (_, i) => (
+                  <Icon key={i} name="star" size={44} style={{ '--a': `${i * 45}deg`, animationDelay: `${(i % 4) * 0.12}s` } as CSSProperties} />
+                ))}
+              </div>
+            )}
+          </div>
+          {/* How much is coloured, right under the letter: fills up as the child works, full only when it's done. */}
+          <div className={s.meter} role="progressbar" aria-valuemin={0} aria-valuemax={100} aria-valuenow={Math.round(progress * 100)}>
+            <span style={{ width: `${Math.round((won ? 1 : Math.min(progress / needed, 0.97)) * 100)}%` }} />
+          </div>
         </div>
 
         <div className={s.side}>
@@ -505,11 +511,6 @@ function FillBoard({ entry, modes }: { entry: WriteEntry; modes: ReactNode }) {
             </>
           )}
         </div>
-      </div>
-
-      {/* How much is coloured: fills up as the child works, full only when it's done. */}
-      <div className={s.meter} role="progressbar" aria-valuemin={0} aria-valuemax={100} aria-valuenow={Math.round(progress * 100)}>
-        <span style={{ width: `${Math.round((won ? 1 : Math.min(progress / needed, 0.97)) * 100)}%` }} />
       </div>
     </Screen>
   )
