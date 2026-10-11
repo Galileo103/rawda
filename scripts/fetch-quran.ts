@@ -3,8 +3,8 @@
  *
  * Text:  Tanzil Quran Text (Uthmani, Hafs), verbatim — https://tanzil.net (CC BY 3.0, no changes allowed)
  * Names: Tanzil quran-data.js metadata
- * Audio: per-ayah teaching recitations from https://everyayah.com — Mahmoud Khalil Al-Husary (Mu'allim, the default)
- *        and Mohamed Siddiq Al-Minshawi (Mu'allim, with children repeating after him)
+ * Audio: per-ayah teaching recitations from https://everyayah.com — Mohamed Siddiq Al-Minshawi (Mu'allim, with
+ *        children repeating after him; the default) and Mahmoud Khalil Al-Husary (Mu'allim)
  *
  * Verification (the script aborts on any mismatch; nothing is written):
  *  - ayah count per surah == Tanzil metadata == quran.com chapter metadata
@@ -19,15 +19,15 @@ import { QuranZ } from '../src/content/schemas'
 import { ROOT } from './lib/contentFs'
 
 /** Al-Fatiha, then the last surahs in the order children usually learn them. */
-const SURAHS = [1, 114, 113, 112, 111, 110]
+const SURAHS = [1, 114, 113, 112, 111, 110, 109, 108, 107, 106, 105, 104, 103, 102]
 const TEXT_URL = 'https://tanzil.net/pub/download/index.php?quranType=uthmani&outType=txt-2&agree=true'
 const META_URL = 'https://tanzil.net/res/text/metadata/quran-data.js'
 const QURANCOM = 'https://api.quran.com/api/v4'
 
 /** Verified human recitations, per ayah. The first is the default (stored as each ayah's `audio`). */
 const RECITERS = [
-  { id: 'husary-muallim', folder: 'Husary_Muallim_128kbps', name: { ar: 'محمود خليل الحصري (المصحف المعلّم)', en: "Mahmoud Khalil Al-Husary (Mu'allim)" } },
   { id: 'minshawy-muallim', folder: 'Minshawy_Teacher_128kbps', name: { ar: 'محمد صديق المنشاوي (المصحف المعلّم مع الأطفال)', en: "Mohamed Siddiq Al-Minshawi (Mu'allim, with children)" } },
+  { id: 'husary-muallim', folder: 'Husary_Muallim_128kbps', name: { ar: 'محمود خليل الحصري (المصحف المعلّم)', en: "Mahmoud Khalil Al-Husary (Mu'allim)" } },
 ] as const
 type Reciter = (typeof RECITERS)[number]
 const DEFAULT = RECITERS[0]

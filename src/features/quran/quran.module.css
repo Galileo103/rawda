@@ -67,68 +67,168 @@
   align-items: center;
 }
 
+/* ---------- The mushaf ---------- */
+/* A page with a classic double gold frame. The Quran text inside is shown exactly as stored. */
 .mushaf {
   width: 100%;
   max-width: 860px;
   margin-inline: auto;
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  padding: 18px;
-  border-radius: var(--radius-l);
-  background: #fffdf6;
-  border: 3px solid #e6d9b8;
-  box-shadow: var(--shadow-soft);
+  padding: 22px clamp(14px, 3vw, 30px) 26px;
+  border-radius: 28px;
+  background: radial-gradient(ellipse at 50% 0%, #fffaf0 0%, #fffdf6 55%, #fbf5e6 100%);
+  border: 3px solid #c9a646;
+  box-shadow:
+    inset 0 0 0 5px #fffdf6,
+    inset 0 0 0 7px #e6d3a0,
+    0 8px 24px rgba(107, 84, 20, 0.12);
 }
 
-.basmala,
-.ayah {
+/* The basmala: centred in an ornamental band. */
+.basmala {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 14px;
   width: 100%;
-  padding: 10px 14px;
+  margin-bottom: 10px;
+  padding: 10px 14px 14px;
   border: 0;
-  border-radius: var(--radius);
+  border-radius: 18px;
+  background: transparent;
+  cursor: pointer;
+  direction: rtl;
+}
+.basmala .ayahText {
+  flex: none;
+  text-align: center;
+}
+.flourish {
+  flex: 1;
+  max-width: 120px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #c9a646);
+  position: relative;
+}
+.flourish::after {
+  content: '';
+  position: absolute;
+  inset-inline-start: 0;
+  top: 50%;
+  width: 9px;
+  height: 9px;
+  background: #c9a646;
+  transform: translate(0, -50%) rotate(45deg);
+  border-radius: 2px;
+}
+.flourishEnd {
+  background: linear-gradient(270deg, transparent, #c9a646);
+}
+.flourishEnd::after {
+  inset-inline-start: auto;
+  inset-inline-end: 0;
+}
+
+/* Each ayah: the text, then its marker right where it ends (as in a printed mushaf). */
+.ayah {
+  display: block;
+  width: 100%;
+  padding: 12px 16px;
+  border: 0;
+  border-inline-start: 4px solid transparent;
+  border-radius: 16px;
   background: transparent;
   cursor: pointer;
   text-align: start;
   direction: rtl;
+  transition: background 0.15s ease;
 }
-
-.basmala {
-  justify-content: center;
+/* A gold hairline between ayahs, fading at both ends. */
+.ayah {
+  position: relative;
+}
+.ayah + .ayah::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  inset-inline: 18px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #e6d3a0 20%, #e6d3a0 80%, transparent);
+  pointer-events: none;
+}
+.playing::before,
+.playing + .ayah::before,
+.waiting::before,
+.waiting + .ayah::before {
+  opacity: 0;
+}
+.ayah:hover,
+.basmala:hover {
+  background: #fdf3d6;
+}
+.ayah:focus-visible,
+.basmala:focus-visible {
+  outline: 3px solid #c9a646;
+  outline-offset: 2px;
+}
+.ayah:active,
+.basmala:active {
+  background: #fbe9b7;
 }
 
 .ayahText {
-  flex: 1;
   font-family: var(--font-quran);
   font-size: clamp(1.7rem, 4.4vw, 2.5rem);
   line-height: 2.1;
   color: #1d1630;
 }
 
-.basmala .ayahText {
-  flex: none;
-  text-align: center;
-}
-
-.ayahNum {
-  display: grid;
+/* The end-of-ayah marker: a small gold rosette with the number inside, sized with the text. */
+.mark {
+  position: relative;
+  display: inline-grid;
   place-items: center;
-  flex: none;
-  min-width: 46px;
-  height: 46px;
-  border-radius: 50%;
-  border: 3px solid #c9a646;
-  color: #6b5414;
+  width: 1.5em;
+  height: 1.5em;
+  margin-inline-start: 0.35em;
+  vertical-align: middle;
+  font-size: clamp(1.7rem, 4.4vw, 2.5rem);
+}
+.markArt {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  fill: #fff6dc;
+  stroke: #c9a646;
+  stroke-width: 2;
+  stroke-linejoin: round;
+}
+.markNum {
+  position: relative;
+  font-family: var(--font);
+  font-size: 0.42em;
   font-weight: 800;
-  font-size: 1.15rem;
+  line-height: 1;
+  color: #6b5414;
 }
 
+/* Being recited: a soft gold wash, a gold edge on the reading side, and a filled marker. */
 .playing {
-  background: var(--sun-soft);
-  box-shadow: inset 0 0 0 3px var(--sun);
+  background: #fff1c4;
+  border-inline-start-color: #e0b13a;
+}
+.playing .markArt {
+  fill: #e0b13a;
+  stroke: #b8891d;
+}
+.playing .markNum {
+  color: #fff;
+}
+.basmala.playing {
+  border-inline-start-color: transparent;
+  box-shadow: inset 0 0 0 2px #e0b13a;
 }
 
 .source {
@@ -145,33 +245,228 @@
   color: #b42318;
 }
 
-.reciterPick {
+/* ---------- Surah screen (around the mushaf) ---------- */
+.surahScreen {
+  gap: 16px;
+}
+
+.meta {
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
+  gap: 8px;
 }
-
-.hint {
-  max-width: 860px;
-  margin: 0 auto;
-  font-size: 0.9rem;
-  font-weight: 700;
-  color: var(--ink-soft);
-  text-align: center;
+.metaChip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border-radius: 999px;
+  background: #fffdf6;
+  border: 2px solid #e6d9b8;
+  color: #6b5414;
+  font-size: 0.95rem;
+  font-weight: 800;
 }
-
-/* The child's turn to repeat: a calm teal frame on the ayah and a short caption. */
-.waiting {
+.metaReciter {
   background: var(--teal-soft);
-  box-shadow: inset 0 0 0 3px var(--teal);
+  border-color: transparent;
+  color: var(--teal);
 }
-.yourTurn {
+
+/* Two ways to start. */
+.modes {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  width: 100%;
   max-width: 860px;
-  margin: 0 auto;
-  padding: 10px 18px;
-  border-radius: var(--radius);
+  margin-inline: auto;
+}
+.modesOne {
+  grid-template-columns: minmax(0, 1fr);
+  max-width: 520px;
+}
+.mode {
+  --c: var(--teal);
+  --edge: #0c6b63;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  min-height: 112px;
+  padding: 16px 20px;
+  border: 0;
+  border-radius: 28px;
+  background: var(--c);
+  color: #fff;
+  font: inherit;
+  text-align: start;
+  box-shadow: 0 7px 0 var(--edge);
+  cursor: pointer;
+  transition: transform 0.12s ease, box-shadow 0.12s ease;
+}
+.mode:active {
+  transform: translateY(5px);
+  box-shadow: 0 2px 0 var(--edge);
+}
+.mode:focus-visible {
+  outline: 4px solid var(--sun);
+  outline-offset: 3px;
+}
+.modeLink {
+  --c: #e8613a;
+  --edge: #b9472a;
+}
+/* The mode now playing glows softly. */
+.modeOn {
+  box-shadow: 0 7px 0 var(--edge), 0 0 0 5px var(--sun);
+}
+.modeIcon {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 68px;
+  height: 68px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.22);
+}
+.modeText {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+.modeTitle {
+  font-size: clamp(1.25rem, 3.2vw, 1.55rem);
+  font-weight: 800;
+  line-height: 1.2;
+}
+.modeSub {
+  font-size: 0.98rem;
+  font-weight: 700;
+  opacity: 0.92;
+}
+/* A tiny picture of the method: 1 · 2 · 1 2 · 3 · 1 2 3 */
+.linkSteps {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin-top: 4px;
+}
+.linkSteps i {
+  padding: 1px 8px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.22);
+  font-style: normal;
+  font-weight: 800;
+  font-size: 0.85rem;
+}
+.linkSteps .joined {
+  background: #fff;
+  color: #b9472a;
+}
+
+/* The grown-up's settings: one calm panel. */
+.panel {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+  max-width: 860px;
+  margin-inline: auto;
+  padding: 14px 18px;
+  border-radius: 24px;
+  background: var(--surface);
+  border: 2px solid var(--line);
+}
+.panelTitle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+  color: var(--ink-soft);
+  font-size: 1rem;
+  font-weight: 800;
+}
+.reciters {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 10px;
+}
+.reciterOpt {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  border: 3px solid var(--line);
+  border-radius: 18px;
+  background: var(--surface);
+  color: var(--ink);
+  font: inherit;
+  font-weight: 800;
+  text-align: start;
+  cursor: pointer;
+}
+.reciterOpt[aria-checked='true'] {
+  border-color: var(--teal);
   background: var(--teal-soft);
   color: var(--teal);
-  font-size: 1.3rem;
-  font-weight: 800;
-  text-align: center;
+}
+.reciterAvatar {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: var(--line);
+  color: var(--ink-soft);
+}
+.reciterOpt[aria-checked='true'] .reciterAvatar {
+  background: var(--teal);
+  color: #fff;
+}
+.reciterName {
+  min-width: 0;
+}
+.toggles {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 4px 24px;
+}
+
+/* A little room around the recited ayah when it scrolls into view. */
+.mushaf > button {
+  scroll-margin-block: 24px;
+}
+
+/* The child's turn to repeat: the same shape in calm teal. */
+.waiting {
+  background: var(--teal-soft);
+  border-inline-start-color: var(--teal);
+}
+.waiting .markArt {
+  fill: var(--teal);
+  stroke: #0c6b63;
+}
+.waiting .markNum {
+  color: #fff;
+}
+.basmala.waiting {
+  border-inline-start-color: transparent;
+  box-shadow: inset 0 0 0 2px var(--teal);
+}
+
+@media (max-width: 600px) {
+  .modes {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .mode {
+    min-height: 96px;
+    padding: 14px 16px;
+  }
+  .modeIcon {
+    width: 56px;
+    height: 56px;
+  }
 }

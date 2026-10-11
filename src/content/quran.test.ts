@@ -14,6 +14,14 @@ import { content } from './loader'
 // Standard Hafs ayah counts and Arabic names (as given in Tanzil's quran-data metadata).
 const EXPECTED: Record<number, { name: string; ayahs: number }> = {
   1: { name: 'الفاتحة', ayahs: 7 },
+  102: { name: 'التكاثر', ayahs: 8 },
+  103: { name: 'العصر', ayahs: 3 },
+  104: { name: 'الهمزة', ayahs: 9 },
+  105: { name: 'الفيل', ayahs: 5 },
+  106: { name: 'قريش', ayahs: 4 },
+  107: { name: 'الماعون', ayahs: 7 },
+  108: { name: 'الكوثر', ayahs: 3 },
+  109: { name: 'الكافرون', ayahs: 6 },
   110: { name: 'النصر', ayahs: 3 },
   111: { name: 'المسد', ayahs: 5 },
   112: { name: 'الإخلاص', ayahs: 4 },
@@ -31,7 +39,7 @@ describe('Quran data', () => {
   })
 
   it('contains exactly the agreed surahs with correct names and ayah counts', () => {
-    expect(quran.surahs.map((s) => s.number).sort((a, b) => a - b)).toEqual([1, 110, 111, 112, 113, 114])
+    expect(quran.surahs.map((s) => s.number).sort((a, b) => a - b)).toEqual([1, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114])
     for (const s of quran.surahs) {
       expect(s.nameAr, `surah ${s.number}`).toBe(EXPECTED[s.number]!.name)
       expect(s.ayahs, `surah ${s.number}`).toHaveLength(EXPECTED[s.number]!.ayahs)
@@ -68,7 +76,9 @@ describe('Quran data', () => {
 
   it('every other verified reciter covers every ayah and the basmala, unchanged since download', () => {
     const others = (quran.source.reciters ?? []).slice(1)
-    expect(others.map((r) => r.id)).toContain('minshawy-muallim')
+    // Al-Minshawi (teaching, with children) is the default voice; Al-Husary is the second.
+    expect(quran.source.reciters?.[0]?.id).toBe('minshawy-muallim')
+    expect(others.map((r) => r.id)).toContain('husary-muallim')
     for (const r of others) {
       expect(r.audioUrl).toContain('everyayah.com')
       const b = quran.basmala.more?.[r.id]
