@@ -1,7 +1,7 @@
 import type { Activity } from '../../content/schemas'
 import { type MasteryRecord, isMastered, needsPractice } from '../../domain/engine/mastery'
 import type { AreaId, Lang } from '../../domain/types'
-import type { CompletionRow } from '../../services/db'
+import { type AttemptRow, type CompletionRow, localDay } from '../../services/db'
 
 export interface Bucket {
   practiced: number
@@ -10,13 +10,29 @@ export interface Bucket {
   avg: number
 }
 
+/** What the child practised today, per learning area: distinct concepts (skill + language). */
+export function practiceToday(attempts: readonly Pick<AttemptRow, 'ts' | 'areaId' | 'skill' | 'lang'>[], now = Date.now()): { area: AreaId; concepts: number }[] {
+  const today = localDay(now)
+  const areas = new Map<AreaId, Set<string>>()
+  for (const a of attempts) {
+    if (localDay(a.ts) !== today) continue
+    const skills = areas.get(a.areaId) ?? new Set<string>()
+    skills.add(`${a.skill}|${a.lang}`)
+    areas.set(a.areaId, skills)
+  }
+  return [...areas].map(([area, skills]) => ({ area, concepts: skills.size })).sort((x, y) => y.concepts - x.concepts)
+}
+
 export interface ProgressStats {
   activitiesDone: number
   conceptsPracticed: number
   stars: number
   byArea: Map<AreaId, Bucket>
   byLang: Map<Lang, Bucket>
+  /** Mastered concepts, most recent first. */
   recent: MasteryRecord[]
+  /** Concepts practised lately (mastered or not), most recent first. */
+  practisedLately: MasteryRecord[]
   practiceMore: MasteryRecord[]
 }
 
@@ -50,6 +66,7 @@ export function computeStats(completions: readonly CompletionRow[], mastery: rea
     byArea,
     byLang,
     recent: mastery.filter(isMastered).sort((a, b) => b.lastSeen - a.lastSeen).slice(0, 10),
+    practisedLately: [...mastery].sort((a, b) => b.lastSeen - a.lastSeen).slice(0, 10),
     practiceMore: mastery.filter(needsPractice).sort((a, b) => a.score - b.score).slice(0, 10),
   }
 }

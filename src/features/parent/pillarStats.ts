@@ -26,13 +26,11 @@ export type MilestoneId = 'firstWord' | 'tenWords' | 'firstTrace' | 'tenTraces' 
 
 export interface PillarDashboard {
   pillars: Record<Pillar, PillarStat>
-  /** Last 14 local days, oldest first. */
-  days: { day: string; counts: Record<Pillar, number> }[]
+  /** Last 14 local days, oldest first. `other`: answers in activities outside the four pillars (colours, stories…). */
+  days: { day: string; counts: Record<Pillar, number>; other: number }[]
   /** Consecutive days (ending today or yesterday) with any learning or drawing. */
   streakDays: number
   milestones: { id: MilestoneId; done: boolean }[]
-  /** Words the device recognised on-device in "Say it!". */
-  wordsHeard: number
 }
 
 const zero = (): Record<Pillar, number> => ({ speech: 0, logic: 0, motor: 0, creativity: 0 })
@@ -65,15 +63,19 @@ export function computePillars(input: {
   const today = localDay(now)
   const dayKeys = Array.from({ length: 14 }, (_, i) => localDay(now - (13 - i) * DAY))
   const byDay = new Map(dayKeys.map((d) => [d, zero()]))
+  const otherByDay = new Map(dayKeys.map((d) => [d, 0]))
   const activeDays = new Set<string>()
-  let wordsHeard = 0
   let sorts = 0
 
   for (const a of input.attempts) {
     activeDays.add(localDay(a.ts))
     // Writing room colouring is fine-motor practice too.
     const p = activityPillar.get(a.activityId) ?? (a.activityId.startsWith('write:') ? 'motor' : undefined)
-    if (!p) continue
+    if (!p) {
+      const d = localDay(a.ts)
+      if (otherByDay.has(d)) otherByDay.set(d, (otherByDay.get(d) ?? 0) + 1)
+      continue
+    }
     total[p]++
     if (now - a.ts < 7 * DAY) week[p]++
     if (a.firstTry) firstTry[p]++
@@ -81,7 +83,6 @@ export function computePillars(input: {
       qualitySum[p] += a.quality
       qualityN[p]++
     }
-    if (p === 'speech' && a.quality === 1) wordsHeard++
     if (templateOf.get(a.activityId) === 'sort') sorts++
     const bucket = byDay.get(localDay(a.ts))
     if (bucket) bucket[p]++
@@ -127,5 +128,5 @@ export function computePillars(input: {
     { id: 'fiveDrawings', done: total.creativity >= 5 },
     { id: 'streak3', done: streakDays >= 3 },
   ]
-  return { pillars, days: dayKeys.map((day) => ({ day, counts: byDay.get(day) ?? zero() })), streakDays, milestones, wordsHeard }
+  return { pillars, days: dayKeys.map((day) => ({ day, counts: byDay.get(day) ?? zero(), other: otherByDay.get(day) ?? 0 })), streakDays, milestones }
 }

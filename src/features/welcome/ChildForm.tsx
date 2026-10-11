@@ -21,7 +21,7 @@ export function childComplete(c: ChildDraft, mode: LearningMode): boolean {
 }
 
 /** Boy / girl pictures (Rawda's own drawings; see content/pictureSources.ts). */
-const PICTURE: Record<Gender, string> = { m: 'E001', f: 'E002' }
+export const PICTURE: Record<Gender, string> = { m: 'E001', f: 'E002' }
 
 /**
  * Who the child is: boy or girl, and their name in Arabic and English.

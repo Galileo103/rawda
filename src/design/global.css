@@ -28,6 +28,9 @@
 
   --success: #2e9e5b;
   --focus: #1d5fd6;
+  --danger: #b42318;
+  --danger-soft: #fff4f2;
+  --danger-line: #f1b8b0;
 
   --radius-s: 14px;
   --radius: 24px;
