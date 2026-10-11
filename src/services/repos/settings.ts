@@ -1,4 +1,4 @@
-import { AREA_IDS, type Lang } from '../../domain/types'
+import { AREA_IDS } from '../../domain/types'
 import { type ProfileRow, type SettingsRow, db } from '../db'
 
 export const DEFAULT_SETTINGS: SettingsRow = {
@@ -9,12 +9,12 @@ export const DEFAULT_SETTINGS: SettingsRow = {
   practiceLang: 'ar',
   disabledAreas: [],
   areaDifficulty: {},
-  narration: true,
+  // Hala starts silent: a grown-up reads the large captions, and can turn her voice on in settings.
+  narration: false,
   narrationVolume: 0.9,
   sfxVolume: 0.5,
   speechRate: 1,
   captions: true,
-  micEnabled: false,
   reducedMotion: false,
   highContrast: false,
   rewardsEnabled: true,
@@ -55,18 +55,4 @@ export async function updateProfile(patch: Partial<Omit<ProfileRow, 'id'>>): Pro
   const next: ProfileRow = { ...current, ...patch, id: 'main' }
   for (const k of ['nickname', 'nameAr', 'nameEn'] as const) next[k] = k in patch ? cleanName(patch[k]) : current[k]
   await db.profile.put(next)
-}
-
-/** The parent's recording of the child's name (stays on this device). */
-export async function saveNameClip(lang: Lang, blob: Blob): Promise<void> {
-  await db.voiceClips.put({ id: `name-${lang}`, blob, createdAt: Date.now() })
-}
-
-export async function deleteNameClip(lang: Lang): Promise<void> {
-  await db.voiceClips.delete(`name-${lang}`)
-}
-
-export async function getNameClips(): Promise<Partial<Record<Lang, Blob>>> {
-  const rows = await db.voiceClips.toArray()
-  return Object.fromEntries(rows.map((r) => [r.id.slice(5), r.blob]))
 }

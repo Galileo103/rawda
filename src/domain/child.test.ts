@@ -60,20 +60,9 @@ describe('the child’s name', () => {
 describe('name in narration', () => {
   afterEach(() => vi.restoreAllMocks())
 
-  it('plays the parent’s recording in the name slot, else says "our hero/heroine"', async () => {
-    vi.spyOn(URL, 'createObjectURL').mockReturnValue('blob:name')
-    vi.spyOn(URL, 'revokeObjectURL').mockReturnValue(undefined)
+  it('says "our hero/heroine" in the name slot', async () => {
     const a = new AudioService()
-    const played: string[] = []
-    vi.spyOn(a as unknown as { playFile: (url: string) => Promise<boolean> }, 'playFile').mockImplementation(async (url: string) => {
-      played.push(url)
-      return true
-    })
-    a.setChild('f', { ar: new Blob(['x']) })
-    await a.speak('أَحْسَنْتِ يَا @name!', 'ar')
-    expect(played).toContain('blob:name')
-
-    a.setChild('f', {})
+    a.setChild('f')
     const said: string[] = []
     vi.spyOn(a as unknown as { sayText: (t: string) => Promise<string> }, 'sayText').mockImplementation(async (t: string) => {
       said.push(t)

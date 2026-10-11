@@ -41,7 +41,7 @@ const GENDERS: (Gender | undefined)[] = ['m', 'f', undefined]
 /**
  * Every line the app can speak, per language — the input for scripts/render-audio.ts.
  * Gendered lines are collected in every form (boy, girl, not set), and lines with the
- * child's name as the pieces around it (the name itself is the parent's recording).
+ * child's name as the pieces around it (the name slot is said as "our hero/heroine").
  */
 export function collectNarration(bundle: ContentBundle, dicts: Record<Lang, RawDict>): { lang: Lang; text: string }[] {
   const out = new Map<string, { lang: Lang; text: string }>()

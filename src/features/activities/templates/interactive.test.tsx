@@ -82,7 +82,6 @@ describe('SpeakTemplate', () => {
       </AppStateProvider>,
     )
     expect(await screen.findByTestId('speak-word')).toHaveTextContent('cat')
-    expect(screen.queryByTestId('speak-mic')).not.toBeInTheDocument() // mic is opt-in (off by default)
     await userEvent.click(screen.getByTestId('choice-answer'))
     expect(onCorrect).toHaveBeenCalledWith('cat', 0.5)
     expect(onWrong).not.toHaveBeenCalled()

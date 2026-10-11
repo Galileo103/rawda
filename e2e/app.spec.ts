@@ -272,19 +272,25 @@ test('a movement break appears after a few activities and waits for "Done"', asy
   await expect(page.getByRole('heading', { name: /أحسنتم/ })).toBeVisible()
 })
 
-test('voice off: press-and-hold silences Hala and a grown-up reads the big on-screen text', async ({ page }) => {
+test('voice off: Hala starts silent, press-and-hold switches her, and a grown-up reads the big on-screen text', async ({ page }) => {
   await onboard(page)
   const toggle = page.getByTestId('voice-toggle')
+  await expect(toggle).toHaveAttribute('aria-pressed', 'true') // off by default
   await toggle.click() // a quick tap (a curious child) changes nothing…
-  await expect(toggle).toHaveAttribute('aria-pressed', 'false')
-  await expect(page.getByRole('status').filter({ hasText: 'اضغط باستمرار' })).toBeVisible() // …but explains itself (no hover on phones)
-  await toggle.hover()
-  await page.mouse.down()
-  await page.waitForTimeout(1500)
-  await page.mouse.up()
   await expect(toggle).toHaveAttribute('aria-pressed', 'true')
+  await expect(page.getByRole('status').filter({ hasText: 'اضغط باستمرار' })).toBeVisible() // …but explains itself (no hover on phones)
+  const hold = async () => {
+    await toggle.hover()
+    await page.mouse.down()
+    await page.waitForTimeout(1500)
+    await page.mouse.up()
+  }
+  await hold()
+  await expect(toggle).toHaveAttribute('aria-pressed', 'false') // voice on
   await page.reload() // remembered
-  await expect(page.getByTestId('voice-toggle')).toHaveAttribute('aria-pressed', 'true')
+  await expect(toggle).toHaveAttribute('aria-pressed', 'false')
+  await hold()
+  await expect(toggle).toHaveAttribute('aria-pressed', 'true') // silent again
 
   await page.goto('./#/play/colors')
   await page.getByRole('button', { name: /ابدأ/ }).click()
@@ -502,12 +508,11 @@ test('finger paths: a pre-writing stroke with a green start dot can be traced', 
   await expect(page.locator('[class*="stoneDone"]').first()).toBeVisible({ timeout: 10_000 })
 })
 
-test('"Say it!" works without a microphone and shows up in the four-pillar dashboard', async ({ page }) => {
+test('"Say it!": say the word aloud, tap "I said it!", and it shows up in the four-pillar dashboard', async ({ page }) => {
   await onboard(page)
   await page.goto('./#/play/ar-say-words')
   await page.getByRole('button', { name: /ابدأ/ }).click()
   await expect(page.getByTestId('speak-word')).toBeVisible()
-  await expect(page.getByTestId('speak-mic')).toHaveCount(0) // microphone is parent opt-in
   await page.getByTestId('choice-answer').click()
   await expect(page.locator('[class*="stoneDone"]').first()).toBeVisible({ timeout: 10_000 })
   // Parent dashboard

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { useApp } from '../../app/AppState'
 import { content } from '../../content/loader'
 import { Button, Field, Panel, Segmented, Switch } from '../../design/ui'
@@ -8,7 +8,6 @@ import type { ProfileRow } from '../../services/db'
 import { hashPin, isValidPin, newSalt } from '../../services/parentGate'
 import { updateProfile } from '../../services/repos/settings'
 import { type ChildDraft, ChildForm } from '../welcome/ChildForm'
-import { type OnDeviceStatus, installOnDevice, micSupported, onDeviceStatus } from '../speech/speechService'
 import s from './parent.module.css'
 
 export function SettingsTab() {
@@ -101,7 +100,6 @@ export function SettingsTab() {
             onChange={(v) => void update({ speechRate: v })}
           />
           <Switch label={t.parent.captions} checked={settings.captions} onChange={(v) => void update({ captions: v })} />
-          <MicSetting />
           <Switch label={t.parent.reducedMotion} checked={settings.reducedMotion} onChange={(v) => void update({ reducedMotion: v })} />
           <Switch label={t.parent.highContrast} checked={settings.highContrast} onChange={(v) => void update({ highContrast: v })} />
           <Switch label={t.parent.rewardsOn} checked={settings.rewardsEnabled} onChange={(v) => void update({ rewardsEnabled: v })} />
@@ -130,44 +128,6 @@ export function SettingsTab() {
         </div>
       </Panel>
     </div>
-  )
-}
-
-/**
- * Speaking practice opt-in. The browser asks for microphone permission on first use in an
- * activity; recordings stay in memory. Shows whether word recognition can run on this device.
- */
-function MicSetting() {
-  const { settings, t, update } = useApp()
-  const lang = settings.practiceLang
-  const [status, setStatus] = useState<OnDeviceStatus | 'working' | null>(null)
-  useEffect(() => {
-    let cancelled = false
-    if (settings.micEnabled) void onDeviceStatus(lang).then((st) => !cancelled && setStatus(st))
-    return () => {
-      cancelled = true
-    }
-  }, [settings.micEnabled, lang])
-
-  const prepare = async () => {
-    setStatus('working')
-    await installOnDevice(lang)
-    setStatus(await onDeviceStatus(lang))
-  }
-
-  return (
-    <>
-      <Switch label={t.parent.mic} checked={settings.micEnabled} onChange={(v) => void update({ micEnabled: v })} />
-      <p className={s.note}>{t.parent.micHint}</p>
-      {settings.micEnabled && !micSupported() && <p className={s.err}>{t.parent.micUnsupported}</p>}
-      {settings.micEnabled && micSupported() && status === 'available' && <p className={s.ok}>{t.parent.onDeviceReady}</p>}
-      {settings.micEnabled && micSupported() && status === 'unavailable' && <p className={s.note}>{t.parent.onDeviceNone}</p>}
-      {settings.micEnabled && micSupported() && (status === 'downloadable' || status === 'downloading' || status === 'working') && (
-        <Button variant="secondary" icon="save" onClick={() => void prepare()} disabled={status === 'working' || status === 'downloading'}>
-          {status === 'downloadable' ? t.parent.onDeviceDownload : t.parent.onDeviceWorking}
-        </Button>
-      )}
-    </>
   )
 }
 

@@ -23,8 +23,6 @@ export interface SettingsRow {
   sfxVolume: number
   speechRate: number
   captions: boolean
-  /** Speaking practice may use the microphone (parent opt-in; audio stays in memory, never saved or sent). */
-  micEnabled: boolean
   reducedMotion: boolean
   highContrast: boolean
   rewardsEnabled: boolean
@@ -44,13 +42,6 @@ export interface ProfileRow {
   /** Chooses masculine or feminine wording; unset = neutral. */
   gender?: Gender
   ageBand?: '3-4' | '4-5' | '5-6'
-}
-
-/** The parent's recording of the child's name, one per language. Never exported or uploaded. */
-export interface VoiceClipRow {
-  id: `name-${Lang}`
-  blob: Blob
-  createdAt: number
 }
 
 export interface AttemptRow {
@@ -127,7 +118,6 @@ export class RawdaDB extends Dexie {
   drawings!: EntityTable<DrawingRow, 'id'>
   storyProgress!: EntityTable<StoryProgressRow, 'storyId'>
   usage!: EntityTable<UsageRow, 'day'>
-  voiceClips!: EntityTable<VoiceClipRow, 'id'>
 
   constructor(name = 'rawda') {
     super(name)
@@ -156,6 +146,8 @@ export class RawdaDB extends Dexie {
             delete p.nickname
           })
       })
+    // Recording the child's name was removed: delete any recordings still on the device.
+    this.version(3).stores({ voiceClips: null })
   }
 }
 

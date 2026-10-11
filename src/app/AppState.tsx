@@ -7,7 +7,7 @@ import { fillName } from '../domain/child'
 import { type Dict, dict, dirOf, setDictGender } from '../i18n'
 import { audio } from '../services/audio/AudioService'
 import { type ProfileRow, type SettingsRow, db, localDay } from '../services/db'
-import { getNameClips, getProfile, getSettings, updateSettings } from '../services/repos/settings'
+import { getProfile, getSettings, updateSettings } from '../services/repos/settings'
 
 export interface AppState {
   settings: SettingsRow
@@ -44,12 +44,11 @@ export function AppStateProvider({ children }: { children: ReactNode }) {
   const settings = useLiveQuery(getSettings, [])
   const profile = useLiveQuery(getProfile, [])
   const usageRow = useLiveQuery(() => db.usage.get(localDay()), [])
-  const nameClips = useLiveQuery(getNameClips, [])
 
-  // Lines with the child's name play the parent's recording in the name slot.
+  // Lines with the child's name say "our hero/heroine" (by gender) in the name slot.
   useLayoutEffect(() => {
-    if (profile && nameClips) audio.setChild(profile.gender, nameClips)
-  }, [profile, nameClips])
+    if (profile) audio.setChild(profile.gender)
+  }, [profile])
 
   // Reflect settings on <html>: language, direction, motion and contrast.
   // Layout effect: direction is applied before paint, so there's no LTR flash on Arabic screens.

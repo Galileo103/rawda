@@ -145,27 +145,6 @@
   gap: 8px;
 }
 
-.recorder {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 8px;
-}
-
-.recDot {
-  width: 14px;
-  height: 14px;
-  border-radius: 50%;
-  background: #e53935;
-  animation: recPulse 1s ease-in-out infinite;
-}
-
-@keyframes recPulse {
-  50% {
-    opacity: 0.3;
-  }
-}
-
 .needHint {
   margin: 0;
   padding: 8px 14px;

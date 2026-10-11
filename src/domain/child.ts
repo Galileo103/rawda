@@ -17,7 +17,7 @@ export interface Gendered<T> {
 /** Either a plain value or one that changes with the child's gender. */
 export type G<T> = T | Gendered<T>
 
-/** In text, where the child's name goes (shown written, spoken from the parent's recording). */
+/** In text, where the child's name goes (shown written; spoken as "our hero/heroine"). */
 export const NAME_TOKEN = '@name'
 
 /** Said and shown in place of the name when there is no name / no recording. */

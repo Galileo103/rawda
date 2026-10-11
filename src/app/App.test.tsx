@@ -103,7 +103,8 @@ describe('app', () => {
   })
 
   it('an activity starts and shows its intro', async () => {
-    await onboard({ uiLang: 'en', learningMode: 'en', practiceLang: 'en' })
+    // Hala's voice is off by default; with it on, the activity offers "Listen again".
+    await onboard({ uiLang: 'en', learningMode: 'en', practiceLang: 'en', narration: true })
     window.location.hash = '#/play/en-find-letter'
     render(<App />)
     expect(await screen.findByRole('heading', { name: 'Find the letter' })).toBeInTheDocument()
