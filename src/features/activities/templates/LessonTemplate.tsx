@@ -5,7 +5,7 @@ import { visualKey } from '../../../content/parse'
 import type { ChoiceItem, LessonItem, TraceItem } from '../../../content/schemas'
 import { Icon } from '../../../design/Icon'
 import { OpenMoji, Visual } from '../../../design/Visual'
-import { lessonCountLine, lessonExampleLine, lessonExamplesLine, lessonTraceLine } from '../../../content/lessonLines'
+import { highlightForms, lessonCountLine, lessonExampleLine, lessonExamplesLine, lessonTraceLine } from '../../../content/lessonLines'
 import { dict, numeral } from '../../../i18n'
 import { audio } from '../../../services/audio/AudioService'
 import { numberWord, randomLine, voice } from '../../common'
@@ -24,12 +24,15 @@ function prefersStill(reducedMotion: boolean): boolean {
 
 const MARKS = /[ً-ْٰـ]/
 
-/** Split a word around the first occurrence of `letter` (with its diacritics) so it can be coloured. */
-export function highlightParts(word: string, letter: string | undefined): [string, string, string] {
-  if (!letter) return [word, '', '']
+/**
+ * Split a word around the first occurrence of `letter` (with its diacritics) so it can be coloured.
+ * A letter with several forms (alif: ["أ", "إ"]) colours whichever form comes first.
+ */
+export function highlightParts(word: string, letter: string | readonly string[] | undefined): [string, string, string] {
+  const targets = highlightForms(letter).map((l) => l.toLowerCase())
+  if (!targets.length) return [word, '', '']
   const chars = [...word]
-  const target = letter.toLowerCase()
-  const i = chars.findIndex((c) => c.toLowerCase() === target)
+  const i = chars.findIndex((c) => targets.includes(c.toLowerCase()))
   if (i < 0) return [word, '', '']
   let end = i + 1
   while (end < chars.length && MARKS.test(chars[end] as string)) end++

@@ -25,6 +25,7 @@ export function CompletionView({
   onHome,
   movementBreak,
   lang,
+  letterStory,
 }: {
   t: Dict
   uiLang: Lang
@@ -40,6 +41,8 @@ export function CompletionView({
   /** A short movement/calm break, shown until the child taps "Done". */
   movementBreak?: MovementBreak
   lang: Lang
+  /** After a Discover letter lesson that has a letter story: its letter, and how to open it. */
+  letterStory?: { letter: string; onOpen: () => void }
 }) {
   const [breakDone, setBreakDone] = useState(false)
   const lex = movementBreak ? content.lexicon.get(movementBreak.lex) : undefined
@@ -81,6 +84,11 @@ export function CompletionView({
             </div>
           ))}
         </div>
+      )}
+      {letterStory && !resting && (
+        <Button size="lg" variant="teal" icon="book" onClick={letterStory.onOpen} data-testid="letter-story">
+          {fmt(t.completion.letterStory, { letter: letterStory.letter })}
+        </Button>
       )}
       <div className={s.actions}>
         <Button variant="secondary" icon="again" onClick={onAgain}>

@@ -47,6 +47,21 @@
   color: #fff;
 }
 
+/* A small book: this letter has a story. */
+.storyBadge {
+  position: absolute;
+  inset-block-start: -8px;
+  inset-inline-start: -8px;
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--sky);
+  color: #fff;
+  pointer-events: none;
+}
+
 .legend {
   display: flex;
   justify-content: center;

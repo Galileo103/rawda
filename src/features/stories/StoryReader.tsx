@@ -1,6 +1,7 @@
 import { type ReactNode, useCallback, useEffect, useMemo, useState } from 'react'
 import { Navigate, useNavigate, useParams, useSearchParams } from 'react-router-dom'
 import { useApp } from '../../app/AppState'
+import { storyHighlight } from '../../content/letterStories'
 import { content, storyById } from '../../content/loader'
 import type { Reward, Story } from '../../content/schemas'
 import { Mascot, type MascotMood } from '../../design/Mascot'
@@ -15,20 +16,30 @@ import { finishStory, recordItemResult, saveStoryPage } from '../../services/rep
 import { randomLine, voice } from '../common'
 import a from '../activities/activities.module.css'
 import { ChoiceTemplate } from '../activities/templates/ChoiceTemplate'
+import { highlightParts } from '../activities/templates/LessonTemplate'
 import { Scene } from './Scene'
 import s from './stories.module.css'
 
-/** Render text with {highlighted} vocabulary words. */
-function richText(text: string): ReactNode[] {
-  return text.split(/(\{[^}]+\})/g).map((part, i) =>
-    part.startsWith('{') ? (
+/**
+ * Render text with {highlighted} vocabulary words. In a letter story, the lesson's letter inside
+ * each highlighted word is coloured the same way the lesson colours it.
+ */
+export function richText(text: string, letter?: Parameters<typeof highlightParts>[1]): ReactNode[] {
+  return text.split(/(\{[^}]+\})/g).map((part, i) => {
+    if (!part.startsWith('{')) return part
+    const [before, hl, after] = highlightParts(part.slice(1, -1), letter)
+    return (
       <mark key={i} className={s.word}>
-        {part.slice(1, -1)}
+        {before}
+        {hl && (
+          <span className={s.letter} data-testid="story-letter">
+            {hl}
+          </span>
+        )}
+        {after}
       </mark>
-    ) : (
-      part
-    ),
-  )
+    )
+  })
 }
 
 export function StoryReader() {
@@ -137,6 +148,7 @@ function Reader({ story, lang, startPage }: { story: Story; lang: Lang; startPag
   }
 
   const title = named(story.title[lang], lang)
+  const letter = storyHighlight(story, content.activities, lang)
 
   if (phase === 'end') {
     return (
@@ -192,7 +204,7 @@ function Reader({ story, lang, startPage }: { story: Story; lang: Lang; startPag
       <TopBar backTo="/stories" backLabel={t.common.back} title={<span lang={lang}>{title}</span>} />
       <Scene scene={current.scene} lang={lang} />
       <p className={s.text} lang={lang} dir={lang === 'ar' ? 'rtl' : 'ltr'}>
-        {richText(named(current.text[lang], lang))}
+        {richText(named(current.text[lang], lang), letter)}
       </p>
       {current.prompt && (
         // Dialogic reading: a question for the grown-up to ask. Shown only, never spoken by Hala.

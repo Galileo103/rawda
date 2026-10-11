@@ -13,6 +13,7 @@ import {
   sillyRevealWord,
   sillyShowLetter,
   sillyShowWord,
+  sameMeaning,
   sillyWordOk,
 } from '../../content/funGames'
 import { JUDGE_HEX, type Letter, type LearnedPools, type SillyKind, monsterLetters, numberName, sillyKinds } from '../../content/games'
@@ -57,7 +58,11 @@ function planSilly(kind: SillyKind, p: LearnedPools, lang: Lang, d: Dict, choice
       p.words.map((w) => content.lexicon.get(w)).filter(sillyWordOk),
       rng,
     )
-    const [a, b, c] = words as [LexEntry, LexEntry, LexEntry | undefined]
+    // The claimed word and the third option never mean the shown picture (لَبَن / حَلِيب), or Hala would be right.
+    const a = words[0] as LexEntry
+    const rest = words.filter((e) => !sameMeaning(a, e))
+    const b = rest[0] ?? (words[1] as LexEntry)
+    const c = rest.find((e) => e !== b && !sameMeaning(b, e))
     const claim = truth ? a : b
     const opts = shuffle([a, b, ...(c ? [c] : [])].slice(0, n), rng)
     return {

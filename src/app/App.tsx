@@ -10,6 +10,7 @@ import { QuranScreen } from '../features/quran/QuranScreen'
 import { SurahScreen } from '../features/quran/SurahScreen'
 import { RememberScreen } from '../features/remember/RememberScreen'
 import { RewardsScreen } from '../features/rewards/RewardsScreen'
+import { LetterStories } from '../features/stories/LetterStories'
 import { StoryLibrary } from '../features/stories/StoryLibrary'
 import { StoryReader } from '../features/stories/StoryReader'
 import { GalleryScreen } from '../features/studio/GalleryScreen'
@@ -38,6 +39,7 @@ export function App() {
               <Route path="/play/:activityId" element={<ActivityPlayer />} />
               <Route path="/discover/:activityId" element={<DiscoverBoard />} />
               <Route path="/stories" element={<StoryLibrary />} />
+              <Route path="/stories/letters" element={<LetterStories />} />
               <Route path="/stories/:storyId" element={<StoryReader />} />
               <Route path="/studio" element={<StudioScreen />} />
               <Route path="/studio/gallery" element={<GalleryScreen />} />

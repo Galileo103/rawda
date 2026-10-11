@@ -99,6 +99,7 @@ export const en = {
     again: 'Play again',
     next: 'Next activity',
     home: 'Home',
+    letterStory: 'Story of {letter}',
   },
   stories: {
     title: 'Stories',
@@ -114,6 +115,13 @@ export const en = {
     askChild: 'Ask your child',
     starring: 'Starring {name}',
     yourStories: 'Stories about you',
+    letterShelf: 'Letter stories',
+    otherShelf: 'More stories',
+    letterSub: { m: 'A story for every letter, starring you!', f: 'A story for every letter, starring you!', n: 'A story for every letter!' },
+    letterCount: '{n} of {total} stories',
+    lettersLearned: '{n} learned',
+    pickLetter: 'Let’s pick a letter and read its story!',
+    soon: 'Soon',
   },
   studio: {
     title: 'Drawing',

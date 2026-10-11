@@ -31,9 +31,15 @@ export function lessonLetterName(item: LessonLike, lang: Lang): string | undefin
   return (m?.[1] ?? item.trace ?? (item.focus.kind === 'glyph' ? item.focus.text : ''))?.toUpperCase() || undefined
 }
 
-function startsWithLetter(word: string, letter: string | undefined): boolean {
+/** A lesson's highlight as a list of forms: "ب" → ["ب"], ["أ", "إ"] stays, none → []. */
+export function highlightForms(highlight: string | readonly string[] | undefined): string[] {
+  if (!highlight) return []
+  return typeof highlight === 'string' ? [highlight] : [...highlight]
+}
+
+function startsWithLetter(word: string, letter: string | readonly string[] | undefined): boolean {
   const first = [...word.replace(MARKS, '')][0]
-  return !!letter && !!first && first.toLowerCase() === letter.toLowerCase()
+  return !!first && highlightForms(letter).some((l) => first.toLowerCase() === l.toLowerCase())
 }
 
 /**

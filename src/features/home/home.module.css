@@ -69,6 +69,62 @@
     translate: -40px 0;
   }
 }
+/* Evening: a deep blue sky, a crescent moon and a few stars; the clouds go soft and dim. */
+.night {
+  background: linear-gradient(180deg, #2b2f6b 0%, #4a4f99 65%, #7a6fc0 100%);
+}
+.moon {
+  position: absolute;
+  inset-block-start: 14px;
+  inset-inline-end: 24px;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  /* A crescent: only the inset shadow shows. */
+  box-shadow: inset 13px 7px 0 0 #ffe9a8;
+  filter: drop-shadow(0 0 10px rgba(255, 233, 168, 0.55));
+  transform: rotate(-12deg);
+}
+.star {
+  position: absolute;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #fff7d1;
+  box-shadow: 0 0 6px rgba(255, 247, 209, 0.9);
+  animation: twinkle 2.4s ease-in-out infinite alternate;
+}
+.star1 {
+  inset-block-start: 18px;
+  inset-inline-end: 34%;
+}
+.star2 {
+  inset-block-start: 52px;
+  inset-inline-end: 22%;
+  width: 5px;
+  height: 5px;
+  animation-delay: 0.8s;
+}
+.star3 {
+  inset-block-start: 30px;
+  inset-inline-end: 52%;
+  width: 5px;
+  height: 5px;
+  animation-delay: 1.5s;
+}
+@keyframes twinkle {
+  to {
+    opacity: 0.35;
+    transform: scale(0.7);
+  }
+}
+.night .cloud,
+.night .cloud::before {
+  background: #8b86c9;
+}
+.night .cloud {
+  opacity: 0.45;
+}
 .halaWave {
   flex: none;
   line-height: 0;

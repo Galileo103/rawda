@@ -172,6 +172,11 @@
   box-shadow: inset 0 -4px 0 var(--sun);
 }
 
+/* Letter stories: the lesson's letter, coloured as in the lesson (lesson.module.css .hl). */
+.letter {
+  color: var(--coral);
+}
+
 .vocab {
   display: flex;
   justify-content: center;
@@ -253,4 +258,147 @@
   .pageDots .dotNow {
     width: 18px;
   }
+}
+
+/* Library shelves: letter stories, then the other stories. */
+.shelf {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+}
+
+.shelfTitle {
+  margin: 8px 0 0;
+  font-size: 1.6rem;
+  font-weight: 800;
+  text-align: center;
+}
+
+/* ---------- Letter stories ---------- */
+/* One big door from the library to the letter board (Arabic only). */
+.letterEntry {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  width: 100%;
+  max-width: 1100px;
+  margin-inline: auto;
+  padding: 16px 22px;
+  border: 0;
+  border-radius: 32px;
+  background: linear-gradient(135deg, #7a5cd6 0%, #9b7cf0 55%, #f5a3c7 100%);
+  color: #fff;
+  font: inherit;
+  text-align: start;
+  box-shadow: 0 8px 0 #5a3fb0, var(--shadow);
+  cursor: pointer;
+  transition: transform 0.12s ease;
+}
+.letterEntry:active {
+  transform: translateY(5px);
+  box-shadow: 0 3px 0 #5a3fb0;
+}
+.letterEntryGlyphs {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 108px;
+  height: 108px;
+  border-radius: 28px;
+  background: #fff;
+  color: var(--grape);
+  font-size: 2.4rem;
+  font-weight: 800;
+  line-height: 1;
+  white-space: nowrap;
+  box-shadow: inset 0 -5px 0 rgba(122, 92, 214, 0.18);
+}
+.letterEntryText {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+.letterEntryTitle {
+  font-size: clamp(1.5rem, 4vw, 2rem);
+  font-weight: 800;
+  line-height: 1.15;
+}
+.letterEntrySub {
+  font-size: 1.1rem;
+  font-weight: 700;
+  opacity: 0.95;
+}
+.letterEntryCount {
+  display: inline-flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-top: 4px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  opacity: 0.9;
+}
+.letterEntryGo {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.25);
+}
+@media (max-width: 520px) {
+  .letterEntry {
+    gap: 12px;
+    padding: 14px;
+  }
+  .letterEntryGlyphs {
+    width: 76px;
+    height: 76px;
+    font-size: 1.7rem;
+    border-radius: 22px;
+  }
+  .letterEntryGo {
+    display: none;
+  }
+}
+
+/* The letter board. */
+.letterHello {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+/* A letter whose story isn't written yet: still in its place in the alphabet, dimmed. */
+.soonTile {
+  opacity: 0.45;
+  box-shadow: none;
+  cursor: default;
+}
+.soonTile:active {
+  transform: none;
+}
+.soon {
+  position: absolute;
+  inset-block-end: 6px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--ink-soft);
+}
+.readBadge {
+  position: absolute;
+  inset-block-start: -8px;
+  inset-inline-start: -8px;
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--sun);
+  color: #fff;
+  pointer-events: none;
 }

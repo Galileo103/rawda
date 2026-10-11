@@ -51,5 +51,10 @@
   { "id": "sticker-bubbles", "hex": "1FAE7", "name": { "ar": "فقاعات", "en": "Bubbles" }, "rule": { "type": "story", "storyId": "clean-hands" } },
   { "id": "sticker-bouquet", "hex": "1F490", "name": { "ar": "باقة ورد", "en": "Bouquet" }, "rule": { "type": "story", "storyId": "thankful-family" } },
   { "id": "sticker-strong", "hex": "1F4AA", "name": { "ar": "ذراع قوية", "en": "Strong arm" }, "rule": { "type": "story", "storyId": "hero-try-again" } },
-  { "id": "sticker-basket", "hex": "1F9FA", "name": { "ar": "سلة", "en": "Basket" }, "rule": { "type": "activity", "activityId": "give-me" } }
+  { "id": "sticker-tractor", "hex": "1F69C", "name": { "ar": "جرار", "en": "Tractor" }, "rule": { "type": "story", "storyId": "letter-ba" } },
+  { "id": "sticker-castle", "hex": "1F3F0", "name": { "ar": "قصر", "en": "Castle" }, "rule": { "type": "story", "storyId": "letter-ta" } },
+  { "id": "sticker-basket", "hex": "1F9FA", "name": { "ar": "سلة", "en": "Basket" }, "rule": { "type": "activity", "activityId": "give-me" } },
+  { "id": "sticker-snowman", "hex": "26C4", "name": { "ar": "رجل الثلج", "en": "Snowman" }, "rule": { "type": "story", "storyId": "letter-tha" } },
+  { "id": "sticker-camel", "hex": "1F42B", "name": { "ar": "جمل", "en": "Camel" }, "rule": { "type": "story", "storyId": "letter-jim" } },
+  { "id": "sticker-juice", "hex": "1F9C3", "name": { "ar": "علبة عصير", "en": "Juice box" }, "rule": { "type": "story", "storyId": "letter-alif" } }
 ]

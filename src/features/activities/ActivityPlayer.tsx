@@ -1,6 +1,7 @@
 import { type CSSProperties, useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { useNavigate, useParams, useSearchParams } from 'react-router-dom'
 import { useApp } from '../../app/AppState'
+import { lessonStoryOffer } from '../../content/letterStories'
 import { activityAvailable, activityById, activityLang, content } from '../../content/loader'
 import type { Activity, AnyItem, ChoiceItem, CountItem, MatchItem, LessonItem, MemoryItem, MovementBreak, Reward, SequenceItem, SortItem, SpeakItem, SyllablesItem, TraceItem } from '../../content/schemas'
 import { Mascot, type MascotMood } from '../../design/Mascot'
@@ -309,6 +310,8 @@ function Session({ activity, chosenItem, onAgain }: { activity: Activity; chosen
   }
 
   if (phase === 'done' && done) {
+    // A Discover letter lesson with its own letter story: offer the story right away.
+    const offer = lessonStoryOffer(activity, items, content.stories)
     return (
       <Screen>
         <CompletionView
@@ -325,6 +328,7 @@ function Session({ activity, chosenItem, onAgain }: { activity: Activity; chosen
           onAgain={onAgain}
           onNext={() => done.nextId && navigate(`/play/${done.nextId}`)}
           onHome={() => navigate('/home')}
+          letterStory={offer && { letter: offer.letter, onOpen: () => navigate(`/stories/${offer.story.id}?lang=${lang}`) }}
         />
       </Screen>
     )

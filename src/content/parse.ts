@@ -134,6 +134,16 @@ export function parseContent(raw: Record<string, unknown>): ContentBundle {
     }
   }
 
+  // Letter stories: the linked lesson item must exist, and every one of its example words must be
+  // in some page's vocab (the story revisits the words the lesson taught).
+  for (let i = stories.length - 1; i >= 0; i--) {
+    const problem = letterLinkProblem(stories[i] as StoryDef, activities)
+    if (problem) {
+      errors.push(`content/stories/${(stories[i] as StoryDef).id}: ${problem}`)
+      stories.splice(i, 1)
+    }
+  }
+
   const areaOrder = new Map(areas.map((a) => [a.id, a.order]))
   activities.sort(
     (a, b) => (areaOrder.get(a.areaId) ?? 99) - (areaOrder.get(b.areaId) ?? 99) || a.level - b.level || a.order - b.order,
@@ -166,6 +176,21 @@ export function parseContent(raw: Record<string, unknown>): ContentBundle {
   const breaks = (safe(BreaksZ, get('breaks.json') ?? [], 'breaks.json') ?? []).filter((b) => lexOk(b.lex, 'breaks.json'))
 
   return { areas, lexicon, activities, stories, rewards, studio, breaks, quran: quran && errors.every((e) => !e.startsWith('quran/')) ? quran : undefined, errors }
+}
+
+/** Why a letter story's `letter` link is broken, or undefined when it is fine (or absent). */
+export function letterLinkProblem(story: StoryDef, activities: readonly Activity[]): string | undefined {
+  if (!story.letter) return undefined
+  const { activityId, itemId } = story.letter
+  const activity = activities.find((a) => a.id === activityId)
+  if (!activity) return `letter refers to unknown activity "${activityId}"`
+  if (activity.template !== 'lesson') return `letter activity "${activityId}" is not a lesson`
+  const item = activity.items.find((i) => i.id === itemId)
+  if (!item) return `letter refers to unknown item "${itemId}" in "${activityId}"`
+  const vocab = new Set(story.pages.flatMap((p) => p.vocab))
+  const missing = item.examples.filter((e) => !vocab.has(e))
+  if (missing.length) return `letter story must have every lesson word of ${activityId}/${itemId} in some page's vocab; missing: ${missing.join(', ')}`
+  return undefined
 }
 
 function checkActivity(

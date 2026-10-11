@@ -48,7 +48,7 @@ Templates:
 - **speak** ("Say it!"): `word` (lexicon id). Write `say` so it contains the word (e.g. "هَيَّا نَقُولُ: تُفَّاحَة"). The microphone is parent opt-in; without it the child says the word aloud and taps "I said it!". It is never marked wrong.
 - **give** ("Give me N", cardinality): `object` (lexicon id), `n` 1–10 and `have` (the pile, at least `n + 2`, at most 10). The child taps or drags objects onto the plate (each gets its count number; tap one there to take it back) and taps "Done". `say` is the neutral line ("هَيَّا نَضَعُ ثَلَاثَ تُفَّاحَاتٍ فِي الطَّبَقِ."); optional `ask` speaks to the child, e.g. `{ "ar": { "m": "أَعْطِنِي ثَلَاثَ تُفَّاحَاتٍ.", "f": "أَعْطِينِي ثَلَاثَ تُفَّاحَاتٍ." } }`. Write the number–noun agreement in the content (3–10: plural genitive with gender polarity: ثَلَاثَ تُفَّاحَاتٍ but ثَلَاثَةَ بَالُونَاتٍ).
 - **syllables** ("Clap the parts!", phonological awareness): `word` (lexicon id) and `parts`, its 1–4 spoken syllables (`["بَطْ", "طَة"]`, `["rab", "bit"]`; a shadda splits across two parts: تُفْ | فَا | حَة). Joined, the parts must spell the word (tashkeel and spaces ignored; `validate:content` checks it). Optional `choices`: the numerals to offer (default 1–4, must include the number of parts). Each drum tap lights the next part; then the child picks how many claps. Write `say` with the parts, e.g. "هَيَّا نُصَفِّقُ لِكُلِّ جُزْءٍ: بَطْ… طَة!".
-- **lesson** (Discover: teaches before testing): `focus` (Visual), `meet` (name and sound to speak), `teaches` (skill ids this introduces, e.g. `["ar.letter.ba", "ar.sound.ba"]`). Optional stages, shown in this order when present: `examples` (lexicon ids, with `highlight` = the letter to colour), `count: { "object": "apple", "n": 3 }`, `trace` (glyph), `calm: { "say" }` (a "what to do" step for big feelings: the turtle breathes slowly while the line is spoken; still when motion is reduced), and `check: { "say", "answer", "choices" }` (2–3 options). Use `sessionLength: 1`: one new concept per session.
+- **lesson** (Discover: teaches before testing): `focus` (Visual), `meet` (name and sound to speak), `teaches` (skill ids this introduces, e.g. `["ar.letter.ba", "ar.sound.ba"]`). Optional stages, shown in this order when present: `examples` (up to 5 lexicon ids, with `highlight` = the letter to colour, or a list of its forms such as `["أ", "إ"]`; letter games also use every lexicon word starting with that letter), `count: { "object": "apple", "n": 3 }`, `trace` (glyph), `calm: { "say" }` (a "what to do" step for big feelings: the turtle breathes slowly while the line is spoken; still when motion is reduced), and `check: { "say", "answer", "choices" }` (2–3 options). Use `sessionLength: 1`: one new concept per session.
 
 More visuals: `{ "kind": "phrase", "text": { "ar": "بِسْمِ اللهِ", "en": "Bismillah" } }` (short phrases) and `{ "kind": "row", "items": [Visual, …], "question": true }` (patterns with a "?" at the end, or sums when `question` is false).
 
@@ -71,6 +71,15 @@ Set `"personalized": true`. Then:
 - Run `npm run audio:render` afterwards: every piece of both forms gets its own clip.
 
 The same `{ m, f, n? }` form works in `src/i18n/*.ts` for app lines that speak to the child. `n` is used while the parent hasn't said boy or girl.
+
+### Letter stories
+
+A story can belong to one Discover letter lesson: add `"letter": { "activityId": "ar-discover", "itemId": "ba" }` (use the id `letter-<item>`, e.g. `letter-ba`). Then:
+
+- **Every lesson word is in the story.** Each `examples` id of that lesson item must appear in some page's `vocab`; `validate:content` names any missing words. The activity must be a `lesson` and the item must exist; only one story per lesson item.
+- **The letter is coloured.** Inside `{highlighted}` words, the lesson's `highlight` letter (or any of its forms, e.g. `["أ", "إ"]`) gets the same colour as in the lesson. This happens only in the lesson's language, so wrap the words that contain the letter.
+- **Where it shows up.** When the child finishes that lesson, the completion screen offers a big "قِصَّةُ ب" / "Story of ب" button. On the Discover board, the letter's tile carries a small book badge (the tile still opens the lesson). In the library, letter stories sit on their own shelf, "قِصَصُ الْحُرُوفِ", in alphabet order with letters the child has already met first. Nothing is ever locked.
+- Letter stories are usually `personalized` and follow all the story rules above (`prompt` on every page, `{ m, f }` forms, full tashkeel).
 
 ## Religious content
 

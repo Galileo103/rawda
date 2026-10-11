@@ -89,6 +89,16 @@ describe('Discover lessons', () => {
     expect(highlightParts('cat', undefined)).toEqual(['cat', '', ''])
   })
 
+  it('colour alif in both its forms: أ in أَرْنَب and إ in إِبْرِيق', () => {
+    const alif = (content.activities.find((a) => a.id === 'ar-discover')!.items as LessonItem[]).find((i) => i.id === 'alif')!
+    expect(alif.highlight).toEqual(['أ', 'إ'])
+    expect(alif.examples).toContain('teapot')
+    expect(highlightParts('أَرْنَب', alif.highlight)).toEqual(['', 'أَ', 'رْنَب'])
+    expect(highlightParts('إِبْرِيق', alif.highlight)).toEqual(['', 'إِ', 'بْرِيق'])
+    // the hamza-below word is still "at the start", not "inside"
+    expect(lessonExampleLine(alif, 'إِبْرِيق', 'ar', dict('ar'))).toBe(lessonExampleLine(alif, 'أَرْنَب', 'ar', dict('ar')).replace('أَرْنَب', 'إِبْرِيق'))
+  })
+
   // The lesson reads the age band from the profile row; start each test from a clean database.
   beforeEach(async () => {
     await db.delete()

@@ -1,7 +1,8 @@
 import { useLiveQuery } from 'dexie-react-hooks'
 import { Navigate, useNavigate, useParams } from 'react-router-dom'
 import { useApp } from '../../app/AppState'
-import { activityAvailable, activityById, pick } from '../../content/loader'
+import { letterStoryFor } from '../../content/letterStories'
+import { activityAvailable, activityById, content, pick } from '../../content/loader'
 import type { LessonItem } from '../../content/schemas'
 import { Icon } from '../../design/Icon'
 import { Mascot } from '../../design/Mascot'
@@ -90,6 +91,12 @@ export function DiscoverBoard() {
               {learned && (
                 <span className={s.badge}>
                   <Icon name="check" size={18} />
+                </span>
+              )}
+              {/* This letter has its own story (opened from the lesson's end; the tile still opens the lesson). */}
+              {letterStoryFor(content.stories, activity.id, item.id) && (
+                <span className={s.storyBadge} data-testid={`story-badge-${item.id}`}>
+                  <Icon name="book" size={16} />
                 </span>
               )}
             </button>

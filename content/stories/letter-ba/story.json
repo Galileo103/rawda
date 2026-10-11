@@ -1,0 +1,52 @@
+{
+  "id": "letter-ba",
+  "title": {"ar": "@name وَحَرْفُ الْبَاءِ", "en": "@name and the Letter ب"},
+  "theme": "letters",
+  "level": 1,
+  "personalized": true,
+  "letter": {"activityId": "ar-discover", "itemId": "ba"},
+  "cover": {"kind": "lex", "id": "duck"},
+  "pages": [
+    {
+      "scene": {"bg": "home", "actors": [{"lex": "@hero", "x": 32, "y": 62, "size": "lg", "motion": "bounce"}, {"lex": "penguin", "x": 66, "y": 66, "size": "md", "motion": "sway", "flip": true}]},
+      "text": {"ar": {"m": "@name يُرِيدُ أَنْ يَرَى حَيَوَانَاتِ مَزْرَعَةِ الْجَدِّ مَعَ لُعْبَتِهِ {الْبِطْرِيقِ}.", "f": "@name تُرِيدُ أَنْ تَرَى حَيَوَانَاتِ مَزْرَعَةِ الْجَدِّ مَعَ لُعْبَتِهَا {الْبِطْرِيقِ}."}, "en": {"m": "@name wants to see Grandpa's farm animals with his toy {penguin}.", "f": "@name wants to see Grandpa's farm animals with her toy {penguin}."}},
+      "vocab": ["penguin"],
+      "prompt": {"ar": {"m": "مَا اللُّعْبَةُ الَّتِي تَأْخُذُهَا مَعَكَ دَائِمًا؟", "f": "مَا اللُّعْبَةُ الَّتِي تَأْخُذِينَهَا مَعَكِ دَائِمًا؟"}, "en": "Which toy do you always take with you?"}
+    },
+    {
+      "scene": {"bg": "meadow", "actors": [{"lex": "@hero", "x": 28, "y": 62, "size": "lg"}, {"lex": "cow", "x": 70, "y": 60, "size": "lg", "motion": "sway", "flip": true}, {"lex": "sun", "x": 86, "y": 14, "size": "sm", "motion": "sway"}]},
+      "text": {"ar": "{الْبَقَرَةُ} تَقُولُ: مُووو! صَبَاحُ الْخَيْرِ يَا @name!", "en": "The {cow} says: Moo! Good morning, @name!"},
+      "vocab": ["cow"],
+      "prompt": {"ar": "مَاذَا نَأْخُذُ مِنَ الْبَقَرَةِ؟", "en": "What do we get from a cow?"}
+    },
+    {
+      "scene": {"bg": "sea", "actors": [{"lex": "@hero", "x": 28, "y": 60, "size": "lg"}, {"lex": "duck", "x": 70, "y": 66, "size": "lg", "motion": "sway", "flip": true}]},
+      "text": {"ar": {"m": "@name يَرَى {الْبَطَّةَ} جَائِعَةً عِنْدَ الْبِرْكَةِ، فَيُطْعِمُهَا حَبًّا.", "f": "@name تَرَى {الْبَطَّةَ} جَائِعَةً عِنْدَ الْبِرْكَةِ، فَتُطْعِمُهَا حَبًّا."}, "en": "@name sees a hungry {duck} by the pond and kindly shares some grain."},
+      "vocab": ["duck"],
+      "prompt": {"ar": {"m": "مَاذَا تَظُنُّ أَنَّ الْبَطَّةَ تُحِبُّ أَنْ تَأْكُلَ؟", "f": "مَاذَا تَظُنِّينَ أَنَّ الْبَطَّةَ تُحِبُّ أَنْ تَأْكُلَ؟"}, "en": "What do you think the duck likes to eat?"}
+    },
+    {
+      "scene": {"bg": "garden", "actors": [{"lex": "@hero", "x": 30, "y": 62, "size": "lg", "motion": "bounce"}, {"lex": "watermelon", "x": 66, "y": 66, "size": "md"}, {"lex": "sun", "x": 86, "y": 14, "size": "sm", "motion": "sway"}]},
+      "text": {"ar": {"m": "يَقْطَعُ الْجَدُّ {بِطِّيخَةً} حُلْوَةً بَارِدَةً، فَيَفْرَحُ @name.", "f": "يَقْطَعُ الْجَدُّ {بِطِّيخَةً} حُلْوَةً بَارِدَةً، فَتَفْرَحُ @name."}, "en": "Grandpa cuts a sweet, cold {watermelon}, and @name is happy."},
+      "vocab": ["watermelon"],
+      "prompt": {"ar": "مَا لَوْنُ الْبِطِّيخَةِ مِنَ الدَّاخِلِ؟ وَمَا طَعْمُهَا؟", "en": "What color is a watermelon inside? How does it taste?"}
+    },
+    {
+      "scene": {"bg": "night", "actors": [{"lex": "@hero", "x": 28, "y": 64, "size": "lg"}, {"lex": "penguin", "x": 44, "y": 72, "size": "sm"}, {"lex": "owl", "x": 72, "y": 40, "size": "lg", "motion": "sway", "flip": true}, {"lex": "crescent", "x": 86, "y": 12, "size": "sm"}]},
+      "text": {"ar": {"m": "{الْبُومَةُ} تَقُولُ: رَأَيْتَ الْمَزْرَعَةَ كُلَّهَا، تُصْبِحُ عَلَى خَيْرٍ يَا @name!", "f": "{الْبُومَةُ} تَقُولُ: رَأَيْتِ الْمَزْرَعَةَ كُلَّهَا، تُصْبِحِينَ عَلَى خَيْرٍ يَا @name!"}, "en": "The {owl} says: You saw the whole farm. Good night, @name!"},
+      "vocab": ["owl"],
+      "prompt": {"ar": {"m": "لِمَاذَا تَسْهَرُ الْبُومَةُ فِي اللَّيْلِ فِي رَأْيِكَ؟", "f": "لِمَاذَا تَسْهَرُ الْبُومَةُ فِي اللَّيْلِ فِي رَأْيِكِ؟"}, "en": "Why do you think the owl stays awake at night?"}
+    },
+    {
+      "scene": {"bg": "meadow", "actors": [{"lex": "@hero", "x": 18, "y": 62, "size": "lg", "motion": "bounce"}, {"lex": "penguin", "x": 40, "y": 70, "size": "sm"}, {"lex": "cow", "x": 54, "y": 70, "size": "sm"}, {"lex": "duck", "x": 68, "y": 70, "size": "sm"}, {"lex": "watermelon", "x": 82, "y": 70, "size": "sm"}, {"lex": "owl", "x": 74, "y": 36, "size": "sm"}]},
+      "text": {"ar": {"m": "@name وَجَدَ حَرْفَ الْبَاءِ فِي: {بِطْرِيقٍ}، {بَقَرَةٍ}، {بَطَّةٍ}، {بِطِّيخَةٍ}، {بُومَةٍ}!", "f": "@name وَجَدَتْ حَرْفَ الْبَاءِ فِي: {بِطْرِيقٍ}، {بَقَرَةٍ}، {بَطَّةٍ}، {بِطِّيخَةٍ}، {بُومَةٍ}!"}, "en": "@name found the letter ب in: {penguin}, {cow}, {duck}, {watermelon} and {owl}!"},
+      "vocab": ["penguin", "cow", "duck", "watermelon", "owl"],
+      "prompt": {"ar": {"m": "هَلْ تَعْرِفُ كَلِمَةً أُخْرَى تَبْدَأُ بِحَرْفِ الْبَاءِ؟", "f": "هَلْ تَعْرِفِينَ كَلِمَةً أُخْرَى تَبْدَأُ بِحَرْفِ الْبَاءِ؟"}, "en": "Do you know another word that starts with ب?"}
+    }
+  ],
+  "questions": [
+    {"id": "start", "skill": "story.letterba.start", "difficulty": 1, "say": {"ar": "أَيُّ صُورَةٍ تَبْدَأُ بِحَرْفِ الْبَاءِ؟", "en": "Which picture starts with the letter ب?"}, "answer": {"kind": "lex", "id": "watermelon"}, "choices": [{"kind": "lex", "id": "apple"}, {"kind": "lex", "id": "watermelon"}, {"kind": "lex", "id": "carrot"}]},
+    {"id": "recall", "skill": "story.letterba.recall", "difficulty": 1, "say": {"ar": "مَنْ أَكَلَ الْحَبَّ عِنْدَ الْبِرْكَةِ؟", "en": "Who ate grain by the pond?"}, "answer": {"kind": "lex", "id": "duck"}, "choices": [{"kind": "lex", "id": "cow"}, {"kind": "lex", "id": "owl"}, {"kind": "lex", "id": "duck"}]},
+    {"id": "feel", "skill": "story.letterba.feel", "difficulty": 1, "say": {"ar": {"m": "قَطَعَ الْجَدُّ الْبِطِّيخَةَ. كَيْفَ شَعَرَ @name؟", "f": "قَطَعَ الْجَدُّ الْبِطِّيخَةَ. كَيْفَ شَعَرَتْ @name؟"}, "en": "Grandpa cut the watermelon. How did @name feel?"}, "answer": {"kind": "lex", "id": "happy"}, "choices": [{"kind": "lex", "id": "happy"}, {"kind": "lex", "id": "sad"}, {"kind": "lex", "id": "scared"}]}
+  ]
+}

@@ -55,7 +55,7 @@ describe('Discover lessons (educational correctness)', () => {
   it('every example word really starts with the letter being taught', () => {
     for (const a of content.activities.filter((x) => x.template === 'lesson' && x.areaId === 'letters')) {
       const lang = a.langs === 'en' ? 'en' : 'ar'
-      for (const item of a.items as { id: string; highlight?: string; examples: string[] }[]) {
+      for (const item of a.items as { id: string; highlight?: string | string[]; examples: string[] }[]) {
         for (const id of item.examples) {
           const word = content.lexicon.get(id)![lang]
           if (item.id === 'x') {
@@ -65,7 +65,9 @@ describe('Discover lessons (educational correctness)', () => {
           const first = firstLetter(word)
           // أ / ا are the same letter (alif) for a child
           const norm = (c: string) => c.toLowerCase().replace(/[أإآ]/, 'ا')
-          expect(norm(first), `${a.id}/${item.id}: ${word}`).toBe(norm(item.highlight ?? ''))
+          // alif lists its forms (["أ", "إ"]): any of them is the letter
+          const forms = [item.highlight ?? ''].flat().map(norm)
+          expect(forms, `${a.id}/${item.id}: ${word}`).toContain(norm(first))
         }
       }
     }

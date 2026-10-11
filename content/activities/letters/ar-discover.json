@@ -36,11 +36,13 @@
       "meet": {
         "ar": "هَذَا حَرْفُ الْأَلِفِ. حَرْفُ الْأَلِفِ يَقُولُ: أَ، أُ، إِ."
       },
-      "highlight": "أ",
+      "highlight": ["أ", "إ"],
       "examples": [
         "rabbit",
         "lion",
-        "octopus"
+        "octopus",
+        "pineapple",
+        "teapot"
       ],
       "trace": "أ",
       "check": {
@@ -90,7 +92,9 @@
       "examples": [
         "duck",
         "cow",
-        "watermelon"
+        "watermelon",
+        "penguin",
+        "owl"
       ],
       "trace": "ب",
       "check": {
@@ -140,7 +144,8 @@
       "examples": [
         "apple",
         "crocodile",
-        "crown"
+        "crown",
+        "tv"
       ],
       "trace": "ت",
       "check": {
@@ -189,7 +194,8 @@
       "examples": [
         "fox",
         "garlic",
-        "ox"
+        "ox",
+        "snow"
       ],
       "check": {
         "say": {
@@ -238,7 +244,8 @@
       "examples": [
         "camel",
         "carrot",
-        "bell"
+        "bell",
+        "cheese"
       ],
       "check": {
         "say": {
@@ -287,7 +294,9 @@
       "examples": [
         "horse",
         "donkey",
-        "whale"
+        "whale",
+        "milk-jug",
+        "shoe"
       ],
       "check": {
         "say": {
@@ -336,7 +345,9 @@
       "examples": [
         "sheep",
         "cucumber",
-        "peach"
+        "peach",
+        "ring",
+        "bread"
       ],
       "check": {
         "say": {
@@ -386,7 +397,9 @@
       "examples": [
         "bear",
         "chicken",
-        "bicycle"
+        "bicycle",
+        "bucket",
+        "worm"
       ],
       "trace": "د",
       "check": {
@@ -534,7 +547,9 @@
       "examples": [
         "giraffe",
         "flower",
-        "olive"
+        "olive",
+        "butter",
+        "bottle"
       ],
       "trace": "ز",
       "check": {
@@ -584,7 +599,9 @@
       "examples": [
         "fish",
         "turtle",
-        "car"
+        "car",
+        "clock",
+        "ship"
       ],
       "trace": "س",
       "check": {
@@ -634,7 +651,9 @@
       "examples": [
         "sun",
         "tree",
-        "chocolate"
+        "chocolate",
+        "candle",
+        "window"
       ],
       "trace": "ش",
       "check": {
@@ -784,7 +803,9 @@
       "examples": [
         "airplane",
         "tomato",
-        "peacock"
+        "peacock",
+        "drum",
+        "doctor"
       ],
       "trace": "ط",
       "check": {
@@ -932,7 +953,8 @@
       "examples": [
         "gazelle",
         "crow",
-        "cloud"
+        "cloud",
+        "washer"
       ],
       "trace": "غ",
       "check": {
@@ -982,7 +1004,9 @@
       "examples": [
         "elephant",
         "strawberry",
-        "butterfly"
+        "butterfly",
+        "dress",
+        "pepper"
       ],
       "trace": "ف",
       "check": {
@@ -1032,7 +1056,9 @@
       "examples": [
         "cat",
         "monkey",
-        "pencil"
+        "pencil",
+        "boat",
+        "tshirt"
       ],
       "trace": "ق",
       "check": {
@@ -1082,7 +1108,9 @@
       "examples": [
         "dog",
         "ball",
-        "book"
+        "book",
+        "cup",
+        "pear"
       ],
       "trace": "ك",
       "check": {
@@ -1132,7 +1160,9 @@
       "examples": [
         "lemon",
         "milk",
-        "meat"
+        "meat",
+        "tongue",
+        "painting"
       ],
       "trace": "ل",
       "check": {
@@ -1182,7 +1212,9 @@
       "examples": [
         "banana",
         "goat",
-        "key"
+        "key",
+        "sailboat",
+        "ruler"
       ],
       "trace": "م",
       "check": {
@@ -1232,7 +1264,9 @@
       "examples": [
         "bee",
         "tiger",
-        "star"
+        "star",
+        "glasses",
+        "palmtree"
       ],
       "trace": "ن",
       "check": {
@@ -1282,7 +1316,8 @@
       "examples": [
         "crescent",
         "gift",
-        "pyramid"
+        "pyramid",
+        "helicopter"
       ],
       "trace": "ه",
       "check": {

@@ -13,15 +13,21 @@ export function useLearnedPools(): LearnedPools | undefined {
   return useLiveQuery(async () => {
     const lessons = lessonActivities({ disabledAreas: settings.disabledAreas, langs })
     const taken = await takenLessonItems(lessons.map((l) => l.id))
-    // Picture words shown in the lessons the child took (Silly Hala names them).
+    // Each letter's word pool: its lesson words plus every lexicon word starting with it.
+    const byLetter = letterLessonWords(content.activities, lang, content.lexicon)
+    // Picture words shown in the lessons the child took (Silly Hala names them); a discovered
+    // letter brings its whole pool, so the parent's extra words (أَنَانَاس، بُومَة…) appear too.
     const words = new Set<string>()
     for (const a of lessons) {
       const done = taken.get(a.id)
       if (!done) continue
-      for (const item of a.items) if (done.has(item.id) && 'examples' in item) for (const w of item.examples as string[]) words.add(w)
+      const letterLesson = a.id === `${lang}-discover`
+      for (const item of a.items) {
+        if (!done.has(item.id) || !('examples' in item)) continue
+        for (const w of (letterLesson ? byLetter.get(item.id) : undefined) ?? (item.examples as string[])) words.add(w)
+      }
     }
-    // Each letter lesson's words that really start with that letter (Hungry Monster's menu).
-    const byLetter = letterLessonWords(content.activities, lang)
+    // Each letter's words that really start with that letter (Hungry Monster's menu).
     const letterWords = new Map(lettersFor(lang).map((l) => [l.id, monsterWords(l, byLetter.get(l.id) ?? [], content.lexicon, lang).map((e) => e.id)]))
     return learnedPools(introducedSkills(taken), lang, { words: [...words].filter((w) => sillyWordOk(content.lexicon.get(w))), letterWords })
   }, [settings.disabledAreas.join(), langs.join(), lang])

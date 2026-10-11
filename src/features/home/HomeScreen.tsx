@@ -81,8 +81,18 @@ export function HomeScreen() {
       <header className={s.header}>
         {/* Welcome banner: a little sky with Hala greeting the child. */}
         <div className={s.greeting}>
-          <span className={s.sky} aria-hidden="true">
-            <i className={s.sun} />
+          {/* Morning: a sun and white clouds. Evening: a night sky with a crescent moon and twinkling stars. */}
+          <span className={[s.sky, morning ? '' : s.night].join(' ')} aria-hidden="true" data-testid={morning ? 'sky-day' : 'sky-night'}>
+            {morning ? (
+              <i className={s.sun} />
+            ) : (
+              <>
+                <i className={s.moon} />
+                <i className={[s.star, s.star1].join(' ')} />
+                <i className={[s.star, s.star2].join(' ')} />
+                <i className={[s.star, s.star3].join(' ')} />
+              </>
+            )}
             <i className={s.cloud} />
             <i className={[s.cloud, s.cloud2].join(' ')} />
           </span>

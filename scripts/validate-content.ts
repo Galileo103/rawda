@@ -19,9 +19,11 @@ for (const a of bundle.activities) {
       const word = bundle.lexicon.get(id)
       if (!word) continue // unknown ids are already reported by the parser
       if (item.highlight) {
+        // A letter may list several forms (alif: ["أ", "إ"]); each word needs one of them.
+        const forms = typeof item.highlight === 'string' ? [item.highlight] : item.highlight
         for (const lang of langs) {
-          if (!plain(word[lang]).includes(plain(item.highlight)))
-            errors.push(`${where}: example "${id}" (${word[lang]}) does not contain the lesson letter "${item.highlight}"`)
+          if (!forms.some((f) => plain(word[lang]).includes(plain(f))))
+            errors.push(`${where}: example "${id}" (${word[lang]}) does not contain the lesson letter "${forms.join(' / ')}"`)
         }
       }
       const other = seen.get(word.image)
@@ -53,6 +55,16 @@ for (const a of bundle.activities) {
         errors.push(`${a.id}/${item.id}: parts "${item.parts.join(' | ')}" do not spell "${word[lang]}" (${lang})`)
     }
   }
+}
+
+/** Letter stories: one story per lesson item (the lesson's end offers exactly one). Links are checked by the parser. */
+const letterLinks = new Map<string, string>()
+for (const st of bundle.stories) {
+  if (!st.letter) continue
+  const key = `${st.letter.activityId}/${st.letter.itemId}`
+  const other = letterLinks.get(key)
+  if (other) errors.push(`stories ${other} and ${st.id} are both linked to the letter ${key}`)
+  else letterLinks.set(key, st.id)
 }
 
 const items = bundle.activities.reduce((n, a) => n + a.items.length, 0)

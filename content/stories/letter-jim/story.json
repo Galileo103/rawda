@@ -1,0 +1,46 @@
+{
+  "id": "letter-jim",
+  "title": {"ar": "@name وَحَرْفُ الْجِيمِ", "en": "@name and the Letter Jeem"},
+  "theme": "letters",
+  "level": 1,
+  "personalized": true,
+  "letter": {"activityId": "ar-discover", "itemId": "jim"},
+  "cover": {"kind": "lex", "id": "camel"},
+  "pages": [
+    {
+      "scene": {"bg": "meadow", "actors": [{"lex": "@hero", "x": 26, "y": 62, "size": "lg", "motion": "bounce"}, {"lex": "camel", "x": 68, "y": 64, "size": "lg", "flip": true}, {"lex": "palmtree", "x": 90, "y": 52, "size": "md", "motion": "sway"}, {"lex": "sun", "x": 84, "y": 14, "size": "sm", "motion": "sway"}]},
+      "text": {"ar": {"m": "@name يَزُورُ الْمَزْرَعَةَ وَيَرَى {جَمَلًا} كَبِيرًا.", "f": "@name تَزُورُ الْمَزْرَعَةَ وَتَرَى {جَمَلًا} كَبِيرًا."}, "en": "@name visits the farm and sees a big {camel}."},
+      "vocab": ["camel"],
+      "prompt": {"ar": {"m": "هَلْ رَأَيْتَ جَمَلًا مِنْ قَبْلُ؟ أَيْنَ رَأَيْتَهُ؟", "f": "هَلْ رَأَيْتِ جَمَلًا مِنْ قَبْلُ؟ أَيْنَ رَأَيْتِهِ؟"}, "en": "Have you ever seen a camel? Where did you see it?"}
+    },
+    {
+      "scene": {"bg": "meadow", "actors": [{"lex": "@hero", "x": 24, "y": 62, "size": "lg"}, {"lex": "camel", "x": 66, "y": 64, "size": "lg", "flip": true}, {"lex": "bell", "x": 62, "y": 34, "size": "md", "motion": "sway"}, {"lex": "sun", "x": 86, "y": 14, "size": "sm"}]},
+      "text": {"ar": "فِي رَقَبَةِ الْجَمَلِ {جَرَسٌ} يَرِنُّ: رِنْ، رِنْ!", "en": "The camel has a {bell} on its neck: ring, ring!"},
+      "vocab": ["bell"],
+      "prompt": {"ar": "مَا الْأَشْيَاءُ الَّتِي تَرِنُّ فِي بَيْتِنَا؟", "en": "What things ring in our home?"}
+    },
+    {
+      "scene": {"bg": "meadow", "actors": [{"lex": "@hero", "x": 28, "y": 62, "size": "lg"}, {"lex": "carrot", "x": 48, "y": 60, "size": "md", "motion": "bounce"}, {"lex": "camel", "x": 72, "y": 64, "size": "lg", "flip": true}]},
+      "text": {"ar": {"m": "@name يُعْطِي الْجَمَلَ الْجَائِعَ {جَزَرَةً}.", "f": "@name تُعْطِي الْجَمَلَ الْجَائِعَ {جَزَرَةً}."}, "en": "@name gives the hungry camel a {carrot}."},
+      "vocab": ["carrot"],
+      "prompt": {"ar": {"m": "مَاذَا تُحِبُّ أَنْ تَأْكُلَ عِنْدَمَا تَجُوعُ؟", "f": "مَاذَا تُحِبِّينَ أَنْ تَأْكُلِي عِنْدَمَا تَجُوعِينَ؟"}, "en": "What do you like to eat when you are hungry?"}
+    },
+    {
+      "scene": {"bg": "meadow", "actors": [{"lex": "@hero", "x": 30, "y": 62, "size": "lg"}, {"lex": "cheese", "x": 52, "y": 68, "size": "md", "motion": "bounce"}, {"lex": "bread", "x": 66, "y": 70, "size": "sm"}, {"lex": "palmtree", "x": 14, "y": 50, "size": "md", "motion": "sway"}, {"lex": "camel", "x": 84, "y": 64, "size": "md", "flip": true}]},
+      "text": {"ar": {"m": "@name يَأْكُلُ خُبْزًا وَ{جُبْنًا} تَحْتَ النَّخْلَةِ.", "f": "@name تَأْكُلُ خُبْزًا وَ{جُبْنًا} تَحْتَ النَّخْلَةِ."}, "en": "@name eats bread and {cheese} under the palm tree."},
+      "vocab": ["cheese"],
+      "prompt": {"ar": {"m": "مَعَ مَنْ تُحِبُّ أَنْ تَأْكُلَ فِي الرِّحْلَةِ؟", "f": "مَعَ مَنْ تُحِبِّينَ أَنْ تَأْكُلِي فِي الرِّحْلَةِ؟"}, "en": "Who would you like to eat with on a trip?"}
+    },
+    {
+      "scene": {"bg": "meadow", "actors": [{"lex": "@hero", "x": 28, "y": 62, "size": "lg", "motion": "bounce"}, {"lex": "happy", "x": 28, "y": 22, "size": "sm"}, {"lex": "camel", "x": 58, "y": 70, "size": "sm"}, {"lex": "bell", "x": 70, "y": 70, "size": "sm"}, {"lex": "carrot", "x": 80, "y": 70, "size": "sm"}, {"lex": "cheese", "x": 90, "y": 70, "size": "sm"}]},
+      "text": {"ar": {"m": "@name سَعِيدٌ لِأَنَّهُ وَجَدَ الْجِيمَ فِي: {جَمَلٍ}، {جَرَسٍ}، {جَزَرَةٍ}، {جُبْنٍ}.", "f": "@name سَعِيدَةٌ لِأَنَّهَا وَجَدَتِ الْجِيمَ فِي: {جَمَلٍ}، {جَرَسٍ}، {جَزَرَةٍ}، {جُبْنٍ}."}, "en": {"m": "@name is happy because he found ج in: {camel}, {bell}, {carrot}, {cheese}.", "f": "@name is happy because she found ج in: {camel}, {bell}, {carrot}, {cheese}."}},
+      "vocab": ["camel", "bell", "carrot", "cheese", "happy"],
+      "prompt": {"ar": {"m": "هَلْ تَعْرِفُ كَلِمَةً أُخْرَى فِيهَا حَرْفُ الْجِيمِ؟", "f": "هَلْ تَعْرِفِينَ كَلِمَةً أُخْرَى فِيهَا حَرْفُ الْجِيمِ؟"}, "en": "Do you know another word with the letter ج?"}
+    }
+  ],
+  "questions": [
+    {"id": "start", "skill": "story.letterjim.start", "difficulty": 1, "say": {"ar": "أَيُّ صُورَةٍ تَبْدَأُ بِحَرْفِ الْجِيمِ؟", "en": "Which picture starts with the letter ج?"}, "answer": {"kind": "lex", "id": "camel"}, "choices": [{"kind": "lex", "id": "rabbit"}, {"kind": "lex", "id": "camel"}, {"kind": "lex", "id": "duck"}]},
+    {"id": "gift", "skill": "story.letterjim.gift", "difficulty": 1, "say": {"ar": {"m": "الْجَمَلُ جَائِعٌ. مَاذَا أَعْطَاهُ @name؟", "f": "الْجَمَلُ جَائِعٌ. مَاذَا أَعْطَتْهُ @name؟"}, "en": "The camel was hungry. What did @name give him?"}, "answer": {"kind": "lex", "id": "carrot"}, "choices": [{"kind": "lex", "id": "carrot"}, {"kind": "lex", "id": "apple"}, {"kind": "lex", "id": "banana"}]},
+    {"id": "feeling", "skill": "story.letterjim.feeling", "difficulty": 1, "say": {"ar": {"m": "فِي النِّهَايَةِ، كَيْفَ شَعَرَ @name؟", "f": "فِي النِّهَايَةِ، كَيْفَ شَعَرَتْ @name؟"}, "en": "How did @name feel at the end?"}, "answer": {"kind": "lex", "id": "happy"}, "choices": [{"kind": "lex", "id": "happy"}, {"kind": "lex", "id": "sad"}]}
+  ]
+}

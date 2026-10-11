@@ -1,0 +1,46 @@
+{
+  "id": "letter-ta",
+  "title": {"ar": "@name وَحَرْفُ التَّاءِ", "en": "@name and the Letter ت"},
+  "theme": "letters",
+  "level": 1,
+  "personalized": true,
+  "letter": {"activityId": "ar-discover", "itemId": "ta"},
+  "cover": {"kind": "lex", "id": "crown"},
+  "pages": [
+    {
+      "scene": {"bg": "home", "actors": [{"lex": "@hero", "x": 32, "y": 62, "size": "lg", "motion": "bounce"}, {"lex": "crown", "x": 70, "y": 50, "size": "lg", "motion": "sway"}]},
+      "text": {"ar": {"m": "@name يَلْبَسُ {تَاجًا}، وَيُرِيدُ طَعَامًا لِلْمَلِكِ.", "f": "@name تَلْبَسُ {تَاجًا}، وَتُرِيدُ طَعَامًا لِلْمَلِكَةِ."}, "en": {"m": "@name puts on a {crown} and wants a snack for the king.", "f": "@name puts on a {crown} and wants a snack for the queen."}},
+      "vocab": ["crown"],
+      "prompt": {"ar": {"m": "لَوْ كُنْتَ مَلِكًا، مَاذَا تَفْعَلُ؟", "f": "لَوْ كُنْتِ مَلِكَةً، مَاذَا تَفْعَلِينَ؟"}, "en": {"m": "If you were a king, what would you do?", "f": "If you were a queen, what would you do?"}}
+    },
+    {
+      "scene": {"bg": "home", "actors": [{"lex": "@hero", "x": 26, "y": 64, "size": "lg"}, {"lex": "tv", "x": 70, "y": 52, "size": "lg"}]},
+      "text": {"ar": {"m": "@name يَجْلِسُ أَمَامَ {التِّلِفِزْيُونِ} لِيُشَاهِدَ بَرْنَامَجًا عَنِ النَّهْرِ.", "f": "@name تَجْلِسُ أَمَامَ {التِّلِفِزْيُونِ} لِتُشَاهِدَ بَرْنَامَجًا عَنِ النَّهْرِ."}, "en": "@name sits in front of the {TV} to watch a show about the river."},
+      "vocab": ["tv"],
+      "prompt": {"ar": {"m": "مَاذَا تُحِبُّ أَنْ تُشَاهِدَ؟", "f": "مَاذَا تُحِبِّينَ أَنْ تُشَاهِدِي؟"}, "en": "What do you like to watch?"}
+    },
+    {
+      "scene": {"bg": "home", "actors": [{"lex": "@hero", "x": 22, "y": 64, "size": "lg"}, {"lex": "tv", "x": 66, "y": 44, "size": "lg"}, {"lex": "crocodile", "x": 66, "y": 40, "size": "md", "motion": "sway", "flip": true}]},
+      "text": {"ar": {"m": "@name يَرَى فِي التِّلِفِزْيُونِ {تِمْسَاحًا} يَسْبَحُ فِي النَّهْرِ.", "f": "@name تَرَى فِي التِّلِفِزْيُونِ {تِمْسَاحًا} يَسْبَحُ فِي النَّهْرِ."}, "en": "@name sees a {crocodile} swimming in the river on the TV."},
+      "vocab": ["crocodile"],
+      "prompt": {"ar": "أَيْنَ يَعِيشُ التِّمْسَاحُ؟", "en": "Where does the crocodile live?"}
+    },
+    {
+      "scene": {"bg": "home", "actors": [{"lex": "@hero", "x": 28, "y": 62, "size": "lg"}, {"lex": "apple", "x": 50, "y": 70, "size": "md", "motion": "bounce"}, {"lex": "mother", "x": 74, "y": 60, "size": "lg", "flip": true}]},
+      "text": {"ar": {"m": "@name يَجِدُ {تُفَّاحَةً}، فَيَتَقَاسَمُهَا مَعَ أُمِّهِ، فَيَفْرَحَانِ.", "f": "@name تَجِدُ {تُفَّاحَةً}، فَتَتَقَاسَمُهَا مَعَ أُمِّهَا، فَتَفْرَحَانِ."}, "en": {"m": "@name finds an {apple} and shares it with his mom, and they are both happy.", "f": "@name finds an {apple} and shares it with her mom, and they are both happy."}},
+      "vocab": ["apple"],
+      "prompt": {"ar": {"m": "مَعَ مَنْ تُحِبُّ أَنْ تَتَقَاسَمَ طَعَامَكَ؟", "f": "مَعَ مَنْ تُحِبِّينَ أَنْ تَتَقَاسَمِي طَعَامَكِ؟"}, "en": "Who do you like to share your food with?"}
+    },
+    {
+      "scene": {"bg": "home", "actors": [{"lex": "@hero", "x": 18, "y": 62, "size": "lg", "motion": "bounce"}, {"lex": "crown", "x": 42, "y": 70, "size": "sm"}, {"lex": "tv", "x": 58, "y": 70, "size": "sm"}, {"lex": "crocodile", "x": 74, "y": 70, "size": "sm"}, {"lex": "apple", "x": 90, "y": 70, "size": "sm"}]},
+      "text": {"ar": {"m": "@name وَجَدَ حَرْفَ التَّاءِ فِي: {تَاجٍ}، وَ{تِلِفِزْيُونٍ}، وَ{تِمْسَاحٍ}، وَ{تُفَّاحَةٍ}!", "f": "@name وَجَدَتْ حَرْفَ التَّاءِ فِي: {تَاجٍ}، وَ{تِلِفِزْيُونٍ}، وَ{تِمْسَاحٍ}، وَ{تُفَّاحَةٍ}!"}, "en": "@name found the letter ت in: {crown}, {TV}, {crocodile} and {apple}!"},
+      "vocab": ["crown", "tv", "crocodile", "apple"],
+      "prompt": {"ar": {"m": "هَلْ تَعْرِفُ كَلِمَةً أُخْرَى تَبْدَأُ بِحَرْفِ التَّاءِ؟", "f": "هَلْ تَعْرِفِينَ كَلِمَةً أُخْرَى تَبْدَأُ بِحَرْفِ التَّاءِ؟"}, "en": "Do you know another word that starts with ت?"}
+    }
+  ],
+  "questions": [
+    {"id": "start", "skill": "story.letterta.start", "difficulty": 1, "say": {"ar": "أَيُّ صُورَةٍ تَبْدَأُ بِحَرْفِ التَّاءِ؟", "en": "Which picture starts with the letter ت?"}, "answer": {"kind": "lex", "id": "crown"}, "choices": [{"kind": "lex", "id": "banana"}, {"kind": "lex", "id": "crown"}, {"kind": "lex", "id": "cat"}]},
+    {"id": "tv", "skill": "story.letterta.recall", "difficulty": 1, "say": {"ar": {"m": "مَاذَا رَأَيْتَ فِي التِّلِفِزْيُونِ؟", "f": "مَاذَا رَأَيْتِ فِي التِّلِفِزْيُونِ؟"}, "en": "What did you see on the TV?"}, "answer": {"kind": "lex", "id": "crocodile"}, "choices": [{"kind": "lex", "id": "crocodile"}, {"kind": "lex", "id": "lion"}, {"kind": "lex", "id": "elephant"}]},
+    {"id": "feeling", "skill": "story.letterta.feeling", "difficulty": 1, "say": {"ar": "كَيْفَ شَعَرَتِ الْأُمُّ حِينَ أَكَلَتْ مِنَ التُّفَّاحَةِ؟", "en": "How did Mom feel when she ate some of the apple?"}, "answer": {"kind": "lex", "id": "happy"}, "choices": [{"kind": "lex", "id": "sad"}, {"kind": "lex", "id": "happy"}]}
+  ]
+}

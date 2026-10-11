@@ -140,9 +140,9 @@ export const LessonItemZ = z.object({
   /** Skills this lesson introduces; practice activities then focus on them. */
   teaches: z.array(z.string().min(1)).min(1),
   /** Familiar words (lexicon ids) that start with / show the concept. */
-  examples: z.array(Id).max(4).default([]),
-  /** Letter to colour inside the example words. */
-  highlight: z.string().min(1).max(2).optional(),
+  examples: z.array(Id).max(5).default([]),
+  /** Letter to colour inside the example words; several forms when the letter has them (alif: ["أ", "إ"]). */
+  highlight: z.union([z.string().min(1).max(2), z.array(z.string().min(1).max(2)).min(1).max(4)]).optional(),
   /** Number lessons: objects appear one by one while counting. */
   count: z.object({ object: Id, n: z.number().int().min(1).max(10) }).optional(),
   /** Glyph to trace with a finger. */
@@ -256,6 +256,12 @@ export const StoryZ = z.object({
   level: z.number().int().min(1).max(5),
   /** The child is the hero: listed first, and the cover shows the child's picture. */
   personalized: z.boolean().default(false),
+  /**
+   * A letter story: linked to one Discover lesson item (e.g. { activityId: "ar-discover", itemId: "ba" }).
+   * Every example word of that lesson must appear in some page's `vocab`; inside {highlighted}
+   * words the lesson letter is coloured, and the lesson's completion screen offers the story.
+   */
+  letter: z.object({ activityId: Id, itemId: Id }).strict().optional(),
   pages: z
     .array(
       z.object({

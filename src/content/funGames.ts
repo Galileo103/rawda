@@ -28,10 +28,12 @@ import type { Activity, LexEntry } from './schemas'
 const TASHKEEL = /[ً-ٰٟـ]/g
 const bare = (w: string) => w.replace(TASHKEEL, '').trim()
 
-/** Feminine nouns with no ة ending (عَيْن، أُذُن، شَمْس، يَد), compared without tashkeel. */
-const AR_FEMININE_WORDS = new Set(['عين', 'أذن', 'شمس', 'يد'])
+/** Feminine nouns with no ة ending (عَيْن، أُذُن، شَمْس، يَد، نَار، صَحْرَاء، بِيتْزَا، كُمَّثْرَى) and plurals of things (أَوْرَاق), compared without tashkeel. */
+const AR_FEMININE_WORDS = new Set(['عين', 'أذن', 'شمس', 'يد', 'نار', 'صحراء', 'أوراق', 'بيتزا', 'كمثرى'])
+/** Masculine nouns that only look feminine (نَبَات ends in ات). */
+const AR_MASCULINE_WORDS = new Set(['نبات'])
 /** Arabic nouns ending in ة / ات / اة (or listed above) take هَذِهِ and feminine verbs. */
-export const arFeminine = (w: string) => AR_FEMININE_WORDS.has(bare(w)) || /(ة|ات|اة)$/.test(bare(w))
+export const arFeminine = (w: string) => !AR_MASCULINE_WORDS.has(bare(w)) && (AR_FEMININE_WORDS.has(bare(w)) || /(ة|ات|اة)$/.test(bare(w)))
 /** "قِطَّة" → "القِطَّة"; a noun and its adjective both take it ("شَكْل بَيْضَاوِيّ" → "الشَكْل البَيْضَاوِيّ"). */
 export const arDef = (w: string) =>
   w
@@ -49,17 +51,58 @@ export const cap = (w: string) => w.charAt(0).toUpperCase() + w.slice(1)
 /** Single, picturable words Silly Hala can name (and get wrong). */
 export const sillyWordOk = (e: LexEntry | undefined): e is LexEntry => !!e && !!e.ar && !!e.en && !bare(e.ar).includes(' ')
 
-/** Letter id → the words its Discover lesson showed (lexicon ids). */
-export function letterLessonWords(activities: readonly Activity[], lang: Lang): Map<string, string[]> {
+/**
+ * Extra pool words are things: not feelings or actions (faces and gestures), and not people
+ * (Hala's "هَذَا …" would misname بِنْت or أُمّ). Lesson examples stay as the lesson shows them.
+ */
+const NOT_THING_TAGS = new Set(['feeling', 'action', 'person', 'family'])
+/** Category words stay out of the extras: "هَذَا طَائِر" over an owl would be true, not silly. */
+const NOT_EXTRA_IDS = new Set(['bird', 'plant', 'seedling', 'meal'])
+
+/**
+ * Letter id → its word pool (lexicon ids): the words its Discover lesson showed, then (Arabic,
+ * when `lexicon` is given) every other single picture word whose Arabic, tashkeel stripped,
+ * starts with that letter (alif: أ or إ). So the parent's whole word list (أَنَانَاس، أَنْف،
+ * بُومَة، بَطَاطِس…) reaches the games once the letter is discovered, not only the lesson's few.
+ */
+export function letterLessonWords(activities: readonly Activity[], lang: Lang, lexicon?: ReadonlyMap<string, LexEntry>): Map<string, string[]> {
   const lesson = activities.find((a) => a.id === `${lang}-discover`)
   const out = new Map<string, string[]>()
   for (const item of lesson?.items ?? []) if ('examples' in item) out.set(item.id, [...(item.examples as string[])])
+  if (lang !== 'ar' || !lexicon) return out
+  for (const l of lettersFor('ar')) {
+    const words = out.get(l.id)
+    if (!words) continue
+    const first = firstLetterOf(l.glyph, 'ar')
+    for (const e of lexicon.values()) {
+      // "الْكَوْن" starts with ال, not with alif: leave words with the article out
+      const w = bare(e.ar)
+      const starts = !w.startsWith('ال') && w.charAt(0).replace(/[أإآ]/, 'ا') === first
+      if (starts && sillyWordOk(e) && !NOT_EXTRA_IDS.has(e.id) && !(e.tags ?? []).some((t) => NOT_THING_TAGS.has(t)) && !words.includes(e.id)) words.push(e.id)
+    }
+  }
   return out
 }
 
 /** Hungry Monster only eats things: never people or body parts (a police officer, an eye, a tooth). */
 const NOT_FOOD_TAGS = new Set(['person', 'body'])
-export const monsterCanEat = (e: LexEntry) => !(e.tags ?? []).some((t) => NOT_FOOD_TAGS.has(t))
+/** Things the monster must never say "yum" about: unsafe to eat, even in play. */
+export const MONSTER_NEVER = new Set(['fire', 'soap', 'toothbrush'])
+export const monsterCanEat = (e: LexEntry) => !MONSTER_NEVER.has(e.id) && !(e.tags ?? []).some((t) => NOT_FOOD_TAGS.has(t))
+
+/** Pictures that share a meaning (لَبَن / حَلِيب, قَارِب / مَرْكَب): Hala naming one over the other would be right. */
+const SAME_MEANING: readonly (readonly string[])[] = [
+  ['milk', 'milk-jug'],
+  ['boat', 'sailboat'],
+  ['pigeon', 'dove'],
+]
+/** True when calling picture `a` by word `b` would be a true claim (same English name, a listed synonym, or a category word over one of its members). */
+export function sameMeaning(a: LexEntry, b: LexEntry): boolean {
+  if (a.id === b.id || a.en === b.en) return true
+  if (SAME_MEANING.some((g) => g.includes(a.id) && g.includes(b.id))) return true
+  if ((b.id === 'bird' && (a.tags ?? []).includes('bird')) || (a.id === 'bird' && (b.tags ?? []).includes('bird'))) return true
+  return false
+}
 
 /** Lesson words that really start with the letter (a lesson may show a word with the letter inside, like "fox" for X), minus people and body parts. */
 export function monsterWords(letter: Letter, words: readonly string[], lexicon: ReadonlyMap<string, LexEntry>, lang: Lang): LexEntry[] {
@@ -182,7 +225,7 @@ export function funGameLines(lang: Lang, d: Dict, lexicon: ReadonlyMap<string, L
   const letters = lettersFor(lang)
   for (const l of letters) out.push(sillyClaimLetter(l, d), sillyShowLetter(l, d), sillyRevealLetter(l, d), monsterWant(l, d), monsterWantTwo(l, d), rememberLetter(l, d))
   for (let n = 1; n <= 10; n++) out.push(sillyClaimCount(n, d), sillyRevealCount(n, d), rememberNumber(n, d))
-  for (const [id, words] of letterLessonWords(activities, lang)) {
+  for (const [id, words] of letterLessonWords(activities, lang, lexicon)) {
     const l = letters.find((x) => x.id === id)
     if (!l) continue
     for (const e of monsterWords(l, words, lexicon, lang)) out.push(monsterYum(e, l, lang, d), monsterNoThanks(e, l, lang, d))

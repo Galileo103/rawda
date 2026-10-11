@@ -1,0 +1,46 @@
+{
+  "id": "letter-tha",
+  "title": {"ar": "@name وَحَرْفُ الثَّاءِ", "en": "@name and the letter ث"},
+  "theme": "letters",
+  "level": 1,
+  "personalized": true,
+  "letter": {"activityId": "ar-discover", "itemId": "tha"},
+  "cover": {"kind": "lex", "id": "fox"},
+  "pages": [
+    {
+      "scene": {"bg": "home", "actors": [{"lex": "@hero", "x": 28, "y": 62, "size": "lg"}, {"lex": "book", "x": 50, "y": 70, "size": "sm"}, {"lex": "fox", "x": 74, "y": 62, "size": "lg", "motion": "bounce", "flip": true}]},
+      "text": {"ar": {"m": "@name يَقْرَأُ قِصَّةً عَنْ {ثَعْلَبٍ} صَغِيرٍ.", "f": "@name تَقْرَأُ قِصَّةً عَنْ {ثَعْلَبٍ} صَغِيرٍ."}, "en": "@name reads a story about a little {fox}."},
+      "vocab": ["fox"],
+      "prompt": {"ar": {"m": "مَاذَا تَظُنُّ أَنَّ الثَّعْلَبَ سَيَفْعَلُ؟", "f": "مَاذَا تَظُنِّينَ أَنَّ الثَّعْلَبَ سَيَفْعَلُ؟"}, "en": "What do you think the fox will do?"}
+    },
+    {
+      "scene": {"bg": "meadow", "actors": [{"lex": "@hero", "x": 22, "y": 64, "size": "md"}, {"lex": "snow", "x": 50, "y": 18, "size": "md", "motion": "sway"}, {"lex": "snow", "x": 80, "y": 26, "size": "sm", "motion": "sway"}, {"lex": "fox", "x": 66, "y": 64, "size": "lg", "flip": true}]},
+      "text": {"ar": "فِي الْقِصَّةِ يَنْزِلُ {الثَّلْجُ}، فَيَشْعُرُ الثَّعْلَبُ الصَّغِيرُ بِالْبَرْدِ.", "en": "In the story, {snow} falls, and the little fox feels cold."},
+      "vocab": ["snow"],
+      "prompt": {"ar": {"m": "هَلْ رَأَيْتَ الثَّلْجَ مِنْ قَبْلُ؟ كَيْفَ يَكُونُ؟", "f": "هَلْ رَأَيْتِ الثَّلْجَ مِنْ قَبْلُ؟ كَيْفَ يَكُونُ؟"}, "en": "Have you ever seen snow? What is it like?"}
+    },
+    {
+      "scene": {"bg": "meadow", "actors": [{"lex": "@hero", "x": 18, "y": 64, "size": "md"}, {"lex": "ox", "x": 52, "y": 60, "size": "lg"}, {"lex": "fox", "x": 78, "y": 66, "size": "md", "motion": "bounce", "flip": true}, {"lex": "snow", "x": 86, "y": 16, "size": "sm", "motion": "sway"}]},
+      "text": {"ar": "{ثَوْرٌ} طَيِّبٌ يُدْفِئُ الثَّعْلَبَ، فَيَفْرَحُ الثَّعْلَبُ.", "en": "A kind {ox} keeps the fox warm, and the fox is happy."},
+      "vocab": ["ox"],
+      "prompt": {"ar": "كَيْفَ سَاعَدَ الثَّوْرُ الثَّعْلَبَ؟", "en": "How did the ox help the fox?"}
+    },
+    {
+      "scene": {"bg": "home", "actors": [{"lex": "@hero", "x": 28, "y": 62, "size": "lg", "motion": "bounce"}, {"lex": "mother", "x": 56, "y": 60, "size": "md"}, {"lex": "garlic", "x": 78, "y": 68, "size": "md", "motion": "sway"}]},
+      "text": {"ar": {"m": "@name يَشُمُّ {الثُّومَ} فِي حَسَاءِ أُمِّهِ الدَّافِئِ.", "f": "@name تَشُمُّ {الثُّومَ} فِي حَسَاءِ أُمِّهَا الدَّافِئِ."}, "en": {"m": "@name smells {garlic} in his mother's warm soup.", "f": "@name smells {garlic} in her mother's warm soup."}},
+      "vocab": ["garlic"],
+      "prompt": {"ar": {"m": "مَا الطَّعَامُ الدَّافِئُ الَّذِي تُحِبُّهُ؟", "f": "مَا الطَّعَامُ الدَّافِئُ الَّذِي تُحِبِّينَهُ؟"}, "en": "Which warm food do you like?"}
+    },
+    {
+      "scene": {"bg": "home", "actors": [{"lex": "@hero", "x": 20, "y": 62, "size": "lg", "motion": "bounce"}, {"lex": "fox", "x": 44, "y": 70, "size": "sm"}, {"lex": "snow", "x": 60, "y": 70, "size": "sm"}, {"lex": "ox", "x": 76, "y": 70, "size": "sm"}, {"lex": "garlic", "x": 90, "y": 70, "size": "sm"}]},
+      "text": {"ar": {"m": "@name وَجَدَ الثَّاءَ فِي: {ثَعْلَبٍ}، وَ{ثَلْجٍ}، وَ{ثَوْرٍ}، وَ{ثُومٍ}!", "f": "@name وَجَدَتِ الثَّاءَ فِي: {ثَعْلَبٍ}، وَ{ثَلْجٍ}، وَ{ثَوْرٍ}، وَ{ثُومٍ}!"}, "en": "@name found ث in: {fox}, {snow}, {ox} and {garlic}!"},
+      "vocab": ["fox", "snow", "ox", "garlic"],
+      "prompt": {"ar": {"m": "هَلْ تَعْرِفُ كَلِمَةً أُخْرَى فِيهَا حَرْفُ الثَّاءِ؟", "f": "هَلْ تَعْرِفِينَ كَلِمَةً أُخْرَى فِيهَا حَرْفُ الثَّاءِ؟"}, "en": "Do you know another word with the letter ث?"}
+    }
+  ],
+  "questions": [
+    {"id": "start", "skill": "story.lettertha.start", "difficulty": 1, "say": {"ar": "أَيُّ صُورَةٍ تَبْدَأُ بِحَرْفِ الثَّاءِ؟", "en": "Which picture starts with ث in Arabic?"}, "answer": {"kind": "lex", "id": "garlic"}, "choices": [{"kind": "lex", "id": "tomato"}, {"kind": "lex", "id": "garlic"}, {"kind": "lex", "id": "banana"}]},
+    {"id": "helper", "skill": "story.lettertha.helper", "difficulty": 1, "say": {"ar": "مَنْ أَدْفَأَ الثَّعْلَبَ الصَّغِيرَ؟", "en": "Who kept the little fox warm?"}, "answer": {"kind": "lex", "id": "ox"}, "choices": [{"kind": "lex", "id": "cat"}, {"kind": "lex", "id": "dog"}, {"kind": "lex", "id": "ox"}]},
+    {"id": "feeling", "skill": "story.lettertha.feeling", "difficulty": 1, "say": {"ar": "كَيْفَ شَعَرَ الثَّعْلَبُ عِنْدَمَا دَفِئَ؟", "en": "How did the fox feel when he was warm?"}, "answer": {"kind": "lex", "id": "happy"}, "choices": [{"kind": "lex", "id": "happy"}, {"kind": "lex", "id": "sad"}, {"kind": "lex", "id": "angry"}]}
+  ]
+}

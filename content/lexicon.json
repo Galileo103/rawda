@@ -162,7 +162,7 @@
   { "id": "tongue", "image": "1F445", "ar": "لِسَان", "en": "tongue", "tags": ["body"] },
   { "id": "goat", "image": "1F410", "ar": "مَاعِز", "en": "goat", "tags": ["animal"] },
   { "id": "key", "image": "1F511", "ar": "مِفْتَاح", "en": "key", "tags": ["object"] },
-  { "id": "sailboat", "image": "26F5", "ar": "مَرْكَب", "en": "boat", "tags": ["vehicle", "sea"] },
+  { "id": "sailboat", "image": "26F5", "ar": "مَرْكَب", "en": "sailboat", "tags": ["vehicle", "sea"] },
   { "id": "ruler", "image": "1F4CF", "ar": "مِسْطَرَة", "en": "ruler", "tags": ["object"] },
   { "id": "tiger", "image": "1F405", "ar": "نَمِر", "en": "tiger", "tags": ["animal"] },
   { "id": "palmtree", "image": "1F334", "ar": "نَخْلَة", "en": "palm tree", "tags": ["plant"] },
@@ -184,5 +184,6 @@
   { "id": "mouse", "image": "1F42D", "ar": "فَأْر", "en": "mouse", "tags": ["animal"] },
   { "id": "spoon", "image": "1F944", "ar": "مِلْعَقَة", "en": "spoon", "tags": ["object"] },
   { "id": "cake", "image": "1F382", "ar": "كَعْكَة", "en": "cake", "tags": ["food"] },
-  { "id": "snake", "image": "1F40D", "ar": "ثُعْبَان", "en": "snake", "tags": ["animal"] }
+  { "id": "snake", "image": "1F40D", "ar": "ثُعْبَان", "en": "snake", "tags": ["animal"] },
+  { "id": "teapot", "image": "1FAD6", "ar": "إِبْرِيق", "en": "teapot", "tags": ["object", "home"] }
 ]

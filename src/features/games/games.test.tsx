@@ -6,7 +6,7 @@ import { beforeEach, describe, expect, it, vi } from 'vitest'
 import { App } from '../../app/App'
 import type { AreaId } from '../../domain/types'
 import { type ComponentType } from 'react'
-import { SOUND_ANIMAL_IDS, funGameLines, letterLessonWords, monsterWords, sillyClaimWord, soundPath } from '../../content/funGames'
+import { SOUND_ANIMAL_IDS, funGameLines, letterLessonWords, monsterWords, sameMeaning, sillyClaimWord, soundPath } from '../../content/funGames'
 import { splitName } from '../../domain/child'
 import { GAME_HEXES, GAMES, type LearnedPools, firstLetterOf, gameLines, gameReadiness, learnedPools, lettersFor, longestRun, mixupModes, playablePuzzles } from '../../content/games'
 import { MonsterRound, SillyRound } from './sillyRounds'
@@ -170,23 +170,69 @@ describe('games play only with what the child discovered', () => {
 
   it('Hungry Monster never eats a person or a body part, and Hala says هَذِهِ for feminine words with no ة', () => {
     for (const lang of ['ar', 'en'] as const) {
-      const byLetter = letterLessonWords(content.activities, lang)
+      const byLetter = letterLessonWords(content.activities, lang, content.lexicon)
       for (const l of lettersFor(lang))
         for (const e of monsterWords(l, byLetter.get(l.id) ?? [], content.lexicon, lang))
-          expect(e.tags.some((t) => t === 'person' || t === 'body'), `${lang} ${l.id} ${e.id}`).toBe(false)
+          expect(e.tags.some((t) => t === 'person' || t === 'body') || ['fire', 'soap', 'toothbrush'].includes(e.id), `${lang} ${l.id} ${e.id}`).toBe(false)
     }
     // The Arabic lesson really shows these, so the filter is doing work.
     const arLesson = letterLessonWords(content.activities, 'ar')
     expect(arLesson.get('dad')).toEqual(expect.arrayContaining(['officer', 'tooth']))
     expect(arLesson.get('ayn')).toContain('eye')
     const ar = dictionaries.ar
-    for (const id of ['eye', 'ear', 'sun', 'hand']) {
+    for (const id of ['eye', 'ear', 'sun', 'hand', 'fire', 'desert', 'leaves', 'pizza', 'pear']) {
       const e = content.lexicon.get(id)
       if (!e) throw new Error(`missing lexicon word ${id}`)
       expect(sillyClaimWord(e, 'ar', ar), id).toMatch(/^هَذِهِ/)
     }
     const fox = content.lexicon.get('fox')
     if (fox) expect(sillyClaimWord(fox, 'ar', ar)).toMatch(/^هَذَا/)
+    expect(sillyClaimWord(content.lexicon.get('plant')!, 'ar', ar)).toMatch(/^هَذَا/) // نَبَات only looks feminine
+  })
+
+  it('each Arabic letter brings every lexicon word that starts with it, not only the lesson pictures', () => {
+    const pool = letterLessonWords(content.activities, 'ar', content.lexicon)
+    const letter = (id: string) => lettersFor('ar').find((l) => l.id === id)!
+    const menu = (id: string) => monsterWords(letter(id), pool.get(id) ?? [], content.lexicon, 'ar').map((e) => e.id)
+    // Lesson words come first, in the lesson's order.
+    const lesson = letterLessonWords(content.activities, 'ar')
+    for (const [id, words] of lesson) expect(pool.get(id)!.slice(0, words.length), id).toEqual(words)
+    // The parent's extras reach the games: alif takes both أ and إ.
+    expect(pool.get('alif')).toEqual(expect.arrayContaining(['pineapple', 'nose', 'ear', 'teapot', 'leaves']))
+    expect(pool.get('alif')).not.toContain('mother') // people stay out: Hala would say هَذَا أُمّ
+    expect(menu('alif')).toEqual(expect.arrayContaining(['pineapple', 'teapot']))
+    expect(menu('alif')).not.toContain('nose') // body parts stay off the menu
+    expect(menu('ba')).toEqual(expect.arrayContaining(['owl', 'potato', 'house', 'orange', 'penguin', 'egg']))
+    expect(menu('jim')).toContain('cheese')
+    // Unsafe things never reach the menu, and category words never join a pool (هَذَا طَائِر over an owl is true).
+    expect(menu('nun')).not.toContain('fire')
+    expect(menu('sad')).not.toContain('soap')
+    expect(pool.get('tta')).not.toContain('bird')
+    for (const words of pool.values()) expect(words).not.toContain('bird')
+    // Hala never "gets wrong" a picture by a word that means the same thing.
+    const lx = (id: string) => content.lexicon.get(id)!
+    expect(sameMeaning(lx('milk'), lx('milk-jug'))).toBe(true)
+    expect(sameMeaning(lx('boat'), lx('sailboat'))).toBe(true)
+    expect(sameMeaning(lx('owl'), lx('bird'))).toBe(true)
+    expect(sameMeaning(lx('owl'), lx('potato'))).toBe(false)
+    // Every word in a pool really starts with its letter, appears once, and is a single picture word, never a feeling.
+    for (const [id, words] of pool) {
+      expect(new Set(words).size, id).toBe(words.length)
+      for (const w of words.slice((lesson.get(id) ?? []).length)) {
+        const e = content.lexicon.get(w)!
+        expect(firstLetterOf(e.ar, 'ar'), `${id} ${w}`).toBe(firstLetterOf(letter(id).glyph, 'ar'))
+        expect(e.ar.trim(), w).not.toContain(' ')
+        expect(e.ar.trim().startsWith('ال'), w).toBe(false)
+        expect(e.tags.filter((t) => t === 'feeling' || t === 'action' || t === 'person'), w).toEqual([])
+      }
+    }
+    // English keeps its lesson pools.
+    expect(letterLessonWords(content.activities, 'en', content.lexicon)).toEqual(letterLessonWords(content.activities, 'en'))
+    // Hala's claims and the monster's lines for the new words are in the audio list.
+    const lines = new Set(funGameLines('ar', dictionaries.ar, content.lexicon, content.activities))
+    const ar = dictionaries.ar.games.fun
+    expect(lines).toContain(fmt(ar.monsterYum, { thing: content.lexicon.get('teapot')!.ar, letter: letter('alif').name }))
+    expect(lines).toContain(fmt(ar.monsterNoThanks, { thing: content.lexicon.get('owl')!.ar, letter: letter('ba').name }))
   })
 
   it('every silly-game line is complete and gets a recorded clip', () => {

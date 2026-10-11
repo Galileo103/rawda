@@ -1,0 +1,52 @@
+{
+  "id": "letter-alif",
+  "title": {"ar": "@name وَحَرْفُ الْأَلِفِ", "en": "@name and the Letter Alif"},
+  "theme": "letters",
+  "level": 1,
+  "personalized": true,
+  "letter": {"activityId": "ar-discover", "itemId": "alif"},
+  "cover": {"kind": "lex", "id": "rabbit"},
+  "pages": [
+    {
+      "scene": {"bg": "meadow", "actors": [{"lex": "@hero", "x": 28, "y": 62, "size": "lg", "motion": "bounce"}, {"lex": "rabbit", "x": 70, "y": 66, "size": "lg", "motion": "bounce", "flip": true}, {"lex": "sun", "x": 88, "y": 14, "size": "sm", "motion": "sway"}]},
+      "text": {"ar": {"m": "@name يَزُورُ حَدِيقَةَ الْحَيَوَانِ، فَيَرَى {أَرْنَبًا}.", "f": "@name تَزُورُ حَدِيقَةَ الْحَيَوَانِ، فَتَرَى {أَرْنَبًا}."}, "en": "@name visits the zoo and sees a {rabbit}."},
+      "vocab": ["rabbit"],
+      "prompt": {"ar": {"m": "مَاذَا يَأْكُلُ الْأَرْنَبُ فِي رَأْيِكَ؟", "f": "مَاذَا يَأْكُلُ الْأَرْنَبُ فِي رَأْيِكِ؟"}, "en": "What do you think the rabbit eats?"}
+    },
+    {
+      "scene": {"bg": "garden", "actors": [{"lex": "@hero", "x": 26, "y": 62, "size": "lg"}, {"lex": "lion", "x": 70, "y": 64, "size": "lg", "flip": true}, {"lex": "sun", "x": 88, "y": 14, "size": "sm"}]},
+      "text": {"ar": {"m": "@name يَمْشِي بِهُدُوءٍ؛ لِأَنَّ {الْأَسَدَ} نَائِمٌ.", "f": "@name تَمْشِي بِهُدُوءٍ؛ لِأَنَّ {الْأَسَدَ} نَائِمٌ."}, "en": "@name walks quietly, because the {lion} is asleep."},
+      "vocab": ["lion"],
+      "prompt": {"ar": "لِمَاذَا نَمْشِي بِهُدُوءٍ عِنْدَمَا يَنَامُ أَحَدٌ؟", "en": "Why do we walk quietly when someone is sleeping?"}
+    },
+    {
+      "scene": {"bg": "sea", "actors": [{"lex": "@hero", "x": 26, "y": 60, "size": "lg"}, {"lex": "octopus", "x": 68, "y": 62, "size": "lg", "motion": "sway"}, {"lex": "fish", "x": 86, "y": 40, "size": "sm", "motion": "sway", "flip": true}]},
+      "text": {"ar": "فِي حَوْضِ الْمَاءِ، يُلَوِّحُ {أُخْطُبُوطٌ}: أَهْلًا يَا @name!", "en": "In the big fish tank, an {octopus} waves: hello, @name!"},
+      "vocab": ["octopus"],
+      "prompt": {"ar": {"m": "مَاذَا يَفْعَلُ الْأُخْطُبُوطُ بِأَذْرُعِهِ الْكَثِيرَةِ فِي رَأْيِكَ؟", "f": "مَاذَا يَفْعَلُ الْأُخْطُبُوطُ بِأَذْرُعِهِ الْكَثِيرَةِ فِي رَأْيِكِ؟"}, "en": "What do you think the octopus does with all its arms?"}
+    },
+    {
+      "scene": {"bg": "garden", "actors": [{"lex": "@hero", "x": 26, "y": 62, "size": "lg"}, {"lex": "pineapple", "x": 56, "y": 68, "size": "md", "motion": "bounce"}, {"lex": "mother", "x": 80, "y": 62, "size": "lg", "flip": true}]},
+      "text": {"ar": {"m": "وَقْتُ النُّزْهَةِ! @name يَأْكُلُ {أَنَانَاسًا} حُلْوًا.", "f": "وَقْتُ النُّزْهَةِ! @name تَأْكُلُ {أَنَانَاسًا} حُلْوًا."}, "en": "Picnic time! @name eats some sweet {pineapple}."},
+      "vocab": ["pineapple"],
+      "prompt": {"ar": {"m": "مَاذَا تُحِبُّ أَنْ تَأْكُلَ فِي النُّزْهَةِ؟", "f": "مَاذَا تُحِبِّينَ أَنْ تَأْكُلِي فِي النُّزْهَةِ؟"}, "en": "What would you like to eat on a picnic?"}
+    },
+    {
+      "scene": {"bg": "garden", "actors": [{"lex": "@hero", "x": 24, "y": 62, "size": "lg"}, {"lex": "happy", "x": 24, "y": 24, "size": "sm", "motion": "bounce"}, {"lex": "teapot", "x": 48, "y": 70, "size": "md"}, {"lex": "mother", "x": 68, "y": 62, "size": "md", "flip": true}, {"lex": "father", "x": 86, "y": 62, "size": "md", "flip": true}]},
+      "text": {"ar": {"m": "@name يَصُبُّ الْحَلِيبَ الدَّافِئَ مِنَ {الْإِبْرِيقِ}، فَيَفْرَحُ الْجَمِيعُ.", "f": "@name تَصُبُّ الْحَلِيبَ الدَّافِئَ مِنَ {الْإِبْرِيقِ}، فَيَفْرَحُ الْجَمِيعُ."}, "en": "@name pours warm milk from the {teapot}, and everyone is happy."},
+      "vocab": ["teapot", "happy"],
+      "prompt": {"ar": {"m": "لِمَنْ تُحِبُّ أَنْ تَصُبَّ الْحَلِيبَ؟", "f": "لِمَنْ تُحِبِّينَ أَنْ تَصُبِّي الْحَلِيبَ؟"}, "en": "Who would you like to pour milk for?"}
+    },
+    {
+      "scene": {"bg": "meadow", "actors": [{"lex": "@hero", "x": 18, "y": 60, "size": "lg", "motion": "bounce"}, {"lex": "rabbit", "x": 42, "y": 72, "size": "sm"}, {"lex": "lion", "x": 58, "y": 72, "size": "sm"}, {"lex": "octopus", "x": 74, "y": 72, "size": "sm"}, {"lex": "pineapple", "x": 90, "y": 72, "size": "sm"}, {"lex": "teapot", "x": 66, "y": 44, "size": "sm"}]},
+      "text": {"ar": {"m": "@name وَجَدَ حَرْفَ الْأَلِفِ فِي: {أَرْنَبٍ}، {أَسَدٍ}، {أُخْطُبُوطٍ}، {أَنَانَاسٍ}، {إِبْرِيقٍ}!", "f": "@name وَجَدَتْ حَرْفَ الْأَلِفِ فِي: {أَرْنَبٍ}، {أَسَدٍ}، {أُخْطُبُوطٍ}، {أَنَانَاسٍ}، {إِبْرِيقٍ}!"}, "en": "@name found the letter Alif in: {rabbit}, {lion}, {octopus}, {pineapple}, {teapot}!"},
+      "vocab": ["rabbit", "lion", "octopus", "pineapple", "teapot"],
+      "prompt": {"ar": {"m": "هَلْ تَعْرِفُ كَلِمَةً أُخْرَى تَبْدَأُ بِحَرْفِ الْأَلِفِ؟", "f": "هَلْ تَعْرِفِينَ كَلِمَةً أُخْرَى تَبْدَأُ بِحَرْفِ الْأَلِفِ؟"}, "en": "Do you know another word that starts with Alif?"}
+    }
+  ],
+  "questions": [
+    {"id": "start", "skill": "story.letteralif.start", "difficulty": 1, "say": {"ar": "أَيُّ صُورَةٍ تَبْدَأُ بِحَرْفِ الْأَلِفِ؟", "en": "Which picture starts with the letter Alif?"}, "answer": {"kind": "lex", "id": "lion"}, "choices": [{"kind": "lex", "id": "duck"}, {"kind": "lex", "id": "lion"}, {"kind": "lex", "id": "banana"}]},
+    {"id": "recall", "skill": "story.letteralif.recall", "difficulty": 1, "say": {"ar": "مَنْ لَوَّحَ فِي حَوْضِ الْمَاءِ؟", "en": "Who waved in the big fish tank?"}, "answer": {"kind": "lex", "id": "octopus"}, "choices": [{"kind": "lex", "id": "octopus"}, {"kind": "lex", "id": "whale"}, {"kind": "lex", "id": "cat"}]},
+    {"id": "feeling", "skill": "story.letteralif.feeling", "difficulty": 1, "say": {"ar": "كَيْفَ شَعَرَتِ الْعَائِلَةُ فِي النُّزْهَةِ؟", "en": "How did the family feel at the picnic?"}, "answer": {"kind": "lex", "id": "happy"}, "choices": [{"kind": "lex", "id": "sad"}, {"kind": "lex", "id": "happy"}]}
+  ]
+}

@@ -103,6 +103,7 @@ export const ar: RawDict = {
     again: 'نلعب مرة أخرى',
     next: 'النشاط التالي',
     home: 'الرئيسية',
+    letterStory: 'قِصَّةُ {letter}',
   },
   stories: {
     title: 'القصص',
@@ -118,6 +119,13 @@ export const ar: RawDict = {
     askChild: 'اسْأَلْ طِفْلَكَ',
     starring: { m: 'بطلها {name}', f: 'بطلتها {name}' },
     yourStories: { m: 'قصص بطلها أنت', f: 'قصص بطلتها أنتِ' },
+    letterShelf: 'قِصَصُ الْحُرُوفِ',
+    otherShelf: 'قِصَصٌ أُخْرَى',
+    letterSub: { m: 'قِصَّةٌ لِكُلِّ حَرْفٍ، وَبَطَلُهَا أَنْتَ!', f: 'قِصَّةٌ لِكُلِّ حَرْفٍ، وَبَطَلَتُهَا أَنْتِ!', n: 'قِصَّةٌ لِكُلِّ حَرْفٍ!' },
+    letterCount: '{n} مِنْ {total} قِصَّةً',
+    lettersLearned: 'تَعَلَّمْنَا {n}',
+    pickLetter: 'هَيَّا نَخْتَارُ حَرْفًا وَنَقْرَأُ قِصَّتَهُ!',
+    soon: 'قَرِيبًا',
   },
   studio: {
     title: 'الرسم',
