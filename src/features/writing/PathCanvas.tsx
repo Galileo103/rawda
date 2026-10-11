@@ -3,7 +3,7 @@ import type { Lang } from '../../domain/types'
 import { Icon } from '../../design/Icon'
 import { dict } from '../../i18n'
 import { audio } from '../../services/audio/AudioService'
-import { type Pt, type Stroke, distToStroke, follow, strokeProgress } from './paths'
+import { type Pt, type Stroke, distToStroke, followMove, strokeProgress } from './paths'
 import s from './writing.module.css'
 
 export const BOARD = 600
@@ -326,7 +326,7 @@ export function PathCanvas({
     const tol = Math.max(34, (TOL * trackOf(st)) / TRACK) * lv.tol
     for (const ev of e.nativeEvent.getCoalescedEvents?.() ?? [e.nativeEvent]) {
       const p = toCanvas(ev)
-      reached.current = follow(st, reached.current, p, tol, lv.look)
+      reached.current = followMove(st, reached.current, last.current ?? p, p, tol, lv.look)
       // Wandered off the path: one soft bump per stroke.
       if (!bumped.current && distToStroke(st, p) > tol * 1.6) {
         bumped.current = true

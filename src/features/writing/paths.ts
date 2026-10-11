@@ -175,21 +175,40 @@ function transformPath(d: string, scale: number, ox: number, oy: number): string
  * index). The finger moves it to the point of the stroke nearest to it, a little way ahead
  * and within `tol` — only forward, so drawing it backwards doesn't count. Nearest (not
  * furthest): where a stroke passes close to itself (the tail of a hamza, a loop), progress
- * stays where the finger really is instead of jumping ahead. Returns the new `reached`.
+ * stays where the finger really is instead of jumping ahead. A point ahead must be nearer
+ * than the one already reached, so a finger that barely moves (a mouse sends many tiny
+ * events) doesn't creep progress ahead of itself. Returns the new `reached`.
  */
 export function follow(stroke: Stroke, reached: number, p: Pt, tol: number, lookahead = 40): number {
   let best = reached
-  let bestD = tol
+  const at = stroke.pts[reached]
+  let bestD = at ? Math.min(tol, Math.hypot(at.x - p.x, at.y - p.y)) : tol
   const end = Math.min(stroke.pts.length - 1, reached + lookahead)
   for (let i = reached + 1; i <= end; i++) {
     const q = stroke.pts[i] as Pt
     const d = Math.hypot(q.x - p.x, q.y - p.y)
-    if (d <= bestD) {
+    if (d < bestD) {
       best = i
       bestD = d
     }
   }
   return best
+}
+
+/**
+ * Follow a finger that moved from `from` to `to` since the last pointer event. A quick hand
+ * sends events far apart — further than `lookahead` reaches — so progress walks the
+ * movement in small steps instead of stalling mid-stroke. Each step can carry progress only
+ * about as far as the finger travelled (plus a little slack), so it never races ahead of
+ * the hand — not even where a stroke passes close to itself (the tail of a hamza).
+ */
+export function followMove(stroke: Stroke, reached: number, from: Pt, to: Pt, tol: number, lookahead = 40): number {
+  const dist = Math.hypot(to.x - from.x, to.y - from.y)
+  const n = Math.max(1, Math.ceil(dist / (STEP * 3)))
+  const reach = Math.min(lookahead, Math.ceil(dist / n / STEP) + 8)
+  let r = reached
+  for (let k = 1; k <= n; k++) r = follow(stroke, r, { x: from.x + ((to.x - from.x) * k) / n, y: from.y + ((to.y - from.y) * k) / n }, tol, reach)
+  return r
 }
 
 /** How far along a stroke `reached` is, 0..1. */

@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest'
 import { STROKES } from '../../content/strokes'
 import { WRITE_ENTRIES, writeEntryById } from '../../content/writing'
 import { brushFor } from './brushes'
-import { STEP, follow, layoutStrokes, letterStrokes, parseStroke, resample, strokeProgress } from './paths'
+import { STEP, follow, followMove, layoutStrokes, letterStrokes, parseStroke, resample, strokeProgress } from './paths'
 
 describe('stroke paths', () => {
   it('parses lines, curves and dots', () => {
@@ -65,6 +65,45 @@ describe('stroke paths', () => {
     reached = follow(st, reached, part[part.length - 1]!, 34, 12)
     // Where the finger is (give or take a point), not on the tail further along (it used to jump to ~62 of 71).
     expect(Math.abs(reached - (part.length - 1))).toBeLessThanOrEqual(2)
+  })
+
+  it('keeps up with a quick hand: pointer events far apart still finish أ and A', () => {
+    for (const id of ['ar-alif', 'en-A']) {
+      for (const st of letterStrokes(id, 600)) {
+        // One event every 15 points (60 board px): further than the lookahead reaches in one go.
+        let reached = 0
+        let last = st.pts[0]!
+        for (let i = 15; i < st.pts.length + 15; i += 15) {
+          const p = st.pts[Math.min(i, st.pts.length - 1)]!
+          reached = followMove(st, reached, last, p, 34, 12)
+          last = p
+        }
+        expect(strokeProgress(st, reached)).toBe(1)
+        // Jumping to the end without passing along the stroke still doesn't count.
+        expect(followMove(st, 0, st.pts[st.pts.length - 1]!, st.pts[st.pts.length - 1]!, 34, 12)).toBeLessThan(st.pts.length / 2)
+      }
+    }
+  })
+
+  it('never races ahead of the finger: a mouse sending many tiny moves does not finish أ early', () => {
+    for (const st of letterStrokes('ar-alif', 600)) {
+      // A move every 1 px along the first half of the stroke (it used to finish the alef at 59%, the hamza at 37%).
+      const stop = Math.floor(st.pts.length * 0.5)
+      let reached = 0
+      let last = st.pts[0]!
+      for (let i = 0; i < stop; i++)
+        for (let k = 1; k <= 4; k++) {
+          const a = st.pts[i]!
+          const b = st.pts[i + 1]!
+          const p = { x: a.x + ((b.x - a.x) * k) / 4, y: a.y + ((b.y - a.y) * k) / 4 }
+          reached = followMove(st, reached, last, p, 54, 18)
+          last = p
+        }
+      expect(reached).toBeLessThanOrEqual(stop + 2)
+      // Standing still (a hand resting on the mouse) doesn't move it either.
+      for (let k = 0; k < 50; k++) reached = followMove(st, reached, last, last, 54, 18)
+      expect(reached).toBeLessThanOrEqual(stop + 2)
+    }
   })
 })
 
