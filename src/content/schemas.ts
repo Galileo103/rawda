@@ -35,7 +35,6 @@ const BASE_VISUALS = [
   z.object({ kind: z.literal('phrase'), text: z.object({ ar: z.string().min(1).max(40), en: z.string().min(1).max(60) }) }),
 ] as const
 export const BaseVisualZ = z.discriminatedUnion('kind', [...BASE_VISUALS])
-export type BaseVisual = z.infer<typeof BaseVisualZ>
 
 /** Anything shown on screen as a prompt, an answer or a card. `row` lines several up (patterns, sums). */
 export const VisualZ = z.discriminatedUnion('kind', [

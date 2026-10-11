@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { lessonStoryOffer, storyHighlight, storyShelves } from './letterStories'
+import { lessonStoryOffer, storyHighlight } from './letterStories'
 import { parseContent } from './parse'
 
 /** A tiny fixture world: two lexicon-backed letter lessons and stories linked to them (independent of /content). */
@@ -104,17 +104,6 @@ describe('letter stories: helpers', () => {
     plain1: story('plain1', undefined, [['cat']]),
     'letter-ba': story('letter-ba', { activityId: 'ar-discover', itemId: 'ba' }, [['duck', 'door']]),
     plain2: story('plain2', undefined, [['cat']]),
-  })
-
-  it('library shelf: letter stories in alphabet order, learned letters first; other stories keep their order', () => {
-    expect(r.errors).toEqual([])
-    const none = storyShelves(r.stories, r.activities, new Map())
-    expect(none.letters.map((s) => s.id)).toEqual(['letter-ba', 'letter-ta'])
-    expect(none.others.map((s) => s.id)).toEqual(['plain1', 'plain2'])
-    const learnedTa = storyShelves(r.stories, r.activities, new Map([['ar-discover', new Set(['ta'])]]))
-    expect(learnedTa.letters.map((s) => s.id)).toEqual(['letter-ta', 'letter-ba'])
-    const learnedBoth = storyShelves(r.stories, r.activities, new Map([['ar-discover', new Set(['ta', 'ba'])]]))
-    expect(learnedBoth.letters.map((s) => s.id)).toEqual(['letter-ba', 'letter-ta'])
   })
 
   it('offers the story after its lesson only', () => {

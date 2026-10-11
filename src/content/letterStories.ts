@@ -1,4 +1,4 @@
-import type { Activity, LessonItem, StoryDef } from './schemas'
+import type { Activity, LessonItem } from './schemas'
 import type { Lang } from '../domain/types'
 
 /**
@@ -59,32 +59,4 @@ export function lessonLetter(item: LessonItem): string {
   if (typeof h === 'string') return h
   if (Array.isArray(h)) return h.join(' ')
   return item.id
-}
-
-/**
- * The library's two shelves: letter stories (learned letters first, each group in alphabet order,
- * i.e. lesson item order) and every other story in the given order. Nothing is locked.
- */
-export function storyShelves<S extends StoryDef>(
-  stories: readonly S[],
-  activities: readonly Activity[],
-  taken: ReadonlyMap<string, ReadonlySet<string>>,
-): { letters: S[]; others: S[] } {
-  const rank = new Map<string, { learned: boolean; activity: number; item: number }>()
-  for (const s of stories) {
-    const link = linkedLesson(s, activities)
-    if (!link) continue
-    rank.set(s.id, {
-      learned: taken.get(link.activity.id)?.has(link.item.id) ?? false,
-      activity: activities.indexOf(link.activity),
-      item: link.activity.items.findIndex((i) => i.id === link.item.id),
-    })
-  }
-  const letters = stories.filter((s) => rank.has(s.id))
-  letters.sort((a, b) => {
-    const x = rank.get(a.id)!
-    const y = rank.get(b.id)!
-    return Number(y.learned) - Number(x.learned) || x.activity - y.activity || x.item - y.item
-  })
-  return { letters, others: stories.filter((s) => !rank.has(s.id)) }
 }
