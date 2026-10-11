@@ -176,6 +176,8 @@ export const GARDEN: readonly GardenItem[] = [
 
 /** Props drawn in the games' scenes. */
 export const PROP_HEX = { playWorld: '1F3A1', bunny: '1F430', carrot: '1F955', engine: '1F682', frog: '1F438', drop: '1F4A7' } as const
+/** Thumbs up / thumbs down on Silly Hala's judge buttons, so a child who can't read yet knows which is which. */
+export const JUDGE_HEX = { yes: 'E006', no: 'E007' } as const
 
 // ---- science the fun games play with (skills come from science-discover) ----
 
@@ -222,6 +224,7 @@ export const GAME_HEXES: readonly string[] = [
     ...Object.values(CATEGORIES).flat(),
     ...GARDEN.map((g) => g.hex),
     ...Object.values(PROP_HEX),
+    ...Object.values(JUDGE_HEX),
     ...Object.values(WEATHER_SKILL).map((w) => w.hex),
     ...Object.values(HABITAT_SKILL).flatMap((h) => [h.hex, h.homeHex]),
     ...Object.values(FOOD_SKILL).flatMap((f) => [f.hex, f.foodHex]),
@@ -331,10 +334,13 @@ export function gameReadiness(id: GameId, p: LearnedPools, lang: Lang): Readines
       const n = monsterLetters(p).length
       return { ready: n >= 2, need: 'letters', lessonId: letterLesson, learned: n }
     }
+    // Weather clothes and animal sounds are everyday knowledge: these two open on day one, so a
+    // brand-new child always has something to play. Dress the Hero plays every weather whatever was
+    // learned (the lesson only counts towards the card's goal); lessons add homes and food to the Mix-up.
     case 'dress':
-      return { ready: p.weathers.length >= 1, need: 'weather', lessonId: 'science-discover', learned: p.weathers.length }
+      return { ready: true, need: 'weather', lessonId: 'science-discover', learned: p.weathers.length }
     case 'mixup':
-      return { ready: mixupModes(p).length > 0, need: 'animals', lessonId: 'science-discover', learned: p.habitats.length + p.foods.length }
+      return { ready: true, need: 'animals', lessonId: 'science-discover', learned: p.habitats.length + p.foods.length }
   }
 }
 
@@ -357,14 +363,14 @@ export function firstLetterOf(word: string, lang: Lang): string {
 }
 
 /**
- * What Animal Mix-up can play: homes once two different homes are known, food once one
- * animal's food is, and real animal sounds as soon as either is (the sounds need no lesson).
+ * What Animal Mix-up can play: real animal sounds always (they need no lesson), homes once two
+ * different homes are known, and food once one animal's food is.
  */
 export type MixupMode = 'sounds' | 'homes' | 'food'
 export function mixupModes(p: LearnedPools): MixupMode[] {
   const homes = new Set(p.habitats.map((a) => HABITAT_SKILL[a].home)).size >= 2
   const food = p.foods.length > 0
-  return [...(homes || food ? (['sounds'] as const) : []), ...(homes ? (['homes'] as const) : []), ...(food ? (['food'] as const) : [])]
+  return ['sounds', ...(homes ? (['homes'] as const) : []), ...(food ? (['food'] as const) : [])]
 }
 
 /** Discovered letters that have lesson words to feed Hungry Monster. */

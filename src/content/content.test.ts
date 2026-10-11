@@ -2,9 +2,11 @@ import { existsSync } from 'node:fs'
 import { join } from 'node:path'
 import { describe, expect, it } from 'vitest'
 import { ROOT, loadBundle } from '../../scripts/lib/contentFs'
+import { resolveGender } from '../domain/child'
 import { dictionaries, rawDictionaries } from '../i18n'
 import { clipKey } from '../services/audio/clipKey'
 import { content } from './loader'
+import manifest from './generated/audio-manifest.json'
 import { collectNarration } from './narration'
 import { parseContent } from './parse'
 import { picturePath } from './pictureSources'
@@ -122,6 +124,25 @@ describe('narration', () => {
       for (const lang of langs) for (const item of a.items) expect(keys.has(clipKey(lang, item.say[lang]!)), `${a.id}/${item.id}/${lang}`).toBe(true)
     }
     expect(keys.has(clipKey('ar', dictionaries.ar.voice.numbers[2]!))).toBe(true)
+    // Praise that names what the child did is pre-rendered for a boy, a girl and "we".
+    for (const line of ['عَدَدْتَ وَاحِدَةً وَاحِدَةً!', 'عَدَدْتِ وَاحِدَةً وَاحِدَةً!', 'عَدَدْنَا وَاحِدَةً وَاحِدَةً!']) expect(keys.has(clipKey('ar', line)), line).toBe(true)
+    expect(keys.has(clipKey('en', 'You counted one by one!'))).toBe(true)
+  })
+
+  it('collects every praise that names what the child did, in each gender, for the audio build', () => {
+    // Otherwise an odd answer would drop out of Hala's voice into the device voice (or silence).
+    // The clips themselves come from `npm run audio:render`, which needs the voice service.
+    const keys = new Set(collectNarration(content, rawDictionaries).map((l) => clipKey(l.lang, l.text)))
+    for (const lang of ['ar', 'en'] as const) {
+      for (const gender of ['m', 'f', undefined] as const) {
+        const praiseBy = resolveGender(rawDictionaries[lang].voice.praiseBy, gender)
+        for (const [template, lines] of Object.entries(praiseBy)) {
+          for (const line of lines) expect(keys.has(clipKey(lang, line)), `${lang}/${gender ?? 'n'}/${template}: ${line}`).toBe(true)
+        }
+      }
+    }
+    // English clips are rendered offline with Piper, so they are expected to be in the bundle already.
+    for (const lines of Object.values(resolveGender(rawDictionaries.en.voice.praiseBy, undefined))) for (const line of lines) expect(clipKey('en', line) in manifest.clips, line).toBe(true)
   })
 
   it('normalises braces and whitespace so story highlights map to the same clip', () => {

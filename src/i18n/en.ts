@@ -85,6 +85,8 @@ export const en = {
     progress: 'Task {n} of {total}',
     notFound: 'This activity isn’t available.',
     countHint: 'Tap each one to count',
+    peek: 'Peek again',
+    look: 'Let’s look',
     exitAsk: 'Shall we stop now?',
     keepPlaying: 'Keep playing',
     stop: 'Stop',
@@ -109,6 +111,7 @@ export const en = {
     vocab: 'New words',
     language: 'Story language',
     finish: 'Finish',
+    askChild: 'Ask your child',
     starring: 'Starring {name}',
     yourStories: 'Stories about you',
   },
@@ -176,6 +179,13 @@ export const en = {
   },
   speak: {
     saidIt: 'I said it!',
+  },
+  give: {
+    done: 'Done!',
+    plate: 'The plate',
+  },
+  syllables: {
+    drum: 'Drum',
   },
   pillars: {
     title: 'Four pillars of learning',
@@ -628,12 +638,28 @@ export const en = {
       f: ['Great job!', 'You did it!', 'Wonderful!', 'Super!', 'Well done, @name!', 'You’re a superstar!'],
       n: ['Great job!', 'You did it!', 'Wonderful!', 'Super!'],
     },
+    /** Praise that names what the child just did, per activity template (young children learn more from it than from "great!"). */
+    praiseBy: {
+      choice: ['You looked carefully!', 'You found it by yourself!'],
+      count: ['You counted one by one!', 'You counted every single one!'],
+      match: ['You found the pair!', 'You spotted the two that go together!'],
+      memory: ['You remembered where it was!', 'You kept it in your mind!'],
+      sequence: ['You put them in the right order!', 'You worked out what comes next!'],
+      sort: ['You put everything in its place!', 'You sorted them just right!'],
+      trace: ['You followed the arrow with your finger!', 'You traced it all the way!'],
+      speak: ['You said it loud and clear!', 'You listened and said it back!'],
+      syllables: ['You counted one by one!', 'You counted every single one!'],
+      lesson: ['You learned something new!', 'You looked, listened and understood!'],
+      give: ['You counted one by one!'],
+    },
     tryAgain: ['Let’s try again!', 'Almost! Let’s try once more.'],
     hint: 'Let’s look together.',
     complete: { m: 'We finished! Well done, @name!', f: 'We finished! Well done, @name!', n: 'We finished! Well done!' },
     sticker: 'A new sticker for you!',
     rest: 'We learned so much today. Let’s rest and play again later!',
     countTogether: 'Let’s count together!',
+    clapHowMany: 'How many claps?',
+    clapTogether: 'Let’s clap together, slowly!',
     storyQuestions: 'Let’s answer some questions!',
     drawHello: 'Let’s draw!',
     saved: 'Your drawing is saved!',
@@ -647,6 +673,23 @@ export const en = {
     chooseIslamic: 'What shall we learn about our faith today?',
     chooseScience: 'What shall we discover about our world today?',
     chooseLogic: 'Which idea shall we learn today?',
+    chooseFeeling: 'Which feeling shall we get to know today?',
     numbers: ['one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten'],
+    /**
+     * Discover lesson steps (the caption a grown-up reads when the voice is off).
+     * {focus} = the letter's name, {word} = an example word, {n} = a number word.
+     */
+    lesson: {
+      examples: 'Look! The letter {focus} is at the start of {word}.',
+      examplesIn: 'Look! The letter {focus} is in {word}.',
+      examplesAll: 'Look! Here are words with the letter {focus}.',
+      look: 'Look at these pictures!',
+      lookAt: 'Look! {word}!',
+      trace: 'Let’s write the letter {focus} with our finger!',
+      count: 'Let’s count together up to {n}!',
+      countOne: 'Let’s count it together!',
+      /** The number words in the count line. */
+      countTo: ['one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten'],
+    },
   },
 }

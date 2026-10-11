@@ -134,6 +134,37 @@
   text-align: center;
 }
 
+/* Dialogic reading: a calm, smaller question for the grown-up to ask. */
+.askWrap {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 10px;
+  max-width: 900px;
+  width: 100%;
+  margin: 0 auto;
+}
+.askBtn {
+  flex: none;
+}
+.ask {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin: 0;
+  padding: 8px 16px;
+  border-radius: var(--radius);
+  border: 2px dashed var(--line);
+  color: var(--ink-soft);
+  font-size: clamp(1rem, 2.4vw, 1.2rem);
+  line-height: 1.6;
+  text-align: center;
+}
+.askLabel {
+  font-size: 0.8em;
+  font-weight: 700;
+}
+
 .word {
   padding: 0 6px;
   border-radius: 10px;

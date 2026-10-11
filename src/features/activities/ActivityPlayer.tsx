@@ -2,7 +2,7 @@ import { type CSSProperties, useCallback, useEffect, useMemo, useRef, useState }
 import { useNavigate, useParams, useSearchParams } from 'react-router-dom'
 import { useApp } from '../../app/AppState'
 import { activityAvailable, activityById, activityLang, content } from '../../content/loader'
-import type { Activity, AnyItem, ChoiceItem, CountItem, MatchItem, LessonItem, MemoryItem, MovementBreak, Reward, SequenceItem, SortItem, SpeakItem, TraceItem } from '../../content/schemas'
+import type { Activity, AnyItem, ChoiceItem, CountItem, MatchItem, LessonItem, MemoryItem, MovementBreak, Reward, SequenceItem, SortItem, SpeakItem, SyllablesItem, TraceItem } from '../../content/schemas'
 import { Mascot, type MascotMood } from '../../design/Mascot'
 import { Button, IconButton, Screen, SpeechBubble } from '../../design/ui'
 import { Visual } from '../../design/Visual'
@@ -20,6 +20,8 @@ import { forRecommend, iconFor, introducedSkills, journeyCompleted, lessonActivi
 import s from './activities.module.css'
 import { VoiceToggle } from '../VoiceToggle'
 import { CompletionView } from './CompletionView'
+import { itemSay } from './itemSay'
+import { praiseLine } from './praise'
 import { ChoiceTemplate } from './templates/ChoiceTemplate'
 import { CountTemplate } from './templates/CountTemplate'
 import { MatchTemplate } from './templates/MatchTemplate'
@@ -29,6 +31,9 @@ import { LessonTemplate } from './templates/LessonTemplate'
 import { TraceTemplate } from './templates/TraceTemplate'
 import { SortTemplate } from './templates/SortTemplate'
 import { SpeakTemplate } from './templates/SpeakTemplate'
+import { SyllablesTemplate } from './templates/SyllablesTemplate'
+import { GiveTemplate } from './templates/GiveTemplate'
+import type { GiveItem } from '../../content/schemas'
 
 export function ActivityPlayer() {
   const { activityId } = useParams()
@@ -70,7 +75,7 @@ interface DoneInfo {
  * Each finished task is saved immediately, so leaving early never loses progress.
  */
 function Session({ activity, chosenItem, onAgain }: { activity: Activity; chosenItem?: string; onAgain: () => void }) {
-  const { settings, t, langs, usage, age } = useApp()
+  const { settings, t, langs, usage, age, profile } = useApp()
   const navigate = useNavigate()
   const lang: Lang = activityLang(activity, settings.practiceLang)
   const v = voice(lang)
@@ -82,6 +87,8 @@ function Session({ activity, chosenItem, onAgain }: { activity: Activity; chosen
   const [burst, setBurst] = useState(0)
   const [bigBurst, setBigBurst] = useState(false)
   const streak = useRef(0)
+  /** Correct answers so far: praise alternates between naming what the child did and a plain cheer. */
+  const corrects = useRef(0)
   const lastActive = useRef(Date.now())
   const lastPoint = useRef<{ x: number; y: number } | null>(null)
   /** A star that flies from where the child answered to her stone on the path. */
@@ -126,7 +133,7 @@ function Session({ activity, chosenItem, onAgain }: { activity: Activity; chosen
         ? [chosen as AnyItem]
         : activity.template === 'lesson'
           ? // Discover: the next new concept, in curriculum order.
-            pickLessonItems<AnyItem>(activity.items, taken.get(activity.id) ?? new Set(), activity.sessionLength)
+            pickLessonItems<AnyItem>(activity.items, taken.get(activity.id) ?? new Set(), activity.sessionLength, level)
           : // Practice: focus on what Discover lessons already introduced.
             pickSessionItems<AnyItem>(activity.items, { lang, level, mastery, now: Date.now(), count: Math.min(activity.sessionLength, age.sessionCap), rng: defaultRng, focusSkills: introducedSkills(taken) })
       if (cancelled) return
@@ -151,7 +158,8 @@ function Session({ activity, chosenItem, onAgain }: { activity: Activity; chosen
   const item = items[index]
   // Templates with several steps (Discover lessons) can update the current instruction.
   const [stepInstruction, setStepInstruction] = useState<string | null>(null)
-  const instruction = stepInstruction ?? (item ? pick(item.say, lang) : '')
+  const gender = profile.gender
+  const instruction = stepInstruction ?? (item ? itemSay(item, lang, gender) : '')
   const hintLevel = Math.min(3, misses + helps)
   const selfNarrating = activity.template === 'lesson'
 
@@ -163,9 +171,10 @@ function Session({ activity, chosenItem, onAgain }: { activity: Activity; chosen
     // Self-narrating templates (lessons) set their own caption per step; their effects run first.
     if (selfNarrating) return
     setStepInstruction(null)
-    setBubble(pick(item.say, lang))
-    void audio.speak(pick(item.say, lang), lang)
-  }, [phase, index, item, lang, selfNarrating])
+    const say = itemSay(item, lang, gender)
+    setBubble(say)
+    void audio.speak(say, lang)
+  }, [phase, index, item, lang, selfNarrating, gender])
 
   // Gentle idle helper: if the child goes quiet, Hala repeats the question and the options
   // wiggle. Never counted as a mistake; younger children get it sooner (age profile).
@@ -232,7 +241,10 @@ function Session({ activity, chosenItem, onAgain }: { activity: Activity; chosen
       setBigBurst(big)
       flyStar(index)
       audio.sfx(big ? 'sparkle' : 'correct')
-      const praise = big ? v.streak : randomLine(v.praise)
+      corrects.current += 1
+      // A quick look is recognised at a glance, not counted: praise the looking.
+      const quickLook = activity.template === 'count' && 'layout' in item && item.layout === 'dice'
+      const praise = big ? v.streak : praiseLine(quickLook ? 'choice' : activity.template, corrects.current, v)
       // Voice off: the grown-up needs the "that's …" line on screen too, and a moment to read it.
       setBubble(parentReads && say ? `${say} ${praise}` : praise)
       void recordItemResult({
@@ -318,7 +330,7 @@ function Session({ activity, chosenItem, onAgain }: { activity: Activity; chosen
     )
   }
 
-  const props = { lang, hintLevel, locked, onCorrect, onWrong, onInstruction, rng: defaultRng }
+  const props = { lang, hintLevel, locked, onCorrect, onWrong, onInstruction, onHelp, rng: defaultRng }
 
   return (
     <Screen>
@@ -439,5 +451,9 @@ function TaskView({ activity, item, pool, ...props }: { activity: Activity; item
       return <SortTemplate item={item as SortItem} {...props} />
     case 'speak':
       return <SpeakTemplate item={item as SpeakItem} {...props} />
+    case 'syllables':
+      return <SyllablesTemplate item={item as SyllablesItem} {...props} />
+    case 'give':
+      return <GiveTemplate item={item as GiveItem} {...props} />
   }
 }

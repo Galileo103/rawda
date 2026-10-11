@@ -151,3 +151,63 @@
 .ready {
   animation: glow 1.6s ease-in-out infinite;
 }
+
+/* Calm step: the turtle breathes in… and out… slowly (about 6 s a breath). */
+.calm {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: min(62vw, 40dvh, 320px);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  border: 6px solid var(--leaf);
+  background: radial-gradient(circle at 50% 45%, #fff 0%, var(--leaf-soft) 80%);
+  box-shadow: var(--shadow-soft);
+  cursor: pointer;
+}
+.calmGlow {
+  position: absolute;
+  inset: 12%;
+  border-radius: 50%;
+  background: var(--leaf);
+  opacity: 0.18;
+}
+.calmTurtle {
+  position: relative;
+  display: grid;
+  place-items: center;
+}
+.calmGlow.breathe {
+  animation: breatheGlow 6s ease-in-out infinite;
+}
+.calmTurtle.breathe {
+  animation: breathe 6s ease-in-out infinite;
+}
+@keyframes breathe {
+  0%,
+  100% {
+    transform: scale(0.9);
+  }
+  50% {
+    transform: scale(1.08);
+  }
+}
+@keyframes breatheGlow {
+  0%,
+  100% {
+    transform: scale(0.75);
+    opacity: 0.12;
+  }
+  50% {
+    transform: scale(1.12);
+    opacity: 0.3;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .breathe {
+    animation: none !important;
+  }
+}
+:global(:root[data-motion='reduced']) .breathe {
+  animation: none !important;
+}

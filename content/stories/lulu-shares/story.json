@@ -8,32 +8,38 @@
     {
       "scene": { "bg": "meadow", "actors": [ { "lex": "cat", "x": 32, "y": 64, "size": "lg", "motion": "bounce" }, { "lex": "tree", "x": 76, "y": 52, "size": "lg" }, { "lex": "sun", "x": 88, "y": 16, "size": "md", "motion": "sway" } ] },
       "text": { "ar": "هَذِهِ {قِطَّةٌ} صَغِيرَةٌ، اسْمُهَا لُولُو.", "en": "This is a little {cat}. Her name is Lulu." },
-      "vocab": ["cat"]
+      "vocab": ["cat"],
+      "prompt": { "ar": "مَاذَا تُحِبُّ الْقِطَطُ أَنْ تَفْعَلَ؟", "en": "What do cats like to do?" }
     },
     {
       "scene": { "bg": "garden", "actors": [ { "lex": "cat", "x": 26, "y": 62, "size": "lg" }, { "lex": "apple", "x": 58, "y": 70, "size": "sm", "motion": "bounce" }, { "lex": "apple", "x": 70, "y": 72, "size": "sm", "motion": "bounce" }, { "lex": "apple", "x": 82, "y": 70, "size": "sm", "motion": "bounce" } ] },
       "text": { "ar": "عِنْدَ لُولُو ثَلَاثُ {تُفَّاحَاتٍ} حَمْرَاءَ.", "en": "Lulu has three red {apples}." },
-      "vocab": ["apple"]
+      "vocab": ["apple"],
+      "prompt": { "ar": "كَمْ تُفَّاحَةً عِنْدَ لُولُو؟ هَيَّا نَعُدُّ!", "en": "How many apples does Lulu have? Let’s count!" }
     },
     {
       "scene": { "bg": "meadow", "actors": [ { "lex": "cat", "x": 24, "y": 64, "size": "md" }, { "lex": "rabbit", "x": 70, "y": 62, "size": "lg", "motion": "sway", "flip": true }, { "lex": "sad", "x": 70, "y": 24, "size": "sm" } ] },
       "text": { "ar": "جَاءَ {الْأَرْنَبُ}. الْأَرْنَبُ جَائِعٌ.", "en": "Here comes {Rabbit}. Rabbit is hungry." },
-      "vocab": ["rabbit", "sad"]
+      "vocab": ["rabbit", "sad"],
+      "prompt": { "ar": "كَيْفَ يَشْعُرُ الْأَرْنَبُ؟ لِمَاذَا؟", "en": "How does Rabbit feel? Why?" }
     },
     {
       "scene": { "bg": "meadow", "actors": [ { "lex": "cat", "x": 32, "y": 62, "size": "lg" }, { "lex": "apple", "x": 51, "y": 56, "size": "sm", "motion": "bounce" }, { "lex": "rabbit", "x": 70, "y": 62, "size": "lg", "flip": true } ] },
       "text": { "ar": "أَعْطَتْ لُولُو الْأَرْنَبَ {تُفَّاحَةً}.", "en": "Lulu gives Rabbit an {apple}." },
-      "vocab": ["apple"]
+      "vocab": ["apple"],
+      "prompt": { "ar": "مَاذَا سَيَقُولُ الْأَرْنَبُ؟", "en": "What will Rabbit say?" }
     },
     {
       "scene": { "bg": "garden", "actors": [ { "lex": "cat", "x": 33, "y": 62, "size": "lg", "motion": "bounce" }, { "lex": "rabbit", "x": 67, "y": 62, "size": "lg", "motion": "bounce", "flip": true }, { "lex": "heart", "x": 50, "y": 26, "size": "md", "motion": "bounce" } ] },
       "text": { "ar": "فَرِحَ الْأَرْنَبُ وَقَالَ: شُكْرًا يَا لُولُو!", "en": "Rabbit is happy. “Thank you, Lulu!”" },
-      "vocab": ["happy", "heart"]
+      "vocab": ["happy", "heart"],
+      "prompt": { "ar": { "m": "مَاذَا تَقُولُ عِنْدَمَا يُعْطِيكَ أَحَدٌ شَيْئًا؟", "f": "مَاذَا تَقُولِينَ عِنْدَمَا يُعْطِيكِ أَحَدٌ شَيْئًا؟" }, "en": "What do you say when someone gives you something?" }
     },
     {
       "scene": { "bg": "sky", "actors": [ { "lex": "cat", "x": 34, "y": 62, "size": "lg" }, { "lex": "rabbit", "x": 64, "y": 62, "size": "lg", "flip": true }, { "lex": "rainbow", "x": 50, "y": 22, "size": "lg" } ] },
       "text": { "ar": "الْمُشَارَكَةُ تَجْعَلُنَا {سُعَدَاءَ}.", "en": "Sharing makes us {happy}." },
-      "vocab": ["happy"]
+      "vocab": ["happy"],
+      "prompt": { "ar": { "m": "مَعَ مَنْ تُحِبُّ أَنْ تُشَارِكَ؟", "f": "مَعَ مَنْ تُحِبِّينَ أَنْ تُشَارِكِي؟" }, "en": "Who do you like to share with?" }
     }
   ],
   "questions": [

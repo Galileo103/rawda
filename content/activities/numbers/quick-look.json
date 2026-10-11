@@ -1,0 +1,25 @@
+{
+  "id": "quick-look",
+  "areaId": "numbers",
+  "template": "count",
+  "langs": "any",
+  "level": 2,
+  "order": 2.5,
+  "sessionLength": 5,
+  "icon": { "kind": "img", "hex": "1F440" },
+  "title": { "ar": "نَظْرَةٌ سَرِيعَةٌ", "en": "Quick look" },
+  "intro": { "ar": "تَظْهَرُ الْأَشْيَاءُ قَلِيلًا ثُمَّ تَخْتَبِئُ. نَنْظُرُ جَيِّدًا، وَنَعْرِفُ كَمْ هِيَ مِنْ نَظْرَةٍ وَاحِدَةٍ!", "en": "The things show for a moment, then hide. Let's look closely and know how many with just one look!" },
+  "items": [
+    { "id": "ql-apple-1", "skill": "num.subitize.1", "difficulty": 1, "object": "apple", "count": 1, "layout": "dice", "flashMs": 2000, "say": { "ar": "كَمْ تُفَّاحَةً كَانَتْ هُنَا؟", "en": "How many apples were there?" } },
+    { "id": "ql-star-2", "skill": "num.subitize.2", "difficulty": 1, "object": "star", "count": 2, "layout": "dice", "flashMs": 2000, "say": { "ar": "كَمْ نَجْمَةً كَانَتْ هُنَا؟", "en": "How many stars were there?" } },
+    { "id": "ql-ball-2", "skill": "num.subitize.2", "difficulty": 1, "object": "ball", "count": 2, "layout": "dice", "flashMs": 2000, "say": { "ar": "كَمْ كُرَةً كَانَتْ هُنَا؟", "en": "How many balls were there?" } },
+    { "id": "ql-flower-3", "skill": "num.subitize.3", "difficulty": 1, "object": "flower", "count": 3, "layout": "dice", "flashMs": 2000, "say": { "ar": "كَمْ زَهْرَةً كَانَتْ هُنَا؟", "en": "How many flowers were there?" } },
+    { "id": "ql-balloon-3", "skill": "num.subitize.3", "difficulty": 1, "object": "balloon", "count": 3, "layout": "dice", "flashMs": 2000, "say": { "ar": "كَمْ بَالُونًا كَانَ هُنَا؟", "en": "How many balloons were there?" } },
+    { "id": "ql-fish-4", "skill": "num.subitize.4", "difficulty": 3, "object": "fish", "count": 4, "layout": "dice", "flashMs": 1500, "say": { "ar": "كَمْ سَمَكَةً كَانَتْ هُنَا؟", "en": "How many fish were there?" } },
+    { "id": "ql-duck-4", "skill": "num.subitize.4", "difficulty": 3, "object": "duck", "count": 4, "layout": "dice", "flashMs": 1500, "say": { "ar": "كَمْ بَطَّةً كَانَتْ هُنَا؟", "en": "How many ducks were there?" } },
+    { "id": "ql-bee-5", "skill": "num.subitize.5", "difficulty": 3, "object": "bee", "count": 5, "layout": "dice", "flashMs": 1500, "say": { "ar": "كَمْ نَحْلَةً كَانَتْ هُنَا؟", "en": "How many bees were there?" } },
+    { "id": "ql-butterfly-5", "skill": "num.subitize.5", "difficulty": 3, "object": "butterfly", "count": 5, "layout": "dice", "flashMs": 1500, "say": { "ar": "كَمْ فَرَاشَةً كَانَتْ هُنَا؟", "en": "How many butterflies were there?" } },
+    { "id": "ql-car-6", "skill": "num.subitize.6", "difficulty": 4, "object": "car", "count": 6, "layout": "dice", "flashMs": 1500, "say": { "ar": "كَمْ سَيَّارَةً كَانَتْ هُنَا؟", "en": "How many cars were there?" } },
+    { "id": "ql-heart-6", "skill": "num.subitize.6", "difficulty": 4, "object": "heart", "count": 6, "layout": "dice", "flashMs": 1500, "say": { "ar": "كَمْ قَلْبًا كَانَ هُنَا؟", "en": "How many hearts were there?" } }
+  ]
+}

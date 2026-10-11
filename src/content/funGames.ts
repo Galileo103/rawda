@@ -28,8 +28,10 @@ import type { Activity, LexEntry } from './schemas'
 const TASHKEEL = /[ً-ٰٟـ]/g
 const bare = (w: string) => w.replace(TASHKEEL, '').trim()
 
-/** Arabic nouns ending in ة / ات / اة take هَذِهِ and feminine verbs. */
-export const arFeminine = (w: string) => /(ة|ات|اة)$/.test(bare(w))
+/** Feminine nouns with no ة ending (عَيْن، أُذُن، شَمْس، يَد), compared without tashkeel. */
+const AR_FEMININE_WORDS = new Set(['عين', 'أذن', 'شمس', 'يد'])
+/** Arabic nouns ending in ة / ات / اة (or listed above) take هَذِهِ and feminine verbs. */
+export const arFeminine = (w: string) => AR_FEMININE_WORDS.has(bare(w)) || /(ة|ات|اة)$/.test(bare(w))
 /** "قِطَّة" → "القِطَّة"; a noun and its adjective both take it ("شَكْل بَيْضَاوِيّ" → "الشَكْل البَيْضَاوِيّ"). */
 export const arDef = (w: string) =>
   w
@@ -55,9 +57,15 @@ export function letterLessonWords(activities: readonly Activity[], lang: Lang): 
   return out
 }
 
-/** Lesson words that really start with the letter (a lesson may show a word with the letter inside, like "fox" for X). */
+/** Hungry Monster only eats things: never people or body parts (a police officer, an eye, a tooth). */
+const NOT_FOOD_TAGS = new Set(['person', 'body'])
+export const monsterCanEat = (e: LexEntry) => !(e.tags ?? []).some((t) => NOT_FOOD_TAGS.has(t))
+
+/** Lesson words that really start with the letter (a lesson may show a word with the letter inside, like "fox" for X), minus people and body parts. */
 export function monsterWords(letter: Letter, words: readonly string[], lexicon: ReadonlyMap<string, LexEntry>, lang: Lang): LexEntry[] {
-  return words.map((w) => lexicon.get(w)).filter((e): e is LexEntry => !!e && firstLetterOf(e[lang], lang) === firstLetterOf(letter.glyph, lang))
+  return words
+    .map((w) => lexicon.get(w))
+    .filter((e): e is LexEntry => !!e && monsterCanEat(e) && firstLetterOf(e[lang], lang) === firstLetterOf(letter.glyph, lang))
 }
 
 // ---- Silly Hala ----
@@ -79,11 +87,8 @@ export const sillyRevealLetter = (l: Letter, d: Dict) => fmt(fun(d).sillyRevealL
 export const sillyClaimCount = (n: number, d: Dict) => fmt(fun(d).sillyCount, { number: numberName(n, d) })
 export const sillyRevealCount = (n: number, d: Dict) => fmt(fun(d).sillyRevealCount, { number: numberName(n, d) })
 
-/** Letters that look alike, so Hala's mistakes are believable (ب/ت/ث/ن, b/d/p…). */
-export const LOOKALIKE: Record<Lang, Record<string, string>> = {
-  ar: { ب: 'تثن', ت: 'بثن', ث: 'بتن', ن: 'بت', ج: 'حخ', ح: 'جخ', خ: 'جح', د: 'ذ', ذ: 'د', ر: 'ز', ز: 'ر', س: 'ش', ش: 'س', ص: 'ض', ض: 'ص', ط: 'ظ', ظ: 'ط', ع: 'غ', غ: 'ع', ف: 'ق', ق: 'ف' },
-  en: { B: 'DP', D: 'BO', P: 'BR', Q: 'O', M: 'NW', N: 'MH', W: 'MV', V: 'WU', C: 'OG', O: 'CQ', E: 'FB', F: 'ET', T: 'FI', H: 'NA', U: 'VN' },
-}
+/** Letters that look alike, so Hala's mistakes are believable (ب/ت/ث/ن, b/d/p…). Shared with lesson checks. */
+export { LOOKALIKE } from './confusables'
 
 // ---- Hungry Monster ----
 

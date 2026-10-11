@@ -8,32 +8,38 @@
     {
       "scene": { "bg": "garden", "actors": [ { "lex": "girl", "x": 30, "y": 60, "size": "lg" }, { "lex": "seed", "x": 62, "y": 74, "size": "sm", "motion": "bounce" } ] },
       "text": { "ar": "زَرَعَتْ سَلْمَى {بِذْرَةً} صَغِيرَةً فِي الْحَدِيقَةِ.", "en": "Salma planted a little {seed} in the garden." },
-      "vocab": ["seed", "girl"]
+      "vocab": ["seed", "girl"],
+      "prompt": { "ar": "مَاذَا سَيَحْدُثُ لِلْبِذْرَةِ؟", "en": "What will happen to the seed?" }
     },
     {
       "scene": { "bg": "garden", "actors": [ { "lex": "girl", "x": 30, "y": 60, "size": "lg" }, { "lex": "water", "x": 58, "y": 48, "size": "sm", "motion": "bounce" }, { "lex": "seed", "x": 62, "y": 74, "size": "sm" } ] },
       "text": { "ar": "سَقَتْ سَلْمَى الْبِذْرَةَ {بِالْمَاءِ}.", "en": "Salma gave the seed some {water}." },
-      "vocab": ["water"]
+      "vocab": ["water"],
+      "prompt": { "ar": "مَاذَا تَحْتَاجُ الْبِذْرَةُ لِتَكْبَرَ؟", "en": "What does a seed need to grow?" }
     },
     {
       "scene": { "bg": "meadow", "actors": [ { "lex": "sun", "x": 80, "y": 18, "size": "md", "motion": "sway" }, { "lex": "seed", "x": 50, "y": 72, "size": "sm" } ] },
       "text": { "ar": "أَعْطَتِ {الشَّمْسُ} الْبِذْرَةَ دِفْئًا وَنُورًا.", "en": "The {sun} gave the seed warmth and light." },
-      "vocab": ["sun"]
+      "vocab": ["sun"],
+      "prompt": { "ar": "أَيْنَ الشَّمْسُ؟ هَلْ هِيَ دَافِئَةٌ؟", "en": "Where is the sun? Is it warm?" }
     },
     {
       "scene": { "bg": "garden", "actors": [ { "lex": "girl", "x": 28, "y": 60, "size": "lg" }, { "lex": "seedling", "x": 62, "y": 70, "size": "md", "motion": "bounce" } ] },
       "text": { "ar": "انْتَظَرَتْ سَلْمَى بِصَبْرٍ، فَخَرَجَتْ {نَبْتَةٌ} خَضْرَاءُ صَغِيرَةٌ!", "en": "Salma waited patiently, and a little green {sprout} came up!" },
-      "vocab": ["seedling"]
+      "vocab": ["seedling"],
+      "prompt": { "ar": { "m": "هَلِ انْتَظَرْتَ شَيْئًا بِصَبْرٍ مِثْلَ سَلْمَى؟", "f": "هَلِ انْتَظَرْتِ شَيْئًا بِصَبْرٍ مِثْلَ سَلْمَى؟" }, "en": "Have you ever waited patiently, like Salma?" }
     },
     {
       "scene": { "bg": "garden", "actors": [ { "lex": "sunflower", "x": 50, "y": 56, "size": "lg", "motion": "sway" }, { "lex": "bee", "x": 74, "y": 30, "size": "sm", "motion": "bounce" }, { "lex": "butterfly", "x": 26, "y": 34, "size": "sm", "motion": "bounce" } ] },
       "text": { "ar": "كَبِرَتِ النَّبْتَةُ وَصَارَتْ {زَهْرَةً} كَبِيرَةً جَمِيلَةً.", "en": "The sprout grew into a big, beautiful {flower}." },
-      "vocab": ["sunflower", "bee", "butterfly"]
+      "vocab": ["sunflower", "bee", "butterfly"],
+      "prompt": { "ar": "أَيْنَ النَّحْلَةُ؟ وَأَيْنَ الْفَرَاشَةُ؟", "en": "Where is the bee? And the butterfly?" }
     },
     {
       "scene": { "bg": "sky", "actors": [ { "lex": "girl", "x": 32, "y": 60, "size": "lg", "motion": "bounce" }, { "lex": "sunflower", "x": 66, "y": 58, "size": "lg" }, { "lex": "sun", "x": 86, "y": 16, "size": "md" } ] },
       "text": { "ar": "فَرِحَتْ سَلْمَى كَثِيرًا. الصَّبْرُ يَأْتِي بِأَشْيَاءَ جَمِيلَةٍ.", "en": "Salma was so happy. Waiting patiently brings beautiful things." },
-      "vocab": ["happy"]
+      "vocab": ["happy"],
+      "prompt": { "ar": "كَيْفَ تَشْعُرُ سَلْمَى؟ لِمَاذَا؟", "en": "How does Salma feel? Why?" }
     }
   ],
   "questions": [

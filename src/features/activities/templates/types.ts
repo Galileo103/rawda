@@ -21,5 +21,7 @@ export interface TemplateProps<I> {
   onWrong: () => void
   /** Multi-step templates: the instruction for the current step (caption, replay, try-again). */
   onInstruction?: (text: string) => void
+  /** Ask for help from inside the task (e.g. "peek again"): the same path as the help button. */
+  onHelp?: () => void
   rng: Rng
 }

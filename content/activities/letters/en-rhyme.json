@@ -1,0 +1,24 @@
+{
+  "id": "en-rhyme",
+  "areaId": "letters",
+  "template": "choice",
+  "langs": "en",
+  "level": 3,
+  "order": 6,
+  "sessionLength": 6,
+  "icon": { "kind": "lex", "id": "hat" },
+  "title": { "en": "Rhyming words" },
+  "intro": { "en": "Some words sound the same at the end: cat, hat! Let's listen and find them." },
+  "items": [
+    { "id": "cat-hat", "skill": "en.rhyme", "difficulty": 1, "say": { "en": "Which word rhymes with cat?" }, "show": { "kind": "lex", "id": "cat" }, "answer": { "kind": "lex", "id": "hat" }, "choices": [ { "kind": "lex", "id": "hat" }, { "kind": "lex", "id": "dog" }, { "kind": "lex", "id": "sun" } ], "sayAfter": { "en": "Cat, hat!" } },
+    { "id": "dog-frog", "skill": "en.rhyme", "difficulty": 1, "say": { "en": "Which word rhymes with dog?" }, "show": { "kind": "lex", "id": "dog" }, "answer": { "kind": "lex", "id": "frog" }, "choices": [ { "kind": "lex", "id": "frog" }, { "kind": "lex", "id": "cat" }, { "kind": "lex", "id": "bee" } ], "sayAfter": { "en": "Dog, frog!" } },
+    { "id": "bee-tree", "skill": "en.rhyme", "difficulty": 1, "say": { "en": "Which word rhymes with bee?" }, "show": { "kind": "lex", "id": "bee" }, "answer": { "kind": "lex", "id": "tree" }, "choices": [ { "kind": "lex", "id": "tree" }, { "kind": "lex", "id": "fish" }, { "kind": "lex", "id": "car" } ], "sayAfter": { "en": "Bee, tree!" } },
+    { "id": "star-car", "skill": "en.rhyme", "difficulty": 2, "say": { "en": "Which word rhymes with star?" }, "show": { "kind": "lex", "id": "star" }, "answer": { "kind": "lex", "id": "car" }, "choices": [ { "kind": "lex", "id": "car" }, { "kind": "lex", "id": "fish" }, { "kind": "lex", "id": "hat" } ], "sayAfter": { "en": "Star, car!" } },
+    { "id": "fox-box", "skill": "en.rhyme", "difficulty": 2, "say": { "en": "Which word rhymes with fox?" }, "show": { "kind": "lex", "id": "fox" }, "answer": { "kind": "lex", "id": "box" }, "choices": [ { "kind": "lex", "id": "box" }, { "kind": "lex", "id": "cat" }, { "kind": "lex", "id": "tree" } ], "sayAfter": { "en": "Fox, box!" } },
+    { "id": "house-mouse", "skill": "en.rhyme", "difficulty": 2, "say": { "en": "Which word rhymes with house?" }, "show": { "kind": "lex", "id": "house" }, "answer": { "kind": "lex", "id": "mouse" }, "choices": [ { "kind": "lex", "id": "mouse" }, { "kind": "lex", "id": "dog" }, { "kind": "lex", "id": "egg" } ], "sayAfter": { "en": "House, mouse!" } },
+    { "id": "goat-boat", "skill": "en.rhyme", "difficulty": 3, "say": { "en": "Which word rhymes with goat?" }, "show": { "kind": "lex", "id": "goat" }, "answer": { "kind": "lex", "id": "boat" }, "choices": [ { "kind": "lex", "id": "boat" }, { "kind": "lex", "id": "cow" }, { "kind": "lex", "id": "fish" } ], "sayAfter": { "en": "Goat, boat!" } },
+    { "id": "bear-pear", "skill": "en.rhyme", "difficulty": 3, "say": { "en": "Which word rhymes with bear?" }, "show": { "kind": "lex", "id": "bear" }, "answer": { "kind": "lex", "id": "pear" }, "choices": [ { "kind": "lex", "id": "pear" }, { "kind": "lex", "id": "apple" }, { "kind": "lex", "id": "dog" } ], "sayAfter": { "en": "Bear, pear!" } },
+    { "id": "moon-spoon", "skill": "en.rhyme", "difficulty": 3, "say": { "en": "Which word rhymes with moon?" }, "show": { "kind": "lex", "id": "crescent" }, "answer": { "kind": "lex", "id": "spoon" }, "choices": [ { "kind": "lex", "id": "spoon" }, { "kind": "lex", "id": "sun" }, { "kind": "lex", "id": "star" } ], "sayAfter": { "en": "Moon, spoon!" } },
+    { "id": "cake-snake", "skill": "en.rhyme", "difficulty": 4, "say": { "en": "Which word rhymes with cake?" }, "show": { "kind": "lex", "id": "cake" }, "answer": { "kind": "lex", "id": "snake" }, "choices": [ { "kind": "lex", "id": "snake" }, { "kind": "lex", "id": "bee" }, { "kind": "lex", "id": "ball" } ], "sayAfter": { "en": "Cake, snake!" } }
+  ]
+}

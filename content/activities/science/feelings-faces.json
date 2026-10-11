@@ -1,0 +1,23 @@
+{
+  "id": "feelings-faces",
+  "areaId": "science",
+  "template": "choice",
+  "langs": "any",
+  "level": 1,
+  "order": 7,
+  "sessionLength": 4,
+  "icon": { "kind": "lex", "id": "calm" },
+  "title": { "ar": "وُجُوهٌ وَمَشَاعِرُ", "en": "Faces and feelings" },
+  "intro": { "ar": "كُلُّ شُعُورٍ طَبِيعِيٌّ. هَيَّا نَعْرِفُ الْمَشَاعِرَ مِنَ الْوُجُوهِ!", "en": "Every feeling is okay. Let's find the feelings on the faces!" },
+  "items": [
+    { "id": "face-happy", "skill": "sci.feelings.happy", "difficulty": 1, "say": { "ar": "أَيْنَ الْوَجْهُ السَّعِيدُ؟", "en": "Where is the happy face?" }, "answer": { "kind": "lex", "id": "happy" }, "choices": [ { "kind": "lex", "id": "happy" }, { "kind": "lex", "id": "sad" } ] },
+    { "id": "face-sad", "skill": "sci.feelings.sad", "difficulty": 1, "say": { "ar": "أَيْنَ الْوَجْهُ الْحَزِينُ؟", "en": "Where is the sad face?" }, "answer": { "kind": "lex", "id": "sad" }, "choices": [ { "kind": "lex", "id": "sad" }, { "kind": "lex", "id": "happy" } ], "sayAfter": { "ar": "نَحْزَنُ أَحْيَانًا، وَهَذَا طَبِيعِيٌّ.", "en": "Sometimes we feel sad, and that's okay." } },
+    { "id": "face-angry", "skill": "sci.feelings.angry", "difficulty": 1, "say": { "ar": "أَيْنَ الْوَجْهُ الْغَاضِبُ؟", "en": "Where is the angry face?" }, "answer": { "kind": "lex", "id": "angry" }, "choices": [ { "kind": "lex", "id": "angry" }, { "kind": "lex", "id": "calm" } ], "sayAfter": { "ar": "عِنْدَمَا نَغْضَبُ، نَتَنَفَّسُ بِبُطْءٍ مِثْلَ السُّلَحْفَاةِ.", "en": "When we feel angry, we breathe slowly like a turtle." } },
+    { "id": "face-scared", "skill": "sci.feelings.scared", "difficulty": 1, "say": { "ar": "أَيْنَ الْوَجْهُ الْخَائِفُ؟", "en": "Where is the scared face?" }, "answer": { "kind": "lex", "id": "scared" }, "choices": [ { "kind": "lex", "id": "scared" }, { "kind": "lex", "id": "happy" } ], "sayAfter": { "ar": "عِنْدَمَا نَخَافُ، نَطْلُبُ حُضْنًا مِمَّنْ نُحِبُّ.", "en": "When we feel scared, we ask someone we love for a hug." } },
+    { "id": "face-tired", "skill": "sci.feelings.tired", "difficulty": 1, "say": { "ar": "أَيْنَ الْوَجْهُ الْمُتْعَبُ؟", "en": "Where is the tired face?" }, "answer": { "kind": "lex", "id": "tired" }, "choices": [ { "kind": "lex", "id": "tired" }, { "kind": "lex", "id": "angry" } ] },
+    { "id": "face-calm", "skill": "sci.feelings.calm", "difficulty": 1, "say": { "ar": "أَيْنَ الْوَجْهُ الْهَادِئُ؟", "en": "Where is the calm face?" }, "answer": { "kind": "lex", "id": "calm" }, "choices": [ { "kind": "lex", "id": "calm" }, { "kind": "lex", "id": "scared" } ] },
+    { "id": "gift-happy", "skill": "sci.feelings.happy", "difficulty": 2, "show": { "kind": "lex", "id": "gift" }, "say": { "ar": "أَخَذْنَا هَدِيَّةً! كَيْفَ نَشْعُرُ؟", "en": "We got a present! How do we feel?" }, "answer": { "kind": "lex", "id": "happy" }, "choices": [ { "kind": "lex", "id": "happy" }, { "kind": "lex", "id": "sad" }, { "kind": "lex", "id": "tired" } ] },
+    { "id": "bed-tired", "skill": "sci.feelings.tired", "difficulty": 2, "show": { "kind": "lex", "id": "bed" }, "say": { "ar": "لَعِبْنَا كَثِيرًا، وَنُرِيدُ أَنْ نَنَامَ. كَيْفَ نَشْعُرُ؟", "en": "We played a lot and we want to sleep. How do we feel?" }, "answer": { "kind": "lex", "id": "tired" }, "choices": [ { "kind": "lex", "id": "tired" }, { "kind": "lex", "id": "angry" }, { "kind": "lex", "id": "happy" } ] },
+    { "id": "thunder-scared", "skill": "sci.feelings.scared", "difficulty": 2, "show": { "kind": "lex", "id": "thunder" }, "say": { "ar": "صَوْتُ الرَّعْدِ عَالٍ جِدًّا! كَيْفَ قَدْ نَشْعُرُ؟", "en": "The thunder is very loud! How might we feel?" }, "answer": { "kind": "lex", "id": "scared" }, "choices": [ { "kind": "lex", "id": "scared" }, { "kind": "lex", "id": "happy" }, { "kind": "lex", "id": "tired" } ] }
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "id": "en-last-sound",
+  "areaId": "letters",
+  "template": "choice",
+  "langs": "en",
+  "level": 4,
+  "order": 7,
+  "sessionLength": 6,
+  "icon": { "kind": "lex", "id": "dog" },
+  "title": { "en": "Last sounds" },
+  "intro": { "en": "Every word ends with a sound. Let's listen to the end of the word!" },
+  "items": [
+    { "id": "dog", "skill": "en.lastsound.g", "difficulty": 1, "say": { "en": "Which letter does dog end with?" }, "show": { "kind": "lex", "id": "dog" }, "answer": { "kind": "glyph", "text": "g" }, "choices": [ { "kind": "glyph", "text": "g" }, { "kind": "glyph", "text": "t" }, { "kind": "glyph", "text": "s" } ], "sayAfter": { "en": "Dog ends with g!" } },
+    { "id": "cat", "skill": "en.lastsound.t", "difficulty": 1, "say": { "en": "Which letter does cat end with?" }, "show": { "kind": "lex", "id": "cat" }, "answer": { "kind": "glyph", "text": "t" }, "choices": [ { "kind": "glyph", "text": "t" }, { "kind": "glyph", "text": "m" }, { "kind": "glyph", "text": "s" } ], "sayAfter": { "en": "Cat ends with t!" } },
+    { "id": "sun", "skill": "en.lastsound.n", "difficulty": 1, "say": { "en": "Which letter does sun end with?" }, "show": { "kind": "lex", "id": "sun" }, "answer": { "kind": "glyph", "text": "n" }, "choices": [ { "kind": "glyph", "text": "n" }, { "kind": "glyph", "text": "g" }, { "kind": "glyph", "text": "t" } ], "sayAfter": { "en": "Sun ends with n!" } },
+    { "id": "bus", "skill": "en.lastsound.s", "difficulty": 2, "say": { "en": "Which letter does bus end with?" }, "show": { "kind": "lex", "id": "bus" }, "answer": { "kind": "glyph", "text": "s" }, "choices": [ { "kind": "glyph", "text": "s" }, { "kind": "glyph", "text": "m" }, { "kind": "glyph", "text": "t" } ], "sayAfter": { "en": "Bus ends with s!" } },
+    { "id": "book", "skill": "en.lastsound.k", "difficulty": 2, "say": { "en": "Which letter does book end with?" }, "show": { "kind": "lex", "id": "book" }, "answer": { "kind": "glyph", "text": "k" }, "choices": [ { "kind": "glyph", "text": "k" }, { "kind": "glyph", "text": "n" }, { "kind": "glyph", "text": "g" } ], "sayAfter": { "en": "Book ends with k!" } },
+    { "id": "owl", "skill": "en.lastsound.l", "difficulty": 2, "say": { "en": "Which letter does owl end with?" }, "show": { "kind": "lex", "id": "owl" }, "answer": { "kind": "glyph", "text": "l" }, "choices": [ { "kind": "glyph", "text": "l" }, { "kind": "glyph", "text": "s" }, { "kind": "glyph", "text": "m" } ], "sayAfter": { "en": "Owl ends with l!" } },
+    { "id": "frog", "skill": "en.lastsound.g", "difficulty": 3, "say": { "en": "Which letter does frog end with?" }, "show": { "kind": "lex", "id": "frog" }, "answer": { "kind": "glyph", "text": "g" }, "choices": [ { "kind": "glyph", "text": "g" }, { "kind": "glyph", "text": "d" }, { "kind": "glyph", "text": "n" } ], "sayAfter": { "en": "Frog ends with g!" } },
+    { "id": "bed", "skill": "en.lastsound.d", "difficulty": 4, "say": { "en": "Which letter does bed end with?" }, "show": { "kind": "lex", "id": "bed" }, "answer": { "kind": "glyph", "text": "d" }, "choices": [ { "kind": "glyph", "text": "d" }, { "kind": "glyph", "text": "b" }, { "kind": "glyph", "text": "p" } ], "sayAfter": { "en": "Bed ends with d!" } },
+    { "id": "drum", "skill": "en.lastsound.m", "difficulty": 4, "say": { "en": "Which letter does drum end with?" }, "show": { "kind": "lex", "id": "drum" }, "answer": { "kind": "glyph", "text": "m" }, "choices": [ { "kind": "glyph", "text": "m" }, { "kind": "glyph", "text": "n" }, { "kind": "glyph", "text": "w" } ], "sayAfter": { "en": "Drum ends with m!" } },
+    { "id": "goat", "skill": "en.lastsound.t", "difficulty": 5, "say": { "en": "Which letter does goat end with?" }, "show": { "kind": "lex", "id": "goat" }, "answer": { "kind": "glyph", "text": "t" }, "choices": [ { "kind": "glyph", "text": "t" }, { "kind": "glyph", "text": "f" }, { "kind": "glyph", "text": "l" } ], "sayAfter": { "en": "Goat ends with t!" } }
+  ]
+}

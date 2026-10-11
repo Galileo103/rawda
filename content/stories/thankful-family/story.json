@@ -1,0 +1,50 @@
+{
+  "id": "thankful-family",
+  "title": {"ar": "مَرْيَمُ تَقُولُ: الْحَمْدُ لِلَّهِ", "en": "Mariam Says Alhamdulillah"},
+  "theme": "gratitude",
+  "level": 1,
+  "cover": {"kind": "lex", "id": "family"},
+  "pages": [
+    {
+      "scene": {"bg": "home", "actors": [{"lex": "father", "x": 22, "y": 58, "size": "lg"}, {"lex": "girl", "x": 50, "y": 64, "size": "md", "motion": "bounce"}, {"lex": "mother", "x": 78, "y": 58, "size": "lg", "flip": true}]},
+      "text": {"ar": "هَذِهِ مَرْيَمُ مَعَ {عَائِلَتِهَا} فِي الْبَيْتِ.", "en": "This is Mariam with her {family} at home."},
+      "vocab": ["family"],
+      "prompt": {"ar": {"m": "مَنْ فِي عَائِلَتِكَ؟", "f": "مَنْ فِي عَائِلَتِكِ؟"}, "en": "Who is in your family?"}
+    },
+    {
+      "scene": {"bg": "home", "actors": [{"lex": "father", "x": 26, "y": 58, "size": "lg"}, {"lex": "mother", "x": 74, "y": 58, "size": "lg", "flip": true}, {"lex": "meal", "x": 50, "y": 30, "size": "md", "motion": "sway"}]},
+      "text": {"ar": "حَضَّرَ {الْأَبُ} وَالْأُمُّ الْغَدَاءَ مَعًا.", "en": "{Dad} and Mom made lunch together."},
+      "vocab": ["father", "mother"],
+      "prompt": {"ar": "مَاذَا سَيَأْكُلُونَ؟", "en": "What do you think they will eat?"}
+    },
+    {
+      "scene": {"bg": "home", "actors": [{"lex": "girl", "x": 22, "y": 62, "size": "lg"}, {"lex": "bread", "x": 50, "y": 70, "size": "sm", "motion": "bounce"}, {"lex": "apple", "x": 66, "y": 70, "size": "sm", "motion": "bounce"}, {"lex": "meal", "x": 82, "y": 70, "size": "sm", "motion": "bounce"}]},
+      "text": {"ar": "عَلَى الْمَائِدَةِ {خُبْزٌ} وَ{تُفَّاحٌ} وَطَعَامٌ لَذِيذٌ.", "en": "On the table there is {bread}, {apples} and yummy food."},
+      "vocab": ["bread", "apple"],
+      "prompt": {"ar": {"m": "مَا الطَّعَامُ الَّذِي تُحِبُّهُ؟", "f": "مَا الطَّعَامُ الَّذِي تُحِبِّينَهُ؟"}, "en": "What food do you love?"}
+    },
+    {
+      "scene": {"bg": "home", "actors": [{"lex": "girl", "x": 30, "y": 62, "size": "lg", "motion": "bounce"}, {"lex": "meal", "x": 66, "y": 66, "size": "md"}, {"lex": "happy", "x": 30, "y": 24, "size": "sm", "motion": "bounce"}]},
+      "text": {"ar": "أَكَلَتْ مَرْيَمُ حَتَّى شَبِعَتْ. {الطَّعَامُ} لَذِيذٌ!", "en": "Mariam ate until she was full. The {food} is yummy!"},
+      "vocab": ["meal"],
+      "prompt": {"ar": "كَيْفَ تَشْعُرُ مَرْيَمُ بَعْدَ الْأَكْلِ؟", "en": "How does Mariam feel after eating?"}
+    },
+    {
+      "scene": {"bg": "home", "actors": [{"lex": "girl", "x": 30, "y": 62, "size": "lg"}, {"lex": "family", "x": 70, "y": 58, "size": "lg"}, {"lex": "heart", "x": 50, "y": 22, "size": "sm", "motion": "bounce"}]},
+      "text": {"ar": "قَالَتْ مَرْيَمُ: الْحَمْدُ لِلَّهِ عَلَى الطَّعَامِ وَعَلَى {عَائِلَتِي}!", "en": "Mariam said: “Alhamdulillah for the food and for my {family}!”"},
+      "vocab": ["family"],
+      "prompt": {"ar": {"m": "عَلَى أَيِّ شَيْءٍ تَقُولُ: الْحَمْدُ لِلَّهِ؟", "f": "عَلَى أَيِّ شَيْءٍ تَقُولِينَ: الْحَمْدُ لِلَّهِ؟"}, "en": "What are you thankful for?"}
+    },
+    {
+      "scene": {"bg": "sky", "actors": [{"lex": "father", "x": 22, "y": 58, "size": "lg", "motion": "bounce"}, {"lex": "girl", "x": 50, "y": 64, "size": "md", "motion": "bounce"}, {"lex": "mother", "x": 78, "y": 58, "size": "lg", "motion": "bounce", "flip": true}, {"lex": "heart", "x": 50, "y": 22, "size": "md", "motion": "bounce"}]},
+      "text": {"ar": "ثُمَّ قَالَتْ: شُكْرًا يَا أُمِّي، شُكْرًا يَا أَبِي! وَامْتَلَأَ الْبَيْتُ {بِالْحُبِّ}.", "en": "Then she said: “Thank you, Mom! Thank you, Dad!” And the home was full of {love}."},
+      "vocab": ["heart"],
+      "prompt": {"ar": {"m": "لِمَنْ تَقُولُ: شُكْرًا؟", "f": "لِمَنْ تَقُولِينَ: شُكْرًا؟"}, "en": "Who do you say thank you to?"}
+    }
+  ],
+  "questions": [
+    {"id": "who", "skill": "story.thankful.who", "difficulty": 1, "say": {"ar": "مَعَ مَنْ أَكَلَتْ مَرْيَمُ؟", "en": "Who did Mariam eat with?"}, "answer": {"kind": "lex", "id": "family"}, "choices": [{"kind": "lex", "id": "family"}, {"kind": "lex", "id": "rabbit"}, {"kind": "lex", "id": "fish"}]},
+    {"id": "said", "skill": "story.thankful.said", "difficulty": 1, "say": {"ar": "مَاذَا قَالَتْ مَرْيَمُ بَعْدَ الْأَكْلِ؟", "en": "What did Mariam say after eating?"}, "answer": {"kind": "phrase", "text": {"ar": "الْحَمْدُ لِلَّهِ", "en": "Alhamdulillah"}}, "choices": [{"kind": "phrase", "text": {"ar": "الْحَمْدُ لِلَّهِ", "en": "Alhamdulillah"}}, {"kind": "phrase", "text": {"ar": "السَّلَامُ عَلَيْكُمْ", "en": "Assalamu alaykum"}}]},
+    {"id": "table", "skill": "story.thankful.table", "difficulty": 1, "say": {"ar": "مَاذَا كَانَ عَلَى الْمَائِدَةِ؟", "en": "What was on the table?"}, "answer": {"kind": "lex", "id": "bread"}, "choices": [{"kind": "lex", "id": "bread"}, {"kind": "lex", "id": "ball"}, {"kind": "lex", "id": "car"}]}
+  ]
+}

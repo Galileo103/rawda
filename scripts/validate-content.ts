@@ -2,9 +2,58 @@
  * npm run validate:content — schema + cross-reference check for everything in /content.
  * Runs before every build; exits non-zero on any problem.
  */
+import type { Lang } from '../src/domain/types'
 import { loadBundle } from './lib/contentFs'
 
 const { bundle, errors } = loadBundle()
+
+/** Letter-lesson examples: each word must contain the lesson's letter, and no two may share a picture. */
+const plain = (s: string) => s.normalize('NFC').replace(/[ً-ٰٟـ]/g, '').toLowerCase()
+for (const a of bundle.activities) {
+  if (a.template !== 'lesson') continue
+  const langs: Lang[] = a.langs === 'any' ? ['ar', 'en'] : [a.langs]
+  for (const item of a.items) {
+    const where = `${a.id}/${item.id}`
+    const seen = new Map<string, string>()
+    for (const id of item.examples) {
+      const word = bundle.lexicon.get(id)
+      if (!word) continue // unknown ids are already reported by the parser
+      if (item.highlight) {
+        for (const lang of langs) {
+          if (!plain(word[lang]).includes(plain(item.highlight)))
+            errors.push(`${where}: example "${id}" (${word[lang]}) does not contain the lesson letter "${item.highlight}"`)
+        }
+      }
+      const other = seen.get(word.image)
+      if (other) errors.push(`${where}: examples "${other}" and "${id}" use the same picture ${word.image}`)
+      else seen.set(word.image, id)
+    }
+  }
+}
+
+/**
+ * Syllable clapping: the parts, joined, must spell the word in that language (tashkeel and spaces
+ * ignored). A doubled letter (shadda) is split across two parts, so بَطَّة = بَطْ + طَة.
+ */
+const spelled = (s: string) =>
+  s
+    .normalize('NFC')
+    .replace(/[ً-ِْ-ٰٟـ]/g, '') // every mark except shadda (U+0651)
+    .replace(/(.)ّ/g, '$1$1')
+    .replace(/[\s'’-]/g, '')
+    .toLowerCase()
+for (const a of bundle.activities) {
+  if (a.template !== 'syllables') continue
+  const langs: Lang[] = a.langs === 'any' ? ['ar', 'en'] : [a.langs]
+  for (const item of a.items) {
+    const word = bundle.lexicon.get(item.word)
+    if (!word) continue
+    for (const lang of langs) {
+      if (spelled(item.parts.join('')) !== spelled(word[lang]))
+        errors.push(`${a.id}/${item.id}: parts "${item.parts.join(' | ')}" do not spell "${word[lang]}" (${lang})`)
+    }
+  }
+}
 
 const items = bundle.activities.reduce((n, a) => n + a.items.length, 0)
 console.log(

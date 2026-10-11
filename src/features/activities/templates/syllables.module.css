@@ -1,0 +1,75 @@
+/* ---- Clap the parts (syllables) ---- */
+.picture {
+  display: grid;
+  place-items: center;
+  padding: 14px 28px;
+  border-radius: var(--radius-l);
+  border: 5px solid var(--sun);
+  background: var(--surface);
+  box-shadow: var(--shadow-soft);
+  cursor: pointer;
+  animation: pop-in 0.3s ease;
+}
+
+.parts {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: clamp(8px, 2vw, 16px);
+  max-width: 100%;
+}
+
+.part {
+  min-width: clamp(72px, 16vw, 110px);
+  padding: 8px 16px;
+  border-radius: var(--radius-m, 18px);
+  border: 4px dashed var(--line);
+  background: var(--surface);
+  color: var(--ink-soft, inherit);
+  font-size: clamp(1.8rem, 5.5vw, 2.8rem);
+  font-weight: 800;
+  line-height: 1.4;
+  text-align: center;
+  opacity: 0.55;
+  transition: transform 0.2s, opacity 0.2s, background 0.2s, border-color 0.2s;
+}
+
+.lit {
+  opacity: 1;
+  border-style: solid;
+  border-color: var(--sun);
+  background: var(--sun-soft, var(--surface));
+  color: inherit;
+  animation: pop-in 0.25s ease;
+}
+
+.drum {
+  display: grid;
+  place-items: center;
+  width: clamp(150px, 34vw, 200px);
+  height: clamp(150px, 34vw, 200px);
+  border-radius: 50%;
+  border: 5px solid var(--line);
+  background: var(--surface);
+  box-shadow: var(--shadow);
+  cursor: pointer;
+  touch-action: manipulation;
+  transition: transform 0.1s;
+}
+.drum:active:not(:disabled) {
+  transform: scale(0.9);
+}
+.drum:disabled {
+  cursor: default;
+  opacity: 0.6;
+}
+.drumReady {
+  border-color: var(--sun);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .picture,
+  .lit {
+    animation: none;
+  }
+}

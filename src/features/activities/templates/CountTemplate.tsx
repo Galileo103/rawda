@@ -1,19 +1,34 @@
-import { useEffect, useRef, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import { useOptionalApp } from '../../../app/AppState'
 import { content } from '../../../content/loader'
 import { ageProfile } from '../../../domain/ageProfile'
 import type { CountItem } from '../../../content/schemas'
 import { Icon } from '../../../design/Icon'
 import { OpenMoji } from '../../../design/Visual'
-import { numeral } from '../../../i18n'
+import { dict, numeral } from '../../../i18n'
 import { audio } from '../../../services/audio/AudioService'
 import { numberWord, voice } from '../../common'
 import s from '../activities.module.css'
 import { numberChoices, optionsToHide } from '../choices'
 import type { TemplateProps } from './types'
 
-/** Count objects (tap each one to count aloud), then pick the number. */
-export function CountTemplate({ item, lang, hintLevel, locked, onCorrect, onWrong, rng }: TemplateProps<CountItem>) {
+/** Standard dice positions on a 3×3 grid ([row, column], 1-based) for 1–6 objects. */
+export const DICE_SPOTS: Record<number, ReadonlyArray<readonly [number, number]>> = {
+  1: [[2, 2]],
+  2: [[1, 1], [3, 3]],
+  3: [[1, 1], [2, 2], [3, 3]],
+  4: [[1, 1], [1, 3], [3, 1], [3, 3]],
+  5: [[1, 1], [1, 3], [2, 2], [3, 1], [3, 3]],
+  6: [[1, 1], [2, 1], [3, 1], [1, 3], [2, 3], [3, 3]],
+}
+
+/**
+ * Count objects (tap each one to count aloud), then pick the number.
+ * `layout: "dice"` is a quick look instead: the objects sit in dice positions and, with
+ * `flashMs`, start covered: the first "look" (after the grown-up has read the question)
+ * shows them for `flashMs` and is free; "peek again" after that counts as a help.
+ */
+export function CountTemplate({ item, lang, hintLevel, locked, onCorrect, onWrong, onHelp, rng }: TemplateProps<CountItem>) {
   const entry = content.lexicon.get(item.object)
   const age = useOptionalApp()?.age ?? ageProfile(undefined)
   const [options] = useState(() => numberChoices(item.count, item.difficulty, rng, 10, age.maxChoices))
@@ -21,10 +36,39 @@ export function CountTemplate({ item, lang, hintLevel, locked, onCorrect, onWron
   const [tried, setTried] = useState<Set<number>>(new Set())
   const [solved, setSolved] = useState(false)
   const demoDone = useRef(false)
+  const dice = item.layout === 'dice'
+  const flash = dice ? item.flashMs : undefined
+  const [covered, setCovered] = useState(flash !== undefined)
+  const [looked, setLooked] = useState(false)
+  const coverTimer = useRef<ReturnType<typeof setTimeout> | undefined>(undefined)
 
-  // Hint level 1: Hala counts them all together with the child.
+  // Quick look: show the objects for `flashMs`, then cover them (again after each peek).
+  const peek = useCallback(() => {
+    if (!flash) return
+    clearTimeout(coverTimer.current)
+    setLooked(true)
+    setCovered(false)
+    coverTimer.current = setTimeout(() => setCovered(true), flash)
+  }, [flash])
+  useEffect(() => () => clearTimeout(coverTimer.current), [])
+  // Any help (a miss, the help button, "peek again") shows the objects once more.
+  const lastHint = useRef(hintLevel)
   useEffect(() => {
-    if (hintLevel < 1 || demoDone.current) return
+    if (hintLevel > lastHint.current) peek()
+    lastHint.current = hintLevel
+  }, [hintLevel, peek])
+
+  const peekAgain = () => {
+    if (locked || solved) return
+    audio.sfx('tap')
+    const first = !looked
+    peek()
+    if (!first) onHelp?.()
+  }
+
+  // Hint level 1: Hala counts them all together with the child (not on a quick look).
+  useEffect(() => {
+    if (dice || hintLevel < 1 || demoDone.current) return
     demoDone.current = true
     let cancelled = false
     void (async () => {
@@ -40,7 +84,7 @@ export function CountTemplate({ item, lang, hintLevel, locked, onCorrect, onWron
     return () => {
       cancelled = true
     }
-  }, [hintLevel, item.count, lang])
+  }, [dice, hintLevel, item.count, lang])
 
   const countObject = (i: number) => {
     if (order.includes(i) || solved) return
@@ -55,6 +99,8 @@ export function CountTemplate({ item, lang, hintLevel, locked, onCorrect, onWron
     audio.sfx('tap')
     if (n === item.count) {
       setSolved(true)
+      clearTimeout(coverTimer.current)
+      setCovered(false)
       onCorrect(numberWord(n, lang))
     } else {
       setTried(new Set(tried).add(n))
@@ -66,8 +112,31 @@ export function CountTemplate({ item, lang, hintLevel, locked, onCorrect, onWron
   const hidden = optionsToHide(keys, String(item.count), new Set([...tried].map(String)), hintLevel)
   const size = item.count > 6 ? 76 : 96
 
+  const label = entry?.[lang] ?? ''
+
   return (
     <div className={s.stage}>
+      {dice ? (
+        <div className={s.diceWrap}>
+          <div className={s.dice} role="group" data-testid="dice" data-covered={covered ? 'true' : 'false'} aria-hidden={covered || undefined}>
+            {(DICE_SPOTS[item.count] ?? []).map(([row, col], i) => (
+              <span key={i} className={s.diceSpot} style={{ gridRow: row, gridColumn: col }} role="img" aria-label={label}>
+                {entry && <OpenMoji hex={entry.image} alt="" size={72} />}
+              </span>
+            ))}
+          </div>
+          {flash !== undefined && (
+            <div className={[s.diceCover, covered ? s.diceCoverOn : ''].join(' ')} aria-hidden={!covered || undefined}>
+              {covered && !solved && (
+                <button type="button" className={s.peek} onClick={peekAgain} disabled={locked}>
+                  <Icon name="eye" size={36} />
+                  <span>{looked ? dict(lang).player.peek : dict(lang).player.look}</span>
+                </button>
+              )}
+            </div>
+          )}
+        </div>
+      ) : (
       <div className={s.objects} role="group">
         {Array.from({ length: item.count }, (_, i) => {
           const pos = order.indexOf(i)
@@ -79,6 +148,7 @@ export function CountTemplate({ item, lang, hintLevel, locked, onCorrect, onWron
           )
         })}
       </div>
+      )}
       <div className={s.choices} role="group">
         {options.map((n) => {
           if (hidden.has(String(n))) return null

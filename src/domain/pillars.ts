@@ -11,6 +11,7 @@ export function pillarOf(a: Pick<Activity, 'template' | 'areaId'> & { pillar?: P
   if (a.pillar) return a.pillar
   switch (a.template) {
     case 'speak':
+    case 'syllables':
       return 'speech'
     case 'trace':
       return 'motor'

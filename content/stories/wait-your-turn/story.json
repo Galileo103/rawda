@@ -1,0 +1,50 @@
+{
+  "id": "wait-your-turn",
+  "title": {"ar": "عُمَرُ يَنْتَظِرُ دَوْرَهُ", "en": "Omar Waits His Turn"},
+  "theme": "patience",
+  "level": 1,
+  "cover": {"kind": "lex", "id": "slide"},
+  "pages": [
+    {
+      "scene": {"bg": "garden", "actors": [{"lex": "boy", "x": 28, "y": 62, "size": "lg", "motion": "bounce"}, {"lex": "slide", "x": 68, "y": 60, "size": "lg"}, {"lex": "sun", "x": 86, "y": 16, "size": "sm", "motion": "sway"}]},
+      "text": {"ar": "ذَهَبَ عُمَرُ إِلَى الْحَدِيقَةِ، فَرَأَى {الزُّحْلُوقَةَ} الْكَبِيرَةَ!", "en": "Omar went to the park and saw the big {slide}!"},
+      "vocab": ["slide"],
+      "prompt": {"ar": {"m": "مَاذَا تَرَى فِي الصُّورَةِ؟", "f": "مَاذَا تَرَيْنَ فِي الصُّورَةِ؟"}, "en": "What do you see in the picture?"}
+    },
+    {
+      "scene": {"bg": "garden", "actors": [{"lex": "boy", "x": 22, "y": 62, "size": "lg"}, {"lex": "slide", "x": 66, "y": 60, "size": "lg"}, {"lex": "girl", "x": 60, "y": 36, "size": "md", "motion": "bounce"}]},
+      "text": {"ar": "كَانَتْ {بِنْتٌ} صَغِيرَةٌ عَلَى الزُّحْلُوقَةِ. أَرَادَ عُمَرُ أَنْ يَلْعَبَ الْآنَ!", "en": "A little {girl} was on the slide. Omar wanted to play right now!"},
+      "vocab": ["girl"],
+      "prompt": {"ar": "مَاذَا سَيَفْعَلُ عُمَرُ؟", "en": "What do you think Omar will do?"}
+    },
+    {
+      "scene": {"bg": "garden", "actors": [{"lex": "boy", "x": 22, "y": 62, "size": "lg"}, {"lex": "calm", "x": 22, "y": 26, "size": "sm", "motion": "sway"}, {"lex": "slide", "x": 66, "y": 60, "size": "lg"}, {"lex": "girl", "x": 66, "y": 40, "size": "md"}]},
+      "text": {"ar": "وَقَفَ عُمَرُ {هَادِئًا} وَانْتَظَرَ دَوْرَهُ.", "en": "Omar stood {calm} and waited for his turn."},
+      "vocab": ["calm"],
+      "prompt": {"ar": {"m": "هَلِ انْتَظَرْتَ دَوْرَكَ مِثْلَ عُمَرَ؟", "f": "هَلِ انْتَظَرْتِ دَوْرَكِ مِثْلَ عُمَرَ؟"}, "en": "Have you ever waited your turn, like Omar?"}
+    },
+    {
+      "scene": {"bg": "garden", "actors": [{"lex": "boy", "x": 24, "y": 64, "size": "lg"}, {"lex": "bird", "x": 50, "y": 20, "size": "sm", "motion": "bounce"}, {"lex": "bird", "x": 66, "y": 26, "size": "sm", "motion": "bounce"}, {"lex": "bird", "x": 82, "y": 20, "size": "sm", "motion": "bounce"}, {"lex": "tree", "x": 74, "y": 56, "size": "lg"}]},
+      "text": {"ar": "عَدَّ عُمَرُ {الطُّيُورَ}: وَاحِدٌ، اثْنَانِ، ثَلَاثَةٌ.", "en": "Omar counted the {birds}: one, two, three."},
+      "vocab": ["bird"],
+      "prompt": {"ar": {"m": "كَمْ طَائِرًا تَرَى؟", "f": "كَمْ طَائِرًا تَرَيْنَ؟"}, "en": "How many birds do you see?"}
+    },
+    {
+      "scene": {"bg": "garden", "actors": [{"lex": "girl", "x": 24, "y": 62, "size": "md", "motion": "bounce"}, {"lex": "slide", "x": 64, "y": 60, "size": "lg"}, {"lex": "boy", "x": 62, "y": 38, "size": "md", "motion": "bounce"}]},
+      "text": {"ar": "قَالَتِ الْبِنْتُ: دَوْرُكَ يَا عُمَرُ! فَنَزَلَ عُمَرُ عَلَى {الزُّحْلُوقَةِ}.", "en": "The girl said: “Your turn, Omar!” And Omar went down the {slide}."},
+      "vocab": ["slide"],
+      "prompt": {"ar": "كَيْفَ يَشْعُرُ عُمَرُ الْآنَ؟", "en": "How does Omar feel now?"}
+    },
+    {
+      "scene": {"bg": "sky", "actors": [{"lex": "boy", "x": 32, "y": 62, "size": "lg", "motion": "bounce"}, {"lex": "girl", "x": 66, "y": 62, "size": "lg", "motion": "bounce", "flip": true}, {"lex": "heart", "x": 50, "y": 24, "size": "md", "motion": "bounce"}]},
+      "text": {"ar": "عُمَرُ وَالْبِنْتُ {سَعِيدَانِ}. انْتِظَارُ الدَّوْرِ جَمِيلٌ!", "en": "Omar and the girl are {happy}. Waiting your turn is lovely!"},
+      "vocab": ["happy", "heart"],
+      "prompt": {"ar": {"m": "مَعَ مَنْ تُحِبُّ أَنْ تَلْعَبَ؟", "f": "مَعَ مَنْ تُحِبِّينَ أَنْ تَلْعَبِي؟"}, "en": "Who do you like to play with?"}
+    }
+  ],
+  "questions": [
+    {"id": "where", "skill": "story.turn.where", "difficulty": 1, "say": {"ar": "أَيْنَ أَرَادَ عُمَرُ أَنْ يَلْعَبَ؟", "en": "Where did Omar want to play?"}, "answer": {"kind": "lex", "id": "slide"}, "choices": [{"kind": "lex", "id": "slide"}, {"kind": "lex", "id": "bicycle"}, {"kind": "lex", "id": "boat"}]},
+    {"id": "how", "skill": "story.turn.how", "difficulty": 1, "say": {"ar": "كَيْفَ انْتَظَرَ عُمَرُ دَوْرَهُ؟", "en": "How did Omar wait for his turn?"}, "answer": {"kind": "lex", "id": "calm"}, "choices": [{"kind": "lex", "id": "calm"}, {"kind": "lex", "id": "angry"}]},
+    {"id": "feeling", "skill": "story.turn.feeling", "difficulty": 1, "say": {"ar": "كَيْفَ شَعَرَ عُمَرُ فِي النِّهَايَةِ؟", "en": "How did Omar feel at the end?"}, "answer": {"kind": "lex", "id": "happy"}, "choices": [{"kind": "lex", "id": "happy"}, {"kind": "lex", "id": "sad"}]}
+  ]
+}

@@ -1,0 +1,50 @@
+{
+  "id": "clean-hands",
+  "title": {"ar": "يُوسُفُ يَغْسِلُ يَدَيْهِ", "en": "Youssef Washes His Hands"},
+  "theme": "cleanliness",
+  "level": 1,
+  "cover": {"kind": "lex", "id": "soap"},
+  "pages": [
+    {
+      "scene": {"bg": "garden", "actors": [{"lex": "boy", "x": 28, "y": 62, "size": "lg", "motion": "bounce"}, {"lex": "dog", "x": 66, "y": 68, "size": "md", "motion": "bounce", "flip": true}, {"lex": "ball", "x": 48, "y": 78, "size": "sm"}]},
+      "text": {"ar": "لَعِبَ يُوسُفُ فِي الْحَدِيقَةِ مَعَ {الْكَلْبِ}.", "en": "Youssef played in the garden with the {dog}."},
+      "vocab": ["dog"],
+      "prompt": {"ar": "مَاذَا يَفْعَلُ يُوسُفُ؟", "en": "What is Youssef doing?"}
+    },
+    {
+      "scene": {"bg": "home", "actors": [{"lex": "boy", "x": 28, "y": 62, "size": "lg"}, {"lex": "meal", "x": 68, "y": 64, "size": "md", "motion": "sway"}]},
+      "text": {"ar": "جَاعَ يُوسُفُ، وَ{الطَّعَامُ} جَاهِزٌ!", "en": "Youssef is hungry, and the {food} is ready!"},
+      "vocab": ["meal"],
+      "prompt": {"ar": "مَاذَا يَفْعَلُ يُوسُفُ قَبْلَ الْأَكْلِ؟", "en": "What should Youssef do before eating?"}
+    },
+    {
+      "scene": {"bg": "home", "actors": [{"lex": "boy", "x": 26, "y": 62, "size": "lg"}, {"lex": "water", "x": 56, "y": 36, "size": "sm", "motion": "bounce"}, {"lex": "hand", "x": 56, "y": 66, "size": "sm", "motion": "sway"}, {"lex": "soap", "x": 76, "y": 66, "size": "md"}]},
+      "text": {"ar": "غَسَلَ يُوسُفُ يَدَيْهِ بِـ{الْمَاءِ} وَ{الصَّابُونِ}.", "en": "Youssef washed his hands with {water} and {soap}."},
+      "vocab": ["water", "soap"],
+      "prompt": {"ar": {"m": "كَيْفَ تَغْسِلُ يَدَيْكَ؟ أَرِنِي!", "f": "كَيْفَ تَغْسِلِينَ يَدَيْكِ؟ أَرِينِي!"}, "en": "How do you wash your hands? Show me!"}
+    },
+    {
+      "scene": {"bg": "home", "actors": [{"lex": "boy", "x": 30, "y": 62, "size": "lg", "motion": "bounce"}, {"lex": "hand", "x": 64, "y": 50, "size": "md", "motion": "sway"}, {"lex": "soap", "x": 82, "y": 74, "size": "sm"}]},
+      "text": {"ar": "صَارَتْ {يَدَاهُ} نَظِيفَتَيْنِ.", "en": "His {hands} are clean now."},
+      "vocab": ["hand"],
+      "prompt": {"ar": "أَيْنَ الصَّابُونُ؟", "en": "Where is the soap?"}
+    },
+    {
+      "scene": {"bg": "home", "actors": [{"lex": "boy", "x": 28, "y": 62, "size": "lg"}, {"lex": "plate", "x": 64, "y": 72, "size": "md"}, {"lex": "meal", "x": 64, "y": 40, "size": "sm"}]},
+      "text": {"ar": "جَلَسَ يُوسُفُ أَمَامَ {الطَّبَقِ} وَقَالَ: بِسْمِ اللهِ.", "en": "Youssef sat at his {plate} and said: “Bismillah.”"},
+      "vocab": ["plate"],
+      "prompt": {"ar": {"m": "مَاذَا تَقُولُ قَبْلَ الْأَكْلِ؟", "f": "مَاذَا تَقُولِينَ قَبْلَ الْأَكْلِ؟"}, "en": "What do you say before eating?"}
+    },
+    {
+      "scene": {"bg": "sky", "actors": [{"lex": "boy", "x": 34, "y": 62, "size": "lg", "motion": "bounce"}, {"lex": "happy", "x": 34, "y": 24, "size": "sm", "motion": "bounce"}, {"lex": "plate", "x": 68, "y": 70, "size": "md"}]},
+      "text": {"ar": "أَكَلَ يُوسُفُ بِيَدَيْنِ نَظِيفَتَيْنِ. هُوَ {سَعِيدٌ}!", "en": "Youssef ate with clean hands. He is {happy}!"},
+      "vocab": ["happy"],
+      "prompt": {"ar": "مَتَى نَغْسِلُ أَيْدِيَنَا؟", "en": "When do we wash our hands?"}
+    }
+  ],
+  "questions": [
+    {"id": "soap", "skill": "story.clean.what", "difficulty": 1, "say": {"ar": "بِمَاذَا غَسَلَ يُوسُفُ يَدَيْهِ؟", "en": "What did Youssef wash his hands with?"}, "answer": {"kind": "lex", "id": "soap"}, "choices": [{"kind": "lex", "id": "soap"}, {"kind": "lex", "id": "apple"}, {"kind": "lex", "id": "ball"}]},
+    {"id": "said", "skill": "story.clean.said", "difficulty": 1, "say": {"ar": "مَاذَا قَالَ يُوسُفُ قَبْلَ الْأَكْلِ؟", "en": "What did Youssef say before eating?"}, "answer": {"kind": "phrase", "text": {"ar": "بِسْمِ اللهِ", "en": "Bismillah"}}, "choices": [{"kind": "phrase", "text": {"ar": "بِسْمِ اللهِ", "en": "Bismillah"}}, {"kind": "phrase", "text": {"ar": "السَّلَامُ عَلَيْكُمْ", "en": "Assalamu alaykum"}}]},
+    {"id": "feeling", "skill": "story.clean.feeling", "difficulty": 1, "say": {"ar": "كَيْفَ شَعَرَ يُوسُفُ فِي النِّهَايَةِ؟", "en": "How did Youssef feel at the end?"}, "answer": {"kind": "lex", "id": "happy"}, "choices": [{"kind": "lex", "id": "happy"}, {"kind": "lex", "id": "sad"}]}
+  ]
+}

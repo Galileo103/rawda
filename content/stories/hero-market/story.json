@@ -9,32 +9,38 @@
     {
       "scene": {"bg": "meadow", "actors": [{"lex": "@hero", "x": 30, "y": 62, "size": "lg", "motion": "bounce"}, {"lex": "car", "x": 72, "y": 70, "size": "md", "flip": true}, {"lex": "sun", "x": 86, "y": 16, "size": "sm", "motion": "sway"}]},
       "text": {"ar": {"m": "@name يَذْهَبُ إِلَى السُّوقِ.", "f": "@name تَذْهَبُ إِلَى السُّوقِ."}, "en": "@name goes to the market."},
-      "vocab": ["car"]
+      "vocab": ["car"],
+      "prompt": {"ar": {"m": "مَاذَا سَيَشْتَرِي @name مِنَ السُّوقِ؟", "f": "مَاذَا سَتَشْتَرِي @name مِنَ السُّوقِ؟"}, "en": "What will @name buy at the market?"}
     },
     {
       "scene": {"bg": "home", "actors": [{"lex": "@hero", "x": 28, "y": 62, "size": "lg"}, {"lex": "apple", "x": 66, "y": 66, "size": "md", "motion": "bounce"}]},
       "text": {"ar": {"m": "@name يَشْتَرِي {تُفَّاحَةً} وَاحِدَةً.", "f": "@name تَشْتَرِي {تُفَّاحَةً} وَاحِدَةً."}, "en": "@name buys one {apple}."},
-      "vocab": ["apple"]
+      "vocab": ["apple"],
+      "prompt": {"ar": "أَيْنَ التُّفَّاحَةُ؟ مَا لَوْنُهَا؟", "en": "Where is the apple? What color is it?"}
     },
     {
       "scene": {"bg": "home", "actors": [{"lex": "@hero", "x": 26, "y": 62, "size": "lg"}, {"lex": "banana", "x": 60, "y": 66, "size": "md", "motion": "bounce"}, {"lex": "banana", "x": 78, "y": 66, "size": "md", "motion": "bounce"}]},
       "text": {"ar": {"m": "@name يَشْتَرِي {مَوْزَتَيْنِ}: وَاحِدَةٌ، اثْنَتَانِ.", "f": "@name تَشْتَرِي {مَوْزَتَيْنِ}: وَاحِدَةٌ، اثْنَتَانِ."}, "en": "@name buys two {bananas}: one, two."},
-      "vocab": ["banana"]
+      "vocab": ["banana"],
+      "prompt": {"ar": {"m": "كَمْ مَوْزَةً تَرَى؟", "f": "كَمْ مَوْزَةً تَرَيْنَ؟"}, "en": "How many bananas do you see?"}
     },
     {
       "scene": {"bg": "home", "actors": [{"lex": "@hero", "x": 24, "y": 62, "size": "lg"}, {"lex": "orange", "x": 54, "y": 68, "size": "sm", "motion": "bounce"}, {"lex": "orange", "x": 68, "y": 68, "size": "sm", "motion": "bounce"}, {"lex": "orange", "x": 82, "y": 68, "size": "sm", "motion": "bounce"}]},
       "text": {"ar": {"m": "@name يَعُدُّ {الْبُرْتُقَالَ}: وَاحِدٌ، اثْنَانِ، ثَلَاثَةٌ.", "f": "@name تَعُدُّ {الْبُرْتُقَالَ}: وَاحِدٌ، اثْنَانِ، ثَلَاثَةٌ."}, "en": "@name counts the {oranges}: one, two, three."},
-      "vocab": ["orange"]
+      "vocab": ["orange"],
+      "prompt": {"ar": {"m": "هَلْ ذَهَبْتَ إِلَى السُّوقِ؟ مَاذَا رَأَيْتَ؟", "f": "هَلْ ذَهَبْتِ إِلَى السُّوقِ؟ مَاذَا رَأَيْتِ؟"}, "en": "Have you been to a market? What did you see?"}
     },
     {
       "scene": {"bg": "home", "actors": [{"lex": "@hero", "x": 22, "y": 62, "size": "lg"}, {"lex": "strawberry", "x": 48, "y": 70, "size": "sm", "motion": "bounce"}, {"lex": "strawberry", "x": 60, "y": 70, "size": "sm", "motion": "bounce"}, {"lex": "strawberry", "x": 72, "y": 70, "size": "sm", "motion": "bounce"}, {"lex": "strawberry", "x": 84, "y": 70, "size": "sm", "motion": "bounce"}]},
       "text": {"ar": {"m": "@name يَجِدُ أَرْبَعَ حَبَّاتِ {فَرَاوْلَةٍ} حَمْرَاءَ.", "f": "@name تَجِدُ أَرْبَعَ حَبَّاتِ {فَرَاوْلَةٍ} حَمْرَاءَ."}, "en": "@name finds four red {strawberries}."},
-      "vocab": ["strawberry"]
+      "vocab": ["strawberry"],
+      "prompt": {"ar": {"m": "مَاذَا سَيَفْعَلُ @name بِالْفَاكِهَةِ؟", "f": "مَاذَا سَتَفْعَلُ @name بِالْفَاكِهَةِ؟"}, "en": "What will @name do with all the fruit?"}
     },
     {
       "scene": {"bg": "meadow", "actors": [{"lex": "@hero", "x": 32, "y": 62, "size": "lg", "motion": "bounce"}, {"lex": "happy", "x": 32, "y": 22, "size": "sm"}, {"lex": "apple", "x": 62, "y": 70, "size": "sm"}, {"lex": "banana", "x": 74, "y": 70, "size": "sm"}, {"lex": "orange", "x": 86, "y": 70, "size": "sm"}]},
       "text": {"ar": {"m": "@name سَعِيدٌ! عِنْدَهُ فَاكِهَةٌ كَثِيرَةٌ.", "f": "@name سَعِيدَةٌ! عِنْدَهَا فَاكِهَةٌ كَثِيرَةٌ."}, "en": {"m": "@name is happy! He has lots of fruit.", "f": "@name is happy! She has lots of fruit."}},
-      "vocab": ["happy"]
+      "vocab": ["happy"],
+      "prompt": {"ar": {"m": "لِمَاذَا @name سَعِيدٌ؟", "f": "لِمَاذَا @name سَعِيدَةٌ؟"}, "en": "Why is @name happy?"}
     }
   ],
   "questions": [

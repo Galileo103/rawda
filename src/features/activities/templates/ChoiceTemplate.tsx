@@ -15,7 +15,7 @@ import type { TemplateProps } from './types'
 export function ChoiceTemplate({ item, pool, lang, hintLevel, locked, onCorrect, onWrong, rng }: TemplateProps<ChoiceItem> & { pool: readonly VisualT[] }) {
   // Options are fixed for the lifetime of this task (the player re-mounts per task).
   const age = useOptionalApp()?.age ?? ageProfile(undefined)
-  const [options] = useState(() => buildChoices(item, pool, rng, age.maxChoices))
+  const [options] = useState(() => buildChoices(item, pool, rng, { maxChoices: age.maxChoices, preferConfusables: age.preferConfusables, lang }))
   const [tried, setTried] = useState<Set<string>>(new Set())
   const [solved, setSolved] = useState(false)
   const answerKey = visualKey(item.answer)

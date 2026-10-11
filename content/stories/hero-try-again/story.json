@@ -1,0 +1,51 @@
+{
+  "id": "hero-try-again",
+  "title": {"ar": "@name وَالطَّائِرَةُ الْوَرَقِيَّةُ", "en": "@name and the Kite"},
+  "theme": "trying-again",
+  "level": 2,
+  "personalized": true,
+  "cover": {"kind": "lex", "id": "kite"},
+  "pages": [
+    {
+      "scene": {"bg": "meadow", "actors": [{"lex": "@hero", "x": 30, "y": 62, "size": "lg", "motion": "bounce"}, {"lex": "kite", "x": 66, "y": 56, "size": "md", "motion": "sway"}, {"lex": "sun", "x": 86, "y": 16, "size": "sm", "motion": "sway"}]},
+      "text": {"ar": {"m": "@name عِنْدَهُ {طَائِرَةٌ وَرَقِيَّةٌ} جَمِيلَةٌ.", "f": "@name عِنْدَهَا {طَائِرَةٌ وَرَقِيَّةٌ} جَمِيلَةٌ."}, "en": "@name has a beautiful {kite}."},
+      "vocab": ["kite"],
+      "prompt": {"ar": "مَا لَوْنُ الطَّائِرَةِ الْوَرَقِيَّةِ؟", "en": "What color is the kite?"}
+    },
+    {
+      "scene": {"bg": "meadow", "actors": [{"lex": "@hero", "x": 26, "y": 62, "size": "lg"}, {"lex": "kite", "x": 68, "y": 78, "size": "md"}, {"lex": "grass", "x": 52, "y": 82, "size": "sm"}, {"lex": "grass", "x": 84, "y": 82, "size": "sm"}]},
+      "text": {"ar": "طَارَتِ الطَّائِرَةُ قَلِيلًا، ثُمَّ وَقَعَتْ عَلَى {الْعُشْبِ}!", "en": "The kite flew a little, then it fell on the {grass}!"},
+      "vocab": ["grass"],
+      "prompt": {"ar": {"m": "مَاذَا سَيَفْعَلُ @name الْآنَ؟", "f": "مَاذَا سَتَفْعَلُ @name الْآنَ؟"}, "en": "What will @name do now?"}
+    },
+    {
+      "scene": {"bg": "meadow", "actors": [{"lex": "@hero", "x": 34, "y": 62, "size": "lg"}, {"lex": "calm", "x": 34, "y": 24, "size": "sm", "motion": "sway"}, {"lex": "kite", "x": 70, "y": 78, "size": "md"}]},
+      "text": {"ar": {"m": "@name {حَزِينٌ} قَلِيلًا، لَكِنَّهُ يَتَنَفَّسُ بِـ{هُدُوءٍ}.", "f": "@name {حَزِينَةٌ} قَلِيلًا، لَكِنَّهَا تَتَنَفَّسُ بِـ{هُدُوءٍ}."}, "en": {"m": "@name feels a little {sad}, but he takes a slow, {calm} breath.", "f": "@name feels a little {sad}, but she takes a slow, {calm} breath."}},
+      "vocab": ["sad", "calm"],
+      "prompt": {"ar": {"m": "مَاذَا تَفْعَلُ عِنْدَمَا تَحْزَنُ؟", "f": "مَاذَا تَفْعَلِينَ عِنْدَمَا تَحْزَنِينَ؟"}, "en": "What do you do when you feel sad?"}
+    },
+    {
+      "scene": {"bg": "meadow", "actors": [{"lex": "@hero", "x": 30, "y": 62, "size": "lg", "motion": "bounce"}, {"lex": "hand", "x": 48, "y": 46, "size": "sm"}, {"lex": "kite", "x": 70, "y": 50, "size": "md", "motion": "sway"}]},
+      "text": {"ar": {"m": "@name يُمْسِكُ الْخَيْطَ بِـ{يَدِهِ} وَيَقُولُ: سَأُحَاوِلُ مَرَّةً أُخْرَى!", "f": "@name تُمْسِكُ الْخَيْطَ بِـ{يَدِهَا} وَتَقُولُ: سَأُحَاوِلُ مَرَّةً أُخْرَى!"}, "en": {"m": "@name holds the string in {his hand} and says: “I will try again!”", "f": "@name holds the string in {her hand} and says: “I will try again!”"}},
+      "vocab": ["hand"],
+      "prompt": {"ar": {"m": "هَلْ حَاوَلْتَ شَيْئًا مَرَّةً أُخْرَى؟", "f": "هَلْ حَاوَلْتِ شَيْئًا مَرَّةً أُخْرَى؟"}, "en": "Have you ever tried something again?"}
+    },
+    {
+      "scene": {"bg": "sky", "actors": [{"lex": "@hero", "x": 26, "y": 66, "size": "md", "motion": "bounce"}, {"lex": "kite", "x": 66, "y": 26, "size": "md", "motion": "sway"}, {"lex": "cloud", "x": 84, "y": 14, "size": "md"}, {"lex": "cloud", "x": 44, "y": 12, "size": "sm"}]},
+      "text": {"ar": "طَارَتِ الطَّائِرَةُ عَالِيًا، عَالِيًا، حَتَّى {الْغُيُومِ}!", "en": "The kite flew high, high, up to the {clouds}!"},
+      "vocab": ["cloud"],
+      "prompt": {"ar": "أَيْنَ الطَّائِرَةُ الْوَرَقِيَّةُ الْآنَ؟", "en": "Where is the kite now?"}
+    },
+    {
+      "scene": {"bg": "sky", "actors": [{"lex": "@hero", "x": 32, "y": 62, "size": "lg", "motion": "bounce"}, {"lex": "kite", "x": 68, "y": 28, "size": "md", "motion": "sway"}, {"lex": "star", "x": 50, "y": 16, "size": "sm", "motion": "bounce"}]},
+      "text": {"ar": {"m": "@name {سَعِيدٌ} جِدًّا. أَحْسَنْتَ يَا @name، حَاوَلْتَ مَرَّةً أُخْرَى!", "f": "@name {سَعِيدَةٌ} جِدًّا. أَحْسَنْتِ يَا @name، حَاوَلْتِ مَرَّةً أُخْرَى!"}, "en": "@name is so {happy}. Well done, @name, you tried again!"},
+      "vocab": ["happy", "star"],
+      "prompt": {"ar": {"m": "لِمَاذَا @name سَعِيدٌ؟", "f": "لِمَاذَا @name سَعِيدَةٌ؟"}, "en": "Why is @name happy?"}
+    }
+  ],
+  "questions": [
+    {"id": "what", "skill": "story.tryagain.what", "difficulty": 1, "say": {"ar": "مَاذَا طَارَ فِي السَّمَاءِ؟", "en": "What flew in the sky?"}, "answer": {"kind": "lex", "id": "kite"}, "choices": [{"kind": "lex", "id": "kite"}, {"kind": "lex", "id": "ball"}, {"kind": "lex", "id": "car"}]},
+    {"id": "fell", "skill": "story.tryagain.where", "difficulty": 1, "say": {"ar": "أَيْنَ وَقَعَتِ الطَّائِرَةُ الْوَرَقِيَّةُ؟", "en": "Where did the kite fall?"}, "answer": {"kind": "lex", "id": "grass"}, "choices": [{"kind": "lex", "id": "grass"}, {"kind": "lex", "id": "sea"}, {"kind": "lex", "id": "house"}]},
+    {"id": "feeling", "skill": "story.tryagain.feeling", "difficulty": 1, "say": {"ar": {"m": "فِي النِّهَايَةِ، كَيْفَ شَعَرَ @name؟", "f": "فِي النِّهَايَةِ، كَيْفَ شَعَرَتْ @name؟"}, "en": "How did @name feel at the end?"}, "answer": {"kind": "lex", "id": "happy"}, "choices": [{"kind": "lex", "id": "happy"}, {"kind": "lex", "id": "sad"}]}
+  ]
+}

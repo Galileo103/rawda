@@ -39,7 +39,8 @@
       "highlight": "أ",
       "examples": [
         "rabbit",
-        "lion"
+        "lion",
+        "octopus"
       ],
       "trace": "أ",
       "check": {
@@ -58,6 +59,10 @@
           {
             "kind": "glyph",
             "text": "م"
+          },
+          {
+            "kind": "glyph",
+            "text": "ل"
           }
         ]
       }
@@ -85,7 +90,7 @@
       "examples": [
         "duck",
         "cow",
-        "egg"
+        "watermelon"
       ],
       "trace": "ب",
       "check": {
@@ -104,6 +109,10 @@
           {
             "kind": "glyph",
             "text": "ب"
+          },
+          {
+            "kind": "glyph",
+            "text": "ت"
           }
         ]
       }
@@ -129,7 +138,9 @@
       },
       "highlight": "ت",
       "examples": [
-        "apple"
+        "apple",
+        "crocodile",
+        "crown"
       ],
       "trace": "ت",
       "check": {
@@ -148,6 +159,10 @@
           {
             "kind": "glyph",
             "text": "م"
+          },
+          {
+            "kind": "glyph",
+            "text": "ب"
           }
         ]
       }
@@ -173,7 +188,8 @@
       "highlight": "ث",
       "examples": [
         "fox",
-        "snow"
+        "garlic",
+        "ox"
       ],
       "check": {
         "say": {
@@ -191,6 +207,10 @@
           {
             "kind": "glyph",
             "text": "ث"
+          },
+          {
+            "kind": "glyph",
+            "text": "ب"
           }
         ]
       },
@@ -217,7 +237,8 @@
       "highlight": "ج",
       "examples": [
         "camel",
-        "carrot"
+        "carrot",
+        "bell"
       ],
       "check": {
         "say": {
@@ -235,6 +256,10 @@
           {
             "kind": "glyph",
             "text": "ل"
+          },
+          {
+            "kind": "glyph",
+            "text": "ح"
           }
         ]
       },
@@ -261,8 +286,8 @@
       "highlight": "ح",
       "examples": [
         "horse",
-        "whale",
-        "bus"
+        "donkey",
+        "whale"
       ],
       "check": {
         "say": {
@@ -280,6 +305,10 @@
           {
             "kind": "glyph",
             "text": "ح"
+          },
+          {
+            "kind": "glyph",
+            "text": "ج"
           }
         ]
       },
@@ -305,7 +334,9 @@
       },
       "highlight": "خ",
       "examples": [
-        "sheep"
+        "sheep",
+        "cucumber",
+        "peach"
       ],
       "check": {
         "say": {
@@ -323,6 +354,10 @@
           {
             "kind": "glyph",
             "text": "د"
+          },
+          {
+            "kind": "glyph",
+            "text": "ج"
           }
         ]
       },
@@ -370,6 +405,10 @@
           {
             "kind": "glyph",
             "text": "د"
+          },
+          {
+            "kind": "glyph",
+            "text": "ذ"
           }
         ]
       }
@@ -395,7 +434,9 @@
       },
       "highlight": "ذ",
       "examples": [
-        "corn"
+        "corn",
+        "wolf",
+        "fly"
       ],
       "trace": "ذ",
       "check": {
@@ -414,6 +455,10 @@
           {
             "kind": "glyph",
             "text": "ذ"
+          },
+          {
+            "kind": "glyph",
+            "text": "د"
           }
         ]
       }
@@ -439,7 +484,7 @@
       },
       "highlight": "ر",
       "examples": [
-        "feather"
+        "pomegranate"
       ],
       "trace": "ر",
       "check": {
@@ -458,6 +503,10 @@
           {
             "kind": "glyph",
             "text": "ك"
+          },
+          {
+            "kind": "glyph",
+            "text": "ز"
           }
         ]
       }
@@ -484,7 +533,8 @@
       "highlight": "ز",
       "examples": [
         "giraffe",
-        "flower"
+        "flower",
+        "olive"
       ],
       "trace": "ز",
       "check": {
@@ -503,6 +553,10 @@
           {
             "kind": "glyph",
             "text": "ز"
+          },
+          {
+            "kind": "glyph",
+            "text": "ر"
           }
         ]
       }
@@ -529,8 +583,8 @@
       "highlight": "س",
       "examples": [
         "fish",
-        "car",
-        "turtle"
+        "turtle",
+        "car"
       ],
       "trace": "س",
       "check": {
@@ -549,6 +603,10 @@
           {
             "kind": "glyph",
             "text": "د"
+          },
+          {
+            "kind": "glyph",
+            "text": "ش"
           }
         ]
       }
@@ -575,7 +633,8 @@
       "highlight": "ش",
       "examples": [
         "sun",
-        "tree"
+        "tree",
+        "chocolate"
       ],
       "trace": "ش",
       "check": {
@@ -594,6 +653,10 @@
           {
             "kind": "glyph",
             "text": "ش"
+          },
+          {
+            "kind": "glyph",
+            "text": "س"
           }
         ]
       }
@@ -620,8 +683,8 @@
       "highlight": "ص",
       "examples": [
         "rocket",
-        "desert",
-        "rock"
+        "cactus",
+        "box"
       ],
       "trace": "ص",
       "check": {
@@ -640,6 +703,10 @@
           {
             "kind": "glyph",
             "text": "ي"
+          },
+          {
+            "kind": "glyph",
+            "text": "ض"
           }
         ]
       }
@@ -665,7 +732,9 @@
       },
       "highlight": "ض",
       "examples": [
-        "frog"
+        "frog",
+        "officer",
+        "tooth"
       ],
       "trace": "ض",
       "check": {
@@ -684,6 +753,10 @@
           {
             "kind": "glyph",
             "text": "ض"
+          },
+          {
+            "kind": "glyph",
+            "text": "ص"
           }
         ]
       }
@@ -710,8 +783,8 @@
       "highlight": "ط",
       "examples": [
         "airplane",
-        "bird",
-        "meal"
+        "tomato",
+        "peacock"
       ],
       "trace": "ط",
       "check": {
@@ -730,6 +803,10 @@
           {
             "kind": "glyph",
             "text": "ن"
+          },
+          {
+            "kind": "glyph",
+            "text": "ظ"
           }
         ]
       }
@@ -774,6 +851,10 @@
           {
             "kind": "glyph",
             "text": "ظ"
+          },
+          {
+            "kind": "glyph",
+            "text": "ط"
           }
         ]
       }
@@ -800,8 +881,8 @@
       "highlight": "ع",
       "examples": [
         "grapes",
-        "nest",
-        "grass"
+        "scorpion",
+        "eye"
       ],
       "trace": "ع",
       "check": {
@@ -820,6 +901,10 @@
           {
             "kind": "glyph",
             "text": "ب"
+          },
+          {
+            "kind": "glyph",
+            "text": "غ"
           }
         ]
       }
@@ -845,6 +930,8 @@
       },
       "highlight": "غ",
       "examples": [
+        "gazelle",
+        "crow",
         "cloud"
       ],
       "trace": "غ",
@@ -864,6 +951,10 @@
           {
             "kind": "glyph",
             "text": "غ"
+          },
+          {
+            "kind": "glyph",
+            "text": "ع"
           }
         ]
       }
@@ -890,8 +981,8 @@
       "highlight": "ف",
       "examples": [
         "elephant",
-        "butterfly",
-        "strawberry"
+        "strawberry",
+        "butterfly"
       ],
       "trace": "ف",
       "check": {
@@ -910,6 +1001,10 @@
           {
             "kind": "glyph",
             "text": "ل"
+          },
+          {
+            "kind": "glyph",
+            "text": "ق"
           }
         ]
       }
@@ -937,7 +1032,7 @@
       "examples": [
         "cat",
         "monkey",
-        "heart"
+        "pencil"
       ],
       "trace": "ق",
       "check": {
@@ -956,6 +1051,10 @@
           {
             "kind": "glyph",
             "text": "ق"
+          },
+          {
+            "kind": "glyph",
+            "text": "ف"
           }
         ]
       }
@@ -1002,6 +1101,10 @@
           {
             "kind": "glyph",
             "text": "س"
+          },
+          {
+            "kind": "glyph",
+            "text": "ل"
           }
         ]
       }
@@ -1027,7 +1130,9 @@
       },
       "highlight": "ل",
       "examples": [
-        "lemon"
+        "lemon",
+        "milk",
+        "meat"
       ],
       "trace": "ل",
       "check": {
@@ -1046,6 +1151,10 @@
           {
             "kind": "glyph",
             "text": "ل"
+          },
+          {
+            "kind": "glyph",
+            "text": "ك"
           }
         ]
       }
@@ -1072,8 +1181,8 @@
       "highlight": "م",
       "examples": [
         "banana",
-        "rain",
-        "umbrella"
+        "goat",
+        "key"
       ],
       "trace": "م",
       "check": {
@@ -1092,6 +1201,10 @@
           {
             "kind": "glyph",
             "text": "ج"
+          },
+          {
+            "kind": "glyph",
+            "text": "ه"
           }
         ]
       }
@@ -1118,8 +1231,8 @@
       "highlight": "ن",
       "examples": [
         "bee",
-        "star",
-        "seedling"
+        "tiger",
+        "star"
       ],
       "trace": "ن",
       "check": {
@@ -1138,6 +1251,10 @@
           {
             "kind": "glyph",
             "text": "ن"
+          },
+          {
+            "kind": "glyph",
+            "text": "ب"
           }
         ]
       }
@@ -1164,7 +1281,8 @@
       "highlight": "ه",
       "examples": [
         "crescent",
-        "gift"
+        "gift",
+        "pyramid"
       ],
       "trace": "ه",
       "check": {
@@ -1183,6 +1301,10 @@
           {
             "kind": "glyph",
             "text": "ب"
+          },
+          {
+            "kind": "glyph",
+            "text": "م"
           }
         ]
       }
@@ -1209,7 +1331,7 @@
       "highlight": "و",
       "examples": [
         "rose",
-        "scarf"
+        "medal"
       ],
       "trace": "و",
       "check": {
@@ -1228,6 +1350,10 @@
           {
             "kind": "glyph",
             "text": "و"
+          },
+          {
+            "kind": "glyph",
+            "text": "ر"
           }
         ]
       }
@@ -1254,7 +1380,7 @@
       "highlight": "ي",
       "examples": [
         "hand",
-        "yoyo"
+        "dove"
       ],
       "trace": "ي",
       "check": {
@@ -1273,6 +1399,10 @@
           {
             "kind": "glyph",
             "text": "ح"
+          },
+          {
+            "kind": "glyph",
+            "text": "ب"
           }
         ]
       }

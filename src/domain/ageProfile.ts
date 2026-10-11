@@ -18,12 +18,16 @@ export interface AgeProfile {
   traceBonus: number
   /** A movement break after this many finished activities. */
   breakEvery: number
+  /** Options in a lesson's gentle check (the answer plus look-alikes). */
+  checkChoices: number
+  /** Whether wrong options should be letters that look like the answer (ب/ت, b/d) rather than any letter. */
+  preferConfusables: boolean
 }
 
 const PROFILES: Record<AgeBand, AgeProfile> = {
-  '3-4': { maxChoices: 3, sessionCap: 4, idleMs: 7000, traceBonus: 0.12, breakEvery: 2 },
-  '4-5': { maxChoices: 4, sessionCap: 6, idleMs: 9000, traceBonus: 0.05, breakEvery: 3 },
-  '5-6': { maxChoices: 4, sessionCap: 8, idleMs: 12000, traceBonus: 0, breakEvery: 4 },
+  '3-4': { maxChoices: 3, sessionCap: 4, idleMs: 7000, traceBonus: 0.12, breakEvery: 2, checkChoices: 2, preferConfusables: false },
+  '4-5': { maxChoices: 4, sessionCap: 6, idleMs: 9000, traceBonus: 0.05, breakEvery: 3, checkChoices: 3, preferConfusables: true },
+  '5-6': { maxChoices: 4, sessionCap: 8, idleMs: 12000, traceBonus: 0, breakEvery: 4, checkChoices: 3, preferConfusables: true },
 }
 
 /** Unknown age → the middle profile (4–5). */

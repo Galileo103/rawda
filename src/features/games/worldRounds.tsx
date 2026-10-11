@@ -26,7 +26,7 @@ import {
   mixYesAnd,
   soundPath,
 } from '../../content/funGames'
-import { FOOD_SKILL, type FoodAnimal, type FoodId, HABITAT_SKILL, type HabitatAnimal, type HomeId, type MixupMode, WEATHER_SKILL, type WeatherId, mixupModes } from '../../content/games'
+import { FOOD_SKILL, type FoodAnimal, type FoodId, HABITAT_SKILL, type HabitatAnimal, type HomeId, type MixupMode, WEATHER_IDS, WEATHER_SKILL, type WeatherId, mixupModes } from '../../content/games'
 import { OpenMoji } from '../../design/Visual'
 import { pickOne, shuffle } from '../../domain/rng'
 import { audio } from '../../services/audio/AudioService'
@@ -79,11 +79,13 @@ const SLOT_CLASS = { umb: s.slotUmb, head: s.slotHead, eyes: s.slotEyes, neck: s
 const SKY_CLASS: Record<WeatherId, string | undefined> = { rain: s.skyRain, snow: s.skySnow, sun: s.skySun }
 
 /** Dress the Hero — the child's own hero went out dressed all wrong; drag on the right clothes. */
-export function DressRound({ d, stage, locked, rng, ctl, learned, hero: heroHex }: RoundProps) {
+export function DressRound({ d, stage, locked, rng, ctl, hero: heroHex }: RoundProps) {
   const f = d.games.fun
   const [plan] = useState(() => {
-    const first = pickOne(learned.weathers, rng)
-    const others = learned.weathers.filter((x) => x !== first)
+    // Rain, snow and sun are everyday knowledge, so the game always plays with every weather: a child who has
+    // discovered only one of them still gets the stage-3 weather switch, and the round never gets poorer after a lesson.
+    const first = pickOne(WEATHER_IDS, rng)
+    const others = WEATHER_IDS.filter((x) => x !== first)
     return { first, then: stage === 3 && others.length ? pickOne(others, rng) : null, order: shuffle(CLOTHES_IDS, rng) }
   })
   const [w, setW] = useState<WeatherId>(plan.first)

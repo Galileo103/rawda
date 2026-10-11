@@ -102,6 +102,8 @@ function GameSession({ game, plays, learned: learnedNow, onAgain }: { game: Game
     idle: 0,
     timers: [] as number[],
     alive: true,
+    /** The face the round asked for (Silly Hala wonders while the child judges), restored after a "try again". */
+    mood: 'idle' as MascotMood,
     /** What this round practises, and how it went so far (recorded when solved). */
     skill: '',
     misses: 0,
@@ -160,12 +162,15 @@ function GameSession({ game, plays, learned: learnedNow, onAgain }: { game: Game
       prompt(text) {
         cur.prompt = text
         setBubble(text)
+        cur.mood = 'idle'
         setMood('idle')
         void audio.speak(text, lang)
         armIdle()
       },
       mood(m) {
-        if (thisRound.live) setMood(m)
+        if (!thisRound.live) return
+        cur.mood = m
+        setMood(m)
       },
       practise(skill) {
         cur.skill = skill
@@ -218,6 +223,7 @@ function GameSession({ game, plays, learned: learnedNow, onAgain }: { game: Game
               cur.locked = false
               cur.hint = null
               cur.started = Date.now()
+              cur.mood = 'idle'
               setLocked(false)
               setMood('idle')
               setRound(round + 1)
@@ -237,7 +243,8 @@ function GameSession({ game, plays, learned: learnedNow, onAgain }: { game: Game
         later(() => {
           if (thisRound.live && !cur.locked) {
             setBubble(cur.prompt)
-            setMood('idle')
+            // Back to the face the round chose (Hala keeps wondering while the child is still judging).
+            setMood(cur.mood)
           }
         }, 2600)
         armIdle()

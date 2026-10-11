@@ -59,7 +59,20 @@ export const ChoiceItemZ = z.object({
   choices: z.array(VisualZ).min(2).max(6).optional(),
   sayAfter: LocalizedZ.optional(),
 })
-export const CountItemZ = z.object({ ...ItemBase, object: Id, count: z.number().int().min(1).max(10) })
+/**
+ * Count objects. `layout: "dice"` places 1–6 objects in dice positions (quick look, no
+ * tap-to-count); with `flashMs` they show that long, then hide under a soft card.
+ */
+export const CountItemZ = z
+  .object({
+    ...ItemBase,
+    object: Id,
+    count: z.number().int().min(1).max(10),
+    layout: z.enum(['dice']).optional(),
+    flashMs: z.number().int().min(500).max(5000).optional(),
+  })
+  .refine((i) => i.layout !== 'dice' || i.count <= 6, 'a dice layout shows 1–6 objects')
+  .refine((i) => i.flashMs === undefined || i.layout === 'dice', '"flashMs" needs "layout": "dice"')
 export const MatchItemZ = z.object({
   ...ItemBase,
   pairs: z.array(z.object({ a: VisualZ, b: VisualZ })).min(2).max(5),
@@ -83,6 +96,31 @@ export const SortItemZ = z.object({
 export const SpeakItemZ = z.object({ ...ItemBase, word: Id })
 export type SortItem = z.infer<typeof SortItemZ>
 export type SpeakItem = z.infer<typeof SpeakItemZ>
+/**
+ * "Give me N" (cardinality): move exactly `n` of the `have` objects onto the plate, then tap "done".
+ * `say` is the neutral line (هَيَّا نَضَعُ…); `ask` optionally addresses a boy or a girl ({ m, f }).
+ */
+export const GiveItemZ = z
+  .object({
+    ...ItemBase,
+    object: Id,
+    n: z.number().int().min(1).max(10),
+    have: z.number().int().min(2).max(10),
+    ask: z.lazy(() => GLocalizedZ).optional(),
+  })
+  .refine((i) => i.have >= Math.min(i.n + 2, 10), 'a give item needs "have" of at least n + 2 (at most 10)')
+export type GiveItem = z.infer<typeof GiveItemZ>
+/**
+ * Clap the parts of a word (phonological awareness). `word` is a lexicon id; `parts` are its
+ * syllables as spoken (بَطْ | طَة); `choices` are the numeral options (default 1–4, must include the answer).
+ */
+export const SyllablesItemZ = z.object({
+  ...ItemBase,
+  word: Id,
+  parts: z.array(z.string().min(1).max(12)).min(1).max(4),
+  choices: z.array(z.number().int().min(1).max(4)).min(2).max(4).optional(),
+})
+export type SyllablesItem = z.infer<typeof SyllablesItemZ>
 
 /** The four developmental pillars the parent dashboard reports on. */
 export const PILLARS = ['speech', 'logic', 'motor', 'creativity'] as const
@@ -109,6 +147,8 @@ export const LessonItemZ = z.object({
   count: z.object({ object: Id, n: z.number().int().min(1).max(10) }).optional(),
   /** Glyph to trace with a finger. */
   trace: z.string().min(1).max(3).optional(),
+  /** "What to do" calm step (feelings): the turtle breathes slowly while this line is spoken. */
+  calm: z.object({ say: LocalizedZ }).optional(),
   /** A gentle, low-pressure check at the end (2–3 options). */
   check: z.object({ say: LocalizedZ, answer: VisualZ, choices: z.array(VisualZ).min(2).max(3), /** Shown above the options (e.g. the pattern to finish). */ show: VisualZ.optional() }).optional(),
 })
@@ -148,6 +188,8 @@ export const ActivityZ = z.discriminatedUnion('template', [
   z.object({ ...ActivityBase, template: z.literal('lesson'), items: z.array(LessonItemZ).min(1) }),
   z.object({ ...ActivityBase, template: z.literal('sort'), items: z.array(SortItemZ).min(1) }),
   z.object({ ...ActivityBase, template: z.literal('speak'), items: z.array(SpeakItemZ).min(1) }),
+  z.object({ ...ActivityBase, template: z.literal('give'), items: z.array(GiveItemZ).min(1) }),
+  z.object({ ...ActivityBase, template: z.literal('syllables'), items: z.array(SyllablesItemZ).min(1) }),
 ])
 export type Activity = z.infer<typeof ActivityZ>
 export type TemplateId = Activity['template']
@@ -235,6 +277,8 @@ export const StoryZ = z.object({
         /** {curly braces} mark highlighted vocabulary words. */
         text: z.object({ ar: GTextZ, en: GTextZ }),
         vocab: z.array(Id).default([]),
+        /** Dialogic-reading question for the grown-up to ask; shown, never spoken. */
+        prompt: z.object({ ar: GTextZ, en: GTextZ }).optional(),
       }),
     )
     .min(1),

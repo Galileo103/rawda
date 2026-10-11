@@ -60,6 +60,8 @@ function Reader({ story, lang, startPage }: { story: Story; lang: Lang; startPag
   const [rewards, setRewards] = useState<Reward[]>([])
   const v = voice(lang)
   const current = story.pages[page]
+  // With voice on, the grown-up's question hides behind a small button (reset on each page).
+  const [askOpenOn, setAskOpenOn] = useState<number | null>(null)
 
   useEffect(() => () => audio.stop(), [])
 
@@ -192,6 +194,30 @@ function Reader({ story, lang, startPage }: { story: Story; lang: Lang; startPag
       <p className={s.text} lang={lang} dir={lang === 'ar' ? 'rtl' : 'ltr'}>
         {richText(named(current.text[lang], lang))}
       </p>
+      {current.prompt && (
+        // Dialogic reading: a question for the grown-up to ask. Shown only, never spoken by Hala.
+        <div className={s.askWrap}>
+          {settings.narration && (
+            <IconButton
+              icon="help"
+              label={t.stories.askChild}
+              showLabel
+              aria-expanded={askOpenOn === page}
+              className={s.askBtn}
+              onClick={() => setAskOpenOn(askOpenOn === page ? null : page)}
+              size={24}
+            />
+          )}
+          {(!settings.narration || askOpenOn === page) && (
+            <p className={s.ask} data-testid="ask-child">
+              <span className={s.askLabel}>{t.stories.askChild}</span>
+              <span lang={lang} dir={lang === 'ar' ? 'rtl' : 'ltr'}>
+                {named(current.prompt[lang], lang)}
+              </span>
+            </p>
+          )}
+        </div>
+      )}
       {current.vocab.length > 0 && (
         <div className={s.vocab} aria-label={t.stories.vocab}>
           {current.vocab.map((id) => {

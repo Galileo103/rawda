@@ -1,0 +1,182 @@
+{
+  "id": "ar-syllables",
+  "areaId": "letters",
+  "template": "syllables",
+  "langs": "ar",
+  "level": 2,
+  "order": 9,
+  "sessionLength": 4,
+  "icon": {
+    "kind": "lex",
+    "id": "drum"
+  },
+  "title": {
+    "ar": "هَيَّا نُصَفِّقُ!"
+  },
+  "intro": {
+    "ar": "نَسْمَعُ الْكَلِمَةَ، وَنَدُقُّ الطَّبْلَةَ لِكُلِّ جُزْءٍ، ثُمَّ نَعُدُّ الْأَجْزَاءَ!"
+  },
+  "items": [
+    {
+      "id": "sun",
+      "skill": "syllables.sun",
+      "difficulty": 1,
+      "say": {
+        "ar": "هَيَّا نُصَفِّقُ لِكُلِّ جُزْءٍ: شَمْس!"
+      },
+      "word": "sun",
+      "parts": [
+        "شَمْس"
+      ]
+    },
+    {
+      "id": "bear",
+      "skill": "syllables.bear",
+      "difficulty": 1,
+      "say": {
+        "ar": "هَيَّا نُصَفِّقُ لِكُلِّ جُزْءٍ: دُبّ!"
+      },
+      "word": "bear",
+      "parts": [
+        "دُبّ"
+      ]
+    },
+    {
+      "id": "elephant",
+      "skill": "syllables.elephant",
+      "difficulty": 1,
+      "say": {
+        "ar": "هَيَّا نُصَفِّقُ لِكُلِّ جُزْءٍ: فِيل!"
+      },
+      "word": "elephant",
+      "parts": [
+        "فِيل"
+      ]
+    },
+    {
+      "id": "duck",
+      "skill": "syllables.duck",
+      "difficulty": 1,
+      "say": {
+        "ar": "هَيَّا نُصَفِّقُ لِكُلِّ جُزْءٍ: بَطْ… طَة!"
+      },
+      "word": "duck",
+      "parts": [
+        "بَطْ",
+        "طَة"
+      ]
+    },
+    {
+      "id": "rabbit",
+      "skill": "syllables.rabbit",
+      "difficulty": 1,
+      "say": {
+        "ar": "هَيَّا نُصَفِّقُ لِكُلِّ جُزْءٍ: أَرْ… نَب!"
+      },
+      "word": "rabbit",
+      "parts": [
+        "أَرْ",
+        "نَب"
+      ]
+    },
+    {
+      "id": "camel",
+      "skill": "syllables.camel",
+      "difficulty": 1,
+      "say": {
+        "ar": "هَيَّا نُصَفِّقُ لِكُلِّ جُزْءٍ: جَ… مَل!"
+      },
+      "word": "camel",
+      "parts": [
+        "جَ",
+        "مَل"
+      ]
+    },
+    {
+      "id": "fish",
+      "skill": "syllables.fish",
+      "difficulty": 2,
+      "say": {
+        "ar": "هَيَّا نُصَفِّقُ لِكُلِّ جُزْءٍ: سَ… مَ… كَة!"
+      },
+      "word": "fish",
+      "parts": [
+        "سَ",
+        "مَ",
+        "كَة"
+      ]
+    },
+    {
+      "id": "giraffe",
+      "skill": "syllables.giraffe",
+      "difficulty": 2,
+      "say": {
+        "ar": "هَيَّا نُصَفِّقُ لِكُلِّ جُزْءٍ: زَ… رَا… فَة!"
+      },
+      "word": "giraffe",
+      "parts": [
+        "زَ",
+        "رَا",
+        "فَة"
+      ]
+    },
+    {
+      "id": "apple",
+      "skill": "syllables.apple",
+      "difficulty": 2,
+      "say": {
+        "ar": "هَيَّا نُصَفِّقُ لِكُلِّ جُزْءٍ: تُفْ… فَا… حَة!"
+      },
+      "word": "apple",
+      "parts": [
+        "تُفْ",
+        "فَا",
+        "حَة"
+      ]
+    },
+    {
+      "id": "turtle",
+      "skill": "syllables.turtle",
+      "difficulty": 2,
+      "say": {
+        "ar": "هَيَّا نُصَفِّقُ لِكُلِّ جُزْءٍ: سُ… لَحْ… فَاة!"
+      },
+      "word": "turtle",
+      "parts": [
+        "سُ",
+        "لَحْ",
+        "فَاة"
+      ]
+    },
+    {
+      "id": "orange",
+      "skill": "syllables.orange",
+      "difficulty": 3,
+      "say": {
+        "ar": "هَيَّا نُصَفِّقُ لِكُلِّ جُزْءٍ: بُرْ… تُ… قَا… لَة!"
+      },
+      "word": "orange",
+      "parts": [
+        "بُرْ",
+        "تُ",
+        "قَا",
+        "لَة"
+      ]
+    },
+    {
+      "id": "chocolate",
+      "skill": "syllables.chocolate",
+      "difficulty": 3,
+      "say": {
+        "ar": "هَيَّا نُصَفِّقُ لِكُلِّ جُزْءٍ: شُو… كُو… لَا… تَة!"
+      },
+      "word": "chocolate",
+      "parts": [
+        "شُو",
+        "كُو",
+        "لَا",
+        "تَة"
+      ]
+    }
+  ]
+}

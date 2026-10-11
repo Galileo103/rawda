@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120">
+  <!-- Rawda thumbs down: a bold rounded thumb on a flat gradient badge, readable by a pre-reader at any size -->
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#FF9470"/>
+      <stop offset="1" stop-color="#E8573A"/>
+    </linearGradient>
+  </defs>
+  <circle cx="60" cy="63" r="55" fill="#B83E22"/>
+  <circle cx="60" cy="58" r="55" fill="url(#g)"/>
+  <g transform="translate(60 63) scale(.58) translate(-62 -60) rotate(180 62 60)" stroke-linejoin="round" stroke-width="10">
+    <g transform="translate(0 6)" fill="#B83E22" stroke="#B83E22" opacity=".55">
+      <path d="M18 56 H32 V100 H18 Z"/><path d="M44 56 L64 26 Q68 18 75 20 Q82 23 80 32 L76 48 H100 Q108 48 106 57 L99 94 Q97 101 90 101 H44 Z"/>
+    </g>
+    <path d="M18 56 H32 V100 H18 Z" fill="#fff" stroke="#fff"/>
+    <path d="M44 56 L64 26 Q68 18 75 20 Q82 23 80 32 L76 48 H100 Q108 48 106 57 L99 94 Q97 101 90 101 H44 Z" fill="#fff" stroke="#fff"/>
+  </g>
+</svg>

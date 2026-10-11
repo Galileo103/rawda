@@ -12,10 +12,11 @@ import { takenLessonItems } from '../../services/repos/progress'
 import { useSpeakOnMount, voice } from '../common'
 import s from './discover.module.css'
 
-type BoardPrompt = 'chooseLetter' | 'chooseNumber' | 'chooseColor' | 'chooseShape' | 'chooseIslamic' | 'chooseScience' | 'chooseLogic'
+type BoardPrompt = 'chooseLetter' | 'chooseNumber' | 'chooseColor' | 'chooseShape' | 'chooseIslamic' | 'chooseScience' | 'chooseLogic' | 'chooseFeeling'
 
 /** Hala's question for a Discover board ("Which colour shall we discover today?"). */
 function boardPrompt(activity: { id: string; areaId: string } | undefined): BoardPrompt {
+  if (activity?.id === 'feelings-discover') return 'chooseFeeling'
   if (activity?.id === 'colors-discover') return 'chooseColor'
   if (activity?.id === 'shapes-discover') return 'chooseShape'
   switch (activity?.areaId) {

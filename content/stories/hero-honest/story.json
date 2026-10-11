@@ -1,0 +1,51 @@
+{
+  "id": "hero-honest",
+  "title": {"ar": "@name وَالْكُوبُ", "en": "@name and the Cup"},
+  "theme": "honesty",
+  "level": 2,
+  "personalized": true,
+  "cover": {"kind": "lex", "id": "cup"},
+  "pages": [
+    {
+      "scene": {"bg": "home", "actors": [{"lex": "@hero", "x": 28, "y": 62, "size": "lg", "motion": "bounce"}, {"lex": "ball", "x": 50, "y": 74, "size": "sm", "motion": "bounce"}, {"lex": "cup", "x": 76, "y": 52, "size": "sm"}]},
+      "text": {"ar": {"m": "@name يَلْعَبُ بِـ{الْكُرَةِ} فِي {الْبَيْتِ}.", "f": "@name تَلْعَبُ بِـ{الْكُرَةِ} فِي {الْبَيْتِ}."}, "en": "@name plays with a {ball} in the {house}."},
+      "vocab": ["ball", "house"],
+      "prompt": {"ar": {"m": "أَيْنَ تَلْعَبُ بِالْكُرَةِ؟", "f": "أَيْنَ تَلْعَبِينَ بِالْكُرَةِ؟"}, "en": "Where do you play with a ball?"}
+    },
+    {
+      "scene": {"bg": "home", "actors": [{"lex": "@hero", "x": 24, "y": 62, "size": "lg"}, {"lex": "ball", "x": 62, "y": 44, "size": "sm", "motion": "bounce"}, {"lex": "cup", "x": 76, "y": 78, "size": "sm", "motion": "sway"}]},
+      "text": {"ar": "طَارَتِ الْكُرَةُ، فَوَقَعَ {الْكُوبُ} وَانْكَسَرَ!", "en": "The ball flew, and the {cup} fell and broke!"},
+      "vocab": ["cup"],
+      "prompt": {"ar": "مَاذَا حَدَثَ لِلْكُوبِ؟", "en": "What happened to the cup?"}
+    },
+    {
+      "scene": {"bg": "home", "actors": [{"lex": "@hero", "x": 34, "y": 62, "size": "lg"}, {"lex": "scared", "x": 34, "y": 24, "size": "sm", "motion": "sway"}, {"lex": "cup", "x": 72, "y": 78, "size": "sm"}]},
+      "text": {"ar": {"m": "@name {خَائِفٌ} قَلِيلًا.", "f": "@name {خَائِفَةٌ} قَلِيلًا."}, "en": "@name feels a little {scared}."},
+      "vocab": ["scared"],
+      "prompt": {"ar": {"m": "مَاذَا سَيَفْعَلُ @name الْآنَ؟", "f": "مَاذَا سَتَفْعَلُ @name الْآنَ؟"}, "en": "What will @name do now?"}
+    },
+    {
+      "scene": {"bg": "home", "actors": [{"lex": "@hero", "x": 28, "y": 62, "size": "lg"}, {"lex": "mother", "x": 70, "y": 58, "size": "lg", "flip": true}, {"lex": "cup", "x": 50, "y": 80, "size": "sm"}]},
+      "text": {"ar": {"m": "جَاءَتِ {الْأُمُّ}. @name يَقُولُ: أَنَا كَسَرْتُ الْكُوبَ.", "f": "جَاءَتِ {الْأُمُّ}. @name تَقُولُ: أَنَا كَسَرْتُ الْكُوبَ."}, "en": "{Mom} came in. @name says: “I broke the cup.”"},
+      "vocab": ["mother"],
+      "prompt": {"ar": {"m": "مَتَى قُلْتَ الْحَقَّ؟", "f": "مَتَى قُلْتِ الْحَقَّ؟"}, "en": "When did you tell the truth?"}
+    },
+    {
+      "scene": {"bg": "home", "actors": [{"lex": "@hero", "x": 36, "y": 62, "size": "lg"}, {"lex": "mother", "x": 64, "y": 58, "size": "lg", "flip": true}, {"lex": "hug", "x": 50, "y": 24, "size": "md", "motion": "bounce"}]},
+      "text": {"ar": {"m": "قَالَتِ الْأُمُّ: شُكْرًا لِأَنَّكَ قُلْتَ الْحَقَّ يَا @name! ثُمَّ أَعْطَتْهُ {حُضْنًا} دَافِئًا.", "f": "قَالَتِ الْأُمُّ: شُكْرًا لِأَنَّكِ قُلْتِ الْحَقَّ يَا @name! ثُمَّ أَعْطَتْهَا {حُضْنًا} دَافِئًا."}, "en": {"m": "Mom says: “Thank you for telling the truth, @name!” Then she gives him a warm {hug}.", "f": "Mom says: “Thank you for telling the truth, @name!” Then she gives her a warm {hug}."}},
+      "vocab": ["hug"],
+      "prompt": {"ar": "كَيْفَ تَشْعُرُ الْأُمُّ؟ لِمَاذَا؟", "en": "How does Mom feel? Why?"}
+    },
+    {
+      "scene": {"bg": "sky", "actors": [{"lex": "@hero", "x": 34, "y": 62, "size": "lg", "motion": "bounce"}, {"lex": "mother", "x": 66, "y": 58, "size": "lg", "flip": true}, {"lex": "heart", "x": 50, "y": 22, "size": "md", "motion": "bounce"}]},
+      "text": {"ar": {"m": "قَوْلُ الْحَقِّ شَجَاعَةٌ. @name {سَعِيدٌ} الْآنَ!", "f": "قَوْلُ الْحَقِّ شَجَاعَةٌ. @name {سَعِيدَةٌ} الْآنَ!"}, "en": "Telling the truth is brave. @name is {happy} now!"},
+      "vocab": ["happy", "heart"],
+      "prompt": {"ar": {"m": "لِمَاذَا @name سَعِيدٌ الْآنَ؟", "f": "لِمَاذَا @name سَعِيدَةٌ الْآنَ؟"}, "en": "Why is @name happy now?"}
+    }
+  ],
+  "questions": [
+    {"id": "broke", "skill": "story.honest.what", "difficulty": 1, "say": {"ar": "مَاذَا انْكَسَرَ؟", "en": "What broke?"}, "answer": {"kind": "lex", "id": "cup"}, "choices": [{"kind": "lex", "id": "cup"}, {"kind": "lex", "id": "ball"}, {"kind": "lex", "id": "apple"}]},
+    {"id": "who", "skill": "story.honest.who", "difficulty": 1, "say": {"ar": "مَنْ حَضَنَ @name؟", "en": "Who hugged @name?"}, "answer": {"kind": "lex", "id": "mother"}, "choices": [{"kind": "lex", "id": "mother"}, {"kind": "lex", "id": "cat"}, {"kind": "lex", "id": "rabbit"}]},
+    {"id": "feeling", "skill": "story.honest.feeling", "difficulty": 1, "say": {"ar": {"m": "فِي النِّهَايَةِ، كَيْفَ شَعَرَ @name؟", "f": "فِي النِّهَايَةِ، كَيْفَ شَعَرَتْ @name؟"}, "en": "How did @name feel at the end?"}, "answer": {"kind": "lex", "id": "happy"}, "choices": [{"kind": "lex", "id": "happy"}, {"kind": "lex", "id": "sad"}]}
+  ]
+}

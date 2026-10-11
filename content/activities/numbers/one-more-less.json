@@ -1,0 +1,24 @@
+{
+  "id": "one-more-less",
+  "areaId": "numbers",
+  "template": "choice",
+  "langs": "any",
+  "level": 4,
+  "order": 3.5,
+  "sessionLength": 5,
+  "icon": { "kind": "img", "hex": "2795" },
+  "title": { "ar": "وَاحِدَةٌ أَكْثَرُ، وَاحِدَةٌ أَقَلُّ", "en": "One more, one less" },
+  "intro": { "ar": "هَيَّا نُفَكِّرُ: إِذَا أَضَفْنَا وَاحِدَةً أَوْ أَخَذْنَا وَاحِدَةً، كَمْ يَصِيرُ الْعَدَدُ؟", "en": "Let's think: if we add one or take one away, how many will there be?" },
+  "items": [
+    { "id": "one-more-apple-1", "skill": "num.onemore", "difficulty": 1, "say": { "ar": "إِذَا أَضَفْنَا وَاحِدَةً، كَمْ تَصِيرُ؟", "en": "If we add one more, how many?" }, "show": { "kind": "group", "id": "apple", "count": 1 }, "answer": { "kind": "numeral", "value": 2 }, "choices": [ { "kind": "numeral", "value": 0 }, { "kind": "numeral", "value": 1 }, { "kind": "numeral", "value": 2 } ] },
+    { "id": "one-more-star-2", "skill": "num.onemore", "difficulty": 1, "say": { "ar": "إِذَا أَضَفْنَا وَاحِدَةً، كَمْ تَصِيرُ؟", "en": "If we add one more, how many?" }, "show": { "kind": "group", "id": "star", "count": 2 }, "answer": { "kind": "numeral", "value": 3 }, "choices": [ { "kind": "numeral", "value": 1 }, { "kind": "numeral", "value": 2 }, { "kind": "numeral", "value": 3 } ] },
+    { "id": "one-more-ball-3", "skill": "num.onemore", "difficulty": 2, "say": { "ar": "إِذَا أَضَفْنَا وَاحِدَةً، كَمْ تَصِيرُ؟", "en": "If we add one more, how many?" }, "show": { "kind": "group", "id": "ball", "count": 3 }, "answer": { "kind": "numeral", "value": 4 }, "choices": [ { "kind": "numeral", "value": 2 }, { "kind": "numeral", "value": 3 }, { "kind": "numeral", "value": 4 } ] },
+    { "id": "one-more-flower-4", "skill": "num.onemore", "difficulty": 3, "say": { "ar": "إِذَا أَضَفْنَا وَاحِدَةً، كَمْ تَصِيرُ؟", "en": "If we add one more, how many?" }, "show": { "kind": "group", "id": "flower", "count": 4 }, "answer": { "kind": "numeral", "value": 5 }, "choices": [ { "kind": "numeral", "value": 3 }, { "kind": "numeral", "value": 4 }, { "kind": "numeral", "value": 5 } ] },
+    { "id": "one-more-fish-6", "skill": "num.onemore", "difficulty": 4, "say": { "ar": "إِذَا أَضَفْنَا وَاحِدَةً، كَمْ تَصِيرُ؟", "en": "If we add one more, how many?" }, "show": { "kind": "group", "id": "fish", "count": 6 }, "answer": { "kind": "numeral", "value": 7 }, "choices": [ { "kind": "numeral", "value": 5 }, { "kind": "numeral", "value": 6 }, { "kind": "numeral", "value": 7 } ] },
+    { "id": "one-more-duck-8", "skill": "num.onemore", "difficulty": 5, "say": { "ar": "إِذَا أَضَفْنَا وَاحِدَةً، كَمْ تَصِيرُ؟", "en": "If we add one more, how many?" }, "show": { "kind": "group", "id": "duck", "count": 8 }, "answer": { "kind": "numeral", "value": 9 }, "choices": [ { "kind": "numeral", "value": 7 }, { "kind": "numeral", "value": 8 }, { "kind": "numeral", "value": 9 } ] },
+    { "id": "one-less-carrot-2", "skill": "num.oneless", "difficulty": 1, "say": { "ar": "إِذَا أَخَذْنَا وَاحِدَةً، كَمْ يَبْقَى؟", "en": "If we take one away, how many are left?" }, "show": { "kind": "group", "id": "carrot", "count": 2 }, "answer": { "kind": "numeral", "value": 1 }, "choices": [ { "kind": "numeral", "value": 1 }, { "kind": "numeral", "value": 2 }, { "kind": "numeral", "value": 3 } ] },
+    { "id": "one-less-strawberry-3", "skill": "num.oneless", "difficulty": 2, "say": { "ar": "إِذَا أَخَذْنَا وَاحِدَةً، كَمْ يَبْقَى؟", "en": "If we take one away, how many are left?" }, "show": { "kind": "group", "id": "strawberry", "count": 3 }, "answer": { "kind": "numeral", "value": 2 }, "choices": [ { "kind": "numeral", "value": 2 }, { "kind": "numeral", "value": 3 }, { "kind": "numeral", "value": 4 } ] },
+    { "id": "one-less-bee-5", "skill": "num.oneless", "difficulty": 3, "say": { "ar": "إِذَا أَخَذْنَا وَاحِدَةً، كَمْ يَبْقَى؟", "en": "If we take one away, how many are left?" }, "show": { "kind": "group", "id": "bee", "count": 5 }, "answer": { "kind": "numeral", "value": 4 }, "choices": [ { "kind": "numeral", "value": 4 }, { "kind": "numeral", "value": 5 }, { "kind": "numeral", "value": 6 } ] },
+    { "id": "one-less-car-7", "skill": "num.oneless", "difficulty": 4, "say": { "ar": "إِذَا أَخَذْنَا وَاحِدَةً، كَمْ يَبْقَى؟", "en": "If we take one away, how many are left?" }, "show": { "kind": "group", "id": "car", "count": 7 }, "answer": { "kind": "numeral", "value": 6 }, "choices": [ { "kind": "numeral", "value": 6 }, { "kind": "numeral", "value": 7 }, { "kind": "numeral", "value": 8 } ] }
+  ]
+}

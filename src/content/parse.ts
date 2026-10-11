@@ -233,6 +233,17 @@ function checkActivity(
     case 'speak':
       a.items.forEach((i) => lexOk(i.word, `${path} item ${i.id}`) || problems.push(`${path}: bad word`))
       break
+    case 'give':
+      // `ask` ({ m, f } per language) is optional: without it the neutral `say` is used.
+      a.items.forEach((i) => lexOk(i.object, `${path} item ${i.id}`) || problems.push(`${path}: bad object`))
+      break
+    case 'syllables':
+      for (const i of a.items) {
+        const where = `${path} item ${i.id}`
+        lexOk(i.word, where)
+        if (i.choices && !i.choices.includes(i.parts.length)) problems.push(`${where}: choices must include ${i.parts.length} (the number of parts)`)
+      }
+      break
     case 'lesson':
       for (const i of a.items) {
         const where = `${path} item ${i.id}`

@@ -1,0 +1,50 @@
+{
+  "id": "helping-home",
+  "title": {"ar": "نُورُ تُسَاعِدُ فِي الْبَيْتِ", "en": "Nour Helps at Home"},
+  "theme": "helping",
+  "level": 1,
+  "cover": {"kind": "lex", "id": "plate"},
+  "pages": [
+    {
+      "scene": {"bg": "home", "actors": [{"lex": "girl", "x": 30, "y": 62, "size": "lg", "motion": "bounce"}, {"lex": "mother", "x": 68, "y": 58, "size": "lg", "flip": true}, {"lex": "house", "x": 86, "y": 18, "size": "sm"}]},
+      "text": {"ar": "نُورُ فِي {الْبَيْتِ} مَعَ {أُمِّهَا}.", "en": "Nour is at {home} with her {mom}."},
+      "vocab": ["house", "mother"],
+      "prompt": {"ar": "مَنْ فِي الصُّورَةِ؟", "en": "Who is in the picture?"}
+    },
+    {
+      "scene": {"bg": "home", "actors": [{"lex": "girl", "x": 26, "y": 62, "size": "lg"}, {"lex": "mother", "x": 66, "y": 58, "size": "lg", "flip": true}, {"lex": "meal", "x": 66, "y": 26, "size": "md", "motion": "sway"}]},
+      "text": {"ar": "الْأُمُّ تُحَضِّرُ {الطَّعَامَ}. قَالَتْ نُورُ: أَنَا أُسَاعِدُكِ يَا أُمِّي!", "en": "Mom is making {food}. Nour says: “I will help you, Mom!”"},
+      "vocab": ["meal"],
+      "prompt": {"ar": {"m": "كَيْفَ تُسَاعِدُ أُمَّكَ؟", "f": "كَيْفَ تُسَاعِدِينَ أُمَّكِ؟"}, "en": "How do you help your mom?"}
+    },
+    {
+      "scene": {"bg": "home", "actors": [{"lex": "girl", "x": 22, "y": 62, "size": "lg"}, {"lex": "plate", "x": 50, "y": 72, "size": "sm", "motion": "bounce"}, {"lex": "plate", "x": 66, "y": 72, "size": "sm", "motion": "bounce"}, {"lex": "plate", "x": 82, "y": 72, "size": "sm", "motion": "bounce"}]},
+      "text": {"ar": "وَضَعَتْ نُورُ {الْأَطْبَاقَ} عَلَى الْمَائِدَةِ.", "en": "Nour put the {plates} on the table."},
+      "vocab": ["plate"],
+      "prompt": {"ar": "كَمْ طَبَقًا عَلَى الْمَائِدَةِ؟", "en": "How many plates are on the table?"}
+    },
+    {
+      "scene": {"bg": "home", "actors": [{"lex": "girl", "x": 22, "y": 62, "size": "lg"}, {"lex": "plate", "x": 52, "y": 74, "size": "sm"}, {"lex": "bread", "x": 68, "y": 66, "size": "sm", "motion": "bounce"}, {"lex": "water", "x": 84, "y": 66, "size": "sm", "motion": "bounce"}]},
+      "text": {"ar": "ثُمَّ وَضَعَتِ {الْخُبْزَ} وَ{الْمَاءَ}.", "en": "Then she put out the {bread} and the {water}."},
+      "vocab": ["bread", "water"],
+      "prompt": {"ar": "مَاذَا نَضَعُ أَيْضًا عَلَى الْمَائِدَةِ؟", "en": "What else goes on the table?"}
+    },
+    {
+      "scene": {"bg": "home", "actors": [{"lex": "girl", "x": 24, "y": 62, "size": "lg"}, {"lex": "teddy", "x": 50, "y": 44, "size": "sm", "motion": "bounce"}, {"lex": "ball", "x": 64, "y": 44, "size": "sm", "motion": "bounce"}, {"lex": "box", "x": 72, "y": 70, "size": "md"}]},
+      "text": {"ar": "بَعْدَ الْأَكْلِ، جَمَعَتْ نُورُ لُعَبَهَا فِي {الصُّنْدُوقِ}.", "en": "After eating, Nour put her toys away in the {box}."},
+      "vocab": ["box", "teddy"],
+      "prompt": {"ar": {"m": "أَيْنَ تَضَعُ لُعَبَكَ؟", "f": "أَيْنَ تَضَعِينَ لُعَبَكِ؟"}, "en": "Where do you put your toys?"}
+    },
+    {
+      "scene": {"bg": "sky", "actors": [{"lex": "girl", "x": 34, "y": 62, "size": "lg", "motion": "bounce"}, {"lex": "mother", "x": 66, "y": 58, "size": "lg", "flip": true}, {"lex": "hug", "x": 50, "y": 22, "size": "md", "motion": "bounce"}]},
+      "text": {"ar": "قَالَتِ الْأُمُّ: شُكْرًا يَا نُورُ! وَأَعْطَتْهَا {حُضْنًا} كَبِيرًا.", "en": "Mom said: “Thank you, Nour!” and gave her a big {hug}."},
+      "vocab": ["hug", "happy"],
+      "prompt": {"ar": "كَيْفَ تَشْعُرُ نُورُ؟ لِمَاذَا؟", "en": "How does Nour feel? Why?"}
+    }
+  ],
+  "questions": [
+    {"id": "who", "skill": "story.helping.who", "difficulty": 1, "say": {"ar": "مَنْ سَاعَدَ الْأُمَّ؟", "en": "Who helped Mom?"}, "answer": {"kind": "lex", "id": "girl"}, "choices": [{"kind": "lex", "id": "girl"}, {"kind": "lex", "id": "cat"}, {"kind": "lex", "id": "rabbit"}]},
+    {"id": "table", "skill": "story.helping.table", "difficulty": 1, "say": {"ar": "مَاذَا وَضَعَتْ نُورُ عَلَى الْمَائِدَةِ؟", "en": "What did Nour put on the table?"}, "answer": {"kind": "lex", "id": "plate"}, "choices": [{"kind": "lex", "id": "plate"}, {"kind": "lex", "id": "ball"}, {"kind": "lex", "id": "car"}]},
+    {"id": "toys", "skill": "story.helping.toys", "difficulty": 1, "say": {"ar": "أَيْنَ وَضَعَتْ نُورُ لُعَبَهَا؟", "en": "Where did Nour put her toys?"}, "answer": {"kind": "lex", "id": "box"}, "choices": [{"kind": "lex", "id": "box"}, {"kind": "lex", "id": "tree"}, {"kind": "lex", "id": "car"}]}
+  ]
+}

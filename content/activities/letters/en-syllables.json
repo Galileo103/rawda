@@ -1,0 +1,182 @@
+{
+  "id": "en-syllables",
+  "areaId": "letters",
+  "template": "syllables",
+  "langs": "en",
+  "level": 2,
+  "order": 9.5,
+  "sessionLength": 4,
+  "icon": {
+    "kind": "lex",
+    "id": "drum"
+  },
+  "title": {
+    "en": "Clap the parts!"
+  },
+  "intro": {
+    "en": "We listen to the word, tap the drum for each part, then count the parts!"
+  },
+  "items": [
+    {
+      "id": "sun",
+      "skill": "syllables.sun",
+      "difficulty": 1,
+      "say": {
+        "en": "Let’s clap each part: sun!"
+      },
+      "word": "sun",
+      "parts": [
+        "sun"
+      ]
+    },
+    {
+      "id": "bear",
+      "skill": "syllables.bear",
+      "difficulty": 1,
+      "say": {
+        "en": "Let’s clap each part: bear!"
+      },
+      "word": "bear",
+      "parts": [
+        "bear"
+      ]
+    },
+    {
+      "id": "cat",
+      "skill": "syllables.cat",
+      "difficulty": 1,
+      "say": {
+        "en": "Let’s clap each part: cat!"
+      },
+      "word": "cat",
+      "parts": [
+        "cat"
+      ]
+    },
+    {
+      "id": "rabbit",
+      "skill": "syllables.rabbit",
+      "difficulty": 1,
+      "say": {
+        "en": "Let’s clap each part: rab… bit!"
+      },
+      "word": "rabbit",
+      "parts": [
+        "rab",
+        "bit"
+      ]
+    },
+    {
+      "id": "apple",
+      "skill": "syllables.apple",
+      "difficulty": 1,
+      "say": {
+        "en": "Let’s clap each part: ap… ple!"
+      },
+      "word": "apple",
+      "parts": [
+        "ap",
+        "ple"
+      ]
+    },
+    {
+      "id": "monkey",
+      "skill": "syllables.monkey",
+      "difficulty": 1,
+      "say": {
+        "en": "Let’s clap each part: mon… key!"
+      },
+      "word": "monkey",
+      "parts": [
+        "mon",
+        "key"
+      ]
+    },
+    {
+      "id": "butterfly",
+      "skill": "syllables.butterfly",
+      "difficulty": 2,
+      "say": {
+        "en": "Let’s clap each part: but… ter… fly!"
+      },
+      "word": "butterfly",
+      "parts": [
+        "but",
+        "ter",
+        "fly"
+      ]
+    },
+    {
+      "id": "elephant",
+      "skill": "syllables.elephant",
+      "difficulty": 2,
+      "say": {
+        "en": "Let’s clap each part: el… e… phant!"
+      },
+      "word": "elephant",
+      "parts": [
+        "el",
+        "e",
+        "phant"
+      ]
+    },
+    {
+      "id": "banana",
+      "skill": "syllables.banana",
+      "difficulty": 2,
+      "say": {
+        "en": "Let’s clap each part: ba… na… na!"
+      },
+      "word": "banana",
+      "parts": [
+        "ba",
+        "na",
+        "na"
+      ]
+    },
+    {
+      "id": "tomato",
+      "skill": "syllables.tomato",
+      "difficulty": 2,
+      "say": {
+        "en": "Let’s clap each part: to… ma… to!"
+      },
+      "word": "tomato",
+      "parts": [
+        "to",
+        "ma",
+        "to"
+      ]
+    },
+    {
+      "id": "helicopter",
+      "skill": "syllables.helicopter",
+      "difficulty": 3,
+      "say": {
+        "en": "Let’s clap each part: hel… i… cop… ter!"
+      },
+      "word": "helicopter",
+      "parts": [
+        "hel",
+        "i",
+        "cop",
+        "ter"
+      ]
+    },
+    {
+      "id": "watermelon",
+      "skill": "syllables.watermelon",
+      "difficulty": 3,
+      "say": {
+        "en": "Let’s clap each part: wa… ter… mel… on!"
+      },
+      "word": "watermelon",
+      "parts": [
+        "wa",
+        "ter",
+        "mel",
+        "on"
+      ]
+    }
+  ]
+}

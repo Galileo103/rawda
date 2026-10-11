@@ -80,10 +80,14 @@ export function pickSessionItems<T extends SchedulableItem>(items: readonly T[],
 /**
  * Discover lessons follow the curriculum order: the next lesson not yet taken.
  * When all were taken, start again from the beginning (re-meeting a letter is fine).
+ * With a `level`, lessons marked harder than it (e.g. ABC patterns) wait for that level,
+ * so a taught skill never pulls harder practice forward for a younger child.
  */
-export function pickLessonItems<T extends { id: string }>(items: readonly T[], taken: ReadonlySet<string>, count: number): T[] {
-  const fresh = items.filter((i) => !taken.has(i.id))
-  return (fresh.length > 0 ? fresh : items).slice(0, Math.max(1, count))
+export function pickLessonItems<T extends { id: string; difficulty?: number }>(items: readonly T[], taken: ReadonlySet<string>, count: number, level?: number): T[] {
+  const inLevel = level === undefined ? items : items.filter((i) => (i.difficulty ?? 1) <= level)
+  const pool = inLevel.length > 0 ? inLevel : items
+  const fresh = pool.filter((i) => !taken.has(i.id))
+  return (fresh.length > 0 ? fresh : pool).slice(0, Math.max(1, count))
 }
 
 /** Start with the most familiar item (an early win), shuffle the rest, avoid back-to-back repeats. */

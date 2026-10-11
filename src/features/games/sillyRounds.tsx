@@ -15,7 +15,7 @@ import {
   sillyShowWord,
   sillyWordOk,
 } from '../../content/funGames'
-import { type Letter, type LearnedPools, type SillyKind, monsterLetters, numberName, sillyKinds } from '../../content/games'
+import { JUDGE_HEX, type Letter, type LearnedPools, type SillyKind, monsterLetters, numberName, sillyKinds } from '../../content/games'
 import { content } from '../../content/loader'
 import type { LexEntry } from '../../content/schemas'
 import { OpenMoji } from '../../design/Visual'
@@ -124,6 +124,8 @@ export function SillyRound({ lang, d, stage, choices, maxN, locked, rng, ctl, le
 
   useMount(() => {
     ctl.prompt(plan.claim)
+    // Hala wonders aloud while the child judges, so her face asks the question too.
+    ctl.mood('think')
     ctl.hint(() => card.current)
     if (plan.skill) ctl.practise(plan.skill)
   })
@@ -154,7 +156,7 @@ export function SillyRound({ lang, d, stage, choices, maxN, locked, rng, ctl, le
   return (
     <div className={s.sillyWrap}>
       <div ref={card} className={cx(s.sillyCard, shown.kind === 'counting' && s.sillyCountCard)} lang={lang}>
-        {shown.kind === 'pictures' && <OpenMoji hex={shown.e.image} alt="" size={170} />}
+        {shown.kind === 'pictures' && <OpenMoji hex={shown.e.image} alt="" size={190} />}
         {shown.kind === 'letters' && <span className={s.sillyGlyph}>{shown.l.glyph}</span>}
         {shown.kind === 'counting' &&
           Array.from({ length: shown.n }, (_, i) => (
@@ -166,11 +168,18 @@ export function SillyRound({ lang, d, stage, choices, maxN, locked, rng, ctl, le
       </div>
       {phase === 'judge' ? (
         <div className={s.judge}>
-          <button type="button" className={s.judgeYes} onClick={() => judge(true)} data-testid={plan.truth ? 'game-answer' : undefined}>
-            {f.right}
+          {/* One big thumb per button says it for a child who can't read; the word under it is for the grown-up. */}
+          <button type="button" className={s.judgeYes} onClick={() => judge(true)} aria-label={f.right} data-testid={plan.truth ? 'game-answer' : undefined}>
+            <span className={s.judgePic}>
+              <OpenMoji hex={JUDGE_HEX.yes} alt="" size={96} />
+            </span>
+            <span className={s.judgeWord}>{f.right}</span>
           </button>
-          <button type="button" className={s.judgeNo} onClick={() => judge(false)} data-testid={plan.truth ? undefined : 'game-answer'}>
-            {f.wrong}
+          <button type="button" className={s.judgeNo} onClick={() => judge(false)} aria-label={f.wrong} data-testid={plan.truth ? undefined : 'game-answer'}>
+            <span className={s.judgePic}>
+              <OpenMoji hex={JUDGE_HEX.no} alt="" size={96} />
+            </span>
+            <span className={s.judgeWord}>{f.wrong}</span>
           </button>
         </div>
       ) : (

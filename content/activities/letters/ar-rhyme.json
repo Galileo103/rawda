@@ -1,0 +1,24 @@
+{
+  "id": "ar-rhyme",
+  "areaId": "letters",
+  "template": "choice",
+  "langs": "ar",
+  "level": 3,
+  "order": 5,
+  "sessionLength": 6,
+  "icon": { "kind": "lex", "id": "duck" },
+  "title": { "ar": "كَلِمَاتٌ تَتَشَابَهُ فِي آخِرِهَا" },
+  "intro": { "ar": "بَعْضُ الْكَلِمَاتِ تَنْتَهِي بِصَوْتٍ وَاحِدٍ: قِطَّة، بَطَّة! هَيَّا نَسْمَعُ وَنَجِدُهَا." },
+  "items": [
+    { "id": "cat-duck", "skill": "ar.rhyme", "difficulty": 1, "say": { "ar": "أَيُّ كَلِمَةٍ تُشْبِهُ قِطَّة فِي آخِرِهَا؟" }, "show": { "kind": "lex", "id": "cat" }, "answer": { "kind": "lex", "id": "duck" }, "choices": [ { "kind": "lex", "id": "duck" }, { "kind": "lex", "id": "dog" }, { "kind": "lex", "id": "sun" } ], "sayAfter": { "ar": "قِطَّة … بَطَّة!" } },
+    { "id": "dog-heart", "skill": "ar.rhyme", "difficulty": 1, "say": { "ar": "أَيُّ كَلِمَةٍ تُشْبِهُ كَلْب فِي آخِرِهَا؟" }, "show": { "kind": "lex", "id": "dog" }, "answer": { "kind": "lex", "id": "heart" }, "choices": [ { "kind": "lex", "id": "heart" }, { "kind": "lex", "id": "sun" }, { "kind": "lex", "id": "banana" } ], "sayAfter": { "ar": "كَلْب … قَلْب!" } },
+    { "id": "ball-corn", "skill": "ar.rhyme", "difficulty": 1, "say": { "ar": "أَيُّ كَلِمَةٍ تُشْبِهُ كُرَة فِي آخِرِهَا؟" }, "show": { "kind": "lex", "id": "ball" }, "answer": { "kind": "lex", "id": "corn" }, "choices": [ { "kind": "lex", "id": "corn" }, { "kind": "lex", "id": "elephant" }, { "kind": "lex", "id": "sun" } ], "sayAfter": { "ar": "كُرَة … ذُرَة!" } },
+    { "id": "lemon-olive", "skill": "ar.rhyme", "difficulty": 2, "say": { "ar": "أَيُّ كَلِمَةٍ تُشْبِهُ لَيْمُون فِي آخِرِهَا؟" }, "show": { "kind": "lex", "id": "lemon" }, "answer": { "kind": "lex", "id": "olive" }, "choices": [ { "kind": "lex", "id": "olive" }, { "kind": "lex", "id": "apple" }, { "kind": "lex", "id": "banana" } ], "sayAfter": { "ar": "لَيْمُون … زَيْتُون!" } },
+    { "id": "book-door", "skill": "ar.rhyme", "difficulty": 2, "say": { "ar": "أَيُّ كَلِمَةٍ تُشْبِهُ كِتَاب فِي آخِرِهَا؟" }, "show": { "kind": "lex", "id": "book" }, "answer": { "kind": "lex", "id": "door" }, "choices": [ { "kind": "lex", "id": "door" }, { "kind": "lex", "id": "cat" }, { "kind": "lex", "id": "tree" } ], "sayAfter": { "ar": "كِتَاب … بَاب!" } },
+    { "id": "pencil-flag", "skill": "ar.rhyme", "difficulty": 2, "say": { "ar": "أَيُّ كَلِمَةٍ تُشْبِهُ قَلَم فِي آخِرِهَا؟" }, "show": { "kind": "lex", "id": "pencil" }, "answer": { "kind": "lex", "id": "flag" }, "choices": [ { "kind": "lex", "id": "flag" }, { "kind": "lex", "id": "book" }, { "kind": "lex", "id": "fish" } ], "sayAfter": { "ar": "قَلَم … عَلَم!" } },
+    { "id": "cow-tree", "skill": "ar.rhyme", "difficulty": 3, "say": { "ar": "أَيُّ كَلِمَةٍ تُشْبِهُ بَقَرَة فِي آخِرِهَا؟" }, "show": { "kind": "lex", "id": "cow" }, "answer": { "kind": "lex", "id": "tree" }, "choices": [ { "kind": "lex", "id": "tree" }, { "kind": "lex", "id": "dog" }, { "kind": "lex", "id": "banana" } ], "sayAfter": { "ar": "بَقَرَة … شَجَرَة!" } },
+    { "id": "camel-honey", "skill": "ar.rhyme", "difficulty": 3, "say": { "ar": "أَيُّ كَلِمَةٍ تُشْبِهُ جَمَل فِي آخِرِهَا؟" }, "show": { "kind": "lex", "id": "camel" }, "answer": { "kind": "lex", "id": "honey" }, "choices": [ { "kind": "lex", "id": "honey" }, { "kind": "lex", "id": "rabbit" }, { "kind": "lex", "id": "monkey" } ], "sayAfter": { "ar": "جَمَل … عَسَل!" } },
+    { "id": "fire-mouse", "skill": "ar.rhyme", "difficulty": 3, "say": { "ar": "أَيُّ كَلِمَةٍ تُشْبِهُ نَار فِي آخِرِهَا؟" }, "show": { "kind": "lex", "id": "fire" }, "answer": { "kind": "lex", "id": "mouse" }, "choices": [ { "kind": "lex", "id": "mouse" }, { "kind": "lex", "id": "water" }, { "kind": "lex", "id": "sun" } ], "sayAfter": { "ar": "نَار … فَأْر!" } },
+    { "id": "bee-palmtree", "skill": "ar.rhyme", "difficulty": 4, "say": { "ar": "أَيُّ كَلِمَةٍ تُشْبِهُ نَحْلَة فِي آخِرِهَا؟" }, "show": { "kind": "lex", "id": "bee" }, "answer": { "kind": "lex", "id": "palmtree" }, "choices": [ { "kind": "lex", "id": "palmtree" }, { "kind": "lex", "id": "rose" }, { "kind": "lex", "id": "fish" } ], "sayAfter": { "ar": "نَحْلَة … نَخْلَة!" } }
+  ]
+}

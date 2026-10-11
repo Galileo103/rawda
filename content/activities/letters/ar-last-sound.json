@@ -1,0 +1,25 @@
+{
+  "id": "ar-last-sound",
+  "areaId": "letters",
+  "template": "choice",
+  "langs": "ar",
+  "level": 4,
+  "order": 6,
+  "sessionLength": 6,
+  "icon": { "kind": "lex", "id": "rabbit" },
+  "title": { "ar": "بِمَاذَا تَنْتَهِي الْكَلِمَةُ؟" },
+  "intro": { "ar": "كُلُّ كَلِمَةٍ تَنْتَهِي بِحَرْفٍ. هَيَّا نَسْمَعُ آخِرَ صَوْتٍ فِي الْكَلِمَةِ!" },
+  "items": [
+    { "id": "rabbit", "skill": "ar.lastsound.ba", "difficulty": 1, "say": { "ar": "بِأَيِّ حَرْفٍ تَنْتَهِي كَلِمَةُ أَرْنَب؟" }, "show": { "kind": "lex", "id": "rabbit" }, "answer": { "kind": "glyph", "text": "ب" }, "choices": [ { "kind": "glyph", "text": "ب" }, { "kind": "glyph", "text": "م" }, { "kind": "glyph", "text": "س" } ], "sayAfter": { "ar": "كَلِمَةُ أَرْنَب تَنْتَهِي بِحَرْفِ الْبَاءِ!" } },
+    { "id": "elephant", "skill": "ar.lastsound.lam", "difficulty": 1, "say": { "ar": "بِأَيِّ حَرْفٍ تَنْتَهِي كَلِمَةُ فِيل؟" }, "show": { "kind": "lex", "id": "elephant" }, "answer": { "kind": "glyph", "text": "ل" }, "choices": [ { "kind": "glyph", "text": "ل" }, { "kind": "glyph", "text": "س" }, { "kind": "glyph", "text": "م" } ], "sayAfter": { "ar": "كَلِمَةُ فِيل تَنْتَهِي بِحَرْفِ اللَّامِ!" } },
+    { "id": "sun", "skill": "ar.lastsound.sin", "difficulty": 1, "say": { "ar": "بِأَيِّ حَرْفٍ تَنْتَهِي كَلِمَةُ شَمْس؟" }, "show": { "kind": "lex", "id": "sun" }, "answer": { "kind": "glyph", "text": "س" }, "choices": [ { "kind": "glyph", "text": "س" }, { "kind": "glyph", "text": "ب" }, { "kind": "glyph", "text": "ل" } ], "sayAfter": { "ar": "كَلِمَةُ شَمْس تَنْتَهِي بِحَرْفِ السِّينِ!" } },
+    { "id": "pencil", "skill": "ar.lastsound.mim", "difficulty": 2, "say": { "ar": "بِأَيِّ حَرْفٍ تَنْتَهِي كَلِمَةُ قَلَم؟" }, "show": { "kind": "lex", "id": "pencil" }, "answer": { "kind": "glyph", "text": "م" }, "choices": [ { "kind": "glyph", "text": "م" }, { "kind": "glyph", "text": "ر" }, { "kind": "glyph", "text": "ب" } ], "sayAfter": { "ar": "كَلِمَةُ قَلَم تَنْتَهِي بِحَرْفِ الْمِيمِ!" } },
+    { "id": "banana", "skill": "ar.lastsound.zay", "difficulty": 2, "say": { "ar": "بِأَيِّ حَرْفٍ تَنْتَهِي كَلِمَةُ مَوْز؟" }, "show": { "kind": "lex", "id": "banana" }, "answer": { "kind": "glyph", "text": "ز" }, "choices": [ { "kind": "glyph", "text": "ز" }, { "kind": "glyph", "text": "م" }, { "kind": "glyph", "text": "ل" } ], "sayAfter": { "ar": "كَلِمَةُ مَوْز تَنْتَهِي بِحَرْفِ الزَّايِ!" } },
+    { "id": "whale", "skill": "ar.lastsound.ta", "difficulty": 2, "say": { "ar": "بِأَيِّ حَرْفٍ تَنْتَهِي كَلِمَةُ حُوت؟" }, "show": { "kind": "lex", "id": "whale" }, "answer": { "kind": "glyph", "text": "ت" }, "choices": [ { "kind": "glyph", "text": "ت" }, { "kind": "glyph", "text": "س" }, { "kind": "glyph", "text": "ل" } ], "sayAfter": { "ar": "كَلِمَةُ حُوت تَنْتَهِي بِحَرْفِ التَّاءِ!" } },
+    { "id": "lion", "skill": "ar.lastsound.dal", "difficulty": 3, "say": { "ar": "بِأَيِّ حَرْفٍ تَنْتَهِي كَلِمَةُ أَسَد؟" }, "show": { "kind": "lex", "id": "lion" }, "answer": { "kind": "glyph", "text": "د" }, "choices": [ { "kind": "glyph", "text": "د" }, { "kind": "glyph", "text": "ن" }, { "kind": "glyph", "text": "م" } ], "sayAfter": { "ar": "كَلِمَةُ أَسَد تَنْتَهِي بِحَرْفِ الدَّالِ!" } },
+    { "id": "sheep", "skill": "ar.lastsound.fa", "difficulty": 3, "say": { "ar": "بِأَيِّ حَرْفٍ تَنْتَهِي كَلِمَةُ خَرُوف؟" }, "show": { "kind": "lex", "id": "sheep" }, "answer": { "kind": "glyph", "text": "ف" }, "choices": [ { "kind": "glyph", "text": "ف" }, { "kind": "glyph", "text": "ب" }, { "kind": "glyph", "text": "ر" } ], "sayAfter": { "ar": "كَلِمَةُ خَرُوف تَنْتَهِي بِحَرْفِ الْفَاءِ!" } },
+    { "id": "tiger", "skill": "ar.lastsound.ra", "difficulty": 4, "say": { "ar": "بِأَيِّ حَرْفٍ تَنْتَهِي كَلِمَةُ نَمِر؟" }, "show": { "kind": "lex", "id": "tiger" }, "answer": { "kind": "glyph", "text": "ر" }, "choices": [ { "kind": "glyph", "text": "ر" }, { "kind": "glyph", "text": "ز" }, { "kind": "glyph", "text": "د" } ], "sayAfter": { "ar": "كَلِمَةُ نَمِر تَنْتَهِي بِحَرْفِ الرَّاءِ!" } },
+    { "id": "crown", "skill": "ar.lastsound.jim", "difficulty": 4, "say": { "ar": "بِأَيِّ حَرْفٍ تَنْتَهِي كَلِمَةُ تَاج؟" }, "show": { "kind": "lex", "id": "crown" }, "answer": { "kind": "glyph", "text": "ج" }, "choices": [ { "kind": "glyph", "text": "ج" }, { "kind": "glyph", "text": "ح" }, { "kind": "glyph", "text": "خ" } ], "sayAfter": { "ar": "كَلِمَةُ تَاج تَنْتَهِي بِحَرْفِ الْجِيمِ!" } },
+    { "id": "lemon", "skill": "ar.lastsound.nun", "difficulty": 5, "say": { "ar": "بِأَيِّ حَرْفٍ تَنْتَهِي كَلِمَةُ لَيْمُون؟" }, "show": { "kind": "lex", "id": "lemon" }, "answer": { "kind": "glyph", "text": "ن" }, "choices": [ { "kind": "glyph", "text": "ن" }, { "kind": "glyph", "text": "ب" }, { "kind": "glyph", "text": "ت" } ], "sayAfter": { "ar": "كَلِمَةُ لَيْمُون تَنْتَهِي بِحَرْفِ النُّونِ!" } }
+  ]
+}

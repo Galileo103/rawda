@@ -1,0 +1,101 @@
+/* "Give me N": a pile of objects and a plate to put exactly N on. */
+
+.plate {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  align-content: center;
+  justify-content: center;
+  gap: 6px;
+  width: min(100%, 460px);
+  min-height: clamp(150px, 26vh, 220px);
+  padding: 22px 32px;
+  /* A rounded rectangle, not an ellipse: wrapped rows stay inside the rim. */
+  border-radius: 64px;
+  border: 10px solid var(--sky-soft);
+  background: var(--surface);
+  box-shadow:
+    inset 0 0 0 6px var(--surface),
+    inset 0 0 0 8px var(--line),
+    var(--shadow-soft);
+  transition: background 0.2s ease;
+}
+
+.plateItem {
+  position: relative;
+  padding: 4px;
+  border: 3px solid transparent;
+  border-radius: 20px;
+  background: var(--sun-soft);
+  cursor: pointer;
+  animation: pop-in 0.3s ease;
+}
+
+.counting {
+  border-color: var(--sun);
+  transform: scale(1.12);
+}
+
+.pile {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  width: min(100%, 720px);
+  min-height: 96px;
+  padding: 12px;
+  border-radius: var(--radius-l);
+  background: var(--leaf-soft);
+}
+
+/* Narrow phones: a smaller pile so the plate, pile and Done button fit without scrolling. */
+@media (max-width: 420px) {
+  /* Beats the picture's inline size (--vs) for the pile only. */
+  .pileItem > * {
+    --vs: 52px !important;
+  }
+}
+
+.pileItem {
+  position: relative;
+  padding: 4px;
+  border: 3px solid transparent;
+  border-radius: 20px;
+  background: transparent;
+  cursor: pointer;
+}
+
+.done {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: var(--touch-l);
+  padding: 12px 34px;
+  border: 4px solid var(--success);
+  border-radius: var(--radius-l);
+  background: var(--surface);
+  color: var(--success);
+  font: inherit;
+  font-size: 1.4rem;
+  font-weight: 800;
+  box-shadow: var(--shadow-soft);
+  cursor: pointer;
+}
+
+.done:active {
+  transform: scale(0.95);
+}
+
+.done:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .plateItem {
+    animation: none;
+  }
+  .counting {
+    transform: none;
+  }
+}
