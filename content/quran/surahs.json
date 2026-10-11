@@ -10,13 +10,37 @@
       "en": "Mahmoud Khalil Al-Husary (Mu'allim)"
     },
     "audioUrl": "https://everyayah.com/data/Husary_Muallim_128kbps/",
+    "reciters": [
+      {
+        "id": "husary-muallim",
+        "name": {
+          "ar": "محمود خليل الحصري (المصحف المعلّم)",
+          "en": "Mahmoud Khalil Al-Husary (Mu'allim)"
+        },
+        "audioUrl": "https://everyayah.com/data/Husary_Muallim_128kbps/"
+      },
+      {
+        "id": "minshawy-muallim",
+        "name": {
+          "ar": "محمد صديق المنشاوي (المصحف المعلّم مع الأطفال)",
+          "en": "Mohamed Siddiq Al-Minshawi (Mu'allim, with children)"
+        },
+        "audioUrl": "https://everyayah.com/data/Minshawy_Teacher_128kbps/"
+      }
+    ],
     "crossCheck": "Ayah counts checked against Tanzil metadata and quran.com; per-ayah word counts checked against quran.com word-by-word data.",
-    "fetchedAt": "2026-10-09T18:11:17.947Z"
+    "fetchedAt": "2026-10-11T22:26:02.687Z"
   },
   "basmala": {
     "text": "بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ",
     "audio": "quran/husary-muallim/001001.mp3",
-    "sha256": "f4dff7d7b3624f4ad760f147425d6b63381d12852e258717641f9b605944dcb6"
+    "sha256": "f4dff7d7b3624f4ad760f147425d6b63381d12852e258717641f9b605944dcb6",
+    "more": {
+      "minshawy-muallim": {
+        "audio": "quran/minshawy-muallim/001001.mp3",
+        "sha256": "6a5181ddf39b8d6bd64ad9ed50bb74b2ae56729e6d11fdd7cdedd20a7b1520ad"
+      }
+    }
   },
   "surahs": [
     {
@@ -31,43 +55,85 @@
           "n": 1,
           "text": "بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ",
           "audio": "quran/husary-muallim/001001.mp3",
-          "sha256": "f4dff7d7b3624f4ad760f147425d6b63381d12852e258717641f9b605944dcb6"
+          "sha256": "f4dff7d7b3624f4ad760f147425d6b63381d12852e258717641f9b605944dcb6",
+          "more": {
+            "minshawy-muallim": {
+              "audio": "quran/minshawy-muallim/001001.mp3",
+              "sha256": "6a5181ddf39b8d6bd64ad9ed50bb74b2ae56729e6d11fdd7cdedd20a7b1520ad"
+            }
+          }
         },
         {
           "n": 2,
           "text": "ٱلْحَمْدُ لِلَّهِ رَبِّ ٱلْعَٰلَمِينَ",
           "audio": "quran/husary-muallim/001002.mp3",
-          "sha256": "9717bbf9cf97e0ab38c59890e4e56a5533078073d7bcf34a9a51b7b4f89ef863"
+          "sha256": "9717bbf9cf97e0ab38c59890e4e56a5533078073d7bcf34a9a51b7b4f89ef863",
+          "more": {
+            "minshawy-muallim": {
+              "audio": "quran/minshawy-muallim/001002.mp3",
+              "sha256": "0a509b9028966a48bd7063d7d3ae8e101cac3838af6cf32134aba44d41a23012"
+            }
+          }
         },
         {
           "n": 3,
           "text": "ٱلرَّحْمَٰنِ ٱلرَّحِيمِ",
           "audio": "quran/husary-muallim/001003.mp3",
-          "sha256": "f58ae5ff1f7b056d22d29d17161d84e1e6ec3232d35099e2ec92ded07d49e56b"
+          "sha256": "f58ae5ff1f7b056d22d29d17161d84e1e6ec3232d35099e2ec92ded07d49e56b",
+          "more": {
+            "minshawy-muallim": {
+              "audio": "quran/minshawy-muallim/001003.mp3",
+              "sha256": "70d5ae18b7cfb43c1c752282415b805e75d689ff096ecd3d5f58f33a4ece635a"
+            }
+          }
         },
         {
           "n": 4,
           "text": "مَٰلِكِ يَوْمِ ٱلدِّينِ",
           "audio": "quran/husary-muallim/001004.mp3",
-          "sha256": "4c0c5741098f0599a3133492e6dd8a2cdf3c716ff732a78064c4a3749284cccd"
+          "sha256": "4c0c5741098f0599a3133492e6dd8a2cdf3c716ff732a78064c4a3749284cccd",
+          "more": {
+            "minshawy-muallim": {
+              "audio": "quran/minshawy-muallim/001004.mp3",
+              "sha256": "dfa0f41a2ae441f2fb7f12b6751a33481817b0abd8817385b5d0772722bfe541"
+            }
+          }
         },
         {
           "n": 5,
           "text": "إِيَّاكَ نَعْبُدُ وَإِيَّاكَ نَسْتَعِينُ",
           "audio": "quran/husary-muallim/001005.mp3",
-          "sha256": "26ce1573bf520355a77b7cf674b162cb98769558436f87dfb4abeddd11d3db68"
+          "sha256": "26ce1573bf520355a77b7cf674b162cb98769558436f87dfb4abeddd11d3db68",
+          "more": {
+            "minshawy-muallim": {
+              "audio": "quran/minshawy-muallim/001005.mp3",
+              "sha256": "95e59dc06a24b927611b2306eca032f2edf3b0fa1ae2832253bd11d799d3b486"
+            }
+          }
         },
         {
           "n": 6,
           "text": "ٱهْدِنَا ٱلصِّرَٰطَ ٱلْمُسْتَقِيمَ",
           "audio": "quran/husary-muallim/001006.mp3",
-          "sha256": "e13a1b33937d53fa3236d00b054ed0ddf8f5ff49b21ecebc2f98dc4f294af839"
+          "sha256": "e13a1b33937d53fa3236d00b054ed0ddf8f5ff49b21ecebc2f98dc4f294af839",
+          "more": {
+            "minshawy-muallim": {
+              "audio": "quran/minshawy-muallim/001006.mp3",
+              "sha256": "3e66096462be56c21a69e7d9e21adca9d60e21ebef1c69d15dcf8cdb879c5f31"
+            }
+          }
         },
         {
           "n": 7,
           "text": "صِرَٰطَ ٱلَّذِينَ أَنْعَمْتَ عَلَيْهِمْ غَيْرِ ٱلْمَغْضُوبِ عَلَيْهِمْ وَلَا ٱلضَّآلِّينَ",
           "audio": "quran/husary-muallim/001007.mp3",
-          "sha256": "b9dd9a11289b55bbdd6c0e8d739a6340c22093fa7366c971710194a55206b77e"
+          "sha256": "b9dd9a11289b55bbdd6c0e8d739a6340c22093fa7366c971710194a55206b77e",
+          "more": {
+            "minshawy-muallim": {
+              "audio": "quran/minshawy-muallim/001007.mp3",
+              "sha256": "38d78417dd0899c18c14d552ed98bb1e0d48536dffbb3295a22d01e12b5c380a"
+            }
+          }
         }
       ]
     },
@@ -83,37 +149,73 @@
           "n": 1,
           "text": "قُلْ أَعُوذُ بِرَبِّ ٱلنَّاسِ",
           "audio": "quran/husary-muallim/114001.mp3",
-          "sha256": "9dd08d9b862257f7a41b516a9208e34e3456b9e90ca142127555c2dd9620969b"
+          "sha256": "9dd08d9b862257f7a41b516a9208e34e3456b9e90ca142127555c2dd9620969b",
+          "more": {
+            "minshawy-muallim": {
+              "audio": "quran/minshawy-muallim/114001.mp3",
+              "sha256": "9661520b27e4d5e070be11fee065506fe9100f0d7756f521e9c7d8000245f21d"
+            }
+          }
         },
         {
           "n": 2,
           "text": "مَلِكِ ٱلنَّاسِ",
           "audio": "quran/husary-muallim/114002.mp3",
-          "sha256": "05c66f80d669635393847b7eebbd1c5263d33dc90d59fe05269c5ddc2c3741ba"
+          "sha256": "05c66f80d669635393847b7eebbd1c5263d33dc90d59fe05269c5ddc2c3741ba",
+          "more": {
+            "minshawy-muallim": {
+              "audio": "quran/minshawy-muallim/114002.mp3",
+              "sha256": "865c1174917275934968ba3edece6a823ccbc3580b92c5eadc27379826dcdd13"
+            }
+          }
         },
         {
           "n": 3,
           "text": "إِلَٰهِ ٱلنَّاسِ",
           "audio": "quran/husary-muallim/114003.mp3",
-          "sha256": "d9bb596223119389fb7fa33d46c75c6f2c309b109ead9fecd48a25aede0b1233"
+          "sha256": "d9bb596223119389fb7fa33d46c75c6f2c309b109ead9fecd48a25aede0b1233",
+          "more": {
+            "minshawy-muallim": {
+              "audio": "quran/minshawy-muallim/114003.mp3",
+              "sha256": "d9335a12eb76bbea78c527c3d4fd6e1017c029f4c9e73532a0766b5a7cbb28b3"
+            }
+          }
         },
         {
           "n": 4,
           "text": "مِن شَرِّ ٱلْوَسْوَاسِ ٱلْخَنَّاسِ",
           "audio": "quran/husary-muallim/114004.mp3",
-          "sha256": "912105b3dac55d6922ec48a3ad45fe9a12c58759506f0faa4078085f076f1393"
+          "sha256": "912105b3dac55d6922ec48a3ad45fe9a12c58759506f0faa4078085f076f1393",
+          "more": {
+            "minshawy-muallim": {
+              "audio": "quran/minshawy-muallim/114004.mp3",
+              "sha256": "e2b664992cb324bacf83499bdba163a5ba8ecd8c2cf2c2effec4f9e0568950c4"
+            }
+          }
         },
         {
           "n": 5,
           "text": "ٱلَّذِى يُوَسْوِسُ فِى صُدُورِ ٱلنَّاسِ",
           "audio": "quran/husary-muallim/114005.mp3",
-          "sha256": "6e1249cc5e48e9c8376b961380e0593875d2b7cf6200b24f5b9709321a0fe2e4"
+          "sha256": "6e1249cc5e48e9c8376b961380e0593875d2b7cf6200b24f5b9709321a0fe2e4",
+          "more": {
+            "minshawy-muallim": {
+              "audio": "quran/minshawy-muallim/114005.mp3",
+              "sha256": "8178a2d09352d2f48cee079b655907f991a02f072c2bbba6d5dac38494f647bc"
+            }
+          }
         },
         {
           "n": 6,
           "text": "مِنَ ٱلْجِنَّةِ وَٱلنَّاسِ",
           "audio": "quran/husary-muallim/114006.mp3",
-          "sha256": "010db0dcd7fda9f2339e8ae46c361b3d9c0c0cb39e87891f9896cb3cde5c7b54"
+          "sha256": "010db0dcd7fda9f2339e8ae46c361b3d9c0c0cb39e87891f9896cb3cde5c7b54",
+          "more": {
+            "minshawy-muallim": {
+              "audio": "quran/minshawy-muallim/114006.mp3",
+              "sha256": "78c2c5be0f5b2b7a5a4180d284f062d5cd6715384a555dd9ae6d228e1850027a"
+            }
+          }
         }
       ]
     },
@@ -129,31 +231,61 @@
           "n": 1,
           "text": "قُلْ أَعُوذُ بِرَبِّ ٱلْفَلَقِ",
           "audio": "quran/husary-muallim/113001.mp3",
-          "sha256": "b4b381cd16a87dda3f45f923e6388e6e44787a10bfc6992c19389be147991d81"
+          "sha256": "b4b381cd16a87dda3f45f923e6388e6e44787a10bfc6992c19389be147991d81",
+          "more": {
+            "minshawy-muallim": {
+              "audio": "quran/minshawy-muallim/113001.mp3",
+              "sha256": "aaaf03e0c157e78def1963d9ab42c3c08677a68f6a85d5513a61925aaece7299"
+            }
+          }
         },
         {
           "n": 2,
           "text": "مِن شَرِّ مَا خَلَقَ",
           "audio": "quran/husary-muallim/113002.mp3",
-          "sha256": "1a82d339ba76d91b12ffd582d5586878d451f4c08eb6c899c045ffdb68b70b81"
+          "sha256": "1a82d339ba76d91b12ffd582d5586878d451f4c08eb6c899c045ffdb68b70b81",
+          "more": {
+            "minshawy-muallim": {
+              "audio": "quran/minshawy-muallim/113002.mp3",
+              "sha256": "0306d89f7663965c06fb87becf9c80af8581673886f3458c23ca38658d32b303"
+            }
+          }
         },
         {
           "n": 3,
           "text": "وَمِن شَرِّ غَاسِقٍ إِذَا وَقَبَ",
           "audio": "quran/husary-muallim/113003.mp3",
-          "sha256": "194d28136f236c5800f4709d78e0bfd145b4ebb7728d54cf78812ce3ff9f3575"
+          "sha256": "194d28136f236c5800f4709d78e0bfd145b4ebb7728d54cf78812ce3ff9f3575",
+          "more": {
+            "minshawy-muallim": {
+              "audio": "quran/minshawy-muallim/113003.mp3",
+              "sha256": "6ad4c3e6d4a7ce63323611d7e8d65fb4b84287baaf44aaa3069ec422320fe3b7"
+            }
+          }
         },
         {
           "n": 4,
           "text": "وَمِن شَرِّ ٱلنَّفَّٰثَٰتِ فِى ٱلْعُقَدِ",
           "audio": "quran/husary-muallim/113004.mp3",
-          "sha256": "4e570d4c4fed9cf890eb47f090ff083c30d3d987a47b94941b0c5d3a6360205d"
+          "sha256": "4e570d4c4fed9cf890eb47f090ff083c30d3d987a47b94941b0c5d3a6360205d",
+          "more": {
+            "minshawy-muallim": {
+              "audio": "quran/minshawy-muallim/113004.mp3",
+              "sha256": "09409c84163a2310abfd46cdb00b0f001adf71065de20e07c120b93c99ea7b4c"
+            }
+          }
         },
         {
           "n": 5,
           "text": "وَمِن شَرِّ حَاسِدٍ إِذَا حَسَدَ",
           "audio": "quran/husary-muallim/113005.mp3",
-          "sha256": "98f6b4afb7e69a3c2051cbbda0e7167a5ab8c4435889dd9fcb7a8d6a880f7b1b"
+          "sha256": "98f6b4afb7e69a3c2051cbbda0e7167a5ab8c4435889dd9fcb7a8d6a880f7b1b",
+          "more": {
+            "minshawy-muallim": {
+              "audio": "quran/minshawy-muallim/113005.mp3",
+              "sha256": "58829415333d5285010f8ddbb8c67e549f68c6bf134b9ec4037bce870a895bb8"
+            }
+          }
         }
       ]
     },
@@ -169,25 +301,49 @@
           "n": 1,
           "text": "قُلْ هُوَ ٱللَّهُ أَحَدٌ",
           "audio": "quran/husary-muallim/112001.mp3",
-          "sha256": "0b16ecd06a0fc6542000fa22943cf71d248ad085606abdae93ff30ae9b887a93"
+          "sha256": "0b16ecd06a0fc6542000fa22943cf71d248ad085606abdae93ff30ae9b887a93",
+          "more": {
+            "minshawy-muallim": {
+              "audio": "quran/minshawy-muallim/112001.mp3",
+              "sha256": "7794239e886819fe4eeb104a0932e633fef8c640a1428da6e5405c549dbd5e71"
+            }
+          }
         },
         {
           "n": 2,
           "text": "ٱللَّهُ ٱلصَّمَدُ",
           "audio": "quran/husary-muallim/112002.mp3",
-          "sha256": "14e9cfdd371e7aae4f6e259e28a7e66244445fd0552badaaa2ffe9219be746b2"
+          "sha256": "14e9cfdd371e7aae4f6e259e28a7e66244445fd0552badaaa2ffe9219be746b2",
+          "more": {
+            "minshawy-muallim": {
+              "audio": "quran/minshawy-muallim/112002.mp3",
+              "sha256": "ffdc72e43e9d3e33853c288807df8d6b84ef495497a66102e2d32a36f9b21925"
+            }
+          }
         },
         {
           "n": 3,
           "text": "لَمْ يَلِدْ وَلَمْ يُولَدْ",
           "audio": "quran/husary-muallim/112003.mp3",
-          "sha256": "a6d10a34e788750ab2ca578d0e05b0d4e70c1985fdd45ae8f704dc917fbd7eca"
+          "sha256": "a6d10a34e788750ab2ca578d0e05b0d4e70c1985fdd45ae8f704dc917fbd7eca",
+          "more": {
+            "minshawy-muallim": {
+              "audio": "quran/minshawy-muallim/112003.mp3",
+              "sha256": "320e12844c2ae06f37cc5222d875c8f563c90d4e72c37d46a458d7249a2fd084"
+            }
+          }
         },
         {
           "n": 4,
           "text": "وَلَمْ يَكُن لَّهُۥ كُفُوًا أَحَدٌۢ",
           "audio": "quran/husary-muallim/112004.mp3",
-          "sha256": "47f4d7a3e1999ca99588caccd271e788dc5eacd2a311dedc312f33c12ea1941e"
+          "sha256": "47f4d7a3e1999ca99588caccd271e788dc5eacd2a311dedc312f33c12ea1941e",
+          "more": {
+            "minshawy-muallim": {
+              "audio": "quran/minshawy-muallim/112004.mp3",
+              "sha256": "d0983a8c7f60468c10cc2d8719990729e767a5e3b0d1b719351627dcc5e747d0"
+            }
+          }
         }
       ]
     },
@@ -203,31 +359,61 @@
           "n": 1,
           "text": "تَبَّتْ يَدَآ أَبِى لَهَبٍ وَتَبَّ",
           "audio": "quran/husary-muallim/111001.mp3",
-          "sha256": "ac8ecd4d039a0b9336717433f2daf2ccca5fd255ff21a0dd9a8af6cc0e66d5d9"
+          "sha256": "ac8ecd4d039a0b9336717433f2daf2ccca5fd255ff21a0dd9a8af6cc0e66d5d9",
+          "more": {
+            "minshawy-muallim": {
+              "audio": "quran/minshawy-muallim/111001.mp3",
+              "sha256": "8ff1fe636226c2e176370c265c6da23b9dd8256b464a7fb7b5f34043317c060e"
+            }
+          }
         },
         {
           "n": 2,
           "text": "مَآ أَغْنَىٰ عَنْهُ مَالُهُۥ وَمَا كَسَبَ",
           "audio": "quran/husary-muallim/111002.mp3",
-          "sha256": "bccc4c562ba54ba8b463df184013a567a430b81a7f7104856f35030dda5575e5"
+          "sha256": "bccc4c562ba54ba8b463df184013a567a430b81a7f7104856f35030dda5575e5",
+          "more": {
+            "minshawy-muallim": {
+              "audio": "quran/minshawy-muallim/111002.mp3",
+              "sha256": "ac26c5fe46c9e66407e50e66435f2dc0bfdcc7d3f1b48688773d1e4ffedfcdf4"
+            }
+          }
         },
         {
           "n": 3,
           "text": "سَيَصْلَىٰ نَارًا ذَاتَ لَهَبٍ",
           "audio": "quran/husary-muallim/111003.mp3",
-          "sha256": "4922b99a456aa269f1324bad7c3d222c3551da155771550f57c90653fed61b1c"
+          "sha256": "4922b99a456aa269f1324bad7c3d222c3551da155771550f57c90653fed61b1c",
+          "more": {
+            "minshawy-muallim": {
+              "audio": "quran/minshawy-muallim/111003.mp3",
+              "sha256": "b0d48a6386c4bc3717a83646eeaf20b98274ea64470fb5170bbcb611e17098da"
+            }
+          }
         },
         {
           "n": 4,
           "text": "وَٱمْرَأَتُهُۥ حَمَّالَةَ ٱلْحَطَبِ",
           "audio": "quran/husary-muallim/111004.mp3",
-          "sha256": "03a68b240bedf6c74783f25f254ba63db95c7dc6fd9b9614996c0f9f643f621d"
+          "sha256": "03a68b240bedf6c74783f25f254ba63db95c7dc6fd9b9614996c0f9f643f621d",
+          "more": {
+            "minshawy-muallim": {
+              "audio": "quran/minshawy-muallim/111004.mp3",
+              "sha256": "3d88023ed3f62f8a19da19c6dadec34c56c51688b1ef87497db109e4aad7de40"
+            }
+          }
         },
         {
           "n": 5,
           "text": "فِى جِيدِهَا حَبْلٌ مِّن مَّسَدٍۭ",
           "audio": "quran/husary-muallim/111005.mp3",
-          "sha256": "a484f1311517d5655e07945b7b0e77df3439cea6858568be09c00c7b380005b3"
+          "sha256": "a484f1311517d5655e07945b7b0e77df3439cea6858568be09c00c7b380005b3",
+          "more": {
+            "minshawy-muallim": {
+              "audio": "quran/minshawy-muallim/111005.mp3",
+              "sha256": "8357a885566048f8d95c08cdd710be308c340c78ebe92ce6cb81cf149465e846"
+            }
+          }
         }
       ]
     },
@@ -243,19 +429,37 @@
           "n": 1,
           "text": "إِذَا جَآءَ نَصْرُ ٱللَّهِ وَٱلْفَتْحُ",
           "audio": "quran/husary-muallim/110001.mp3",
-          "sha256": "a292eab2b1e88c4cdcaaa12e5b0864b7285abf5f1ed07684ce1a27acc83b9045"
+          "sha256": "a292eab2b1e88c4cdcaaa12e5b0864b7285abf5f1ed07684ce1a27acc83b9045",
+          "more": {
+            "minshawy-muallim": {
+              "audio": "quran/minshawy-muallim/110001.mp3",
+              "sha256": "d612ef1799a3e4285da5b2befe9193b8f416ab5e868cae96a2f50f7dfbe8a1cd"
+            }
+          }
         },
         {
           "n": 2,
           "text": "وَرَأَيْتَ ٱلنَّاسَ يَدْخُلُونَ فِى دِينِ ٱللَّهِ أَفْوَاجًا",
           "audio": "quran/husary-muallim/110002.mp3",
-          "sha256": "8f14276d2400136a7994a6f0e6cef167a1e8be040681a767b53e25c82618d6d2"
+          "sha256": "8f14276d2400136a7994a6f0e6cef167a1e8be040681a767b53e25c82618d6d2",
+          "more": {
+            "minshawy-muallim": {
+              "audio": "quran/minshawy-muallim/110002.mp3",
+              "sha256": "0bb3bea380e6c5eceb9253120b7f13354f6da47fa04906eb862f86c20eec70f3"
+            }
+          }
         },
         {
           "n": 3,
           "text": "فَسَبِّحْ بِحَمْدِ رَبِّكَ وَٱسْتَغْفِرْهُ إِنَّهُۥ كَانَ تَوَّابًۢا",
           "audio": "quran/husary-muallim/110003.mp3",
-          "sha256": "28ced3c776d406ceb45b8e25839441078d4e4f1de4c726450ed61774bb4a8828"
+          "sha256": "28ced3c776d406ceb45b8e25839441078d4e4f1de4c726450ed61774bb4a8828",
+          "more": {
+            "minshawy-muallim": {
+              "audio": "quran/minshawy-muallim/110003.mp3",
+              "sha256": "0ee53a17032c5b207332cb632393a79d2133edeccdcb30b26671802aaeedc97f"
+            }
+          }
         }
       ]
     }

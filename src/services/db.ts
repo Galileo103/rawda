@@ -28,6 +28,10 @@ export interface SettingsRow {
   rewardsEnabled: boolean
   /** 0 = no limit. */
   dailyLimitMin: number
+  /** Quran: which verified reciter plays (id from the Quran data; unset = the default). */
+  quranReciter?: string
+  /** Quran: a quiet pause after each ayah, as long as the ayah, for the child to repeat it. */
+  quranPause: boolean
   pinHash?: string
   pinSalt?: string
 }

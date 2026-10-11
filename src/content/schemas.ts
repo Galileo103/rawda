@@ -300,6 +300,8 @@ export type Story = Resolved<StoryDef>
  * Text is verbatim Tanzil Uthmani; audio is verified per-ayah recitation with recorded SHA-256.
  */
 const Sha = z.string().regex(/^[0-9a-f]{64}$/)
+/** The same ayah by other verified reciters, keyed by reciter id (the default reciter is `audio`). */
+const MoreAudio = z.record(z.string(), z.object({ audio: z.string(), sha256: Sha }))
 export const QuranZ = z.object({
   source: z.object({
     text: z.string(),
@@ -309,10 +311,12 @@ export const QuranZ = z.object({
     textSha256: Sha,
     reciter: z.object({ ar: z.string(), en: z.string() }),
     audioUrl: z.string(),
+    /** Every reciter, the default first. */
+    reciters: z.array(z.object({ id: z.string(), name: z.object({ ar: z.string(), en: z.string() }), audioUrl: z.string() })).min(1).optional(),
     crossCheck: z.string(),
     fetchedAt: z.string(),
   }),
-  basmala: z.object({ text: z.string().min(1), audio: z.string(), sha256: Sha }),
+  basmala: z.object({ text: z.string().min(1), audio: z.string(), sha256: Sha, more: MoreAudio.optional() }),
   surahs: z
     .array(
       z.object({
@@ -323,7 +327,7 @@ export const QuranZ = z.object({
         ayahCount: z.number().int().positive(),
         /** Recited with a basmala heading before ayah 1 (all but Al-Fatiha and At-Tawbah). */
         basmalaHeading: z.boolean(),
-        ayahs: z.array(z.object({ n: z.number().int().positive(), text: z.string().min(1), audio: z.string(), sha256: Sha })).min(1),
+        ayahs: z.array(z.object({ n: z.number().int().positive(), text: z.string().min(1), audio: z.string(), sha256: Sha, more: MoreAudio.optional() })).min(1),
       }),
     )
     .min(1),

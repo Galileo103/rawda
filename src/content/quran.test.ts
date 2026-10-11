@@ -66,6 +66,24 @@ describe('Quran data', () => {
     for (const s of quran.surahs) for (const a of s.ayahs) expect(sha(join(ROOT, 'public', 'assets', a.audio)), a.audio).toBe(a.sha256)
   })
 
+  it('every other verified reciter covers every ayah and the basmala, unchanged since download', () => {
+    const others = (quran.source.reciters ?? []).slice(1)
+    expect(others.map((r) => r.id)).toContain('minshawy-muallim')
+    for (const r of others) {
+      expect(r.audioUrl).toContain('everyayah.com')
+      const b = quran.basmala.more?.[r.id]
+      expect(b, `basmala · ${r.id}`).toBeDefined()
+      expect(sha(join(ROOT, 'public', 'assets', b!.audio))).toBe(b!.sha256)
+      for (const s of quran.surahs)
+        for (const a of s.ayahs) {
+          const x = a.more?.[r.id]
+          expect(x, `${s.number}:${a.n} · ${r.id}`).toBeDefined()
+          expect(x!.audio.startsWith(`quran/${r.id}/`)).toBe(true)
+          expect(sha(join(ROOT, 'public', 'assets', x!.audio)), x!.audio).toBe(x!.sha256)
+        }
+    }
+  })
+
   it('records its sources and the Tanzil notice', () => {
     expect(quran.source.textUrl).toContain('tanzil.net')
     expect(quran.source.textNotice).toContain('Tanzil Project')

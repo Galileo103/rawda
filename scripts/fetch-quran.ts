@@ -3,7 +3,8 @@
  *
  * Text:  Tanzil Quran Text (Uthmani, Hafs), verbatim — https://tanzil.net (CC BY 3.0, no changes allowed)
  * Names: Tanzil quran-data.js metadata
- * Audio: Mahmoud Khalil Al-Husary, Mu'allim (teaching) recitation, per-ayah — https://everyayah.com
+ * Audio: per-ayah teaching recitations from https://everyayah.com — Mahmoud Khalil Al-Husary (Mu'allim, the default)
+ *        and Mohamed Siddiq Al-Minshawi (Mu'allim, with children repeating after him)
  *
  * Verification (the script aborts on any mismatch; nothing is written):
  *  - ayah count per surah == Tanzil metadata == quran.com chapter metadata
@@ -21,9 +22,16 @@ import { ROOT } from './lib/contentFs'
 const SURAHS = [1, 114, 113, 112, 111, 110]
 const TEXT_URL = 'https://tanzil.net/pub/download/index.php?quranType=uthmani&outType=txt-2&agree=true'
 const META_URL = 'https://tanzil.net/res/text/metadata/quran-data.js'
-const AUDIO_BASE = 'https://everyayah.com/data/Husary_Muallim_128kbps'
 const QURANCOM = 'https://api.quran.com/api/v4'
-const AUDIO_DIR = join(ROOT, 'public', 'assets', 'quran', 'husary-muallim')
+
+/** Verified human recitations, per ayah. The first is the default (stored as each ayah's `audio`). */
+const RECITERS = [
+  { id: 'husary-muallim', folder: 'Husary_Muallim_128kbps', name: { ar: 'محمود خليل الحصري (المصحف المعلّم)', en: "Mahmoud Khalil Al-Husary (Mu'allim)" } },
+  { id: 'minshawy-muallim', folder: 'Minshawy_Teacher_128kbps', name: { ar: 'محمد صديق المنشاوي (المصحف المعلّم مع الأطفال)', en: "Mohamed Siddiq Al-Minshawi (Mu'allim, with children)" } },
+] as const
+type Reciter = (typeof RECITERS)[number]
+const DEFAULT = RECITERS[0]
+const audioBase = (r: Reciter) => `https://everyayah.com/data/${r.folder}`
 const CACHE = join(ROOT, '.tools', 'quran')
 const OUT = join(ROOT, 'content', 'quran', 'surahs.json')
 
@@ -49,7 +57,7 @@ function fail(msg: string): never {
 }
 
 mkdirSync(CACHE, { recursive: true })
-mkdirSync(AUDIO_DIR, { recursive: true })
+for (const r of RECITERS) mkdirSync(join(ROOT, 'public', 'assets', 'quran', r.id), { recursive: true })
 
 // 1. Text (verbatim) + copyright notice
 console.log('text: downloading Tanzil Uthmani…')
@@ -112,25 +120,32 @@ for (const number of SURAHS) {
 
   // 4. Audio
   const withAudio = []
-  for (const a of ayahs) withAudio.push({ ...a, ...(await audioFor(number, a.n)) })
+  for (const a of ayahs) withAudio.push({ ...a, ...(await audioFor(number, a.n, DEFAULT)), more: await moreAudio(number, a.n) })
   surahs.push({ number, nameAr: m.name, nameTranslit: m.tname, nameEn: m.ename, ayahCount: m.ayas, basmalaHeading, ayahs: withAudio })
   console.log(`✔ ${number} ${m.name} — ${m.ayas} ayahs verified, audio ok`)
 }
 
-async function audioFor(surah: number, ayah: number): Promise<{ audio: string; sha256: string }> {
+async function audioFor(surah: number, ayah: number, reciter: Reciter): Promise<{ audio: string; sha256: string }> {
   const file = `${pad(surah)}${pad(ayah)}.mp3`
-  const target = join(AUDIO_DIR, file)
+  const target = join(ROOT, 'public', 'assets', 'quran', reciter.id, file)
   if (!existsSync(target)) {
-    const buf = (await get(`${AUDIO_BASE}/${file}`, 'buffer')) as Buffer
+    const buf = (await get(`${audioBase(reciter)}/${file}`, 'buffer')) as Buffer
     // MP3 frame sync or ID3 tag, and a plausible size.
     const isMp3 = buf.subarray(0, 3).toString() === 'ID3' || (buf[0] === 0xff && ((buf[1] ?? 0) & 0xe0) === 0xe0)
     if (!isMp3 || buf.length < 4000) fail(`${file}: not a valid MP3 recording`)
     writeFileSync(target, buf)
   }
-  return { audio: `quran/husary-muallim/${file}`, sha256: sha256(readFileSync(target)) }
+  return { audio: `quran/${reciter.id}/${file}`, sha256: sha256(readFileSync(target)) }
 }
 
-const basmalaAudio = await audioFor(1, 1)
+/** The same ayah by every other reciter, keyed by reciter id. */
+async function moreAudio(surah: number, ayah: number): Promise<Record<string, { audio: string; sha256: string }>> {
+  const out: Record<string, { audio: string; sha256: string }> = {}
+  for (const r of RECITERS.slice(1)) out[r.id] = await audioFor(surah, ayah, r)
+  return out
+}
+
+const basmalaAudio = { ...(await audioFor(1, 1, DEFAULT)), more: await moreAudio(1, 1) }
 const data = QuranZ.parse({
   source: {
     text: 'Tanzil Quran Text (Uthmani, Version 1.1) — Hafs',
@@ -138,8 +153,9 @@ const data = QuranZ.parse({
     textLicense: 'Creative Commons Attribution 3.0 — verbatim copies only; changing the text is not allowed',
     textNotice: notice,
     textSha256: textSha,
-    reciter: { ar: 'محمود خليل الحصري (المصحف المعلّم)', en: "Mahmoud Khalil Al-Husary (Mu'allim)" },
-    audioUrl: `${AUDIO_BASE}/`,
+    reciter: DEFAULT.name,
+    audioUrl: `${audioBase(DEFAULT)}/`,
+    reciters: RECITERS.map((r) => ({ id: r.id, name: r.name, audioUrl: `${audioBase(r)}/` })),
     crossCheck: 'Ayah counts checked against Tanzil metadata and quran.com; per-ayah word counts checked against quran.com word-by-word data.',
     fetchedAt: new Date().toISOString(),
   },

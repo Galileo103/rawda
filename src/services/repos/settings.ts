@@ -19,6 +19,7 @@ export const DEFAULT_SETTINGS: SettingsRow = {
   highContrast: false,
   rewardsEnabled: true,
   dailyLimitMin: 0,
+  quranPause: false,
 }
 
 /** Settings with defaults filled in, so new fields added later never break old installs. */

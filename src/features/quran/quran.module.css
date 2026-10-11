@@ -144,3 +144,34 @@
   font-weight: 800;
   color: #b42318;
 }
+
+.reciterPick {
+  display: flex;
+  justify-content: center;
+}
+
+.hint {
+  max-width: 860px;
+  margin: 0 auto;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--ink-soft);
+  text-align: center;
+}
+
+/* The child's turn to repeat: a calm teal frame on the ayah and a short caption. */
+.waiting {
+  background: var(--teal-soft);
+  box-shadow: inset 0 0 0 3px var(--teal);
+}
+.yourTurn {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 10px 18px;
+  border-radius: var(--radius);
+  background: var(--teal-soft);
+  color: var(--teal);
+  font-size: 1.3rem;
+  font-weight: 800;
+  text-align: center;
+}
