@@ -23,8 +23,8 @@ import { ROOT, loadBundle } from './lib/contentFs'
 
 export type VoiceSpec = { engine: 'neural'; voice: string; rate: string } | { engine: 'piper'; model: string }
 
-/** Default Arabic voice: fus'ha as read in Egypt (the children's home accent). Override with RAWDA_AR_VOICE. */
-export const DEFAULT_AR_VOICE = 'ar-EG-SalmaNeural'
+/** Default Arabic voice: Modern Standard Arabic (الفصحى). Override with RAWDA_AR_VOICE. */
+export const DEFAULT_AR_VOICE = 'ar-SA-ZariyahNeural'
 /** A little slower than normal speech: clearer for young children. */
 export const CHILD_RATE = '-10%'
 
